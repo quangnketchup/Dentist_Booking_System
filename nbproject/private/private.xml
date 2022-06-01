@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/patients/PatientError.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/patients/PatientDAO.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/patients/PatientDTO.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/doctors/DoctorError.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/controller/main/LogoutController.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/controller/main/MainController.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/admins/AdminDAO.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/doctors/DoctorDTO.java</file>
-            <file>file:/C:/Users/quang/OneDrive/Documents/NetBeansProjects/DentistBookingSystem/src/java/controller/main/LoginController.java</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/WEB-INF/web.xml</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/main/LoginController.java</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/login.jsp</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/blog-single.html</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/scss/bootstrap/_navbar.scss</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/login.html</file>
+            <file>file:/D:/TL/Kì%205/SWP/Dentist_Booking_System/Dentist_Booking_System/web/css/adminlte.min.css</file>
         </group>
     </open-files>
 </project-private>
