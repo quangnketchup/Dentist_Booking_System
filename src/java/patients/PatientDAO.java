@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 public class PatientDAO {
     private static String LOGIN = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE gmail=? AND password=?";
-    
+    private static String SEARCH_PATIENT = "SELECT Patient,fullName,roleID FROM tblUsers WHERE fullName like ?";
     public PatientDTO checkLogin(String gmail, String password) throws SQLException {
         PatientDTO patient = null;
         Connection conn = null;
@@ -46,5 +48,20 @@ public class PatientDAO {
             }
         }
         return patient;
+    }
+    
+    public List<PatientDTO> getListUser(String search) throws SQLException {
+        List<PatientDTO> listPatient = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_PATIENT);
+            }
+        } catch (Exception e) {
+        }
+        return listPatient;
     }
 }
