@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import serviceTypes.ServiceTypeDAO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 import services.ServiceType;
@@ -29,8 +30,9 @@ public class ShowServiceController extends HttpServlet {
         String url = ERROR;
         try {
             ServiceDAO serviceDao = new ServiceDAO();
+            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
             List <ServiceDTO> listService = serviceDao.getAllListService();
-            List <ServiceType> listServiceType = serviceDao.getListServiceType();
+            List <ServiceType> listServiceType = serviceTypeDao.getListServiceType();
             HttpSession session = request.getSession();
             AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_USER");
             

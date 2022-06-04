@@ -85,41 +85,6 @@ public class ServiceDAO {
         return list;
     }
     
-    public List<ServiceType> getListServiceType() throws SQLException {
-        List<ServiceType> getListServiceType = null;
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet resultSet = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                getListServiceType = new ArrayList<>();
-                String sql = " SELECT serviceTypeID, serviceName "
-                        + " FROM tblServicesTypes ";
-                pstm = conn.prepareStatement(sql);
-                resultSet = pstm.executeQuery();
-                while (resultSet.next()) {
-                    int serviceTypeID = resultSet.getInt("serviceTypeID");
-                    String serviceName = resultSet.getNString("serviceName");
-                    getListServiceType.add(new ServiceType(serviceTypeID, serviceName));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return getListServiceType;
-    }
-    
     public List<ServiceDTO> getServiceByServiceTypeID(int serviceTypeID) throws SQLException {
         List<ServiceDTO> ListService = null;
         Connection conn = null;
