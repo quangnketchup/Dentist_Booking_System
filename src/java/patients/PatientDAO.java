@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
+import patients.PatientDTO;
 
 public class PatientDAO {
     private static String LOGIN = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE gmail=? AND password=?";

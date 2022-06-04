@@ -5,13 +5,11 @@
  */
 package controller.main;
 
-import controller.main.MainController;
 import admins.AdminDAO;
 import admins.AdminDTO;
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

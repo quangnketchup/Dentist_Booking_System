@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import utils.DBUtils;
+import doctors.DoctorDTO;
 
 public class DoctorDAO {
     

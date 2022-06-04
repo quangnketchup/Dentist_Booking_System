@@ -91,20 +91,11 @@
             </div>
                                         
             <div class="container">
-                <div class="row block-9">
-                    <div class="col-md-3 pr-md-5">
-                        <form action="#">
-                            <div>
-                                <h3>Tìm dịch vụ:</h3>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nhập tên">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Search" class="btn btn-sm btn-primary py-3 px-5">
-                            </div>
-                        </form>
+                <div class="col-md-5 pr-md-5">
+                    <div>
+                        <h3 class="text-primary">Danh sách dịch vụ:</h3>
                     </div>
+                </div>
                     <div class="col-md-9">
                         <form action="">
                             <div class="card-body">
@@ -114,7 +105,7 @@
                                         if (!listService.isEmpty()) {
                                 %>
 
-                                <table id="table_id" class="table table-bordered table-hover text-align-center">
+                                <table id="serviceTB" class="table table-bordered table-hover text-align-center">
                                     <thead class="bg-light align-content-center">
                                         <tr>
                                             <th>Số thứ tự</th>
@@ -122,7 +113,7 @@
                                             <th>Tên dịch vụ</th>
                                             <th>Giá</th>
                                             <th>Mô tả</th>
-                                            <th>Link ảnh</th>
+                                            <th >Link ảnh</th>
                                             <th>Status</th>
                                             <th>Update</th>
                                         </tr>
@@ -139,9 +130,15 @@
                                             <td><%=service.getServiceName()%></td>
                                             <td><%=service.getServicePrice()%></td>
                                             <td><%=service.getDescription()%></td>
-                                            <td><%=service.getImage()%></td>
-                                            <td><%=service.getStatus()%></td>
-                                            <td><button class="btn btn-group">
+                                            <td class="pic-link"><%=service.getImage()%></td>
+                                            <td><%if(service.getStatus()==1){
+                                             %>Hoạt động
+                                                <%  }else{
+                                                %>
+                                                Ngưng hoạt động
+                                                <%
+                                                }
+                                            %></td>
                                                     <td>
                                                         <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
                                                         <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
@@ -149,21 +146,13 @@
                                                         <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
                                                         <input type="hidden" name="image" value="<%=service.getImage()%>"/>
                                                         <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
-                                                        <input type="submit"  name="action" value="UpdateService"/>
+                                                        <input type="button"  name="action" value="UpdateService"/>
                                                     </td>
-                                                </button></td>
+
                                         </tr>
                                     </form>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Rendering engine</th>
-                                            <th>Browser</th>
-                                            <th>Platform(s)</th>
-                                            <th>Engine version</th>
-                                            <th>CSS grade</th>
-                                        </tr>
-                                    </tfoot>
+
                                     <%
                                         }
                                     %>
@@ -201,27 +190,27 @@
                 stroke="#F96D00" />
         </svg></div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-                            $(document).ready(function () {
-                                $('#table_id').DataTable();
-                            });
-    </script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#serviceTB').DataTable();
+            } );
+        </script>
 
 </body>
 </html>

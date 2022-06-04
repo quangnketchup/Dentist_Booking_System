@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import services.ServiceType;
 import utils.DBUtils;
-
+import serviceTypes.ServiceTypeDTO;
 public class ServiceTypeDAO {
 
        public List<ServiceTypeDTO> getListServiceType() throws SQLException {
