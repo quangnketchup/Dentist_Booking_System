@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
-import services.ServiceType;
+
 
 @WebServlet(name = "ShowServiceController", urlPatterns = {"/ShowService"})
 public class ShowServiceController extends HttpServlet {
@@ -29,12 +31,13 @@ public class ShowServiceController extends HttpServlet {
         String url = ERROR;
         try {
             ServiceDAO serviceDao = new ServiceDAO();
+            ServiceTypeDAO ServiceTypeDAO =new ServiceTypeDAO();
             List <ServiceDTO> listService = serviceDao.getAllListService();
-            List <ServiceType> listServiceType = serviceDao.getListServiceType();
+            List <ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
             HttpSession session = request.getSession();
             AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_USER");
             
-            if (loginAdmin != null || "AD".equals(loginAdmin.getRoleID())) {
+            if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listService != null) {
                     session.setAttribute("LIST_SERVICE", listService);
                     session.setAttribute("LIST_SERVICE_TYPE", listServiceType);

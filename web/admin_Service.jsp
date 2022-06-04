@@ -89,6 +89,7 @@
                         </div>
                     </div>
             </div>
+                                        
             <div class="container">
                 <div class="row block-9">
                     <div class="col-md-3 pr-md-5">
@@ -108,9 +109,9 @@
                         <form action="">
                             <div class="card-body">
                                 <%
-                                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
                                     if (listService != null) {
-                                        if (listService.isEmpty()) {
+                                        if (!listService.isEmpty()) {
                                 %>
 
                                 <table id="table_id" class="table table-bordered table-hover text-align-center">
