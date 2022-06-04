@@ -12,6 +12,9 @@ public class AdminDTO {
     String gmail;
     String roleID;
 
+    public AdminDTO() {
+        
+    }
     public AdminDTO(int adminID, String fullName, String password, String gmail, String roleID) {
         this.adminID = adminID;
         this.fullName = fullName;

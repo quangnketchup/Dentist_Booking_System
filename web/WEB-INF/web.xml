@@ -12,6 +12,18 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.main.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceController</servlet-name>
+        <servlet-class>controller.admins.UpdateServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowServiceController</servlet-name>
+        <servlet-class>controller.admins.ShowServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceTypeController</servlet-name>
+        <servlet-class>controller.admins.ServiceTypeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceController</servlet-name>
+        <url-pattern>/UpdateServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowServiceController</servlet-name>
+        <url-pattern>/ShowServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceTypeController</servlet-name>
+        <url-pattern>/ServiceTypeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

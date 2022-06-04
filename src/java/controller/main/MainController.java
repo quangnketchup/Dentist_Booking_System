@@ -24,6 +24,8 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_ADMIN_CONTROLLER = "LoginController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String SHOW_SERVICE = "UpdateService";
+    private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,6 +37,8 @@ public class MainController extends HttpServlet {
                 url = LOGIN_ADMIN_CONTROLLER;
             } else if (LOGOUT.equals(action)) {
                 url = LOGOUT_CONTROLLER;
+            } else if (SHOW_SERVICE.equals(action)) {
+                url = SHOW_SERVICE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController:" + e.toString());

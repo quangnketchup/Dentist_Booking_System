@@ -23,7 +23,7 @@ import patients.PatientDTO;
 public class LoginController extends HttpServlet {
     private static final String ERROR="login.jsp";
     private static final String AD="AD";
-    private static final String ADMIN_PAGE="admin_Service.jsp";
+    private static final String ADMIN_PAGE="ShowServiceController";
     private static final String PA="PA";
     private static final String PATIENT_PAGE = "home.jsp";
     private static final String DR="DR";

@@ -4,13 +4,16 @@ public class ServiceError {
     int serviceIDError;
     int serviceTypeIDError;
     String serviceNameError;
-    float servicePriceError;
+    String servicePriceError;
     String imageError;
     String descriptionError;
     int adminIDError;
     int statusError;
 
-    public ServiceError(int serviceIDError, int serviceTypeIDError, String serviceNameError, float servicePriceError, String imageError, String descriptionError, int adminIDError, int statusError) {
+    public ServiceError() {
+        
+    }
+    public ServiceError(int serviceIDError, int serviceTypeIDError, String serviceNameError, String servicePriceError, String imageError, String descriptionError, int adminIDError, int statusError) {
         this.serviceIDError = serviceIDError;
         this.serviceTypeIDError = serviceTypeIDError;
         this.serviceNameError = serviceNameError;
@@ -45,11 +48,11 @@ public class ServiceError {
         this.serviceNameError = serviceNameError;
     }
 
-    public float getServicePriceError() {
+    public String getServicePriceError() {
         return servicePriceError;
     }
 
-    public void setServicePriceError(float servicePriceError) {
+    public void setServicePriceError(String servicePriceError) {
         this.servicePriceError = servicePriceError;
     }
 

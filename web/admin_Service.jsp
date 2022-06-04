@@ -1,3 +1,6 @@
+<%@page import="admins.AdminDTO"%>
+<%@page import="services.ServiceDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,9 +41,11 @@
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
+                
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="#" class="nav-link">Dịch vụ</a></li>
+                        <li class="nav-item"><a class="nav-link"><%=((AdminDTO) session.getAttribute("LOGIN_USER")).getFullName()%></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Dịch vụ</a></li>
                         <li class="nav-item"><a href="admin_User.html" class="nav-link">User</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">FeedBack</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Bác sĩ</a></li>
@@ -52,6 +57,13 @@
         </nav>
         <!-- END nav -->
 
+        <%
+            String error = (String) request.getAttribute("ERROR");
+            if (error == null) {
+                error = "";
+            }
+        %>
+        <%=error%>
         <section class="home-slider owl-carousel">
             <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
                  data-stellar-background-ratio="0.5">
@@ -60,6 +72,23 @@
         </section>
 
         <section class="ftco-section contact-section ftco-degree-bg">
+            <!--service type theo service-->
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Category</h2>
+                            <div class="card-body"> 
+                                <c:forEach items="${sessionScope.LIST_SERVICE_TYPE}" var="serviceType">
+                                    <div>
+                                        <div>
+                                            <h4><a href="ServiceTypeController?serviceTypeID=${serviceType.serviceTypeID}">${serviceType.serviceTypeName}</a></h4>
+                                        </div>
+                                    </div>				
+                                </c:forEach>
+                            </div><!--/service Type-service-->
+                        </div>
+                    </div>
+            </div>
             <div class="container">
                 <div class="row block-9">
                     <div class="col-md-3 pr-md-5">
@@ -78,63 +107,52 @@
                     <div class="col-md-9">
                         <form action="">
                             <div class="card-body">
+                                <%
+                                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                                    if (listService != null) {
+                                        if (listService.isEmpty()) {
+                                %>
+
                                 <table id="table_id" class="table table-bordered table-hover text-align-center">
                                     <thead class="bg-light align-content-center">
                                         <tr>
+                                            <th>Số thứ tự</th>
                                             <th class="col-md-1">ID</th>
                                             <th>Tên dịch vụ</th>
                                             <th>Giá</th>
                                             <th>Mô tả</th>
                                             <th>Link ảnh</th>
-                                            <th> </th>
+                                            <th>Status</th>
+                                            <th>Update</th>
                                         </tr>
                                     </thead>
                                     <tbody class="align-content-around">
+                                        <%
+                                            int count = 1;
+                                            for (ServiceDTO service : listService) {
+                                        %>
+                                    <form action="MainController">
                                         <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td> 4</td>
-                                            <td>X</td>
-                                            <td><button class="btn btn-group">Update</button></td>
+                                            <td><%=count++%></td>
+                                            <td><%=service.getServiceID()%></td>
+                                            <td><%=service.getServiceName()%></td>
+                                            <td><%=service.getServicePrice()%></td>
+                                            <td><%=service.getDescription()%></td>
+                                            <td><%=service.getImage()%></td>
+                                            <td><%=service.getStatus()%></td>
+                                            <td><button class="btn btn-group">
+                                                    <td>
+                                                        <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
+                                                        <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
+                                                        <input type="hidden" name="servicePrice" value="<%=service.getServicePrice()%>"/>
+                                                        <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
+                                                        <input type="hidden" name="image" value="<%=service.getImage()%>"/>
+                                                        <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
+                                                        <input type="submit"  name="action" value="UpdateService"/>
+                                                    </td>
+                                                </button></td>
                                         </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 5.0
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5</td>
-                                            <td>C</td>
-                                            <td><button class="btn btn-group ">Update</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet
-                                                Explorer 5.5
-                                            </td>
-                                            <td>Win 95+</td>
-                                            <td>5.5</td>
-                                            <td>A</td>
-                                            <td><button class="btn btn-group ">Update</button></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Misc</td>
-                                            <td>IE Mobile</td>
-                                            <td>Windows Mobile 6</td>
-                                            <td>-</td>
-                                            <td>C</td>
-                                            <td><button class="btn btn-group ">Update</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Misc</td>
-                                            <td>PSP browser</td>
-                                            <td>PSP</td>
-                                            <td>-</td>
-                                            <td>C</td>
-                                            <td><button class="btn btn-group ">Update</button></td>
-                                        </tr>
+                                    </form>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -145,7 +163,15 @@
                                             <th>CSS grade</th>
                                         </tr>
                                     </tfoot>
+                                    <%
+                                        }
+                                    %>
+                                    </form>
                                 </table>
+                                <%
+                                        }
+                                    }
+                                %> 
                             </div>
                             <!-- /.card-body -->
                         </form>
