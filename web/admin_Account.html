@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
 
@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-
+    <link rel="stylesheet" href="css/account.css"
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
@@ -41,18 +41,18 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Quang</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
-                        <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
-                    </div>
-                </li>
+                            aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Quang</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                            <a href="#" class="dropdown-item nav-link text-primary text-center ">Hồ sơ cá nhân</a>
+                        </div>
+                    </li>
                     <li class="nav-item "><a href="admin_Service.html" class="nav-link">Dịch vụ</a></li>
-                    <li class="nav-item active"><a href="admin_User.html" class="nav-link">User</a></li>
+                    <li class="nav-item "><a href="admin_User.html" class="nav-link">User</a></li>
                     <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">FeedBack</a></li>
                     <li class="nav-item"><a href="admin_Doctor.html" class="nav-link">Bác sĩ</a></li>
-                    <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Booking</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Khuyến mãi</a></li>
+                    <li class="nav-item "><a href="admin_Booking.html" class="nav-link">Booking</a></li>
+                    <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
                 </ul>
             </div>
         </div>
@@ -68,81 +68,51 @@
 
     <section class="ftco-section contact-section ftco-degree-bg">
         <div class="container">
-
-            <div class="col-md-5 pr-md-5">
-                <div>
-                    <h3 class="text-primary">Danh sách khuyến mãi:</h3>
+            <div class="wrapper bg-white mt-sm-5">
+                <h4 class="pb-4 border-bottom">Account settings</h4>
+                
+                <div class="py-2">
+                    <div class="row py-2">
+                        <div class="col-md-12">
+                            <label for="fullname" class="text-primary">Full Name</label>
+                            <input type="text" class="bg-light form-control" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-12">
+                            <label for="email" class="text-primary">Email Address</label>
+                            <input type="text" class="bg-light form-control" placeholder="steve_@email.com" >
+                            
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-12">
+                            <label for="password" class="text-primary">Password</label>
+                            <input type="password" class="bg-light form-control" placeholder="Input password">
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-12">
+                            <label for="password" class="text-primary">Password</label>
+                            <input type="password" class="bg-light form-control" placeholder="Retype password">    
+                        </div>
+                    </div>
+                    <div class="py-3 pb-4 border-bottom">
+                        <button class="btn btn-primary mr-3">Save Changes</button>
+                        <button class="btn border button">Cancel</button>
+                    </div>
+                    <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                        <div>
+                            <b>Deactivate your account</b>
+                            <p>Details about your company account and password</p>
+                        </div>
+                        <div class="ml-auto">
+                            <button class="btn danger">Deactivate</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-            <div class="col-md-12">
-                <form action="">
-                    <div class="card-body">
-                        <table id="table_id" class="table table-bordered table-hover text-align-center">
-                            <thead class="bg-light align-content-center">
-                                <tr>
-                                    <th class="col-md-1">ID</th>
-                                    <th>Dịch vụ</th>
-                                    <th>Email</th>
-                                    <th>Password</th>
-                                    <th>Link ảnh</th>
-                                    <th> </th>
-                                </tr>
-                            </thead>
-                            <tbody class="align-content-around">
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td> 4</td>
-                                    <td>X</td>
-                                    <td><button class="btn btn-group">Update</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 5.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td>5</td>
-                                    <td>C</td>
-                                    <td><button class="btn btn-group ">Update</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Internet
-                                        Explorer 5.5
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td>5.5</td>
-                                    <td>A</td>
-                                    <td><button class="btn btn-group ">Update</button></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Misc</td>
-                                    <td>IE Mobile</td>
-                                    <td>Windows Mobile 6</td>
-                                    <td>-</td>
-                                    <td>C</td>
-                                    <td><button class="btn btn-group ">Update</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Misc</td>
-                                    <td>PSP browser</td>
-                                    <td>PSP</td>
-                                    <td>-</td>
-                                    <td>C</td>
-                                    <td><button class="btn btn-group ">Update</button></td>
-                                </tr>
-                            </tbody>
-                           
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </form>
-            </div>
-
-        </div>
         </div>
     </section>
 
