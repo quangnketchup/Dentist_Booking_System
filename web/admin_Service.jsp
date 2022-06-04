@@ -58,7 +58,7 @@
         <!-- END nav -->
 
         <%
-            String error = (String) request.getAttribute("ERROR");
+            String error = (String) session.getAttribute("ERROR");
             if (error == null) {
                 error = "";
             }

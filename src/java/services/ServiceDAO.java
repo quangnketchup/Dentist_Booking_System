@@ -85,10 +85,7 @@ public class ServiceDAO {
         return list;
     }
     
-<<<<<<< HEAD
- 
-=======
->>>>>>> 0beb1c80134d605e053c91920eca7696978ee92a
+
     public List<ServiceDTO> getServiceByServiceTypeID(int serviceTypeID) throws SQLException {
         List<ServiceDTO> ListService = null;
         Connection conn = null;
