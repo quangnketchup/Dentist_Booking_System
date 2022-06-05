@@ -20,15 +20,14 @@ public class ServiceTypeDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 getListServiceType = new ArrayList<>();
-                String sql = " SELECT serviceTypeID, serviceName "
-                        + " FROM tblServicesTypes ";
+                String sql = " SELECT serviceTypeID, serviceTypeName "
+                        + " FROM tblServiceTypes ";
                 pstm = conn.prepareStatement(sql);
                 resultSet = pstm.executeQuery();
                 while (resultSet.next()) {
                     int serviceTypeID = resultSet.getInt("serviceTypeID");
-                    String serviceName = resultSet.getNString("serviceName");
-                    getListServiceType.add(new ServiceTypeDTO(serviceTypeID, serviceName));
-
+                    String serviceTypeName = resultSet.getString("serviceTypeName");
+                    getListServiceType.add(new ServiceTypeDTO(serviceTypeID, serviceTypeName));
                 }
             }
         } catch (Exception e) {

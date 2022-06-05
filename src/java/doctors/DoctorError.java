@@ -1,34 +1,34 @@
 package doctors;
 
 public class DoctorError {
-    int doctorIDError;
-    int serviceTypeIDError;
+    String doctorIDError;
+    String serviceTypeIDError;
     String fullNameError;
     String passwordError;
     String confirmPassword;
     String roleIDError;
     String genderError;
-    int workDayIDError;
+    String workDayIDError;
     String gmailError;
-    int phoneError;
+    String phoneError;
     String imageError;
-    int statusError;
+    String statusError;
 
     public DoctorError() {
-        this.doctorIDError = 0;
-        this.serviceTypeIDError = 0;
+        this.doctorIDError = "";
+        this.serviceTypeIDError = "";
         this.fullNameError = "";
         this.passwordError = "";
         this.confirmPassword = "";
         this.roleIDError = "";
         this.genderError = "";
-        this.workDayIDError = 0;
+        this.workDayIDError = "";
         this.gmailError = "";
-        this.phoneError = 0;
+        this.phoneError = "";
         this.imageError = "";
-        this.statusError = 0;
+        this.statusError = "";
     }
-    public DoctorError(int doctorIDError, int serviceTypeIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String genderError, int workDayIDError, String gmailError, int phoneError, String imageError, int statusError) {
+    public DoctorError(String doctorIDError, String serviceTypeIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String genderError, String workDayIDError, String gmailError, String phoneError, String imageError, String statusError) {
         this.doctorIDError = doctorIDError;
         this.serviceTypeIDError = serviceTypeIDError;
         this.fullNameError = fullNameError;
@@ -43,19 +43,19 @@ public class DoctorError {
         this.statusError = statusError;
     }
 
-    public int getDoctorIDError() {
+    public String getDoctorIDError() {
         return doctorIDError;
     }
 
-    public void setDoctorIDError(int doctorIDError) {
+    public void setDoctorIDError(String doctorIDError) {
         this.doctorIDError = doctorIDError;
     }
 
-    public int getServiceTypeIDError() {
+    public String getServiceTypeIDError() {
         return serviceTypeIDError;
     }
 
-    public void setServiceTypeIDError(int serviceTypeIDError) {
+    public void setServiceTypeIDError(String serviceTypeIDError) {
         this.serviceTypeIDError = serviceTypeIDError;
     }
 
@@ -99,11 +99,11 @@ public class DoctorError {
         this.genderError = genderError;
     }
 
-    public int getWorkDayIDError() {
+    public String getWorkDayIDError() {
         return workDayIDError;
     }
 
-    public void setWorkDayIDError(int workDayIDError) {
+    public void setWorkDayIDError(String workDayIDError) {
         this.workDayIDError = workDayIDError;
     }
 
@@ -115,11 +115,11 @@ public class DoctorError {
         this.gmailError = gmailError;
     }
 
-    public int getPhoneError() {
+    public String getPhoneError() {
         return phoneError;
     }
 
-    public void setPhoneError(int phoneError) {
+    public void setPhoneError(String phoneError) {
         this.phoneError = phoneError;
     }
 
@@ -131,11 +131,11 @@ public class DoctorError {
         this.imageError = imageError;
     }
 
-    public int getStatusError() {
+    public String getStatusError() {
         return statusError;
     }
 
-    public void setStatusError(int statusError) {
+    public void setStatusError(String statusError) {
         this.statusError = statusError;
     }
     
