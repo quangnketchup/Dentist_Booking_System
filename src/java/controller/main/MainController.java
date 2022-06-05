@@ -24,6 +24,8 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_ADMIN_CONTROLLER = "LoginController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
+
+    // Sua lai cho nay
     private static final String SHOW_SERVICE = "UpdateService";
     private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

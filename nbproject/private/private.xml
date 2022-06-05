@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/serviceTypes/ServiceTypeDAO.java</file>
-            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/utils/DBUtils.java</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/doctors/DoctorDAO.java</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/admins/UpdateDoctor_Admin.java</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/admins/ShowDoctorController.java</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/web/admin_Doctor.jsp</file>
             <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/services/ServiceDAO.java</file>
-            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/main/MainController.java</file>
-            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/main/LoginController.java</file>
+            <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/src/java/controller/admins/UpdateServiceController.java</file>
             <file>file:/D:/Ki5-FPT/SWP391/big-boobs/Dentist_Booking_System/Dentist_Booking_System/web/admin_Service.jsp</file>
         </group>
     </open-files>

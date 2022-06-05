@@ -21,8 +21,16 @@
         <servlet-class>controller.admins.ShowServiceController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ShowDoctorController</servlet-name>
+        <servlet-class>controller.admins.ShowDoctorController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServiceTypeController</servlet-name>
         <servlet-class>controller.admins.ServiceTypeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDoctor_Admin</servlet-name>
+        <servlet-class>controller.admins.UpdateDoctor_Admin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ServiceTypeController</servlet-name>
         <url-pattern>/ServiceTypeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDoctorController</servlet-name>
+        <url-pattern>/ShowDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDoctor_Admin</servlet-name>
+        <url-pattern>/UpdateDoctor_Admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

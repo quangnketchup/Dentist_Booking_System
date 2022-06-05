@@ -2,7 +2,7 @@ package doctors;
 
 public class DoctorDTO {
     int doctorID;
-    int serviceTypeID;
+    String serviceTypeName;
     String fullName;
     String password;
     String roleID;
@@ -15,7 +15,7 @@ public class DoctorDTO {
 
     public DoctorDTO() {
         this.doctorID = 0;
-        this.serviceTypeID = 0;
+        this.serviceTypeName = "";
         this.fullName = "";
         this.password = "";
         this.roleID = "";
@@ -27,9 +27,9 @@ public class DoctorDTO {
         this.status = 0;
     }
     
-    public DoctorDTO(int doctorID, int serviceTypeID, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image, int status) {
+    public DoctorDTO(int doctorID, String serviceTypeName, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image, int status) {
         this.doctorID = doctorID;
-        this.serviceTypeID = serviceTypeID;
+        this.serviceTypeName = serviceTypeName;
         this.fullName = fullName;
         this.password = password;
         this.roleID = roleID;
@@ -41,18 +41,6 @@ public class DoctorDTO {
         this.status = status;
     }
 
-    public DoctorDTO(int doctorID, int serviceTypeID, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image) {
-        this.doctorID = doctorID;
-        this.serviceTypeID = serviceTypeID;
-        this.fullName = fullName;
-        this.password = password;
-        this.roleID = roleID;
-        this.gender = gender;
-        this.workDayID = workDayID;
-        this.gmail = gmail;
-        this.phone = phone;
-        this.image = image;
-    }
 
     
     public int getDoctorID() {
@@ -63,12 +51,12 @@ public class DoctorDTO {
         this.doctorID = doctorID;
     }
 
-    public int getServiceTypeID() {
-        return serviceTypeID;
+    public String getServiceTypeName() {
+        return serviceTypeName;
     }
 
-    public void setServiceTypeID(int serviceTypeID) {
-        this.serviceTypeID = serviceTypeID;
+    public void setServiceTypeName(String serviceTypeName) {
+        this.serviceTypeName = serviceTypeName;
     }
 
     public String getFullName() {

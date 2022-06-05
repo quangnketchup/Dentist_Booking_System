@@ -48,7 +48,7 @@
                         <li class="nav-item"><a href="#" class="nav-link">Dịch vụ</a></li>
                         <li class="nav-item"><a href="admin_User.html" class="nav-link">User</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">FeedBack</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="ShowDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Booking</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Đăng xuất</a></li>
                     </ul>
@@ -146,7 +146,7 @@
                                                         <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
                                                         <input type="hidden" name="image" value="<%=service.getImage()%>"/>
                                                         <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
-                                                        <input type="button"  name="action" value="UpdateService"/>
+                                                        <input type="submit"  name="action" value="UpdateService"/>
                                                     </td>
 
                                         </tr>
