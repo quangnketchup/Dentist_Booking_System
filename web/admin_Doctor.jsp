@@ -36,8 +36,21 @@
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
-            input[type=text]:disabled {
-                background: #dddddd;
+            #toast-msg{
+                position: absolute;
+                right: 10px;
+                top:10px;
+                z-index: 100;
+                width: 240px;
+                background-color: rgb(231,210,14);
+                display: block;
+                border-radius:10px;
+                text-align: center;
+                
+            }
+            
+            #toast-msg strong{
+                color: red;
             }
         </style>
     </head>
@@ -79,6 +92,29 @@
         %>
         <%=error%>
 
+        <!<!-- Toast thông báo succeed update -->
+
+        <%
+            String msg = (String) request.getAttribute("SSMSG");
+            if (msg == null) {
+                msg = "";
+            } else {
+        %>
+        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header1">
+                <strong class="mr-auto1">Thông báo</strong>
+                <small></small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body1">
+                <%=msg%>
+            </div>
+        </div>
+
+        <%}%>
+
         <section class="home-slider owl-carousel">
             <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
                  data-stellar-background-ratio="0.5">
@@ -94,13 +130,79 @@
                         <h3 class="text-primary">Danh sách bác sĩ:</h3>
                     </div>
                 </div>
+                <div class="col-md-5">
+                    <form action="SearchDoctorController">
+                    <input type="search" name="fullName">
+                    <input type="submit">
+                </form>
+                </div>
+                
+                
                 <div class="col-md-9">
                     <form action="">
                         <div class="card-body">
                             <%
-                                List<doctors.DoctorDTO> listDoctor = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
+                                List<doctors.DoctorDTO> listSearchDoctor  = (List<DoctorDTO>) session.getAttribute("SEARCH_DOCTOR");
+                                if(listSearchDoctor!=null){
+                                List<doctors.DoctorDTO> listDoctor=listSearchDoctor;                           
+                                %>
+                            <table id="table_id" class="table table-bordered table-hover text-align-center">
+                                <thead class="bg-light align-content-center">
+                                    <tr>
+                                        <th>Bác sĩ ID</th>
+                                        <th class="col-md-2">Chuyên khoa</th>
+                                        <th>Họ Tên</th>
+                                        <th>Email</th>                                     
+                                        <th>Link ảnh</th>
+                                        <th>Điện thoại</th>
+                                        <th>Trạng thái</th>
+                                        <th>Gender</th>
+                                        <th>Ngày làm việc</th>
+                                        <th>Update </th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="align-content-around">
+                                    <%
+                                        int count = 1;
+                                        for (DoctorDTO doctor : listDoctor) {
+                                    %>
+                                <form action="UpdateDoctor_Admin" >
+                                    <tr>
+                                        <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" readonly ></td>
+                                        <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
+                                        <td><input type="text" name="fullName" value="<%=doctor.getFullName()%>" readonly ></td>
+                                        <td><input type="text" name="gmail" value="<%=doctor.getGmail()%>" readonly ></td>                                  
+                                        <td><input type="text" name="image" value="<%=doctor.getImage()%>" readonly ></td>
+                                        <td><input type="text" name="phone" value="0<%=doctor.getPhone()%>" readonly ></td>
+                                        <td>  
+                                            <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
+                                        </td> 
+                                        <td><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
+                                        <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                                <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
+                                                <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
+                                        </td>
+                                        <td><input type="submit" name="action" value="Update Doctor"></td>
+                                        <td><a href="DeleteDoctorController?doctorID=<%=doctor.getDoctorID()%>">Xóa bác sĩ</a></td>
+                                    </tr>
+                                </form>
+                                </tbody>
+                                <%
+                                    }
+                                %>
+                            </table>
+                            
+                            <!<!-- ELSE SECTION --> 
+                            
+                            <%
+                                }else{
+                                 List<doctors.DoctorDTO> listDoctor = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
                                 if (listDoctor != null) {
                                     if (!listDoctor.isEmpty()) {
+                                }
+                       
                             %>
                             <table id="table_id" class="table table-bordered table-hover text-align-center">
                                 <thead class="bg-light align-content-center">
@@ -133,10 +235,7 @@
                                         <td><input type="text" name="image" value="<%=doctor.getImage()%>" readonly ></td>
                                         <td><input type="text" name="phone" value="0<%=doctor.getPhone()%>" readonly ></td>
                                         <td>  
-                                            <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                                <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%></option>
-                                                <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghĩ việc<%} else {%>Làm việc<%}%></option>                                               
-                                            </select>
+                                            <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
                                         </td> 
                                         <td><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
                                         <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -144,7 +243,7 @@
                                                 <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
                                         </td>
                                         <td><input type="submit" name="action" value="Update Doctor"></td>
-                                        <td><a href="#">Xoa bac Si</a></td>
+                                        <td><a href="DeleteDoctorController?doctorID=<%=doctor.getDoctorID()%>">Xóa bác sĩ</a></td>
                                     </tr>
                                 </form>
                                 </tbody>
@@ -201,9 +300,11 @@
     <script src="js/scrollax.min.js"></script>
     <script src="js/main.js"></script>
     <script>
-                            $(document).ready(function () {
-                                $('#table_id').DataTable();
-                            });
+   
+                            function toastClose(){
+                                var toast1= document.getElementById("toast-msg");
+                                toast1.style.display ="none";
+                            }
     </script>
 </body>
 </html>

@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
@@ -77,6 +78,7 @@ public class UpdateDoctor_Admin extends HttpServlet {
                 boolean checkUpdate = dao.updateDoctor(doctor);
                 if(checkUpdate) {
                     url = SUCCESS;
+                    request.setAttribute( "SSMSG","Chỉnh sữa thành công !");
                 }
             } else {
                 request.setAttribute("ERROR_UPDATE", dao);

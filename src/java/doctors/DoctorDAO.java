@@ -16,10 +16,35 @@ public class DoctorDAO {
     private static final String GET_ALL_LIST_DOCTOR = "SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID";
     private static String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, workDayID, gmail, phone, image, status FROM tblDoctors WHERE gmail=? AND password=?";
     private static String CHECK_DUPLICATE = "SELECT fullName FROM tblDoctors WHERE doctorID=?";
-    private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
+    private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
     private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?"
                         + " WHERE doctorID =? ";
     
+    private static final String SET_DOCTOR_OFF= "UPDATE tblDoctors SET status = 0 WHERE doctorID=?";
+    
+    public boolean setDoctorOff(int id) throws SQLException{
+        boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(SET_DOCTOR_OFF);
+                pstm.setInt(1, id);
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
      public boolean updateDoctor(DoctorDTO doctor) throws SQLException {
         boolean check = false;
@@ -37,6 +62,7 @@ public class DoctorDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            
             if (pstm != null) {
                 pstm.close();
             }
@@ -48,7 +74,7 @@ public class DoctorDAO {
     }
     
     
-    public List<DoctorDTO> searchDoctorByID(String name) throws SQLException{
+    public List<DoctorDTO> searchDoctorByName(String name) throws SQLException{
         List<DoctorDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -56,7 +82,7 @@ public class DoctorDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn !=null){
-                ptm = conn.prepareStatement(SEARCH_DOCTOR_BY_ID);
+                ptm = conn.prepareStatement(SEARCH_DOCTOR_BY_NAME);
                 ptm.setString(1, "%"+name+"%");
                 rs = ptm.executeQuery();
                 while(rs.next()){
