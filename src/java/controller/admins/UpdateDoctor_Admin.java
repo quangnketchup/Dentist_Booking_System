@@ -81,10 +81,10 @@ public class UpdateDoctor_Admin extends HttpServlet {
                     request.setAttribute( "SSMSG","Chỉnh sữa thành công !");
                 }
             } else {
-                request.setAttribute("ERROR_UPDATE", dao);
+                request.setAttribute( "SSMSG","Chỉnh sữa thất bại !");
             }
         } catch (Exception e) {
-            log("Error at Update Service Controller");
+            log("Error at Update Doctor Controller");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

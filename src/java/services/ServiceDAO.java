@@ -25,15 +25,13 @@ public class ServiceDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblServices SET serviceName =?, image =?, servicePrice =?, serviceTypeID =?, description =? , status = ?"
+                String sql = " UPDATE tblServices SET image =?, servicePrice =?, status = ?"
                         + " WHERE serviceID =? ";
                 pstm = conn.prepareStatement(sql);
-                pstm.setString(1, service.getServiceName());
-                pstm.setString(2, service.getImage());
-                pstm.setInt(3, (int) service.getServicePrice());
-                pstm.setInt(4, (int) service.getServiceTypeID());
-                pstm.setString(5, service.getDescription());
-                pstm.setInt(6, service.getStatus());
+                pstm.setString(1, service.getImage());
+                pstm.setInt(2, (int) service.getServicePrice());
+                pstm.setInt(3, service.getStatus());
+                pstm.setInt(4, service.getServiceID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

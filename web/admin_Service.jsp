@@ -35,7 +35,11 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link"><%=((AdminDTO) session.getAttribute("LOGIN_USER")).getFullName()%></a></li>
+
                         <li class="nav-item active"><a href="#" class="nav-link">Dịch vụ</a></li>
+
+                        <li class="nav-item"><a href="ShowServiceController" class="nav-link">Dịch vụ</a></li>
+
                         <li class="nav-item"><a href="admin_User.html" class="nav-link">Người dùng</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Phản hồi</a></li>
                         <li class="nav-item"><a href="ShowDoctorController" class="nav-link">Bác sĩ</a></li>
@@ -54,6 +58,30 @@
             }
         %>
         <%=error%>
+        
+        <!-- Toast thông báo succeed update -->
+        
+        <%
+            String msg = (String) request.getAttribute("SSMSG");
+            if (msg == null) {
+                msg = "";
+            } else {
+        %>
+        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header1">
+                <strong class="mr-auto1">Thông báo</strong>
+                <small></small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body1">
+                <%=msg%>
+            </div>
+        </div>
+
+        <%}%>
+        
         <section class="home-slider owl-carousel">
             <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
                  data-stellar-background-ratio="0.5">
@@ -117,12 +145,12 @@
                         %>
                     <form action="MainController">
                         <tr>
-                            <td><%=count++%></td>
-                            <td><%=service.getServiceID()%></td>
-                            <td><%=service.getServiceName()%></td>
-                            <td><%=service.getServicePrice()%></td>
+                            <td><%=count++%>"</td>
+                            <td><input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/></td>
+                            <td><input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/></td>
+                            <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/><%=service.getServicePrice()%></td>
 
-                            <td><%=service.getDescription()%></td>
+                            <td><input type="hidden" name="description" value="<%=service.getDescription()%>"/></td>
                             <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
                             <td><%if (service.getStatus() == 1) {
                                 %>Hoạt động
@@ -133,9 +161,8 @@
                                     }
                                 %></td>
                             <td>
-                                <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
-                                <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
-                                <input type="hidden" name="servicePrice" value="<%=service.getServicePrice()%>"/>
+                                
+                                
                                 <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
                                 <input type="hidden" name="image" value="<%=service.getImage()%>"/>
                                 <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
@@ -187,12 +214,12 @@
                                 <form action="MainController">
                                     <tr>
                                         <td><%=count++%></td>
-                                        <td><%=service.getServiceID()%></td>
-                                        <td><%=service.getServiceName()%></td>
-                                        <td><%=service.getServicePrice()%></td>
+                                        <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
+                                        <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
+                                        <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
 
-                                        <td><%=service.getDescription()%></td>
-                                        <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                                        <td><input type="text" name="description" value="<%=service.getDescription()%>"/></td>
+                                        <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"><input type="text" name="image" value="<%=service.getImage()%>"/></td>
                                         <td><%if (service.getStatus() == 1) {
                                             %>Hoạt động
                                             <%  } else {

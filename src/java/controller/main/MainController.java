@@ -24,6 +24,8 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_ADMIN_CONTROLLER = "LoginController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String UPDATE_SERVICE ="UpdateService";
+    private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
 
     // Sua lai cho nay
     private static final String SHOW_SERVICE = "UpdateService";
@@ -41,6 +43,8 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (SHOW_SERVICE.equals(action)) {
                 url = SHOW_SERVICE_CONTROLLER;
+            } else if (UPDATE_SERVICE.equals(action)) {
+                url = UPDATE_SERVICE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController:" + e.toString());

@@ -14,7 +14,7 @@
         <title>Admin Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
@@ -121,7 +121,50 @@
                 <div class="overlay"></div>
             </div>
         </section>
-
+        
+        <!--Modal hiện form tạo bác sĩ-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Add New Doctor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="" method="post">
+                    <div class="modal-body">
+                        <div class="register-box">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Họ tên">
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" placeholder="Mật khẩu">
+                            </div>
+                            <div class="input-group mb-3">
+                                
+                            </div>
+                            <div class="input-group mb-3">
+                                
+                            </div>
+                            <div class="input-group mb-3">
+                                
+                            </div>
+                        </div><!-- /.card -->
+                        </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Add Doctor</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <section class="ftco-section ">
             <div class="container-fluid">
                 <div class="col-md-3 offset-1">
@@ -129,11 +172,15 @@
                         <h3 class="text-primary"><strong>Quản lí bác sĩ:</strong></h3>
                     </div>
                 </div>
-                <div class="col-md-3 offset-1">
-                    <form action="SearchDoctorController">
-                        <input type="search" class="form" name="fullName">
-                        <input class="btn " style="background: #2f89fc; color: white" type="submit">
-                    </form>
+                <div class="col-md-5 offset-1">
+                    <div class="btn-group">
+                        <form action="SearchDoctorController">
+                            <input type="search" class="form" name="fullName">
+                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit">
+                        </form>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
+                    </div>
+
                 </div>
                 <div class="col-md-12">
                     <div class="card-body">
