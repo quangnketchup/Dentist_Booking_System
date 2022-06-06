@@ -42,8 +42,7 @@ public class SearchDoctorController extends HttpServlet {
             DoctorDAO dao=new DoctorDAO();
             String name=request.getParameter("fullName");
             List<DoctorDTO>list= dao.searchDoctorByName(name);  
-            HttpSession session = request.getSession();
-            session.setAttribute("SEARCH_DOCTOR", list);
+            request.setAttribute("SEARCH_DOCTOR", list);
                 url=SUCCESS;          
         } catch (Exception e) {
             log("Error at ShowServiceController: " + e.toString());
