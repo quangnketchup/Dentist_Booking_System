@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -22,16 +23,22 @@ import services.ServiceDTO;
 public class ServiceTypeController extends HttpServlet {
 
     private static final String USER = "home.jsp";
-    private static final String ADMIN = "admin.jsp";
+    private static final String ADMIN = "admin_Service.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = USER;
         try {
-            int serviceTypeID = 0;
+            int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getServiceByServiceTypeID(serviceTypeID);
+            HttpSession session = request.getSession();
+            session.setAttribute("LIST_SERVICE_BY_SVTYPE", listService);
+            url=ADMIN;
         } catch (Exception e) {
+            log("Error at ServiceController");
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

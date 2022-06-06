@@ -17,31 +17,34 @@ import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
-
 @WebServlet(name = "ShowServiceController", urlPatterns = {"/ShowService"})
 public class ShowServiceController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String ADMIN = "admin_Service.jsp"; 
-    
+    private static final String ADMIN = "admin_Service.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            ServiceDAO serviceDao = new ServiceDAO();
-            ServiceTypeDAO ServiceTypeDAO =new ServiceTypeDAO();
-            List <ServiceDTO> listService = serviceDao.getAllListService();
-            List <ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
+
             HttpSession session = request.getSession();
-            AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_USER");
             
-            if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
-                if (listService != null) {
-                    session.setAttribute("LIST_SERVICE", listService);
-                    session.setAttribute("LIST_SERVICE_TYPE", listServiceType);
-                    url = ADMIN;
-                }
+                ServiceDAO serviceDao = new ServiceDAO();
+                ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+                List<ServiceDTO> listService = serviceDao.getAllListService();
+                List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
+
+                AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_USER");
+
+                if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
+                    if (listService != null) {
+                        session.setAttribute("LIST_SERVICE", listService);
+                        session.setAttribute("LIST_SERVICE_TYPE", listServiceType);
+                        url = ADMIN;
+                    }
+              
             }
         } catch (Exception e) {
             log("Error at ShowServiceController: " + e.toString());
@@ -50,7 +53,7 @@ public class ShowServiceController extends HttpServlet {
         }
     }
 
-       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

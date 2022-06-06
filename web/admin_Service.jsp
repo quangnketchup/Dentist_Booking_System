@@ -1,3 +1,4 @@
+<%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="services.ServiceDTO"%>
 <%@page import="java.util.List"%>
@@ -74,18 +75,26 @@
         <section class="ftco-section contact-section ftco-degree-bg">
             <!--service type theo service-->
             <div class="container">
-                    <div class="col-md-12">
-                        <h2>Loại dịch vụ</h2>
-                        <div class="card-body"> 
-                            <c:forEach items="${sessionScope.LIST_SERVICE_TYPE}" var="serviceType">
-                                <div>
-                                    <div>
-                                        <h4><a href="ServiceTypeController?serviceTypeID=${serviceType.serviceTypeID}">${serviceType.serviceTypeName}</a></h4>
-                                    </div>
-                                </div>				
-                            </c:forEach>
-                        </div><!--/service Type-service-->
-                    </div>
+                <div class="col-md-12">
+                    <h2>Loại dịch vụ</h2>
+                    <div class="card-body"> 
+                        <%
+                            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
+                            if (listServiceType != null) {
+                                for (ServiceTypeDTO svType : listServiceType) {
+                        %>
+
+                        <div>
+                            <div>
+                                <h4><a href="ServiceTypeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a></h4>
+                            </div>
+                        </div>	
+
+                        <%
+                                }
+                            }%>
+                    </div><!--/service Type-service-->
+                </div>
             </div>
 
             <div class="container-fluid">
@@ -94,78 +103,144 @@
                         <h3 class="text-primary">Quản lí dịch vụ:</h3>
                     </div>
                 </div>
-                <div class="col-md-12 ">
-                        <div class="card">
-                            <div class="card-body">
-                                <%
-                                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
-                                    if (listService != null) {
-                                        if (!listService.isEmpty()) {
+                <%List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                    if (listsvbySVType != null) {
+                        List<ServiceDTO> listService = listsvbySVType;
+                %>
+
+                <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
+                    <thead class="bg-light align-content-center">
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th class="col-md-1">Mã dịch vụ</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Giá</th>
+                            <th>Mô tả</th>
+                            <th class="col-md-3">Ảnh</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-content-around">
+                        <%
+                            int count = 1;
+                            for (ServiceDTO service : listService) {
+                        %>
+                    <form action="MainController">
+                        <tr>
+                            <td><%=count++%></td>
+                            <td><%=service.getServiceID()%></td>
+                            <td><%=service.getServiceName()%></td>
+                            <td><%=service.getServicePrice()%></td>
+
+                            <td><%=service.getDescription()%></td>
+                            <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                            <td><%if (service.getStatus() == 1) {
+                                %>Hoạt động
+                                <%  } else {
                                 %>
-
-                                <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
-                                    <thead class="bg-light align-content-center">
-                                        <tr>
-                                            <th>Số thứ tự</th>
-                                            <th class="col-md-1">Mã dịch vụ</th>
-                                            <th>Tên dịch vụ</th>
-                                            <th>Giá</th>
-                                            <th>Mô tả</th>
-                                            <th class="col-md-3">Ảnh</th>
-                                            <th>Status</th>
-                                            <th>Update</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="align-content-around">
-                                        <%
-                                            int count = 1;
-                                            for (ServiceDTO service : listService) {
-                                        %>
-                                    <form action="MainController">
-                                        <tr>
-                                            <td><%=count++%></td>
-                                            <td><%=service.getServiceID()%></td>
-                                            <td><%=service.getServiceName()%></td>
-                                            <td><%=service.getServicePrice()%></td>
-
-                                            <td><%=service.getDescription()%></td>
-                                            <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
-                                            <td><%if (service.getStatus() == 1) {
-                                                %>Hoạt động
-                                                <%  } else {
-                                                %>
-                                                Ngưng hoạt động
-                                                <%
-                                                    }
-                                                %></td>
-                                            <td>
-                                                <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
-                                                <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
-                                                <input type="hidden" name="servicePrice" value="<%=service.getServicePrice()%>"/>
-                                                <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
-                                                <input type="hidden" name="image" value="<%=service.getImage()%>"/>
-                                                <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
-                                                <input type="submit"  name="action" value="UpdateService"/>
-                                            </td>
-
-                                        </tr>
-                                    </form>
-                                    </tbody>
-
-                                    <%
-                                        }
-                                    %>
-                                    </form>
-                                </table>
+                                Ngưng hoạt động
                                 <%
+                                    }
+                                %></td>
+                            <td>
+                                <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
+                                <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
+                                <input type="hidden" name="servicePrice" value="<%=service.getServicePrice()%>"/>
+                                <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
+                                <input type="hidden" name="image" value="<%=service.getImage()%>"/>
+                                <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
+                                <input type="submit"  name="action" value="UpdateService"/>
+                            </td>
+
+                        </tr>
+                    </form>
+                    </tbody>
+
+                    <%
+                        }
+                    %>
+                    </form>
+                </table>
+
+                <%
+                } else {
+                %>
+
+
+                <div class="col-md-12 ">
+                    <div class="card">
+                        <div class="card-body">
+                            <%
+                                List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
+                                if (listService != null) {
+                                    if (!listService.isEmpty()) {
+                            %>
+
+                            <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
+                                <thead class="bg-light align-content-center">
+                                    <tr>
+                                        <th>Số thứ tự</th>
+                                        <th class="col-md-1">Mã dịch vụ</th>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Giá</th>
+                                        <th>Mô tả</th>
+                                        <th class="col-md-3">Ảnh</th>
+                                        <th>Status</th>
+                                        <th>Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-content-around">
+                                    <%
+                                        int count = 1;
+                                        for (ServiceDTO service : listService) {
+                                    %>
+                                <form action="MainController">
+                                    <tr>
+                                        <td><%=count++%></td>
+                                        <td><%=service.getServiceID()%></td>
+                                        <td><%=service.getServiceName()%></td>
+                                        <td><%=service.getServicePrice()%></td>
+
+                                        <td><%=service.getDescription()%></td>
+                                        <td ><img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                                        <td><%if (service.getStatus() == 1) {
+                                            %>Hoạt động
+                                            <%  } else {
+                                            %>
+                                            Ngưng hoạt động
+                                            <%
+                                                }
+                                            %></td>
+                                        <td>
+                                            <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"/>
+                                            <input type="hidden" name="serviceName" value="<%=service.getServiceName()%>"/>
+                                            <input type="hidden" name="servicePrice" value="<%=service.getServicePrice()%>"/>
+                                            <input type="hidden" name="description" value="<%=service.getDescription()%>"/>
+                                            <input type="hidden" name="image" value="<%=service.getImage()%>"/>
+                                            <input type="hidden" name="status" value="<%=service.getStatus()%>"/>
+                                            <input type="submit"  name="action" value="UpdateService"/>
+                                        </td>
+
+                                    </tr>
+                                </form>
+                                </tbody>
+
+                                <%
+                                    }
+                                %>
+                                </form>
+                            </table>
+                            <%
                                         }
                                     }
-                                %> 
-                            </div>
+                                }
+                            %> 
                         </div>
+                    </div>
 
-                        <!-- /.card-body -->
-                    
+                    <!-- /.card-body -->
+
                 </div>
             </div>
         </div>
