@@ -122,7 +122,7 @@
             </div>
         </section>
 
-        <section class="ftco-section contact-section ftco-degree-bg">
+        <section class="ftco-section ">
             <div class="container-fluid">
                 <div class="col-md-5 pr-md-5">
                     <div>
@@ -179,6 +179,7 @@
                                             <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
                                         </td> 
                                         <td><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
+                                        
                                         <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
                                                 <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
@@ -233,9 +234,8 @@
                                         <td style="background-color:#b3b1af"><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
                                         <td style="background-color:#b3b1af"><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
                                         <td style="background-color:#b3b1af"><input type="text" name="phone" value="0<%=doctor.getPhone()%>" class="form-control-plaintext" readonly ></td>
-                                        <td>  
-                                            <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
-                                                                                                                                                                                                                                                    <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <td>
+                                            <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%></option>
                                                 <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghĩ việc<%} else {%>Làm việc<%}%></option>                                               
                                             </select>
