@@ -64,7 +64,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto">                       
+                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
+                        <li class="nav-item "><a href="admin_User.html" class="nav-link">Người dùng</a></li>
+                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">Phản hồi</a></li>
+                        <li class="nav-item active"><a href="#" class="nav-link">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Đặt lịch</a></li>
+                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Quang</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -72,12 +78,6 @@
                                 <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
-                        <li class="nav-item "><a href="admin_User.html" class="nav-link">User</a></li>
-                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">FeedBack</a></li>
-                        <li class="nav-item active"><a href="#" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Booking</a></li>
-                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
                     </ul>
                 </div>
             </div>
@@ -123,13 +123,13 @@
         </section>
 
         <section class="ftco-section contact-section ftco-degree-bg">
-            <div class="container">
-
+            <div class="container-fluid">
                 <div class="col-md-5 pr-md-5">
                     <div>
-                        <h3 class="text-primary">Danh sách bác sĩ:</h3>
+                        <h3 class="text-primary">Quản lí bác sĩ:</h3>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="col-md-5">
                     <form action="SearchDoctorController">
                     <input type="search" name="fullName">
@@ -141,6 +141,12 @@
                 <div class="col-md-9">
                     <form action="">
                         <div class="card-body">
+=======
+                <div class="col-md-12 ">
+
+                    <div class="card card-body">
+                        <div class="table-responsive">
+>>>>>>> 2da2c2a202d4e6f01556b64ede1e4aae68dd963f
                             <%
                                 List<doctors.DoctorDTO> listSearchDoctor  = (List<DoctorDTO>) session.getAttribute("SEARCH_DOCTOR");
                                 if(listSearchDoctor!=null){
@@ -204,14 +210,14 @@
                                 }
                        
                             %>
-                            <table id="table_id" class="table table-bordered table-hover text-align-center">
-                                <thead class="bg-light align-content-center">
+                            <table id="table_id" class="table table-bordered table-hover">
+                                <thead class="bg-light ">
                                     <tr>
-                                        <th>Bác sĩ ID</th>
-                                        <th class="col-md-2">Chuyên khoa</th>
+                                        <th>Mã bac sĩ</th>
+                                        <th>Chuyên khoa</th>
                                         <th>Họ Tên</th>
                                         <th>Email</th>                                     
-                                        <th>Link ảnh</th>
+                                        <th>Ảnh</th>
                                         <th>Điện thoại</th>
                                         <th>Trạng thái</th>
                                         <th>Gender</th>
@@ -221,23 +227,23 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="align-content-around">
+                                <tbody>
                                     <%
                                         int count = 1;
                                         for (DoctorDTO doctor : listDoctor) {
                                     %>
                                 <form action="UpdateDoctor_Admin" >
                                     <tr>
-                                        <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="id" value="<%=doctor.getDoctorID()%>" readonly ></td>
                                         <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
-                                        <td><input type="text" name="fullName" value="<%=doctor.getFullName()%>" readonly ></td>
-                                        <td><input type="text" name="gmail" value="<%=doctor.getGmail()%>" readonly ></td>                                  
-                                        <td><input type="text" name="image" value="<%=doctor.getImage()%>" readonly ></td>
-                                        <td><input type="text" name="phone" value="0<%=doctor.getPhone()%>" readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="fullName" value="<%=doctor.getFullName()%>" readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="gmail" value="<%=doctor.getGmail()%>" readonly ></td>                                  
+                                        <td style="background-color:#b3b1af"><input type="text" name="image" value="<%=doctor.getImage()%>" readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="phone" value="0<%=doctor.getPhone()%>" readonly ></td>
                                         <td>  
                                             <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
                                         </td> 
-                                        <td><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
                                         <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
                                                 <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
@@ -247,6 +253,7 @@
                                     </tr>
                                 </form>
                                 </tbody>
+
                                 <%
                                     }
                                 %>
@@ -256,8 +263,8 @@
                                 }
                             %>
                         </div>
-                        <!-- /.card-body -->
-                    </form>
+                    </div>
+
                 </div>
 
             </div>
@@ -300,11 +307,17 @@
     <script src="js/scrollax.min.js"></script>
     <script src="js/main.js"></script>
     <script>
+<<<<<<< HEAD
    
                             function toastClose(){
                                 var toast1= document.getElementById("toast-msg");
                                 toast1.style.display ="none";
                             }
+=======
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+>>>>>>> 2da2c2a202d4e6f01556b64ede1e4aae68dd963f
     </script>
 </body>
 </html>
