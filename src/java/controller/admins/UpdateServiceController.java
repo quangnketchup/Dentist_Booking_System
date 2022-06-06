@@ -18,7 +18,7 @@ import services.ServiceError;
 public class UpdateServiceController extends HttpServlet {
 
     public static final String ERROR = "home.jsp";
-    public static final String SUCCESS = "UpdateService.jsp";
+    public static final String SUCCESS = "ShowServiceController.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -57,6 +57,7 @@ public class UpdateServiceController extends HttpServlet {
                 boolean checkUpdate = dao.updateService(service);
                 if(checkUpdate) {
                     url = SUCCESS;
+                    request.setAttribute( "SSMSG","Chỉnh sữa thành công !");
                 }
             } else {
                 request.setAttribute("ERROR_UPDATE", dao);
