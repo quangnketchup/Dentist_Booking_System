@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
 
@@ -129,7 +129,6 @@
                         <h3 class="text-primary">Quản lí bác sĩ:</h3>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div class="col-md-5">
                     <form action="SearchDoctorController">
                     <input type="search" name="fullName">
@@ -141,12 +140,6 @@
                 <div class="col-md-9">
                     <form action="">
                         <div class="card-body">
-=======
-                <div class="col-md-12 ">
-
-                    <div class="card card-body">
-                        <div class="table-responsive">
->>>>>>> 2da2c2a202d4e6f01556b64ede1e4aae68dd963f
                             <%
                                 List<doctors.DoctorDTO> listSearchDoctor  = (List<DoctorDTO>) session.getAttribute("SEARCH_DOCTOR");
                                 if(listSearchDoctor!=null){
@@ -210,7 +203,7 @@
                                 }
                        
                             %>
-                            <table id="table_id" class="table table-bordered table-hover">
+                            <table id="table_id" class="table table-image table-bordered table-hover">
                                 <thead class="bg-light ">
                                     <tr>
                                         <th>Mã bac sĩ</th>
@@ -234,16 +227,20 @@
                                     %>
                                 <form action="UpdateDoctor_Admin" >
                                     <tr>
-                                        <td style="background-color:#b3b1af"><input type="text" name="id" value="<%=doctor.getDoctorID()%>" readonly ></td>
-                                        <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
-                                        <td style="background-color:#b3b1af"><input type="text" name="fullName" value="<%=doctor.getFullName()%>" readonly ></td>
-                                        <td style="background-color:#b3b1af"><input type="text" name="gmail" value="<%=doctor.getGmail()%>" readonly ></td>                                  
-                                        <td style="background-color:#b3b1af"><input type="text" name="image" value="<%=doctor.getImage()%>" readonly ></td>
-                                        <td style="background-color:#b3b1af"><input type="text" name="phone" value="0<%=doctor.getPhone()%>" readonly ></td>
+                                        <td style="background-color:#b3b1af;"><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
+                                        <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>" ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="fullName" value="<%=doctor.getFullName()%>"  readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
+                                        <td style="background-color:#b3b1af"><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="phone" value="0<%=doctor.getPhone()%>" class="form-control-plaintext" readonly ></td>
                                         <td>  
                                             <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
+                                                                                                                                                                                                                                                    <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                                <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%></option>
+                                                <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghĩ việc<%} else {%>Làm việc<%}%></option>                                               
+                                            </select>
                                         </td> 
-                                        <td style="background-color:#b3b1af"><input type="text" name="gender" value="<%=doctor.getGender()%>" readonly /></td>
+                                        <td style="background-color:#b3b1af"><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly /></td>
                                         <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
                                                 <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
@@ -300,24 +297,18 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/aos.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="js/jquery.animateNumber.min.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/jquery.timepicker.min.js"></script>
     <script src="js/scrollax.min.js"></script>
     <script src="js/main.js"></script>
     <script>
-<<<<<<< HEAD
    
                             function toastClose(){
                                 var toast1= document.getElementById("toast-msg");
                                 toast1.style.display ="none";
                             }
-=======
-        $(document).ready(function () {
-            $('#table_id').DataTable();
-        });
->>>>>>> 2da2c2a202d4e6f01556b64ede1e4aae68dd963f
     </script>
 </body>
 </html>
