@@ -201,8 +201,7 @@
                                     <th>Trạng Thái</th>
                                     <th>Giới Tính</th>
                                     <th>Ngày Làm Việc</th>
-                                    <th>Cập Nhật</th>
-                                    <th>Xóa</th>
+                                    <th>Chỉnh sữa thông tin bác sĩ</th>
                                 </tr>
                             </thead>
 
@@ -220,16 +219,20 @@
                                     <td><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
                                     <td><input type="text" name="phone" value="0<%=doctor.getPhone()%>" class="form-control-plaintext" readonly ></td>
                                     <td>  
-                                        <input type="text" name="status" value="<%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%>" readonly>
+                                        <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Đang làm việc<%} else {%>Đã nghỉ việc<%}%></option>
+                                            <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghỉ việc<%} else {%>Đang làm việc<%}%></option>
+                                        </select>
                                     </td> 
                                     <td><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly /></td>
 
                                     <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
                                             <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
+                                        </select>
                                     </td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Doctor"></td>
-                                    <td ><a class="btn btn-block btn-outline-danger" href="DeleteDoctorController?doctorID=<%=doctor.getDoctorID()%>">Xóa Bác Sĩ</a></td>
+                                   
                                 </tr>
                             </form>
                             </tbody>
@@ -248,52 +251,53 @@
                                 }
 
                         %>
-                        <table  class="table table-image table-bordered table-hover">
-                            <thead class="bg-light ">
+                        <table id="table_id" class="table table-bordered table-hover text-align-center">
+                            <thead class="bg-light align-content-center">
                                 <tr>
-                                    <th>Mã Bác Sĩ</th>
+                                    <th>Bác Sĩ ID</th>
                                     <th>Chuyên Khoa</th>
                                     <th>Họ Tên</th>
                                     <th>Email</th>                                     
-                                    <th>Ảnh</th>
+                                    <th>Link Ảnh</th>
                                     <th>Điện Thoại</th>
                                     <th>Trạng Thái</th>
                                     <th>Giới Tính</th>
                                     <th>Ngày Làm Việc</th>
-                                    <th>Cập Nhật</th>
-                                    <th>Xóa</th>
+                                    <th>Chỉnh sữa thông tin bác sĩ</th>
                                 </tr>
                             </thead>
 
-                            <tbody>
-                                <%                                        int count = 1;
+                            <tbody class="align-content-around">
+                                <%
+                                    int count = 1;
                                     for (DoctorDTO doctor : listDoctor) {
                                 %>
                             <form action="UpdateDoctor_Admin" >
                                 <tr>
-                                    <td style="background-color:#b3b1af;"><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
-                                    <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>" ></td>
-                                    <td style="background-color:#b3b1af"><input type="text" name="fullName" value="<%=doctor.getFullName()%>"  readonly ></td>
-                                    <td style="background-color:#b3b1af"><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
-                                    <td style="background-color:#b3b1af"><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
-                                    <td style="background-color:#b3b1af"><input type="text" name="phone" value="0<%=doctor.getPhone()%>" class="form-control-plaintext" readonly ></td>
-                                    <td>
+                                    <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
+                                    <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
+                                    <td><input type="text" name="fullName" value="<%=doctor.getFullName()%>" class="form-control-plaintext" readonly ></td>
+                                    <td><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
+                                    <td><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
+                                    <td><input type="text" name="phone" value="0<%=doctor.getPhone()%>" class="form-control-plaintext" readonly ></td>
+                                    <td>  
                                         <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                            <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Làm việc<%} else {%>Đã nghĩ việc<%}%></option>
-                                            <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghĩ việc<%} else {%>Làm việc<%}%></option>                                               
+                                            <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Đang làm việc<%} else {%>Đã nghỉ việc<%}%></option>
+                                            <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghỉ việc<%} else {%>Đang làm việc<%}%></option>
                                         </select>
                                     </td> 
-                                    <td style="background-color:#b3b1af"><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly /></td>
+                                    <td><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly /></td>
+
                                     <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
                                             <option value="<%=Math.abs(doctor.getWorkDayID() - 3)%>"><%if (doctor.getWorkDayID() == 2) {%>3, 5, 7<%} else {%>2, 4, 6<%}%></option>
+                                        </select>
                                     </td>
-                                    <td><input class="btn btn-block btn-outline-success" type="submit" name="action" value="Update Doctor"></td>
-                                    <td><a class="btn btn-block btn-outline-danger" href="DeleteDoctorController?doctorID=<%=doctor.getDoctorID()%>">Xóa Bác Sĩ</a></td>
+                                    <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Doctor"></td>
+                                   
                                 </tr>
                             </form>
                             </tbody>
-
                             <%
                                 }
                             %>

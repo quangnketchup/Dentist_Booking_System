@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class DBUtils {
     public static Connection getConnection() throws SQLException, ClassNotFoundException{
         Connection conn = null;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://139.180.129.236:8888/DentistBookingApp";
-        conn = DriverManager.getConnection(url,"root","12341234");
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String url = "jdbc:sqlserver://localhost:1433;database=DentistBookingApp";
+        conn = DriverManager.getConnection(url,"sa","123");
         return conn;
     }
 }

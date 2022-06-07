@@ -23,11 +23,11 @@ public class AdminDTO {
         this.roleID = roleID;
     }
 
-    public int getAccountID() {
+    public int getAdminID() {
         return adminID;
     }
 
-    public void setAccountID(int adminID) {
+    public void setAdminID(int adminID) {
         this.adminID = adminID;
     }
 

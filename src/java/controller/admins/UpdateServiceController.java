@@ -18,7 +18,7 @@ import services.ServiceError;
 public class UpdateServiceController extends HttpServlet {
 
     public static final String ERROR = "home.jsp";
-    public static final String SUCCESS = "ShowServiceController.jsp";
+    public static final String SUCCESS = "ShowServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -26,12 +26,11 @@ public class UpdateServiceController extends HttpServlet {
         ServiceError serviceError = new ServiceError();
         try {
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
-            byte[] bytes = request.getParameter("serviceName").getBytes("ISO-8859-1");
-            String serviceName = new String(bytes, "UTF-8");
-            int servicePrice = Integer.parseInt(request.getParameter("servicePrice"));
-            String image = request.getParameter("image");
+            String serviceName =request.getParameter("serviceName");
+            float servicePrice = Float.parseFloat(request.getParameter("servicePrice"));
             String description = request.getParameter("description");
-            int status = Integer.parseInt(request.getParameter("status"));
+            String image =request.getParameter("image");
+            int status= Integer.parseInt(request.getParameter("status"));
             int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
             int adminID = Integer.parseInt(request.getParameter("adminID"));
             

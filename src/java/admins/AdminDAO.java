@@ -91,7 +91,7 @@ public class AdminDAO {
             if (conn != null) {
                 String sql = "select accountID from tblAccounts where accountID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, userGG.getAccountID());
+                stm.setInt(1, userGG.getAdminID());
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     check = true;

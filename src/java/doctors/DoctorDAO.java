@@ -17,7 +17,7 @@ public class DoctorDAO {
     private static String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, workDayID, gmail, phone, image, status FROM tblDoctors WHERE gmail=? AND password=?";
     private static String CHECK_DUPLICATE = "SELECT fullName FROM tblDoctors WHERE doctorID=?";
     private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
-    private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?"
+    private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?, status=?"
                         + " WHERE doctorID =? ";
     
     private static final String SET_DOCTOR_OFF= "UPDATE tblDoctors SET status = 0 WHERE doctorID=?";
@@ -56,7 +56,8 @@ public class DoctorDAO {
                 pstm = conn.prepareStatement(UPDATE_DOCTOR);
                 pstm.setString(1, doctor.getServiceTypeName());
                 pstm.setInt(2, doctor.getWorkDayID());  
-                pstm.setInt(3, doctor.getDoctorID());
+                pstm.setInt(3, doctor.getStatus());
+                pstm.setInt(4, doctor.getDoctorID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
