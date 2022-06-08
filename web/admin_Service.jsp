@@ -220,7 +220,7 @@
                                         <td><%=count++%></td>
                                         <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
                                         <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
-                                        <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/><%=service.getServicePrice()%></td>
+                                        <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
 
                                         <td><input type="text" name="description" value="<%=service.getDescription()%>"/></td>
                                         <td >

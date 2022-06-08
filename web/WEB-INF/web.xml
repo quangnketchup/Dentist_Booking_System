@@ -40,6 +40,10 @@
         <servlet-name>SearchDoctorController</servlet-name>
         <servlet-class>controller.admins.SearchDoctorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddDoctorController</servlet-name>
+        <servlet-class>controller.admins.AddDoctorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>SearchDoctorController</servlet-name>
         <url-pattern>/SearchDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDoctorController</servlet-name>
+        <url-pattern>/AddDoctorController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

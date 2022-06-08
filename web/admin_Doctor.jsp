@@ -1,3 +1,4 @@
+<%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Math" %>
 <%@ page import="doctors.DoctorDTO" %><%--
@@ -55,6 +56,8 @@
         </style>
     </head>
     <body>
+
+        <% List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");%>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
@@ -121,7 +124,7 @@
                 <div class="overlay"></div>
             </div>
         </section>
-        
+
         <!--Modal hiện form tạo bác sĩ-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -132,39 +135,56 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="post">
-                    <div class="modal-body">
-                        <div class="register-box">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Họ tên">
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Mật khẩu">
-                            </div>
-                            <div class="input-group mb-3">
-                                
-                            </div>
-                            <div class="input-group mb-3">
-                                
-                            </div>
-                            <div class="input-group mb-3">
-                                
-                            </div>
-                        </div><!-- /.card -->
+                    <form action="AddDoctorController" method="GET">
+                        <div class="modal-body">
+                            <div class="register-box">
+                                <div class="input-group mb-3">
+                                    <input name="fullName" type="text" class="form-control" placeholder="Họ tên">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="email" type="email" class="form-control" placeholder="Email" required="">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="password" type="password" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label for="serviceTypeName">Chuyên khoa</label>
+                                    <select name="serviceTypeName">
+                                        <% for (ServiceTypeDTO svTypeDTO : listServiceType) {%>                                
+                                        <option value="<%=svTypeDTO.getServiceTypeID()%>"><%=svTypeDTO.getServiceTypeName()%></option> 
+                                        <%}%>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label for="gender" value="">Giới tính</label>
+                                    <select name="gender">
+                                        <option value="Female">Nữ</option>
+                                        <option value="Male">Nam</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label value="">Lịch làm việc</label>
+                                    <select name="workDayID">
+                                        <option value="2">2, 4, 6</option>
+                                        <option value="3">3, 5, 7</option>       
+                                    </select>
+                                </div>
+                                <label for ="phone">Số điện thoại</label>
+                                <div class="input-group mb-3">
+                                    <input name="phone" type="text">
+                                </div>
+                            </div><!-- /.card -->
                         </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Add Doctor</button>
-                    </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Add Doctor" class="btn btn-primary">
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-        
+
         <section class="ftco-section ">
             <div class="container-fluid">
                 <div class="col-md-3 offset-1">
@@ -172,11 +192,14 @@
                         <h3 class="text-primary"><strong>Quản lí bác sĩ:</strong></h3>
                     </div>
                 </div>
+
+                <!<!-- Search bac si theo ten -->
+
                 <div class="col-md-5 offset-1">
                     <div class="btn-group">
                         <form action="SearchDoctorController">
                             <input type="search" class="form" name="fullName">
-                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit">
+                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm bác sĩ">
                         </form>
                         <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
                     </div>
@@ -210,10 +233,21 @@
                                     int count = 1;
                                     for (DoctorDTO doctor : listDoctor) {
                                 %>
-                            <form action="UpdateDoctor_Admin" >
+                               
+                            <form action="UpdateDoctor_Admin">
                                 <tr>
                                     <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
-                                    <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
+                                    <td>
+                                        <select name="serviceTypeName">
+                                            <option selected  value="<%=doctor.getServiceTypeName()%>"><%=doctor.getServiceTypeName()%></option>
+                                            <% for (ServiceTypeDTO svTypeDTO : listServiceType) {
+                                                    if (!svTypeDTO.getServiceTypeName().equals(doctor.getServiceTypeName())) {
+                                            %>
+                                            <option value="<%=svTypeDTO.getServiceTypeName()%>"><%=svTypeDTO.getServiceTypeName()%></option>
+                                            <%}
+                                                }%>
+                                        </select>
+                                    </td>
                                     <td><input type="text" name="fullName" value="<%=doctor.getFullName()%>" class="form-control-plaintext" readonly ></td>
                                     <td><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
                                     <td><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
@@ -232,13 +266,14 @@
                                         </select>
                                     </td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Doctor"></td>
-                                   
+
                                 </tr>
                             </form>
-                            </tbody>
+
                             <%
                                 }
                             %>
+                            </tbody>
                         </table>
 
                         <!<!-- ELSE SECTION --> 
@@ -268,14 +303,25 @@
                             </thead>
 
                             <tbody class="align-content-around">
-                                <%
-                                    int count = 1;
+                                <%                                    int count = 1;
                                     for (DoctorDTO doctor : listDoctor) {
                                 %>
-                            <form action="UpdateDoctor_Admin" >
+                                
+                         
+                            <form action="UpdateDoctor_Admin" method="POST">
                                 <tr>
                                     <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
-                                    <td><input type="text" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>"></td>
+                                    <td>
+                                        <select name="serviceTypeName">
+                                            <option selected  value="<%=doctor.getServiceTypeName()%>"><%=doctor.getServiceTypeName()%></option>
+                                            <% for (ServiceTypeDTO svTypeDTO : listServiceType) {
+                                                    if (!svTypeDTO.getServiceTypeName().equals(doctor.getServiceTypeName())) {
+                                            %>
+                                            <option value="<%=svTypeDTO.getServiceTypeName()%>" ><%=svTypeDTO.getServiceTypeName()%></option>
+                                            <%}
+                                                }%>
+                                        </select>
+                                    </td>
                                     <td><input type="text" name="fullName" value="<%=doctor.getFullName()%>" class="form-control-plaintext" readonly ></td>
                                     <td><input type="text" name="gmail" value="<%=doctor.getGmail()%>" class="form-control-plaintext" readonly ></td>                                  
                                     <td><input type="text" name="image" value="<%=doctor.getImage()%>" class="form-control-plaintext" readonly ></td>
@@ -286,7 +332,7 @@
                                             <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghỉ việc<%} else {%>Đang làm việc<%}%></option>
                                         </select>
                                     </td> 
-                                    <td><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly /></td>
+                                    <td><input type="text" name="gender" value="<%=doctor.getGender()%>" class="form-control-plaintext" readonly ></td>
 
                                     <td><select id="workDayID" name="workDayID" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected value="<%=doctor.getWorkDayID()%>"><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></option>
@@ -294,13 +340,14 @@
                                         </select>
                                     </td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Doctor"></td>
-                                   
+
                                 </tr>
                             </form>
-                            </tbody>
-                            <%
+                                         <%
                                 }
                             %>
+                            </tbody>
+                           
                         </table>
                         <%
                                 }

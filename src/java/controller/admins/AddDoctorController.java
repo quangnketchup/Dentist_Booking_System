@@ -4,6 +4,8 @@
  */
 package controller.admins;
 
+import static controller.admins.UpdateDoctor_Admin.ERROR;
+import static controller.admins.UpdateDoctor_Admin.SUCCESS;
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import doctors.DoctorError;
@@ -14,17 +16,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
-import services.ServiceDAO;
-import services.ServiceDTO;
 
 /**
  *
  * @author Doan
  */
-public class UpdateDoctor_Admin extends HttpServlet {
+public class AddDoctorController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +34,25 @@ public class UpdateDoctor_Admin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     public static final String ERROR = "home.jsp";
     public static final String SUCCESS = "ShowDoctorController";
-
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         DoctorError doctorError = new DoctorError();
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
             String serviceTypeName = request.getParameter("serviceTypeName");
             String fullName = request.getParameter("fullName");
-            String gmail = request.getParameter("gmail");
-            String image = request.getParameter("image");
-            int status = Integer.parseInt(request.getParameter("status"));
+            String email = request.getParameter("email");
+            int status = 1;
+            String password=request.getParameter("password");
             String gender = request.getParameter("gender");
             int workDayID = Integer.parseInt(request.getParameter("workDayID"));
+            int phone =Integer.parseInt(request.getParameter("phone"));
 
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
@@ -61,21 +60,17 @@ public class UpdateDoctor_Admin extends HttpServlet {
                 doctorError.setServiceTypeIDError("Tên loai dich vu phải từ [1,50]");
                 check = false;
             }
-            if (gmail.trim().length() == 0) {
+            if (email.trim().length() == 0) {
                 doctorError.setGmailError("Không thể để trống Email");
                 check = false;
             }
             DoctorDAO dao = new DoctorDAO();
             ServiceTypeDAO svDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listSV = svDao.getListServiceType();
-            DoctorDTO doctor = new DoctorDTO(id, serviceTypeName, fullName, "***", "DR", gender, workDayID, gmail, 1, image, status);
-            for (ServiceTypeDTO svT : listSV) {
-                if (svT.getServiceTypeName().equals(doctor.getServiceTypeName())) {
-                    doctor.setServiceTypeName(Integer.toString(svT.getServiceTypeID()));
-                }
-            }
+            DoctorDTO doctor = new DoctorDTO(1, serviceTypeName, fullName, password, "DR", gender, workDayID, email, 1, "./", status);
+            
             if (check) {
-                boolean checkUpdate = dao.updateDoctor(doctor);
+                boolean checkUpdate = dao.createDoctor(doctor);
                 if (checkUpdate) {
                     url = SUCCESS;
                     request.setAttribute("SSMSG", "Chỉnh sữa thành công !");

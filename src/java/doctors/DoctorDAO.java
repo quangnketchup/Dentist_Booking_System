@@ -19,9 +19,42 @@ public class DoctorDAO {
     private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
     private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?, status=?"
                         + " WHERE doctorID =? ";
+    private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [workDayID], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
     
+    public boolean createDoctor(DoctorDTO doctor) throws SQLException{
+         boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(CREATE_DOCTOR);
+                pstm.setString(1, doctor.getFullName());
+                pstm.setString(2, doctor.getPassword());
+                pstm.setString(3, doctor.getGender());
+                pstm.setString(4, doctor.getGmail());
+                pstm.setInt(5, doctor.getPhone());
+                pstm.setString(6, doctor.getImage());
+                pstm.setInt(7, doctor.getStatus());
+                pstm.setString(8, doctor.getRoleID());
+                pstm.setInt(9, doctor.getWorkDayID());
+                pstm.setString( 10,doctor.getServiceTypeName());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     private static final String SET_DOCTOR_OFF= "UPDATE tblDoctors SET status = 0 WHERE doctorID=?";
-    
+
     public boolean setDoctorOff(int id) throws SQLException{
         boolean check=false;
         Connection conn = null;
