@@ -21,6 +21,16 @@ public class ServiceDTO {
         this.status = 0;
     }
 
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, float servicePrice, String image, String description, int status) {
+        this.serviceID = serviceID;
+        this.serviceTypeID = serviceTypeID;
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.image = image;
+        this.description = description;
+        this.status = status;
+    }
+
     public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, float servicePrice, String image, String description) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
@@ -39,6 +49,10 @@ public class ServiceDTO {
         this.description = description;
         this.adminID = adminID;
         this.status = status;
+    }
+
+    ServiceDTO(int serviceID, String serviceTypeName, String serviceName, float servicePrice, String image, String description, int adminID, int status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getServiceID() {

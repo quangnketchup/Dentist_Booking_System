@@ -36,8 +36,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link"><%=((AdminDTO) session.getAttribute("LOGIN_USER")).getFullName()%></a></li>
-
+                        <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=((AdminDTO) session.getAttribute("LOGIN_USER")).getFullName()%></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                            </div>
+                        </li>
                         <li class="nav-item active"><a href="#" class="nav-link">Dịch vụ</a></li>
 
                         <li class="nav-item"><a href="ShowServiceController" class="nav-link">Dịch vụ</a></li>
@@ -109,7 +114,8 @@
 
                             <%
                                     }
-                                }%>
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -121,9 +127,82 @@
                         <h3 class="text-primary">Quản lí dịch vụ:</h3>
                     </div>
                 </div>
-                <%List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                    if (listsvbySVType != null) {
-                        List<ServiceDTO> listService = listsvbySVType;
+
+                <!-- Search bac si theo ten -->
+
+                <div class="col-md-5 offset-1">
+                    <div class="btn-group">
+                        <form action="SearchServiceController">
+                            <input type="search" class="form" name="serviceName">
+                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm dịch vụ">
+                        </form>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <%
+                    List<ServiceDTO> listSearchService = (List<ServiceDTO>) session.getAttribute("SEARCH_SERVICE");
+                    List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                    if (listSearchService != null) {
+                        List<ServiceDTO> listService = listSearchService;
+                %>
+                <table  class="table table-image table-bordered table-hover text-align-center">
+                    <thead class="bg-light align-content-center">
+                        <tr>
+                            <th>Số Thứ Tự</th>
+                            <th >Mã Dịch Vụ</th>
+                            <th>Tên Dịch Vụ</th>
+                            <th>Giá</th>
+                            <th>Mô Tả</th>
+                            <th >Ảnh</th>
+                            <th>Trạng Thái</th>
+                            <th>Admin Quản Lý</th>
+                            <th>Chỉnh Sửa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            int count = 1;
+                            for (ServiceDTO service : listSearchService) {
+                        %>
+                    <form action="UpdateServiceController">
+                        <tr>
+                            <td><%=count++%></td>
+                            <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
+                            <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
+                            <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
+                            <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
+                            <td >
+                                <input type="hidden" name="image" value="<%=service.getImage()%>"/>
+                                <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                            <td>
+                                <select name ="status">
+                                    <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
+                                    <option value="<%=Math.abs(service.getStatus() - 1)%>"><%if (service.getStatus() == 0) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
+                                </select>    
+                            </td>
+                            <td>
+                                <%=service.getAdminID()%>
+                            </td>
+                            <td> 
+                                <input type="hidden" name ="adminID" value="<%=login.getAdminID()%>"/>
+                                <input type ="hidden" name ="serviceTypeID" value="<%=service.getServiceTypeID()%>"/>
+                                <input type="submit" class="btn btn-block btn-outline-success flex" name="action" value="Chỉnh Sửa"/>
+                            </td>
+
+                        </tr>
+                    </form>
+                    </tbody>
+
+                    <%
+                        }
+                    %>
+
+                </table>
+
+                <%
+                } else if (listsvbySVType != null) {
+                    List<ServiceDTO> listService = listsvbySVType;
                 %>
                 <div class="col-md-12">
                     <div class="card card-body">

@@ -16,7 +16,7 @@ import utils.DBUtils;
 import services.ServiceDTO;
 
 public class ServiceDAO {
-    
+    private static final String SEARCH_SERVICE_CONTROLLER = "SELECT serviceID, ServiceTypeID, serviceName, servicePrice, image, description, status FROM tblServices s WHERE serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
     public boolean updateService(ServiceDTO service) throws SQLException {
         boolean check = false;
@@ -124,5 +124,44 @@ public class ServiceDAO {
 
         }
         return ListService;
+    }
+    
+    public List<ServiceDTO> searchServiceByName(String name) throws SQLException{
+        List<ServiceDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn !=null){
+                ptm = conn.prepareStatement(SEARCH_SERVICE_CONTROLLER);
+                ptm.setString(1, "%"+name+"%");
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int serviceID = rs.getInt("serviceID");
+                    int serviceTypeID=rs.getInt("serviceTypeID");
+                    String serviceName = rs.getString("serviceName");
+                    float servicePrice = rs.getFloat("servicePrice");
+                    String image = rs.getString("image");
+                    String description = rs.getString("description");
+                    int status = rs.getInt("status");
+                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, status));
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            } 
+        }
+        return list;
     }
 }
