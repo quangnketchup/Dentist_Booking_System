@@ -38,7 +38,6 @@
         <link rel="stylesheet" href="css/style.css">
         <style>
             #toast-msg{
-                border-left: 5px #28a745; 
                 position: fixed;
                 padding-left: 10px;
                 right: 10px;
@@ -55,10 +54,15 @@
             }
             #toast-close{
                 color: white;
+                width: 240px;
+                background-color: rgb(231,210,14);
+                display: block;
             }
+
             #toast-msg strong{
                 color: white;
                 font-size: 15px;
+                
             }
         </style>
     </head>
@@ -111,14 +115,6 @@
         %>
         <%=error%>
 
-        
-
-        <section class="home-slider owl-carousel">
-            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
-                 data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-            </div>
-        </section>
         <!<!-- Toast thông báo succeed update -->
 
         <%
@@ -128,10 +124,10 @@
             } else {
         %>
         <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header1 ">
-                <strong>THÔNG BÁO <i class="fa fa-bell"></i></strong>
-                
-                <button id="toast-close" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+            <div class="toast-header1">
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -141,6 +137,14 @@
         </div>
 
         <%}%>
+
+        <section class="home-slider owl-carousel">
+            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
+                 data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+            </div>
+        </section>
+
         <!--Modal hiện form tạo bác sĩ-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -240,7 +244,7 @@
                                     <th>Trạng Thái</th>
                                     <th>Giới Tính</th>
                                     <th>Ngày Làm Việc</th>
-                                    <th>Chỉnh sửa thông tin bác sĩ</th>
+                                    <th>Chỉnh sữa thông tin bác sĩ</th>
                                 </tr>
                             </thead>
 
@@ -407,19 +411,18 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/aos.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/jquery.timepicker.min.js"></script>
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-    function toastClose() {
-        var toast1 = document.getElementById("toast-msg");
-        toast1.style.display = "none";
-    }
-</script>
-<script>
-    
+
+                        function toastClose() {
+                            var toast1 = document.getElementById("toast-msg");
+                            toast1.style.display = "none";
+                        }
 </script>
 </body>
 </html>
