@@ -31,27 +31,34 @@
 
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
+        <link rel="stylesheet" href="css/menu.css">
 
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
             #toast-msg{
-                position: absolute;
+                border-left: 5px #28a745; 
+                position: fixed;
+                padding-left: 10px;
                 right: 10px;
                 top:10px;
                 z-index: 100;
-                width: 240px;
-                background-color: rgb(231,210,14);
-                display: block;
-                border-radius:10px;
-                text-align: center;
-
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
             }
-
+            #toast-close{
+                color: white;
+            }
             #toast-msg strong{
-                color: red;
+                color: white;
+                font-size: 15px;
             }
         </style>
     </head>
@@ -75,12 +82,21 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
+<<<<<<< HEAD
                         <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
                         <li class="nav-item "><a href="ShowPatientController" class="nav-link">Bệnh nhân</a></li>
                         <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">Phản hồi</a></li>
                         <li class="nav-item"><a href="admin_Doctor.jsp" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Đặt lịch</a></li>
                         <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
+=======
+                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link sa">Dịch vụ</a></li>
+                        <li class="nav-item "><a href="admin_User.html" class="nav-link sa">User</a></li>
+                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link sa">FeedBack</a></li>
+                        <li class="nav-item active"><a href="#" class="nav-link sa">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link sa">Booking</a></li>
+                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link sa">Khuyến mãi</a></li>
+>>>>>>> bbd0736 (tu)
                     </ul>
                 </div>
             </div>
@@ -95,6 +111,14 @@
         %>
         <%=error%>
 
+        
+
+        <section class="home-slider owl-carousel">
+            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
+                 data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+            </div>
+        </section>
         <!<!-- Toast thông báo succeed update -->
 
         <%
@@ -104,10 +128,10 @@
             } else {
         %>
         <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header1">
-                <strong class="mr-auto1">Thông báo</strong>
-
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+            <div class="toast-header1 ">
+                <strong>THÔNG BÁO <i class="fa fa-bell"></i></strong>
+                
+                <button id="toast-close" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -117,14 +141,6 @@
         </div>
 
         <%}%>
-
-        <section class="home-slider owl-carousel">
-            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
-                 data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-            </div>
-        </section>
-
         <!--Modal hiện form tạo bác sĩ-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -224,7 +240,7 @@
                                     <th>Trạng Thái</th>
                                     <th>Giới Tính</th>
                                     <th>Ngày Làm Việc</th>
-                                    <th>Chỉnh sữa thông tin bác sĩ</th>
+                                    <th>Chỉnh sửa thông tin bác sĩ</th>
                                 </tr>
                             </thead>
 
@@ -391,18 +407,19 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/aos.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/jquery.timepicker.min.js"></script>
 <script src="js/scrollax.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-
-                        function toastClose() {
-                            var toast1 = document.getElementById("toast-msg");
-                            toast1.style.display = "none";
-                        }
+    function toastClose() {
+        var toast1 = document.getElementById("toast-msg");
+        toast1.style.display = "none";
+    }
+</script>
+<script>
+    
 </script>
 </body>
 </html>

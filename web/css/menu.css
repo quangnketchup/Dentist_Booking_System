@@ -1,0 +1,19 @@
+nav ul li .sa:after {
+  display:block;
+  content: '';
+  border-bottom: solid 3px #019fb6;  
+  transform: scaleX(0);  
+  transition: transform 200ms ease-in-out;
+  
+}
+
+nav ul li .sa:hover:after{
+  transform: scaleX(1);
+}
+
+.show-item{
+  display: inline-block;
+}
+nav ul li a{
+    font-weight: 200;
+}
