@@ -38,7 +38,7 @@
                 top:10px;
                 z-index: 100;
                 width: 240px;
-                background-color: rgb(231,210,14);
+                background-color: #7FFFD4;
                 display: block;
                 border-radius:10px;
                 text-align: center;
@@ -229,9 +229,7 @@
                                         </select>    
                                     </td>
 
-                                    <td>
-                                        <input type="submit"  name="action" value="UpdatePatient"/>
-                                    </td>
+                                    <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Patient"></td>
 
                                 </tr>
                             </form>
