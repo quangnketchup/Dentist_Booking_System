@@ -86,21 +86,13 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-<<<<<<< HEAD
-                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
-                        <li class="nav-item "><a href="ShowPatientController" class="nav-link">Bệnh nhân</a></li>
-                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">Phản hồi</a></li>
-                        <li class="nav-item"><a href="admin_Doctor.jsp" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Đặt lịch</a></li>
-                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
-=======
                         <li class="nav-item "><a href="admin_Service.jsp" class="nav-link sa">Dịch vụ</a></li>
                         <li class="nav-item "><a href="admin_User.html" class="nav-link sa">User</a></li>
                         <li class="nav-item"><a href="admin_Feedback.html" class="nav-link sa">FeedBack</a></li>
                         <li class="nav-item active"><a href="#" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="admin_Booking.html" class="nav-link sa">Booking</a></li>
                         <li class="nav-item"><a href="admin_Discount.html" class="nav-link sa">Khuyến mãi</a></li>
->>>>>>> bbd0736 (tu)
+
                     </ul>
                 </div>
             </div>
