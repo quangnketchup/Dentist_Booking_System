@@ -76,10 +76,10 @@
                             </div>
                         </li>
                         <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
-                        <li class="nav-item "><a href="admin_User.html" class="nav-link">User</a></li>
-                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">FeedBack</a></li>
-                        <li class="nav-item active"><a href="#" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Booking</a></li>
+                        <li class="nav-item "><a href="ShowPatientController" class="nav-link">Bệnh nhân</a></li>
+                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">Phản hồi</a></li>
+                        <li class="nav-item"><a href="admin_Doctor.jsp" class="nav-link">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Đặt lịch</a></li>
                         <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
                     </ul>
                 </div>

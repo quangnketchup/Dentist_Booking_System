@@ -43,11 +43,11 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-                        <li class="nav-item active"><a href="#" class="nav-link">Dịch vụ</a></li>
+                        
 
                         <li class="nav-item"><a href="ShowServiceController" class="nav-link">Dịch vụ</a></li>
 
-                        <li class="nav-item"><a href="admin_User.html" class="nav-link">Người dùng</a></li>
+                        <li class="nav-item"><a href="ShowPatientController" class="nav-link">Bệnh nhân</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Phản hồi</a></li>
                         <li class="nav-item"><a href="ShowDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Đặt lịch</a></li>

@@ -48,6 +48,18 @@
         <servlet-name>SearchServiceController</servlet-name>
         <servlet-class>controller.admins.SearchServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowPatientController</servlet-name>
+        <servlet-class>controller.admins.ShowPatientController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPatientController</servlet-name>
+        <servlet-class>controller.admins.SearchPatientController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePatientController</servlet-name>
+        <servlet-class>controller.admins.UpdatePatientController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>SearchServiceController</servlet-name>
         <url-pattern>/SearchServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowPatientController</servlet-name>
+        <url-pattern>/ShowPatientController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPatientController</servlet-name>
+        <url-pattern>/SearchPatientController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePatientController</servlet-name>
+        <url-pattern>/UpdatePatientController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
