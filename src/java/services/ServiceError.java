@@ -9,7 +9,7 @@ public class ServiceError {
     String descriptionError;
     int adminIDError;
     int statusError;
-
+    String ServiceTypeNameError;
     public ServiceError() {
         
     }
@@ -22,6 +22,14 @@ public class ServiceError {
         this.descriptionError = descriptionError;
         this.adminIDError = adminIDError;
         this.statusError = statusError;
+    }
+
+    public String getServiceTypeNameError() {
+        return ServiceTypeNameError;
+    }
+
+    public void setServiceTypeNameError(String ServiceTypeNameError) {
+        this.ServiceTypeNameError = ServiceTypeNameError;
     }
 
     public int getServiceIDError() {

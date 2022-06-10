@@ -16,7 +16,9 @@ import utils.DBUtils;
 import services.ServiceDTO;
 
 public class ServiceDAO {
-    private static final String SEARCH_SERVICE_CONTROLLER = "SELECT serviceID, ServiceTypeID, serviceName, servicePrice, image, description, status FROM tblServices s WHERE serviceName like ?";
+    
+    private static final String CREATE_SERVICE ="INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
+    private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
     public boolean updateService(ServiceDTO service) throws SQLException {
         boolean check = false;
@@ -139,13 +141,14 @@ public class ServiceDAO {
                 rs = ptm.executeQuery();
                 while(rs.next()){
                     int serviceID = rs.getInt("serviceID");
-                    int serviceTypeID=rs.getInt("serviceTypeID");
                     String serviceName = rs.getString("serviceName");
                     float servicePrice = rs.getFloat("servicePrice");
                     String image = rs.getString("image");
                     String description = rs.getString("description");
                     int status = rs.getInt("status");
-                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, status));
+                    int adminID = rs.getInt("adminID");
+                    int serviceTypeID = rs.getInt("serviceTypeID");
+                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status));
                 }
             }
             
@@ -163,5 +166,35 @@ public class ServiceDAO {
             } 
         }
         return list;
+    }
+    
+    public boolean createService(ServiceDTO service) throws SQLException {
+        boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(CREATE_SERVICE);
+                pstm.setString(1, service.getServiceName());
+                pstm.setFloat(2, service.getServicePrice());
+                pstm.setString(3, service.getImage());
+                pstm.setString(4, service.getDescription());
+                pstm.setInt(5, service.getStatus());
+                pstm.setInt(6, service.getAdminID());
+                pstm.setString(7, service.getServiceTypeName());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

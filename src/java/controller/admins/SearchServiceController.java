@@ -22,7 +22,7 @@ import services.ServiceDTO;
 public class SearchServiceController extends HttpServlet {
 
     private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "ShowServiceController";
+    private static final String SUCCESS = "admin_Service.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

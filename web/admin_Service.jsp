@@ -87,7 +87,9 @@
             </div>
         </div>
 
-        <%}%>
+        <%
+            }
+        %>
 
         <section class="home-slider owl-carousel">
             <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
@@ -141,7 +143,7 @@
                 </div>
 
                 <%
-                    List<ServiceDTO> listSearchService = (List<ServiceDTO>) session.getAttribute("SEARCH_SERVICE");
+                    List<ServiceDTO> listSearchService = (List<ServiceDTO>) request.getAttribute("SEARCH_SERVICE");
                     List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
                     if (listSearchService != null) {
                         List<ServiceDTO> listService = listSearchService;
@@ -163,7 +165,7 @@
                     <tbody>
                         <%
                             int count = 1;
-                            for (ServiceDTO service : listSearchService) {
+                            for (ServiceDTO service : listService) {
                         %>
                     <form action="UpdateServiceController">
                         <tr>
