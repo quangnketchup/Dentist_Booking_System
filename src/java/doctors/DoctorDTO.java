@@ -26,6 +26,20 @@ public class DoctorDTO {
         this.image = "";
         this.status = 0;
     }
+
+    public DoctorDTO(int doctorID, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image, int status) {
+        this.doctorID = doctorID;
+        this.fullName = fullName;
+        this.password = password;
+        this.roleID = roleID;
+        this.gender = gender;
+        this.workDayID = workDayID;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.image = image;
+        this.status = status;
+    }
+    
     
     public DoctorDTO(int doctorID, String serviceTypeName, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image, int status) {
         this.doctorID = doctorID;

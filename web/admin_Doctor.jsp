@@ -17,7 +17,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
 
@@ -31,27 +30,38 @@
 
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
+        <link rel="stylesheet" href="css/menu.css">
 
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
             #toast-msg{
-                position: absolute;
+                position: fixed;
+                padding-left: 10px;
                 right: 10px;
                 top:10px;
                 z-index: 100;
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
+            }
+            #toast-close{
+                color: white;
                 width: 240px;
                 background-color: rgb(231,210,14);
                 display: block;
-                border-radius:10px;
-                text-align: center;
-
             }
 
             #toast-msg strong{
-                color: red;
+                color: white;
+                font-size: 15px;
+                
             }
         </style>
     </head>
@@ -75,12 +85,13 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link">Dịch vụ</a></li>
-                        <li class="nav-item "><a href="admin_User.html" class="nav-link">User</a></li>
-                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">FeedBack</a></li>
-                        <li class="nav-item active"><a href="#" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Booking</a></li>
-                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
+                        <li class="nav-item "><a href="admin_Service.jsp" class="nav-link sa">Dịch vụ</a></li>
+                        <li class="nav-item "><a href="admin_User.html" class="nav-link sa">Bệnh Nhân</a></li>
+                        <li class="nav-item"><a href="admin_Feedback.html" class="nav-link sa">Phản Hồi</a></li>
+                        <li class="nav-item active"><a href="#" class="nav-link sa">Bác Sĩ</a></li>
+                        <li class="nav-item"><a href="admin_Booking.html" class="nav-link sa">Lịch Hẹn</a></li>
+                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link sa">Khuyến mãi</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -105,7 +116,7 @@
         %>
         <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header1">
-                <strong class="mr-auto1">Thông báo</strong>
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
 
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
                     <span aria-hidden="true">&times;</span>
@@ -130,7 +141,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Add New Doctor</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Thêm Bác Sĩ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

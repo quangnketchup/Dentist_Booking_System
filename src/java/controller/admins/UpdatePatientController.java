@@ -1,10 +1,9 @@
-package controller.main;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller.admins;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,42 +11,57 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import patients.PatientDAO;
+import patients.PatientDTO;
+import patients.PatientError;
 
 /**
  *
- * @author quang
+ * @author ADMIN
  */
-public class MainController extends HttpServlet {
+public class UpdatePatientController extends HttpServlet {
 
-    private static final String DEFAULT = "home.jsp";
-    private static final String LOGIN = "Login";
-    private static final String LOGIN_CONTROLLER = "LoginController";
-    private static final String LOGOUT = "Logout";
-    private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String UPDATE_SERVICE ="UpdateService";
-    private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
+    public static final String ERROR = "home.jsp";
+    public static final String SUCCESS = "ShowPatientController";
 
-    // Sua lai cho nay
-    private static final String SHOW_SERVICE = "UpdateService";
-    private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String url = DEFAULT;
-
+        String url = ERROR;
+        PatientError doctorError = new PatientError();
         try {
-            String action = request.getParameter("action");
-            if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            } else if (LOGOUT.equals(action)) {
-                url = LOGOUT_CONTROLLER;
-            } else if (SHOW_SERVICE.equals(action)) {
-                url = SHOW_SERVICE_CONTROLLER;
-            } else if (UPDATE_SERVICE.equals(action)) {
-                url = UPDATE_SERVICE_CONTROLLER;
+            int patientID = Integer.parseInt(request.getParameter("patientID"));
+            String fullName = request.getParameter("fullName");
+            String password = request.getParameter("passowrd");
+            String roleID = "PA";
+            String gmail = request.getParameter("gmail");
+            int phone = Integer.parseInt(request.getParameter("phone"));
+            String address = request.getParameter("address");
+            String gender = request.getParameter("gender");
+            int status = Integer.parseInt(request.getParameter("status"));
+
+            boolean check = true;
+            if (gmail.trim().length() == 0) {
+                doctorError.setGmailError("Không thể để trống Email");
+                check = false;
+            }
+//          
+
+            PatientDAO dao = new PatientDAO();
+            PatientDTO patient = new PatientDTO(patientID, fullName, password, roleID, gmail, phone, address, gender, status);
+            if (check) {
+                boolean checkUpdate = dao.updatePatient(patient);
+                if (checkUpdate) {
+                    url = SUCCESS;
+                    request.setAttribute("SSMSG", "Chỉnh sữa thành công !");
+                }
+            } else {
+                request.setAttribute("ERROR_UPDATE", dao);
             }
         } catch (Exception e) {
-            log("Error at MainController:" + e.toString());
+            log("Error at Update Service Controller");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

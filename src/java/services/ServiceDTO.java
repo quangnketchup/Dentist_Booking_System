@@ -1,6 +1,7 @@
 package services;
 
 public class ServiceDTO {
+
     int serviceID;
     int serviceTypeID;
     String serviceName;
@@ -9,8 +10,10 @@ public class ServiceDTO {
     String description;
     int adminID;
     int status;
+    String serviceTypeName;
+    String adminName;
 
-    public ServiceDTO () {
+    public ServiceDTO() {
         this.serviceID = 0;
         this.serviceTypeID = 0;
         this.serviceName = "";
@@ -21,6 +24,37 @@ public class ServiceDTO {
         this.status = 0;
     }
 
+    public ServiceDTO(int serviceID, String serviceName, float servicePrice, String image, String description, int adminID, int status) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.image = image;
+        this.description = description;
+        this.adminID = adminID;
+        this.status = status;
+    }
+
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, float servicePrice, String image, String description, int status) {
+        this.serviceID = serviceID;
+        this.serviceTypeID = serviceTypeID;
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.image = image;
+        this.description = description;
+        this.status = status;
+    }
+
+    public ServiceDTO(int serviceID, String serviceName, float servicePrice, String image, String description, int adminID, int status, String serviceTypeName) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.image = image;
+        this.description = description;
+        this.adminID = adminID;
+        this.status = status;
+        this.serviceTypeName = serviceTypeName;
+    }
+
     public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, float servicePrice, String image, String description) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
@@ -29,7 +63,7 @@ public class ServiceDTO {
         this.image = image;
         this.description = description;
     }
-    
+
     public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, float servicePrice, String image, String description, int adminID, int status) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
@@ -39,6 +73,14 @@ public class ServiceDTO {
         this.description = description;
         this.adminID = adminID;
         this.status = status;
+    }
+
+    public String getServiceTypeName() {
+        return serviceTypeName;
+    }
+
+    public void setServiceTypeName(String serviceTypeName) {
+        this.serviceTypeName = serviceTypeName;
     }
 
     public int getServiceID() {
@@ -104,6 +146,13 @@ public class ServiceDTO {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
 }

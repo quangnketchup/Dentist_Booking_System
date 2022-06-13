@@ -1,53 +1,41 @@
-package controller.main;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller.admins;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import patients.PatientDAO;
+import patients.PatientDTO;
 
 /**
  *
- * @author quang
+ * @author ADMIN
  */
-public class MainController extends HttpServlet {
+public class SearchPatientController extends HttpServlet {
 
-    private static final String DEFAULT = "home.jsp";
-    private static final String LOGIN = "Login";
-    private static final String LOGIN_CONTROLLER = "LoginController";
-    private static final String LOGOUT = "Logout";
-    private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String UPDATE_SERVICE ="UpdateService";
-    private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
-
-    // Sua lai cho nay
-    private static final String SHOW_SERVICE = "UpdateService";
-    private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
+        public static final String ERROR = "home.jsp";
+        public static final String SUCCESS = "admin_User.jsp";
+        
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = DEFAULT;
-
+        String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            } else if (LOGOUT.equals(action)) {
-                url = LOGOUT_CONTROLLER;
-            } else if (SHOW_SERVICE.equals(action)) {
-                url = SHOW_SERVICE_CONTROLLER;
-            } else if (UPDATE_SERVICE.equals(action)) {
-                url = UPDATE_SERVICE_CONTROLLER;
-            }
+            PatientDAO dao=new PatientDAO();
+            String name=request.getParameter("fullName");
+            List<PatientDTO>list= dao.searchPatientByName(name);  
+            request.setAttribute("SEARCH_PATIENT", list);
+                url=SUCCESS;          
         } catch (Exception e) {
-            log("Error at MainController:" + e.toString());
+            log("Error at ShowServiceController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
     private static final String PA="PA";
     private static final String PATIENT_PAGE = "home.jsp";
     private static final String DR="DR";
-    private static final String DOCTOR_PAGE = "doctors.jsp";
+    private static final String DOCTOR_PAGE = "home.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
             DoctorDTO loginDoctor = doctorDao.checkLogin(gmail, password);
             if (loginDoctor != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginDoctor);
+                session.setAttribute("LOGIN_DOCTOR", loginDoctor);
                 String roleID = loginDoctor.getRoleID();
                 if (DR.equals(roleID)) {
                     url = DOCTOR_PAGE;
@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
             PatientDTO loginPatient = patientDao.checkLogin(gmail, password);
             if (loginPatient != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginPatient);
+                session.setAttribute("LOGIN_USER1", loginPatient);
                 String roleID = loginPatient.getRoleID();
                 if (PA.equals(roleID)) {
                     url = PATIENT_PAGE;

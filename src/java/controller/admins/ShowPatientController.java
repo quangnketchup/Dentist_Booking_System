@@ -1,53 +1,53 @@
-package controller.main;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller.admins;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import patients.PatientDAO;
+import patients.PatientDTO;
 
 /**
  *
- * @author quang
+ * @author ADMIN
  */
-public class MainController extends HttpServlet {
+@WebServlet(name= "ShowPatientController", urlPatterns = {"/ShowPatientController"})
+public class ShowPatientController extends HttpServlet {
 
-    private static final String DEFAULT = "home.jsp";
-    private static final String LOGIN = "Login";
-    private static final String LOGIN_CONTROLLER = "LoginController";
-    private static final String LOGOUT = "Logout";
-    private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String UPDATE_SERVICE ="UpdateService";
-    private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
+    private static final String ERROR ="login.jsp";
+    private static final String ADMIN = "admin_User.jsp";
 
-    // Sua lai cho nay
-    private static final String SHOW_SERVICE = "UpdateService";
-    private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = DEFAULT;
-
+        String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            } else if (LOGOUT.equals(action)) {
-                url = LOGOUT_CONTROLLER;
-            } else if (SHOW_SERVICE.equals(action)) {
-                url = SHOW_SERVICE_CONTROLLER;
-            } else if (UPDATE_SERVICE.equals(action)) {
-                url = UPDATE_SERVICE_CONTROLLER;
+            PatientDAO patientDAO = new PatientDAO();
+            List<PatientDTO> listPatient = patientDAO.getAllListPatient();
+            HttpSession session = request.getSession();
+            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_USER");
+
+            if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
+                if (listPatient != null) {
+                    session.setAttribute("LIST_PATIENT", listPatient);
+                    url = ADMIN;
+                }
             }
         } catch (Exception e) {
-            log("Error at MainController:" + e.toString());
+            log("Error at ShowServiceController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -65,7 +65,11 @@ public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,7 +83,11 @@ public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
