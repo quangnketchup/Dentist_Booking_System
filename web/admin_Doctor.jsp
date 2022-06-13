@@ -62,13 +62,20 @@
             #toast-msg strong{
                 color: white;
                 font-size: 15px;
-                
+
             }
         </style>
     </head>
     <body>
 
+<<<<<<< HEAD
         <% List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");%>
+=======
+        <%
+            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
+            AdminDTO login = (AdminDTO) session.getAttribute("LOGIN_USER");
+        %>
+>>>>>>> 0994efb (update admin page)
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
@@ -204,20 +211,20 @@
                         <h3 class="text-primary"><strong>Quản lí bác sĩ:</strong></h3>
                     </div>
                 </div>
-
-                <!<!-- Search bac si theo ten -->
-
-                <div class="col-md-5 offset-1">
+                <div class="col-10 offset-1">
                     <div class="btn-group">
                         <form action="SearchDoctorController">
-                            <input type="search" class="form" name="fullName">
+                            <input type="search" style="width: 350px" class="form" name="fullName">
                             <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm bác sĩ">
                         </form>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px; position: absolute; left: 1230px; "><i class="fa fa-plus"></i></button>
                     </div>
-
+                    
                 </div>
-                <div class="col-md-12">
+
+                <!-- Search bac si theo ten -->
+
+                <div class="col-md-12 mt-2">
                     <div class="card-body">
                         <%
                             List<doctors.DoctorDTO> listSearchDoctor = (List<DoctorDTO>) request.getAttribute("SEARCH_DOCTOR");
@@ -245,7 +252,7 @@
                                     int count = 1;
                                     for (DoctorDTO doctor : listDoctor) {
                                 %>
-                               
+
                             <form action="UpdateDoctor_Admin">
                                 <tr>
                                     <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
@@ -318,8 +325,8 @@
                                 <%                                    int count = 1;
                                     for (DoctorDTO doctor : listDoctor) {
                                 %>
-                                
-                         
+
+
                             <form action="UpdateDoctor_Admin" method="POST">
                                 <tr>
                                     <td><input type="text" name="id" value="<%=doctor.getDoctorID()%>" class="form-control-plaintext" readonly ></td>
@@ -355,11 +362,11 @@
 
                                 </tr>
                             </form>
-                                         <%
+                            <%
                                 }
                             %>
                             </tbody>
-                           
+
                         </table>
                         <%
                                 }
@@ -369,52 +376,49 @@
                 </div>
 
             </div>
+        </section>
 
-        </div>
-    </div>
-</section>
-
-<footer class="ftco-footer ftco-bg-dark ftco-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p>Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script> All rights reserved </a>
-                </p>
+        <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved </a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</footer>
+        </footer>
 
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-            stroke="#F96D00" />
-    </svg></div>
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                    stroke="#F96D00" />
+            </svg></div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/jquery.timepicker.min.js"></script>
-<script src="js/scrollax.min.js"></script>
-<script src="js/main.js"></script>
-<script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
 
-                        function toastClose() {
-                            var toast1 = document.getElementById("toast-msg");
-                            toast1.style.display = "none";
-                        }
-</script>
-</body>
+                                function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
+        </script>
+    </body>
 </html>

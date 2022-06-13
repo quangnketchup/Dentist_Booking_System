@@ -98,6 +98,57 @@
             </div>
         </section>
 
+<<<<<<< HEAD
+=======
+        <!--Modal hiện form tạo Service-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Thêm Dịch Vụ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="AddServiceController" method="GET">
+                        <div class="modal-body">
+                            <div class="register-box">
+                                <div class="input-group mb-3">
+                                    <input name="serviceName" type="text" class="form-control" placeholder="Tên dịch vụ">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="servicePrice" type="text" class="form-control" placeholder="Giá dịch vụ" required="">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="image" type="text" class="form-control" placeholder="Ảnh">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input name="description" type="text" class="form-control" placeholder="Mô tả">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="hidden" name="adminID" value="<%=login.getAdminID()%>" class="form-control" readonly="">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label for="serviceTypeName">Chuyên khoa</label>
+                                    <select name="serviceTypeName">
+                                        <% for (ServiceTypeDTO svTypeDTO : listServiceType) {%>                                
+                                        <option value="<%=svTypeDTO.getServiceTypeID()%>"><%=svTypeDTO.getServiceTypeName()%></option> 
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Add Service" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+>>>>>>> 0994efb (update admin page)
         <section>
             <!--service type theo service-->
             <div class="container-fluid">
@@ -132,13 +183,17 @@
 
                 <!-- Search bac si theo ten -->
 
-                <div class="col-md-5 offset-1">
+                <div class="col-md-6 offset-1 mb-3">
                     <div class="btn-group">
                         <form action="SearchServiceController">
-                            <input type="search" class="form" name="serviceName">
+                            <input type="search" style="width: 350px" class="form" name="serviceName">
                             <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm dịch vụ">
                         </form>
+<<<<<<< HEAD
                         <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
+=======
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px; position: absolute; left: 1230px; "><i class="fa fa-plus"></i></button>
+>>>>>>> 0994efb (update admin page)
                     </div>
                 </div>
 
@@ -148,6 +203,7 @@
                     if (listSearchService != null) {
                         List<ServiceDTO> listService = listSearchService;
                 %>
+<<<<<<< HEAD
                 <table  class="table table-image table-bordered table-hover text-align-center">
                     <thead class="bg-light align-content-center">
                         <tr>
@@ -191,6 +247,53 @@
                                 <input type ="hidden" name ="serviceTypeID" value="<%=service.getServiceTypeID()%>"/>
                                 <input type="submit" class="btn btn-block btn-outline-success flex" name="action" value="Chỉnh Sửa"/>
                             </td>
+=======
+                <div class="col-md-12">
+                    <div class=" card-body">
+                        <table class="table table-image table-bordered table-hover text-align-center">
+                            <thead class="bg-light align-content-center">
+                                <tr>
+                                    <th>Số Thứ Tự</th>
+                                    <th>Mã Dịch Vụ</th>
+                                    <th>Tên Dịch Vụ</th>
+                                    <th>Giá</th>
+                                    <th>Mô Tả</th>
+                                    <th>Ảnh</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Admin Quản Lý</th>
+                                    <th>Cập Nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    int count = 1;
+                                    for (ServiceDTO service : listService) {
+                                %>
+                            <form action="UpdateServiceController">
+                                <tr>
+                                    <td><%=count++%></td>
+                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
+                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
+                                    <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
+                                    <td >
+                                        <input type="hidden" name="image" value="<%=service.getImage()%>"/>
+                                        <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                                    <td>
+                                        <select name ="status">
+                                            <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
+                                            <option value="<%=Math.abs(service.getStatus() - 1)%>"><%if (service.getStatus() == 0) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
+                                        </select>    
+                                    </td>
+                                    <td>
+                                        <%=service.getAdminID()%>
+                                    </td>
+                                    <td> 
+                                        <input type="hidden" name ="adminID" value="<%=login.getAdminID()%>"/>
+                                        <input type ="hidden" name ="serviceTypeID" value="<%=service.getServiceTypeID()%>"/>
+                                        <input type="submit" class="btn btn-block btn-outline-success flex" name="action" value="Cập Nhật"/>
+                                    </td>
+>>>>>>> 0994efb (update admin page)
 
                         </tr>
                     </form>
