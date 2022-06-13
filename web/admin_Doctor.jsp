@@ -1,3 +1,4 @@
+<%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Math" %>
@@ -68,14 +69,12 @@
     </head>
     <body>
 
-<<<<<<< HEAD
+
         <% List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");%>
-=======
         <%
-            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
+            
             AdminDTO login = (AdminDTO) session.getAttribute("LOGIN_USER");
         %>
->>>>>>> 0994efb (update admin page)
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
@@ -87,7 +86,7 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Quang</a>
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=((AdminDTO) session.getAttribute("LOGIN_USER")).getFullName()%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a href="" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>

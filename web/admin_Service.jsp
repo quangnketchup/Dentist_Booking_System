@@ -9,6 +9,7 @@
         <title>Admin Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -24,7 +25,8 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <%
+        <%  
+            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
             AdminDTO login = (AdminDTO) session.getAttribute("LOGIN_USER");
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -98,8 +100,6 @@
             </div>
         </section>
 
-<<<<<<< HEAD
-=======
         <!--Modal hiện form tạo Service-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -148,18 +148,16 @@
             </div>
         </div>
 
->>>>>>> 0994efb (update admin page)
         <section>
             <!--service type theo service-->
             <div class="container-fluid">
-                <div class="col-md-5 pr-md-5 mt-5">
+                <div class="col-md-5 pr-md-5 mt-5 offset-1">
                     <div class="dropright">
                         <button class="btn dropdown-toggle" style="background: #2f89fc; color: white; margin-right: 5px" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Loại Dịch Vụ
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
                                 if (listServiceType != null) {
                                     for (ServiceTypeDTO svType : listServiceType) {
                             %>
@@ -175,25 +173,19 @@
             </div>
 
             <div class="container-fluid">
-                <div class="col-md-5 pr-md-5">
+                <div class="col-md-5 pr-md-5 offset-1">
                     <div>
                         <h3 class="text-primary">Quản lí dịch vụ:</h3>
                     </div>
                 </div>
 
-                <!-- Search bac si theo ten -->
-
-                <div class="col-md-6 offset-1 mb-3">
+                <div class="col-md-10 offset-1 mb-3">
                     <div class="btn-group">
                         <form action="SearchServiceController">
                             <input type="search" style="width: 350px" class="form" name="serviceName">
                             <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm dịch vụ">
                         </form>
-<<<<<<< HEAD
-                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px"><i class="fa fa-plus"></i></button>
-=======
                         <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px; position: absolute; left: 1230px; "><i class="fa fa-plus"></i></button>
->>>>>>> 0994efb (update admin page)
                     </div>
                 </div>
 
@@ -203,51 +195,6 @@
                     if (listSearchService != null) {
                         List<ServiceDTO> listService = listSearchService;
                 %>
-<<<<<<< HEAD
-                <table  class="table table-image table-bordered table-hover text-align-center">
-                    <thead class="bg-light align-content-center">
-                        <tr>
-                            <th>Số Thứ Tự</th>
-                            <th >Mã Dịch Vụ</th>
-                            <th>Tên Dịch Vụ</th>
-                            <th>Giá</th>
-                            <th>Mô Tả</th>
-                            <th >Ảnh</th>
-                            <th>Trạng Thái</th>
-                            <th>Admin Quản Lý</th>
-                            <th>Chỉnh Sửa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            int count = 1;
-                            for (ServiceDTO service : listService) {
-                        %>
-                    <form action="UpdateServiceController">
-                        <tr>
-                            <td><%=count++%></td>
-                            <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
-                            <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
-                            <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
-                            <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
-                            <td >
-                                <input type="hidden" name="image" value="<%=service.getImage()%>"/>
-                                <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
-                            <td>
-                                <select name ="status">
-                                    <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
-                                    <option value="<%=Math.abs(service.getStatus() - 1)%>"><%if (service.getStatus() == 0) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
-                                </select>    
-                            </td>
-                            <td>
-                                <%=service.getAdminID()%>
-                            </td>
-                            <td> 
-                                <input type="hidden" name ="adminID" value="<%=login.getAdminID()%>"/>
-                                <input type ="hidden" name ="serviceTypeID" value="<%=service.getServiceTypeID()%>"/>
-                                <input type="submit" class="btn btn-block btn-outline-success flex" name="action" value="Chỉnh Sửa"/>
-                            </td>
-=======
                 <div class="col-md-12">
                     <div class=" card-body">
                         <table class="table table-image table-bordered table-hover text-align-center">
@@ -293,7 +240,6 @@
                                         <input type ="hidden" name ="serviceTypeID" value="<%=service.getServiceTypeID()%>"/>
                                         <input type="submit" class="btn btn-block btn-outline-success flex" name="action" value="Cập Nhật"/>
                                     </td>
->>>>>>> 0994efb (update admin page)
 
                         </tr>
                     </form>
