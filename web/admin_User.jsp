@@ -11,22 +11,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
-
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
-
         <link rel="stylesheet" href="css/aos.css">
-
         <link rel="stylesheet" href="css/ionicons.min.css">
-
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
@@ -120,7 +113,7 @@
         </section>
 
         <section class="ftco-section contact-section ftco-degree-bg">
-            <div class="container">
+            <div class="container-fluid">
 
                 <div class="col-md-5 offset-1">
                     <div>
@@ -245,13 +238,9 @@
                                 }
                             }
                         %> 
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
                 </div>
-
             </div>
-
         </section>
 
         <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -271,7 +260,7 @@
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                     stroke="#F96D00" />
-            </svg></div>
+        </svg></div>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -283,19 +272,13 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/aos.js"></script>
-        <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
         <script src="js/jquery.animateNumber.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                $(document).ready(function () {
-                                    $('#table_id').DataTable();
-                                });
-                                
-                                  function toastClose() {
+                            function toastClose() {
                             var toast1 = document.getElementById("toast-msg");
                             toast1.style.display = "none";
                         }

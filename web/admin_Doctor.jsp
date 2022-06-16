@@ -18,7 +18,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
 
@@ -93,7 +92,7 @@
                             </div>
                         </li>
                         <li class="nav-item "><a href="admin_Service.jsp" class="nav-link sa">Dịch vụ</a></li>
-                        <li class="nav-item "><a href="admin_User.html" class="nav-link sa">User</a></li>
+                        <li class="nav-item "><a href="admin_User.jsp" class="nav-link sa">User</a></li>
                         <li class="nav-item"><a href="admin_Feedback.html" class="nav-link sa">FeedBack</a></li>
                         <li class="nav-item active"><a href="#" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="admin_Booking.html" class="nav-link sa">Booking</a></li>
@@ -406,7 +405,6 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/aos.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="js/jquery.animateNumber.min.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/jquery.timepicker.min.js"></script>

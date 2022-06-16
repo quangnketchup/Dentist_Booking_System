@@ -22,6 +22,35 @@
         <link rel="stylesheet" href="css/jquery.timepicker.css">
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
+        <style>
+            #toast-msg{
+                position: fixed;
+                padding-left: 10px;
+                right: 10px;
+                top:10px;
+                z-index: 100;
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
+            }
+            #toast-close{
+                color: white;
+                width: 240px;
+                background-color: rgb(231,210,14);
+                display: block;
+            }
+
+            #toast-msg strong{
+                color: white;
+                font-size: 15px;
+
+            }
+        </style>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -78,8 +107,8 @@
         %>
         <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header1">
-                <strong class="mr-auto1">Thông báo</strong>
-                <small></small>
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -196,9 +225,9 @@
                         List<ServiceDTO> listService = listSearchService;
                 %>
                 <div class="col-md-12">
-                    <div class=" card-body">
-                        <table class="table table-image table-bordered table-hover text-align-center">
-                            <thead class="bg-light align-content-center">
+                    <div class=" card-body " style="overflow-x:auto">
+                        <table class="table table-bordered table-hover" style="width:100%">
+                            <thead class="bg-light">
                                 <tr>
                                     <th>Số Thứ Tự</th>
                                     <th>Mã Dịch Vụ</th>
@@ -219,9 +248,9 @@
                             <form action="UpdateServiceController">
                                 <tr>
                                     <td><%=count++%></td>
-                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
-                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
-                                    <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="number" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
                                     <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
                                     <td >
                                         <input type="hidden" name="image" value="<%=service.getImage()%>"/>
@@ -279,9 +308,9 @@
                             <form action="UpdateServiceController" >
                                 <tr>
                                     <td><%=count++%></td>
-                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
-                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
-                                    <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
+                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="number" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
                                     <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
                                     <td>
                                         <input type="hidden" name="image" value="<%=service.getImage()%>"/>
@@ -349,9 +378,9 @@
                             <form action="UpdateServiceController">
                                 <tr>
                                     <td><%=count++%></td>
-                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>"/></td>
-                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>"/></td>
-                                    <td><input type="text" name="servicePrice" value="<%=service.getServicePrice()%>"/></td>
+                                    <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="number" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
                                     <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
                                     <td >
                                         <input type="hidden" name="image" value="<%=service.getImage()%>"/>
