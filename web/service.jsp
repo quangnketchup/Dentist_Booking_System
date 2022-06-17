@@ -126,7 +126,7 @@
                             <%
                                 if (listService != null) {
                                     for (ServiceDTO service : listService) {
-                                        if (service.getStatus() == 1) {
+                                        if (service.getStatus() != 1) {
                             %>
                             <div>
                                 <h3><%=service.getServiceName()%></h3>
