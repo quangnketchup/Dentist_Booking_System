@@ -40,7 +40,7 @@
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
+                <a class="navbar-brand" href="home.jsp">Denta<span>Care</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
@@ -49,7 +49,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"><a href="home.jsp" class="nav-link">Trang chủ</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
-                        <li class="nav-item dropdown"><a href="service.jsp" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
+                        <li class="nav-item dropdown"><a href="ServiceController" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <%
                                     if (listServiceType != null) {
@@ -63,7 +63,7 @@
                                 %>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="doctors.html" class="nav-link">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="DoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
                         <li class="nav-item"><a href="login.html" class="nav-link">Đăng nhập</a></li>
@@ -116,38 +116,104 @@
                 <%
                     List<ServiceDTO> listSearchService = (List<ServiceDTO>) request.getAttribute("SEARCH_SERVICE");
                     List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");;
-                    if (listsvbySVType != null) {listService = listsvbySVType;}
-                    else if (listSearchService != null) {listService = listSearchService;}
-                %>
+                    if (listSearchService != null) {
+                        List<ServiceDTO> listService = listSearchService;%>
                 <form>
                     <div class="row">
                         <%
-                                if (listService != null) {
-                                    for (ServiceDTO service : listService) {
-                                        if (service.getStatus() == 1) {
+                            if (listService != null) {
+                                for (ServiceDTO service : listService) {
+                                    if (service.getStatus() == 1) {
                         %>
                         <div class="col-md-3">
                             <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
                                 <div class="services text-center ">
                                     <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
-                                <div>
-                                <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                    <div>
+                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                    </div>
+                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                    <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+
+                                </div>
                             </div>
-                            <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                            <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#modalDetail"><span>Chi Tiết</span></a></button>
-                            
-                            </div>
-                            </div>
-                            
+
                         </div>
                         <%
-                                        }
                                     }
                                 }
-                            %>
+                            }
+                        %>
                     </div>
                 </form>
+
+                <% } else if (listsvbySVType != null) {
+                    List<ServiceDTO> listService = listsvbySVType;
+                %>
+                <form>
+                    <div class="row">
+                        <%
+                            if (listService != null) {
+                                for (ServiceDTO service : listService) {
+                                    if (service.getStatus() != 1) {
+                        %>
+                        <div class="col-md-3">
+                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                                <div class="services text-center ">
+                                    <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <div>
+                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                    </div>
+                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                    <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
+                    </div>
+                </form>
+
+                <%
+                } else {
+                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
+                %>
+                <form>
+                    <div class="row">
+                        <%
+                            if (listService != null) {
+                                for (ServiceDTO service : listService) {
+                                    if (service.getStatus() == 1) {
+                        %>
+                        <div class="col-md-3">
+                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                                <div class="services text-center ">
+                                    <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <div>
+                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                    </div>
+                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                    <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
+                    </div>
+                </form>
+                <%
+                    }
+                %>
             </div>
         </section>
 
@@ -305,40 +371,42 @@
         </footer>
 
 
-
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-        
-        <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+            <%
+                List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
+                for (ServiceDTO service : listService) {
+            %>
+        <div  class="modal fade" id="service<%=service.getServiceID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalRequestLabel">Thông Tin Dịch Vụ</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="#">
-                    <div class="form-group">
-                      <label for="appointment_name" style="color:black">Service Name: </label>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalRequestLabel">Thông Tin Dịch Vụ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                      <label for="appointment_email" style="color:black">Giá: </label>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="appointment_name" style="color:black"><%=service.getServiceName()%></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_email" style="color:black"><%=service.getServicePrice()%> VND</label>
+                            </div>
+                            <div class="form-group">
+                                <img style="width: 200px;height:150px; vertical-align: middle; " src="<%=service.getImage()%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="appointment_email" style="color:black"><%=service.getDescription()%></label>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <img style="width: 200px;height:150px; vertical-align: middle; " src="">
-                    </div>
-                    <div class="form-group">
-                        <label for="appointment_email" style="color:black">Mô tả: </label>
-                      </div>
-                  </form>
-                </div>
-                
-              </div>
-            </div>
-          </div>
 
+                </div>
+            </div>
+        </div>
+        <%}%>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
