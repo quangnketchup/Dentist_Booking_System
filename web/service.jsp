@@ -103,7 +103,6 @@
                             <input type="search" style="width: 350px" class="form" name="serviceName">
                             <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm dịch vụ">
                         </form>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px; position: absolute; left: 1230px; "><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="container">
@@ -121,29 +120,32 @@
                     if (listsvbySVType != null) {listService = listsvbySVType;}
                     else if (listSearchService != null) {listService = listSearchService;}
                 %>
-                <form class="row-cols-3">
-                    <div class="row-cols-3 col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <%
+                <form>
+                    <div class="row">
+                        <%
                                 if (listService != null) {
                                     for (ServiceDTO service : listService) {
                                         if (service.getStatus() == 1) {
-                            %>
-
-                            <h3><%=service.getServiceName()%></h3>
-
-                            <p class="form-control-plaintext"><%=service.getServicePrice()%>VND</p>
-                            <div>
-                                <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>">
+                        %>
+                        <div class="col-md-3">
+                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                                <div class="services text-center ">
+                                    <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                <div>
+                                <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
                             </div>
-                            <a class="form-control-plaintext"><%=service.getDescription()%></a>
-
-                            <%
+                            <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                            <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#modalDetail"><span>Chi Tiết</span></a></button>
+                            
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <%
                                         }
                                     }
                                 }
                             %>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -306,72 +308,36 @@
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+        
+        <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalRequestLabel">Đặt lịch khám</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#">
-                            <div class="form-group">
-                                <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
-                                <input type="text" class="form-control" id="appointment_name" placeholder="Họ tên người đặt">
-                            </div>
-                            <div class="form-group">
-                                <!-- <label for="appointment_email" class="text-black">Email</label> -->
-                                <input type="text" class="form-control" id="appointment_email" placeholder="Email">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                                        <input type="text" class="form-control appointment_date" placeholder="Ngày đặt">
-                                    </div>    
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                                        <input type="text" class="form-control appointment_time" placeholder="Giờ khám">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select name="" id="" class="form-control">
-                                            <option value="" class="text-primary">Teeth Whitening</option>
-                                            <option value="" class="text-primary">Teeth CLeaning</option>
-                                            <option value="" class="text-primary">Quality Brackets</option>
-                                            <option value="" class="text-primary">Modern Anesthetic</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <select name="" id="" class="form-control">
-                                        <option value="" class="text-primary">Service2</option>
-                                        <option value="" class="text-primary">Service2</option>
-                                        <option value="" class="text-primary">Service2</option>
-                                        <option value="" class="text-primary">Service2</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" value="Đặt lịch khám" class="btn btn-primary">
-                            </div>
-                        </form>
-                    </div>
-
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalRequestLabel">Thông Tin Dịch Vụ</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <div class="modal-body">
+                  <form action="#">
+                    <div class="form-group">
+                      <label for="appointment_name" style="color:black">Service Name: </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="appointment_email" style="color:black">Giá: </label>
+                    </div>
+                    <div class="form-group">
+                        <img style="width: 200px;height:150px; vertical-align: middle; " src="">
+                    </div>
+                    <div class="form-group">
+                        <label for="appointment_email" style="color:black">Mô tả: </label>
+                      </div>
+                  </form>
+                </div>
+                
+              </div>
             </div>
-        </div>
-
+          </div>
 
 
         <script src="js/jquery.min.js"></script>
@@ -388,8 +354,6 @@
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
 
     </body>
