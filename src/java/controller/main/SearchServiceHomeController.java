@@ -3,51 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admins;
+package controller.main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import patients.PatientDAO;
-import patients.PatientDTO;
+import services.ServiceDAO;
+import services.ServiceDTO;
 
 /**
  *
- * @author ADMIN
+ * @author quang
  */
-@WebServlet(name= "ShowPatientController", urlPatterns = {"/ShowPatientController"})
-public class ShowPatientController extends HttpServlet {
+public class SearchServiceHomeController extends HttpServlet {
 
-    private static final String ERROR ="login.jsp";
-    private static final String ADMIN = "admin_User.jsp";
-
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "service.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            PatientDAO patientDAO = new PatientDAO();
-            List<PatientDTO> listPatient = patientDAO.getAllListPatient();
-            HttpSession session = request.getSession();
-            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
-
-            if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
-                if (listPatient != null) {
-                    session.setAttribute("LIST_PATIENT", listPatient);
-                    url = ADMIN;
-                }
-            }
+            ServiceDAO dao=new ServiceDAO();
+            String servicename=request.getParameter("serviceName");
+            List<ServiceDTO> list= dao.searchServiceByName(servicename);  
+            request.setAttribute("SEARCH_SERVICE", list);
+                url=SUCCESS;          
         } catch (Exception e) {
-            log("Error at ShowServiceController: " + e.toString());
+            log("Error at Search Service Home Controller: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -65,11 +52,7 @@ public class ShowPatientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -83,11 +66,7 @@ public class ShowPatientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

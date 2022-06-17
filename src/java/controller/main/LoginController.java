@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
             AdminDTO loginAdmin = adminDao.checkLogin(gmail, password);
             if (loginAdmin != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginAdmin);
+                session.setAttribute("LOGIN_ADMIN", loginAdmin);
                 String roleID = loginAdmin.getRoleID();
                 if (AD.equals(roleID)) {
                     url = ADMIN_PAGE;
@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
             DoctorDTO loginDoctor = doctorDao.checkLogin(gmail, password);
             if (loginDoctor != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginDoctor);
+                session.setAttribute("LOGIN_DOCTOR", loginDoctor);
                 String roleID = loginDoctor.getRoleID();
                 if (DR.equals(roleID)) {
                     url = DOCTOR_PAGE;
@@ -67,7 +67,7 @@ public class LoginController extends HttpServlet {
             PatientDTO loginPatient = patientDao.checkLogin(gmail, password);
             if (loginPatient != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginPatient);
+                session.setAttribute("LOGIN_PATIENT", loginPatient);
                 String roleID = loginPatient.getRoleID();
                 if (PA.equals(roleID)) {
                     url = PATIENT_PAGE;

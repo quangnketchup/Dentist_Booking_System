@@ -17,7 +17,7 @@ import services.ServiceError;
 
 public class UpdateServiceController extends HttpServlet {
 
-    public static final String ERROR = "home.jsp";
+    public static final String ERROR = "admin_Service.jsp";
     public static final String SUCCESS = "ShowServiceController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class UpdateServiceController extends HttpServlet {
             
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO service = new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status);
-            if(check) {
+                if(check) {
                 boolean checkUpdate = dao.updateService(service);
                 if(checkUpdate) {
                     url = SUCCESS;
@@ -62,6 +62,7 @@ public class UpdateServiceController extends HttpServlet {
                 request.setAttribute("ERROR_UPDATE", dao);
             }
         } catch (Exception e) {
+            url = ERROR;
             log("Error at Update Service Controller");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

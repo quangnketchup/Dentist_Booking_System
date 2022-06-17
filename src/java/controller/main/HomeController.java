@@ -44,10 +44,12 @@ public class HomeController extends HttpServlet {
             DoctorDAO doctorDAO = new DoctorDAO();
             List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
             HttpSession session = request.getSession();
+            
             patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_USER1");
             doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
             admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN USER");
-            if(loginUser == null || "PA".equals(loginUser.getRoleID())){
+            
+            if(loginUser != null || "PA".equals(loginUser.getRoleID())){
                 if(listService != null){
                     session.setAttribute("LIST_SERVICE", listService);
                     session.setAttribute("LIST_DOCTOR", listDoctor);

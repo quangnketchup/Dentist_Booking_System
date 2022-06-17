@@ -68,6 +68,18 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.main.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.main.ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceTypeHomeController</servlet-name>
+        <servlet-class>controller.main.ServiceTypeHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServiceHomeController</servlet-name>
+        <servlet-class>controller.main.SearchServiceHomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -135,6 +147,18 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/ServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceTypeHomeController</servlet-name>
+        <url-pattern>/ServiceTypeHomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceHomeController</servlet-name>
+        <url-pattern>/SearchServiceHomeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
