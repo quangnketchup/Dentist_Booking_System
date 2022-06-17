@@ -117,64 +117,9 @@
                 <%
                     List<ServiceDTO> listSearchService = (List<ServiceDTO>) request.getAttribute("SEARCH_SERVICE");
                     List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                    if (listsvbySVType != null) {
-                        List<ServiceDTO> listService = listsvbySVType;
-                %>
-                <form>
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <%
-                                if (listService != null) {
-                                    for (ServiceDTO service : listService) {
-                                        if (service.getStatus() != 1) {
-                            %>
-                            <div>
-                                <h3><%=service.getServiceName()%></h3>
-
-                                <p class="form-control-plaintext"><%=service.getServicePrice()%>VND</p>
-                                <div>
-                                    <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>">
-                                </div>
-                                <a class="form-control-plaintext"><%=service.getDescription()%></a>
-
-                            </div>
-                            <%
-                                        }
-                                    }
-                                }
-                            %>
-                        </div>
-                    </div>
-                </form>
-                <%} else if (listSearchService != null) {
-                    List<ServiceDTO> listService = listSearchService;
-                %>
-                <form>
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <%
-                                for (ServiceDTO service : listService) {
-                                    if (service.getStatus() == 1) {
-                            %>
-                            <div>
-                                <h3><%=service.getServiceName()%></h3>
-
-                                <p class="form-control-plaintext"><%=service.getServicePrice()%>VND</p>
-                                <div>
-                                    <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>">
-                                </div>
-                                <a class="form-control-plaintext"><%=service.getDescription()%></a>
-
-                            </div>
-                            <%
-                                    }
-                                }
-                            %>
-                        </div>
-                    </div>
-                </form>
-                <%} else {
-                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
+                    List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");;
+                    if (listsvbySVType != null) {listService = listsvbySVType;}
+                    else if (listSearchService != null) {listService = listSearchService;}
                 %>
                 <form class="row-cols-3">
                     <div class="row-cols-3 col-md-3 d-flex align-self-stretch ftco-animate">
@@ -201,7 +146,6 @@
                         </div>
                     </div>
                 </form>
-                <%}%>
             </div>
         </section>
 

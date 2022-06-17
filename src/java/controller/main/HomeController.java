@@ -45,9 +45,9 @@ public class HomeController extends HttpServlet {
             List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
             HttpSession session = request.getSession();
             
-            patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_USER1");
+            patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
             doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
-            admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN USER");
+            admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
             
             if(loginUser != null || "PA".equals(loginUser.getRoleID())){
                 if(listService != null){
