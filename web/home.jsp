@@ -50,7 +50,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"><a href="home.jsp" class="nav-link">Trang chủ</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
-                        <li class="nav-item"><a href="ServiceController"  class="nav-link">Dịch vụ</a>
+                        <li class="nav-item"><a href="MainController?action=Load"  class="nav-link">Dịch vụ</a>
                             
                         </li>
                         <li class="nav-item"><a href="doctors.html" class="nav-link">Bác sĩ</a></li>

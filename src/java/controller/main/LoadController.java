@@ -5,36 +5,58 @@
  */
 package controller.main;
 
+import admins.AdminDTO;
+import doctors.DoctorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import patients.PatientDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
 /**
  *
- * @author quang
+ * @author nguye
  */
-public class SearchServiceHomeController extends HttpServlet {
+@WebServlet(name = "LoadController", urlPatterns = {"/LoadController"})
+public class LoadController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    
     private static final String ERROR = "home.jsp";
     private static final String SUCCESS = "service.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            ServiceDAO dao=new ServiceDAO();
-            String servicename=request.getParameter("serviceName");
-            List<ServiceDTO> list= dao.searchServiceByName(servicename);  
-            request.setAttribute("LIST_SERVICE", list);
-                url=SUCCESS;          
+            ServiceDAO serviceDao = new ServiceDAO();
+            List<ServiceDTO> listService = serviceDao.getAllListService();
+            if (listService.size() > 0) {
+                    request.setAttribute("LIST_SERVICE", listService);
+                    url = SUCCESS;
+                
+            }
         } catch (Exception e) {
-            log("Error at Search Service Home Controller: " + e.toString());
+            url=ERROR;
+            log("Error at ServiceController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
