@@ -29,7 +29,7 @@ public class ShowDoctorController extends HttpServlet {
             DoctorDAO doctorDAO = new DoctorDAO();
             List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
             HttpSession session = request.getSession();
-            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_USER");
+            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
 
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listDoctor != null) {
