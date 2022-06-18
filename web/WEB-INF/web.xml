@@ -69,10 +69,6 @@
         <servlet-class>controller.main.HomeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServiceController</servlet-name>
-        <servlet-class>controller.main.ServiceController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServiceTypeHomeController</servlet-name>
         <servlet-class>controller.main.ServiceTypeHomeController</servlet-class>
     </servlet>
@@ -147,10 +143,6 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServiceController</servlet-name>
-        <url-pattern>/ServiceController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceTypeHomeController</servlet-name>

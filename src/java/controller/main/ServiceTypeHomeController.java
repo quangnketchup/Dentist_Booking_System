@@ -23,7 +23,7 @@ import services.ServiceDTO;
 public class ServiceTypeHomeController extends HttpServlet {
 
     private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "service.jsp";
+    private static final String SUCCESS = "LoadController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,7 +33,7 @@ public class ServiceTypeHomeController extends HttpServlet {
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getServiceByServiceTypeID(serviceTypeID);
             HttpSession session = request.getSession();
-            session.setAttribute("LIST_SERVICE_BY_SVTYPE", listService);
+            request.setAttribute("LIST_SERVICE_TYPE", listService);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;

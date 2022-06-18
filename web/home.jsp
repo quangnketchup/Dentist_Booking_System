@@ -37,7 +37,6 @@
     <body>
         <%
             String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">

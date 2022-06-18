@@ -36,8 +36,7 @@
 
         <%
             String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
-            
+            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
@@ -52,8 +51,17 @@
                         <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                
-                                <h1>hello</h1>
+                                <%
+                                    if (listServiceType != null) {
+                                        for (ServiceTypeDTO svType : listServiceType) {
+                                %>
+                                <form>
+                                    <button class="dropdown-item"><a href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a></button>
+                                </form>
+                                <%
+                                        }
+                                    }
+                                %>
                             </div>
                         </li>
                         <li class="nav-item"><a href="DoctorController" class="nav-link">Bác sĩ</a></li>
@@ -108,7 +116,7 @@
                 </div>
                 <%
                     
-                    List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                    List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE_TYPE");
                     if (listsvbySVType != null) {
                     List<ServiceDTO> listService = listsvbySVType;
                 %>

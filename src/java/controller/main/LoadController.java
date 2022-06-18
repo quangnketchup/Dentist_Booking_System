@@ -49,10 +49,13 @@ public class LoadController extends HttpServlet {
         try {
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getAllListService();
+            
+            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
             if (listService.size() > 0) {
                     request.setAttribute("LIST_SERVICE", listService);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                     url = SUCCESS;
-                
             }
         } catch (Exception e) {
             url=ERROR;
