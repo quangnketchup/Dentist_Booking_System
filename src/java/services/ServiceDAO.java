@@ -31,7 +31,7 @@ public class ServiceDAO {
                         + " WHERE serviceID =? ";
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, service.getServiceName());
-                pstm.setString(2, service.getImage());
+                pstm.setNString(2, service.getImage());
                 pstm.setInt(3, (int) service.getServicePrice());
                 pstm.setInt(4, service.getStatus());
                 pstm.setInt(5, service.getServiceID());

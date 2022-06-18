@@ -374,16 +374,18 @@
                                             int count = 1;
                                             for (ServiceDTO service : listService) {
                                         %>
-                                    <form action="UpdateServiceController">
+                                    <form action="UpdateServiceController" method="POST">
                                         <tr>
                                             <td><%=count++%></td>
                                             <td><input type="text" name="serviceID" value="<%=service.getServiceID()%>" class="form-control-plaintext" readonly/></td>
                                             <td><input type="text" name="serviceName" value="<%=service.getServiceName()%>" class="form-control-plaintext"/></td>
                                             <td><input type="number" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
                                             <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
-                                            <td >
-                                                <input type="hidden" name="image" value="<%=service.getImage()%>"/>
-                                                <img style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"></td>
+                                            <td>
+                                                <img id="rendered_image_<%=service.getServiceID()%>" style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"/>
+                                                <input type="file" value="" onchange="return onSelectedImage(this,'<%=service.getServiceID()%>')" />
+                                                <input type="hidden" id="image_<%=service.getServiceID()%>" name="image" value=""/>
+                                            </td>
                                             <td>
                                                 <select name ="status">
                                                     <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
@@ -458,12 +460,23 @@
                     <script src="js/jquery.timepicker.min.js"></script>
                     <script src="js/scrollax.min.js"></script>
                     <script src="js/main.js"></script>
+                    <script src="js/js/convertImageBase64.js"></script>
                     <script>
-
-
                                             function toastClose() {
                                                 var toast1 = document.getElementById("toast-msg");
                                                 toast1.style.display = "none";
+                                            }
+
+                                            function onSelectedImage(element, serviceID) {
+                                                const file = element.files[0];
+                                                const reader = new FileReader();
+
+                                                reader.onloadend = function () {
+                                                    $('#rendered_image_' + serviceID).attr("src", reader.result);
+                                                    $('#image_' + serviceID).val(reader.result);
+                                                }
+
+                                                reader.readAsDataURL(file);
                                             }
                     </script>
 

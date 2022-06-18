@@ -36,11 +36,11 @@ public class UpdateServiceController extends HttpServlet {
             
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
-            if (serviceName.trim().length() == 0 || serviceName.trim().length()>50) {
-                serviceError.setServiceNameError("Tên phải từ [1,50]");
+            if (serviceName.equals("")) {
+                serviceError.setServiceNameError("Tên Không được để trống");
                 check = false;
             }
-            if (image.trim().length() == 0) {
+            if (image.equals("")) {
                 serviceError.setImageError("không thể để trống Hình ảnh");
                 check = false;
             }
