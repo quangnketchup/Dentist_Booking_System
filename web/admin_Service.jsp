@@ -82,6 +82,8 @@
                         <li class="nav-item"><a href="#" class="nav-link">Phản hồi</a></li>
                         <li class="nav-item"><a href="ShowDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Đặt lịch</a></li>
+                        <li class="nav-item"><a href="ShowDiscountController" class="nav-link">Khuyến mãi</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>

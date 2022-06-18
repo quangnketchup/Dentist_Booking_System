@@ -15,13 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author ADMIN
- */
+
 public class UpdateDiscountController extends HttpServlet {
 
-    public static final String ERROR = "home.jsp";
+    public static final String ERROR = "admin_Discount.jsp";
     public static final String SUCCESS = "ShowDiscountController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -33,46 +30,45 @@ public class UpdateDiscountController extends HttpServlet {
         DiscountError discountError = new DiscountError();
         try {
             int discountID = Integer.parseInt(request.getParameter("discountID"));
-            String title = request.getParameter("tille");
+            String title = request.getParameter("title");
             String description = request.getParameter("description");
             int percentDiscount = Integer.parseInt(request.getParameter("percentDiscount"));
             int status = Integer.parseInt(request.getParameter("status"));
             String image = request.getParameter("image");
-            String createDate = request.getParameter("craeteDate");
+            String createDate = request.getParameter("createDate");
             String expiredDate = request.getParameter("expiredDate");
             int adminID = Integer.parseInt(request.getParameter("adminID"));
-            
 
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
             if (title.trim().length() == 0 || title.trim().length() > 50) {
-                discountError.setTitleError("Tên title phải từ [1,50]");
+                discountError.setTitleError("Tên chủ đề khuyến mãi phải từ [1,50]");
                 check = false;
             }
-            
             if (image.trim().length() == 0) {
                 discountError.setImageError("không thể để trống Hình ảnh");
                 check = false;
             }
-            
+
             if (percentDiscount < 0) {
-                discountError.setPercentDiscountError("Phần trăm giảm giá không âm");
+                discountError.setPercentDiscountError("Phần trăm khuyến mãi không âm");
                 check = false;
-            }           
-            
+            }
             DiscountDAO dao = new DiscountDAO();
             DiscountDTO discount = new DiscountDTO(discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID);
+
             if (check) {
-                boolean checkUpdate = dao.UpdateDiscount(discount);
+                boolean checkUpdate = dao.updateDiscount(discount);
                 if (checkUpdate) {
                     url = SUCCESS;
                     request.setAttribute("SSMSG", "Chỉnh sữa thành công !");
                 }
             } else {
-                request.setAttribute("ERROR_UPDATE", dao);
+                request.setAttribute("SSMSG", "Chỉnh sữa thất bại !");
             }
         } catch (Exception e) {
-            log("Error at Update Service Controller");
+            url = ERROR;
+            log("Error at Update Discount Controller");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

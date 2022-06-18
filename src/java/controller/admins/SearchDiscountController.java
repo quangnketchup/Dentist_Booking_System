@@ -21,19 +21,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SearchDiscountController extends HttpServlet {
 
-        public static final String ERROR = "home.jsp";
-        public static final String SUCCESS = "admin_Discount.jsp";
-        
+    public static final String ERROR = "home.jsp";
+    public static final String SUCCESS = "admin_Discount.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            DiscountDAO dao=new DiscountDAO();
-            String name=request.getParameter("title");
-            List<DiscountDTO>list= dao.searchDiscountByTitle(name);  
+            DiscountDAO dao = new DiscountDAO();
+            String name = request.getParameter("title");
+            List<DiscountDTO> list = dao.searchDiscountByTitle(name);
             request.setAttribute("SEARCH_DISCOUNT", list);
-                url=SUCCESS;          
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at ShowServiceController: " + e.toString());
         } finally {

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import utils.DBUtils;
 
@@ -13,8 +12,8 @@ public class DiscountDAO {
 
     private static final String GET_ALL_LIST_DISCOUNT = "SELECT  * FROM tblDiscounts";
     private static final String SEARCH_DISCOUNT_BY_TITLE = "SELECT discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID FROM tblDiscounts WHERE title like ?";
-    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount=?, status=?, createDate =?, expiredDate=?"
-            + " WHERE discountID =?";
+    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?," 
+                        + " WHERE discountID =? ";
    
 
     public List<DiscountDTO> getAllListDiscount() throws SQLException {
@@ -97,37 +96,7 @@ public class DiscountDAO {
         }
         return list;
     }
-
-    public boolean UpdateDiscount(DiscountDTO discount) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                pstm = conn.prepareStatement(UPDATE_DISCOUNT);
-                pstm.setInt(1, discount.getPercentDiscount());
-                pstm.setInt(2, discount.getStatus());
-                pstm.setString(3, discount.getCreateDate());
-                pstm.setString(4, discount.getExpiredDate());
-                pstm.setInt(5, discount.getDiscountID());
-                check = pstm.executeUpdate() > 0 ? true : false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
-
-    
+ 
     public boolean checkDuplicate(DiscountDTO discount) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -160,4 +129,30 @@ public class DiscountDAO {
         return check;
     }
 
+     public boolean updateDiscount(DiscountDTO discount) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(UPDATE_DISCOUNT);
+                pstm.setInt(1, discount.getPercentDiscount());               
+                pstm.setInt(2, discount.getStatus());
+                pstm.setInt(3, discount.getDiscountID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }

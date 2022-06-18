@@ -2,7 +2,7 @@
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="java.util.List"%>
 <%@ page import="java.lang.Math" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,24 +10,17 @@
         <title>Admin Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
-
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
-
         <link rel="stylesheet" href="css/aos.css">
-
         <link rel="stylesheet" href="css/ionicons.min.css">
-
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
@@ -76,10 +69,10 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Quang</a>
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=((AdminDTO) session.getAttribute("LOGIN_ADMIN")).getFullName()%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a href="" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
-                                <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                                <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
                         <li class="nav-item "><a href="ShowServiceController" class="nav-link">Dịch vụ</a></li>
@@ -93,7 +86,6 @@
             </div>
         </nav>
         <!-- END nav -->
-
         <%
             String error = (String) session.getAttribute("ERROR");
             if (error == null) {
@@ -123,7 +115,6 @@
                 <%=msg%>
             </div>
         </div>
-
         <%}%>
 
         <section class="home-slider owl-carousel">
@@ -134,24 +125,24 @@
         </section>
 
         <section class="ftco-section contact-section ftco-degree-bg">
-            <div class="container">
+            <div class="container-fluid">
 
-                <div class="col-md-5 pr-md-5">
+                <div class="col-md-5 offset-1">
                     <div>
                         <h3 class="text-primary">Quản lí khuyến mãi:</h3>
                     </div>
                 </div>
 
-                <div class="col-md-5 pr-md-5">
+                <div class="col-md-5 offset-1">
                     <div class="btn-group">
                         <form action="SearchDiscountController">
                             <input type="search" class="form" name="title">
-                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm mã giảm giá">
+                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm mã khuyến mãi">
                         </form>                        
                     </div>
                 </div>
 
-                <div class="col-md-12">                   
+                <div class="col-md-12">
                     <div class="card-body">
                         <%
                             List<discounts.DiscountDTO> listSearchDiscount = (List<DiscountDTO>) request.getAttribute("SEARCH_DISCOUNT");
@@ -183,7 +174,7 @@
                                     <td><input type="text" name="discountID" value="<%=discount.getDiscountID()%>" class="form-control-plaintext" readonly/></td>
                                     <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" readonly/></td>
                                     <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
                                     <td>
                                         <select name ="status">
                                             <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
@@ -196,8 +187,7 @@
                                     <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext" readonly/></td>
                                     <td>
                                         <%=discount.getAdminID()%>
-                                    </td>                                    
-
+                                    </td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Discount"></td>
                                 </tr>
                             </form>
@@ -205,6 +195,7 @@
                                 }
                             %>
                             </tbody>
+
                         </table>
                         <%
                         } else {
@@ -213,9 +204,10 @@
                                 if (!listDiscount.isEmpty()) {
                         %>
 
-                        <table id="table_id" class="table table-bordered table-hover text-align-center">
+
+                        <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
                             <thead class="bg-light align-content-center">
-                                <tr>
+                                <tr>                                     
                                     <th>Mã khuyến mãi</th>
                                     <th>Chủ đề</th>
                                     <th>Mô tả</th>
@@ -238,7 +230,7 @@
                                     <td><input type="text" name="discountID" value="<%=discount.getDiscountID()%>" class="form-control-plaintext" readonly/></td>
                                     <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" readonly/></td>
                                     <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
                                     <td>
                                         <select name ="status">
                                             <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
@@ -247,15 +239,14 @@
                                     </td>
                                     <td><input type="text" name="image" value="<%=discount.getImage()%>" class="form-control-plaintext" readonly ></td>
 
-                                    <td><input type="text" name="createDate" value="<%=discount.getCreateDate()%>"/></td>
-                                    <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>"/></td>
+                                    <td><input type="text" name="createDate" value="<%=discount.getCreateDate()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext" readonly/></td>
                                     <td>
                                         <%=discount.getAdminID()%>
-                                    </td>                                    
-
+                                    </td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Discount"></td>
                                 </tr>
-                            </form>      
+                            </form>                         
                             </tbody>
                             <%
                                 }
@@ -267,12 +258,8 @@
                             }
                         %> 
                     </div>
-                    <!-- /.card-body -->
-
                 </div>
-
             </div>
-
         </section>
 
         <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -304,22 +291,17 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/aos.js"></script>
-        <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <UpdateDiscountscript src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-                                $(document).ready(function () {
-                                    $('#table_id').DataTable();
-                                });
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
                                 function toastClose() {
                                     var toast1 = document.getElementById("toast-msg");
                                     toast1.style.display = "none";
                                 }
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

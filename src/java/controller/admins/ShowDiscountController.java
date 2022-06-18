@@ -38,7 +38,7 @@ public class ShowDiscountController extends HttpServlet {
             DiscountDAO discountDAO = new DiscountDAO();
             List<DiscountDTO> listDiscount = discountDAO.getAllListDiscount();
             HttpSession session = request.getSession();
-            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_USER");
+            admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
 
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listDiscount != null) {

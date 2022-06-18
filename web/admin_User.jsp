@@ -10,7 +10,7 @@
         <title>Admin Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
@@ -24,23 +24,34 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
-        
-         <style>
+
+        <style>
             #toast-msg{
-                position: absolute;
+                position: fixed;
+                padding-left: 10px;
                 right: 10px;
                 top:10px;
                 z-index: 100;
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
+            }
+            #toast-close{
+                color: white;
                 width: 240px;
-                background-color: #7FFFD4;
+                background-color: rgb(231,210,14);
                 display: block;
-                border-radius:10px;
-                text-align: center;
-
             }
 
             #toast-msg strong{
-                color: red;
+                color: white;
+                font-size: 15px;
+
             }
         </style>
     </head>
@@ -69,7 +80,7 @@
                         <li class="nav-item"><a href="admin_Feedback.html" class="nav-link">Phản hồi</a></li>
                         <li class="nav-item"><a href="ShowDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="admin_Booking.html" class="nav-link">Đặt lịch</a></li>
-                        <li class="nav-item"><a href="admin_Discount.html" class="nav-link">Khuyến mãi</a></li>
+                        <li class="nav-item"><a href="ShowDiscountController" class="nav-link">Khuyến mãi</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,7 +105,7 @@
 
         <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header1">
-                <strong class="mr-auto1">Thông báo</strong>
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
 
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
                     <span aria-hidden="true">&times;</span>
@@ -231,8 +242,7 @@
 
                             <%
                                 }
-                            %>
-                            </form>
+                            %>                          
                         </table>
                         <%
                                     }
@@ -261,7 +271,7 @@
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                     stroke="#F96D00" />
-        </svg></div>
+            </svg></div>
 
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -279,10 +289,10 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script>
-                            function toastClose() {
-                            var toast1 = document.getElementById("toast-msg");
-                            toast1.style.display = "none";
-                        }
+                                function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
         </script>
     </body>
 
