@@ -66,7 +66,15 @@
                         <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
                             <%if (loginPatient == null) {%>
                         <li class="nav-item"><a href="login.html" class="nav-link">Đăng nhập</a></li>
-                            <%}%>
+                            <%} else {%> 
+                        <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                                <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                            </div>
+                        </li>
+                        <%}%>
                         <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
                     </ul>
                 </div>

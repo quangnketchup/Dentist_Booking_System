@@ -62,7 +62,9 @@
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="blog.html" class="nav-link sa">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link sa">Liên hệ</a></li>
-                        <li class="nav-item"><a href="login.html" class="nav-link sa">Đăng nhập</a></li>
+                        <%if (loginPatient == null) {%>
+                        <li class="nav-item"><a href="login.jsp" class="nav-link">Đăng nhập</a></li>
+                            <%} else {%> 
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,6 +72,7 @@
                                 <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
+                        <%}%>
                         <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
                     </ul>
                 </div>
@@ -83,7 +86,7 @@
                 <div class="container" data-scrollax-parent="true">
                     <div class="row slider-text align-items-end">
                         <div class="col-md-7 col-sm-12 ftco-animate mb-5">
-                            <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Dịch vụ</span></p>
+                            <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><a href="HomeController">Trang chủ</a></span> <span class="mr-2"><a href="LoadController">Dịch vụ</a></span></p>
                             <h1 class="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Our Service Keeps you Smile</h1>
                         </div>
                     </div>
