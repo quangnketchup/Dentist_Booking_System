@@ -93,22 +93,24 @@
 
         <section class="ftco-section">
             <div class="container">
-                <div class="col-md-10 offset-1 mb-3">
-                    <div class="btn-group">
+                <div class="col-md-10 offset-3 mb-3">
+                    <div class="btn-group align-content-center">
                         <form action="SearchServiceHomeController">
-                            <input type="search" style="width: 350px" class="form" name="serviceName">
-                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm dịch vụ">
+                            <input type="search" style="width: 350px; height: 50px; border-radius: 20px" class="form" name="serviceName">
+                            <input class="btn btn-info" style="background: #2f89fc; color: white; height: 60px; margin-right: 5px;border-radius: 20px " type="submit" value="Tìm kiếm dịch vụ">
                         </form>
                     </div>
                 </div>
-                <div class="container">
-                    <div class="row justify-content-center mb-5 pb-5">
-                        <div class="col-md-7 text-center heading-section ftco-animate">
-                            <h2 class="mb-2">Our Service Keeps you Smile</h2>
-                            <p>Nổ lực để mang tới dịch vụ tốt nhất cho bạn.</p>
-                        </div>
+            </div>
+            <div class="container">
+                <div class="row justify-content-center mb-3 pb-3">
+                    <div class="col-md-7 text-center heading-section ftco-animate">
+                        <h2 class="mb-2">Our Service Keeps you Smile</h2>
+                        <p>Nổ lực để mang tới dịch vụ tốt nhất cho bạn.</p>
                     </div>
                 </div>
+            </div>
+            <div class="container">
                 <%
 
                     List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE_TYPE");
@@ -158,7 +160,7 @@
                         <div class="col-md-3">
                             <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
                                 <div class="services text-center ">
-                                    <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
                                     <div>
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
                                     </div>
@@ -179,6 +181,14 @@
                 <%
                     }
                 %>
+                <div class="pagination align-content-center">
+                    <li class="page-item previous-page"><a class="page-link" href="#">Prev</a></li>
+                    <li class="page-item current-page"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item dots"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item previous-page"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>
+                </div>
             </div>
         </section>
 

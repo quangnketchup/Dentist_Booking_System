@@ -58,8 +58,9 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     text-align: center;
     color: #85b0e9;
 }
-.feedback .form-group .usfeed {
-    
+.navbar .container .navbar-collapse .nav-item a{
+    font-size: 14px;
+    font-style: inherit;
 }
 
 #toast-msg{
@@ -88,4 +89,26 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     color: white;
     font-size: 15px;
 
+}
+.pagination{
+    text-align: center;
+    margin: 30px 30px 60px;
+    user-select:none
+}
+.pagination li{
+    display: inline-block;
+    margin:5px;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
+}
+.previous-page, .next-page{
+    background: #0AB1CE;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+}
+.current-page, .dots{
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%px;
+    cursor: pointer;
 }
