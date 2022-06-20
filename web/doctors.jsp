@@ -64,7 +64,9 @@
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+                            <%if (loginPatient == null) {%>
                         <li class="nav-item"><a href="login.html" class="nav-link">Đăng nhập</a></li>
+                            <%}%>
                         <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
                     </ul>
                 </div>
@@ -164,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                                    
+
                         <%
                             int countService = (int) request.getAttribute("COUNT_SERVICE");
                         %>
