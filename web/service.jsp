@@ -364,7 +364,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
+                        <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -377,9 +377,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="price" style="color:white" ><strong>Giá Gốc: </strong></label>
-                                <label><%=service.getServicePrice()%> VND</label>
+                                <label><%=service.getServicePrice()%> VND</label><br>
+                                <label><h3 class="animate-charcter">Giảm Giá tới 50%<br> Cho đến ngày 23/02/2002</h3></label>
+                                
                             </div>
                             <div class="form-group">
+                                
                                 <img style="width: 350px;height:300px; margin-left: auto;margin-right: auto;display: block " src="<%=service.getImage()%>">
                             </div>
                             <div class="form-group">
@@ -389,7 +392,7 @@
                         </div>
                         <div class="col-md-7 feedback">
                             <div class="form-group ">
-                                <h5 class="head"><strong>Đánh Giá Dịch Vụ</strong></h5>
+                                <h5 class="head animate-charcter1"><strong>Đánh Giá Dịch Vụ</strong></h5>
                             </div>
                             <%if (service.getDateFeedback() != null) {%>
                             <div class="form-group border-primary ">
