@@ -27,52 +27,60 @@ import services.ServiceDTO;
  * @author quang
  */
 public class HomeController extends HttpServlet {
-
-    private static String USER = "MainController";
+    private static final String ERROR ="login.jsp";
+    private static String USER = "home.jsp";
     private static String DOCTOR = "home.jsp";
     private static String ADMIN = "home.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String url = USER;
-        try {
-            ServiceDAO serviceDao = new ServiceDAO();
-            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
-            List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getAllListService();
-            List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) serviceTypeDao.getListServiceType();
-            DoctorDAO doctorDAO = new DoctorDAO();
-            List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
-            HttpSession session = request.getSession();
-            
-            patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-            doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
-            admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
-            
-            if(loginUser != null || "PA".equals(loginUser.getRoleID())){
-                if(listService != null){
-                    session.setAttribute("LIST_SERVICE", listService);
-                    session.setAttribute("LIST_DOCTOR", listDoctor);
-                    url = USER;
+            try {
+                ServiceDAO serviceDao = new ServiceDAO();
+                ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+
+                List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getAllListService();
+                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) serviceTypeDao.getListServiceType();
+
+                DoctorDAO doctorDAO = new DoctorDAO();
+                List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
+
+                HttpSession session = request.getSession();
+
+                patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+                doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
+                admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
+
+                if (loginUser != null || "PA".equals(loginUser.getRoleID())) {
+                    if (listService != null) {
+                        request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                        request.setAttribute("LIST_DOCTOR", listDoctor);
+                        url = USER;
+                    }
+                } else if ("DR".equals(loginDoctor.getRoleID())) {
+                    if (listService != null) {
+                        request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                        request.setAttribute("LIST_DOCTOR", listDoctor);
+                        url = DOCTOR;
+                    }
+                } else if ("AD".equals(loginAdmin.getRoleID())) {
+                    if (listService != null) {
+                        request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                        request.setAttribute("LIST_DOCTOR", listDoctor);
+                        url = ADMIN;
+                    }
                 }
-            }else if("DR".equals(loginDoctor.getRoleID())){
-                if(listService !=null){
-                    session.setAttribute("LIST_SERVICE", listService);
-                    session.setAttribute("LIST_DOCTOR", listDoctor);
-                    url = DOCTOR;
-                }
-            }else if ("AD".equals(loginAdmin.getRoleID())) {
-                if(listService !=null){
-                    session.setAttribute("LIST_SERVICE", listService);
-                    session.setAttribute("LIST_DOCTOR", listDoctor);
-                    url = ADMIN;
-                }
+            } catch (Exception e) {
+                url = ERROR;
+                log("Error at HomeController: " + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        }catch(Exception e){
-            log("Error at ViewController: " + e.toString());
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
-        }
         }
     }
 

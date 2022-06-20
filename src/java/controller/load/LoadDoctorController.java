@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.main;
+package controller.load;
 
-import admins.AdminDTO;
+import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import patients.PatientDAO;
 import patients.PatientDTO;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
@@ -24,46 +23,50 @@ import services.ServiceDTO;
 
 /**
  *
- * @author nguye
+ * @author quang
  */
-@WebServlet(name = "LoadController", urlPatterns = {"/LoadController"})
-public class LoadController extends HttpServlet {
+public class LoadDoctorController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
     private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "service.jsp";
+    private static final String SUCCESS = "doctors.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            ServiceDAO serviceDao = new ServiceDAO();
-            List<ServiceDTO> listService = serviceDao.getAllListService();
-            List<ServiceDTO> listServiceFeedback = serviceDao.getListFeedBackService();
-            
+            DoctorDAO doctorDao = new DoctorDAO();
+            PatientDAO patientDao = new PatientDAO();
             ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+            ServiceDAO serviceDao = new ServiceDAO();
+            
+            List<DoctorDTO> listDoctor = doctorDao.getAllListDoctor();
+            List<PatientDTO> listPatient = patientDao.getAllListPatient();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
-            if (listService.size() > 0) {
-                    request.setAttribute("LIST_SERVICE", listService);
-                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
+            List<ServiceDTO> listService = serviceDao.getAllListService();
+            
+            int countPatient = 0;
+            for (PatientDTO patient : listPatient) {
+                countPatient++;
+            }
+            
+            int countService = 0;
+            for (ServiceDTO service : listService) {
+                countService++;
+            }
+            
+            if (listDoctor.size() > 0) {
+                    request.setAttribute("LIST_DOCTOR", listDoctor);
                     request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                    request.setAttribute("COUNT_PATIENT", countPatient);
+                    request.setAttribute("COUNT_SERVICE", countService);
                     url = SUCCESS;
             }
         } catch (Exception e) {
             url=ERROR;
-            log("Error at ServiceController: " + e.toString());
+            log("Error at Load Doctor Controller: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

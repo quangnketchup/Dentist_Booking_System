@@ -49,10 +49,21 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"><a href="home.jsp" class="nav-link">Trang chủ</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
-                        <li class="nav-item"><a href="MainController?action=Load"  class="nav-link">Dịch vụ</a>
-                            
+                        <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <%
+                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                if (listServiceType != null) {
+                                    for (ServiceTypeDTO svType : listServiceType) {
+                            %>	
+                                <a class="dropdown-item nav-link text-primary" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                            <%
+                                    }
+                                }
+                            %>
+                            </div>
                         </li>
-                        <li class="nav-item"><a href="doctors.html" class="nav-link">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="LoadDoctorController" class="nav-link">Bác sĩ</a></li>
                         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -181,10 +192,62 @@
             </div>
         </section>
 
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row d-md-flex">
+                    <div class="col-md-6 ftco-animate img about-image order-md-last" style="background-image: url(images/about.jpg);">
+                    </div>
+                    <div class="col-md-6 ftco-animate pr-md-5 order-md-first">
+                        <div class="row">
+                            <div class="col-md-12 nav-link-wrap mb-5">
+                                <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="v-pills-whatwedo-tab" data-toggle="pill" href="#v-pills-whatwedo" role="tab" aria-controls="v-pills-whatwedo" aria-selected="true">Chúng tôi làm</a>
+
+                                    <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">Nhiệm vụ</a>
+
+                                    <a class="nav-link" id="v-pills-goal-tab" data-toggle="pill" href="#v-pills-goal" role="tab" aria-controls="v-pills-goal" aria-selected="false">Mục tiêu</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12 d-flex align-items-center">
+
+                                <div class="tab-content ftco-animate" id="v-pills-tabContent">
+
+                                    <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
+                                        <div>
+                                            <h2 class="mb-4">Chúng tôi cung cấp chất lượng cao</h2>
+                                            <p>Với nguyên tắc “Mang đến những giá trị bền vững cho khách hàng” </p>
+                                            <p>Nha khoa Quốc tế DentaCare ngay từ những ngày đầu thành lập cho đến nay vẫn luôn không ngừng nâng cao chất lượng dịch vụ, đem đến cho Quý khách hàng sự hài lòng tối cao cả về dịch vụ và chất lượng.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
+                                        <div>
+                                            <h2 class="mb-4">Tạo kết quả chất lượng nhất cho người dùng</h2>
+                                            <p>Quý khách có cơ hội trải nghiệm điều trị nha khoa hoàn toàn khác biệt với dịch vụ “Nha khoa không đau”.</p>
+                                            <p>Chúng tôi áp dụng triệt để quan niệm mới của ngành Y tế: “Can thiệp tối thiểu – Hiệu quả tối đa”, cam kết tạo cho Quý khách hàng cảm giác nhẹ nhàng và thoải mái nhất.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-goal" role="tabpanel" aria-labelledby="v-pills-goal-tab">
+                                        <div>
+                                            <h2 class="mb-4">Giúp đỡ và hỗ trợ cho mọi trường hợp</h2>
+                                            <p>Chúng tôi luôn đề cao Y đức, nâng cao trình độ chuyên môn, tận tâm trong công việc để mang lại hiệu quả và sự hài lòng cho từng khách hàng.</p>
+                                            <p>Sứ mệnh của Nha khoa Nhân Tâm là mang lại nụ cười hoàn hảo, là nơi khơi nguồn niềm hạnh phúc cho mọi người.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!--List service -->
         <%
             List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
         %>
+        
         <section class="ftco-section ftco-services">
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-5">
@@ -248,24 +311,15 @@
                         <div class="about-wrap">
                             <div class="heading-section heading-section-white mb-5 ftco-animate">
                                 <h2 class="mb-2">Dentacare with a personal touch</h2>
-                                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                                <p>Sứ mệnh mang đến những giá trị cốt lõi cho khách hàng là làm đẹp nụ cười – thay đổi cuộc sống. Đây là hệ thống chuỗi nha khoa tiêu chuẩn Pháp đầu tiên tại Việt Nam quy tụ đội ngũ bác sĩ – chuyên gia nha khoa hàng đầu.</p>
                             </div>
                             <div class="list-services d-flex ftco-animate">
                                 <div class="icon d-flex justify-content-center align-items-center">
                                     <span class="icon-check2"></span>
                                 </div>
                                 <div class="text">
-                                    <h3>Well Experience Dentist</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                </div>
-                            </div>
-                            <div class="list-services d-flex ftco-animate">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-check2"></span>
-                                </div>
-                                <div class="text">
-                                    <h3>High Technology Facilities</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <h3>Gặp gỡ các bác sĩ chất lượng cao</h3>
+                                    <p>Đội ngũ bác sĩ chuyên môn cao – với hơn 20 bác sĩ đã tốt nghiệp loại giỏi , luôn không ngừng học các khóa học chuyên sâu, cập nhật các công nghệ nha khoa mới nhất trên thế giới để có thể đem đến kết quả điều trị tốt nhất cho khách hàng.</p>
                                 </div>
                             </div>
                             <div class="list-services d-flex ftco-animate">
@@ -273,8 +327,17 @@
                                     <span class="icon-check2"></span>
                                 </div>
                                 <div class="text">
-                                    <h3>Comfortable Clinics</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <h3>Trang thiết bị hiện đại</h3>
+                                    <p>Trang thiết bị máy móc là một trong những điểm mạnh vượt trội của Nha khoa Nhân Tâm mà rất ít địa chỉ nào có thể vượt qua được. Để chăm sóc sức khỏe răng miệng, điều trị và phục hình răng hàm mặt tốt nhất cho khách hàng.</p>
+                                </div>
+                            </div>
+                            <div class="list-services d-flex ftco-animate">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="icon-check2"></span>
+                                </div>
+                                <div class="text">
+                                    <h3>Phòng khám tiện nghi</h3>
+                                    <p>Ứng dụng công nghệ hiện đại vào trong việc điều trị.</p>
                                 </div>
                             </div>
                         </div>
@@ -366,11 +429,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row  mt-5 justify-conten-center">
-                    <div class="col-md-8 ftco-animate">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi vero accusantium sunt sit aliquam ipsum molestias autem perferendis, incidunt cumque necessitatibus cum amet cupiditate, ut accusamus. Animi, quo. Laboriosam, laborum.</p>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -379,8 +437,8 @@
                 <div class="row d-flex align-items-center">
                     <div class="col-md-3 aside-stretch py-5">
                         <div class=" heading-section heading-section-white ftco-animate pr-md-4">
-                            <h2 class="mb-3">Achievements</h2>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                            <h2 class="mb-3">THÀNH TỰU</h2>
+                            <p>DentaCare luôn là địa chỉ được khách hàng tin tưởng và tìm đến trong suốt thời gian qua. Chúng tôi cam kết sẽ không ngừng nâng cao chất lượng dịch vụ để mang đến những kết quả tốt nhất cho khách hàng.</p>
                         </div>
                     </div>
                     <div class="col-md-9 py-5 pl-md-5">
@@ -388,32 +446,33 @@
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="14">0</strong>
-                                        <span>Years of Experience</span>
+                                        <strong class="number" data-number="11">0</strong>
+                                        <span>Năm kinh nghiệm</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="4500">0</strong>
-                                        <span>Qualified Dentist</span>
+                                        <strong class="number" data-number="10">0</strong>
+                                        <span>Đội ngũ nha sĩ chất lượng cao</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="4200">0</strong>
-                                        <span>Happy Smiling Customer</span>
+                                        <strong class="number" data-number="1100">0</strong>
+                                        <span>Số lượng bệnh nhân đã thành công</span>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
                                         <strong class="number" data-number="320">0</strong>
-                                        <span>Patients Per Year</span>
+                                        <span>Số lượng bệnh nhân trong năm</span>
                                     </div>
                                 </div>
                             </div>
@@ -422,84 +481,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-5">
-                    <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-3">Our Best Pricing</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Basic</h3>
-                                <p><span class="price">$24.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Standard</h3>
-                                <p><span class="price">$34.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry active pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Premium</h3>
-                                <p><span class="price">$54.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Platinum</h3>
-                                <p><span class="price">$89.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="ftco-section-parallax">
             <div class="parallax-img d-flex align-items-center">
                 <div class="container">
@@ -640,67 +621,6 @@
                                 <span class="icon-search"></span>
                             </div>
                         </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-3">
-                    <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-2">Latest Blog</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry">
-                            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-                            </a>
-                            <div class="text d-flex py-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Sep. 20, 2018</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <div class="desc pl-3">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="100">
-                            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-                            </a>
-                            <div class="text d-flex py-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Sep. 20, 2018</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <div class="desc pl-3">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry" data-aos-delay="200">
-                            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-                            </a>
-                            <div class="text d-flex py-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Sep. 20, 2018</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <div class="desc pl-3">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
