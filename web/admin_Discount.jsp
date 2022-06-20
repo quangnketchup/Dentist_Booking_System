@@ -24,36 +24,7 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
-
-        <style>
-            #toast-msg{
-                position: fixed;
-                padding-left: 10px;
-                right: 10px;
-                top:10px;
-                z-index: 100;
-                width: 210px;
-                background-color: #28a745;
-                border-bottom-left-radius:10px;
-                border-top-left-radius: 10px;
-                border-bottom-right-radius: 10px;
-                text-align: left;
-                color:white;
-                font-size: 18px;
-            }
-            #toast-close{
-                color: white;
-                width: 240px;
-                background-color: rgb(231,210,14);
-                display: block;
-            }
-
-            #toast-msg strong{
-                color: white;
-                font-size: 15px;
-
-            }
-        </style>
+        <<link rel="stylesheet" href="css/menu.css"/>
     </head>
 
     <body>
@@ -117,13 +88,6 @@
         </div>
         <%}%>
 
-        <section class="home-slider owl-carousel">
-            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
-                 data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-            </div>
-        </section>
-
         <section class="ftco-section contact-section ftco-degree-bg">
             <div class="container-fluid">
 
@@ -137,17 +101,18 @@
                     <div class="btn-group">
                         <form action="SearchDiscountController">
                             <input type="search" class="form" name="title">
-                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm mã khuyến mãi">
+                            <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm danh mục">
                         </form>                        
                     </div>
                 </div>
 
                 <div class="col-md-12">
+
                     <div class="card-body">
                         <%
-                            List<discounts.DiscountDTO> listSearchDiscount = (List<DiscountDTO>) request.getAttribute("SEARCH_DISCOUNT");
+                            List<DiscountDTO> listSearchDiscount = (List<DiscountDTO>) request.getAttribute("SEARCH_DISCOUNT");
                             if (listSearchDiscount != null) {
-                                List<discounts.DiscountDTO> listDiscount = listSearchDiscount;
+                                List<DiscountDTO> listPatient = listSearchDiscount;
                         %>
                         <table id="table_id" class="table table-bordered table-hover text-align-center">
                             <thead class="bg-light align-content-center">
@@ -167,27 +132,27 @@
                             <tbody class="align-content-around">
                                 <%
                                     int count = 1;
-                                    for (DiscountDTO discount : listDiscount) {
+                                    for (DiscountDTO discount : listPatient) {
                                 %>
                             <form action="UpdateDiscountController">
                                 <tr>
+
                                     <td><input type="text" name="discountID" value="<%=discount.getDiscountID()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="number" name="percentDiscount" value="0<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
                                     <td>
                                         <select name ="status">
                                             <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
                                             <option value="<%=Math.abs(discount.getStatus() - 1)%>"><%if (discount.getStatus() == 0) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
                                         </select>    
                                     </td>
-                                    <td><input type="text" name="image" value="<%=discount.getImage()%>" class="form-control-plaintext" readonly ></td>
-
-                                    <td><input type="text" name="createDate" value="<%=discount.getCreateDate()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext" readonly/></td>
-                                    <td>
-                                        <%=discount.getAdminID()%>
+                                    <td><img src="<%=discount.getImage()%>" style="width: 200px; vertical-align: middle;"/>
+                                        <input type="image" name="image" value="<%=discount.getImage()%>" class="form-control-plaintext"/>
                                     </td>
+                                    <td><input type="text" name="createDate" value="<%=discount.getCreateDate()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext"/></td>
+                                    <td><%=discount.getAdminID()%></td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Discount"></td>
                                 </tr>
                             </form>
@@ -199,15 +164,15 @@
                         </table>
                         <%
                         } else {
-                            List<DiscountDTO> listDiscount = (List<DiscountDTO>) session.getAttribute("LIST_DISCOUNT");
-                            if (listDiscount != null) {
-                                if (!listDiscount.isEmpty()) {
+                            List<DiscountDTO> listPatient = (List<DiscountDTO>) session.getAttribute("LIST_DISCOUNT");
+                            if (listPatient != null) {
+                                if (!listPatient.isEmpty()) {
                         %>
 
 
                         <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
                             <thead class="bg-light align-content-center">
-                                <tr>                                     
+                                <tr>
                                     <th>Mã khuyến mãi</th>
                                     <th>Chủ đề</th>
                                     <th>Mô tả</th>
@@ -223,34 +188,36 @@
                             <tbody class="align-content-around">
                                 <%
                                     int count = 1;
-                                    for (DiscountDTO discount : listDiscount) {
+                                    for (DiscountDTO discount : listPatient) {
                                 %>
                             <form action="UpdateDiscountController">
                                 <tr>
+
                                     <td><input type="text" name="discountID" value="<%=discount.getDiscountID()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="text" name="title" value="<%=discount.getTitle()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="text" name="description" value="<%=discount.getDescription()%>" class="form-control-plaintext" /></td>
+                                    <td><input type="number" name="percentDiscount" value="0<%=discount.getPercentDiscount()%>" class="form-control-plaintext" /></td>
                                     <td>
                                         <select name ="status">
                                             <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
                                             <option value="<%=Math.abs(discount.getStatus() - 1)%>"><%if (discount.getStatus() == 0) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
                                         </select>    
                                     </td>
-                                    <td><input type="text" name="image" value="<%=discount.getImage()%>" class="form-control-plaintext" readonly ></td>
-
-                                    <td><input type="text" name="createDate" value="<%=discount.getCreateDate()%>" class="form-control-plaintext" readonly/></td>
-                                    <td><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext" readonly/></td>
                                     <td>
-                                        <%=discount.getAdminID()%>
+                                        <img src="<%=discount.getImage()%>" style="width: 200px; vertical-align: middle;"/>
+                                        <input type="text" name="address" value="<%=discount.getImage()%>" class="form-control-plaintext" />
                                     </td>
+                                    <td><input type="text" name="gender" value="<%=discount.getCreateDate()%>" class="form-control-plaintext"/></td>
+                                    <td><input type="text" name="gender" value="<%=discount.getExpiredDate()%>" class="form-control-plaintext"/></td>
+                                    <td><%=discount.getAdminID()%></td>
                                     <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Discount"></td>
                                 </tr>
-                            </form>                         
+                            </form>
                             </tbody>
+
                             <%
                                 }
-                            %>
+                            %>                          
                         </table>
                         <%
                                     }
@@ -261,7 +228,6 @@
                 </div>
             </div>
         </section>
-
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container">
                 <div class="row">

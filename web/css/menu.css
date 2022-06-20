@@ -1,20 +1,20 @@
 nav ul li .sa:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px #019fb6;  
-  transform: scaleX(0);  
-  transition: transform 200ms ease-in-out;
-  
+    display:block;
+    content: '';
+    border-bottom: solid 3px #019fb6;  
+    transform: scaleX(0);  
+    transition: transform 200ms ease-in-out;
+
 }
 .ftco-navbar-light{
     top:0;
 }
 nav ul li .sa:hover:after{
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 .show-item{
-  display: inline-block;
+    display: inline-block;
 }
 nav ul li a{
     font-weight: 200;
@@ -62,3 +62,30 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     
 }
 
+#toast-msg{
+    position: fixed;
+    padding-left: 10px;
+    right: 10px;
+    top:10px;
+    z-index: 100;
+    width: 210px;
+    background-color: #28a745;
+    border-bottom-left-radius:10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: left;
+    color:white;
+    font-size: 18px;
+}
+#toast-close{
+    color: white;
+    width: 240px;
+    background-color: rgb(231,210,14);
+    display: block;
+}
+
+#toast-msg strong{
+    color: white;
+    font-size: 15px;
+
+}
