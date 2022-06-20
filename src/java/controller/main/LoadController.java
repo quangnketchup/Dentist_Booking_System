@@ -44,16 +44,20 @@ public class LoadController extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getAllListService();
+            List<ServiceDTO> listServiceFeedback = serviceDao.getListFeedBackService();
             
             ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
             if (listService.size() > 0) {
                     request.setAttribute("LIST_SERVICE", listService);
+                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                     request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                     url = SUCCESS;
             }

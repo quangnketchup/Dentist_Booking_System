@@ -110,10 +110,10 @@
                     </div>
                 </div>
                 <%
-                    
+
                     List<ServiceDTO> listsvbySVType = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE_TYPE");
                     if (listsvbySVType != null) {
-                    List<ServiceDTO> listService = listsvbySVType;
+                        List<ServiceDTO> listService = listsvbySVType;
                 %>
                 <form>
                     <div class="row">
@@ -129,7 +129,7 @@
                                     <div>
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
                                     </div>
-                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                    <p style="color: white"><%=service.getServicePrice() * service.getPercentDiscount() / 100%> VND</p>
                                     <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
@@ -339,10 +339,18 @@
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
             <%
+                int count = 0;
                 List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                List<ServiceDTO> listServiceFeedBack = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE_FEEDBACK");
                 for (ServiceDTO service : listService) {
             %>
         <div  class="modal fade" id="service<%=service.getServiceID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+            <%
+                for (ServiceDTO serviceFeedback : listServiceFeedBack) {
+                    if (serviceFeedback.getServiceID() == service.getServiceID()) {
+                        service = serviceFeedback;
+                    }
+                }%>
             <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -358,7 +366,7 @@
                                 <label><%=service.getServiceName()%></label>
                             </div>
                             <div class="form-group">
-                                <label for="price" style="color:white" ><strong>Giá: </strong></label>
+                                <label for="price" style="color:white" ><strong>Giá Gốc: </strong></label>
                                 <label><%=service.getServicePrice()%> VND</label>
                             </div>
                             <div class="form-group">
@@ -373,52 +381,22 @@
                             <div class="form-group ">
                                 <h5 class="head"><strong>Đánh Giá Dịch Vụ</strong></h5>
                             </div>
-                            
+                            <%if (service.getDateFeedback() != null) {%>
                             <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center">Người dùng 1</label><br>
-                                    <label for="user-date-feedback" style="color: #cccccc;align-content: center;text-align: center">26/10/2001</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                <div>
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center"><%=service.getFullName()%></label><br>
+                                    <label for="user-date-feedback" style="color: #cccccc;align-content: center;text-align: center"><%=service.getDateFeedback()%></label><br>
+                                    <label for="user-feedback"><%=service.getContent()%></label>
                                 </div>
-                                
-                            </div>
+                            </div>            
+                            <%} else {%>
                             <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                <div>
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center">Không có bình luận nào</label><br>
                                 </div>
-                                
-                            </div>
-                            <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
-                                </div>
-                                
-                            </div>
-                            <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
-                                </div>
-                                
-                            </div>
-                            <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
-                                </div>
-                                
-                            </div>
-                            <div class="form-group border-primary ">
-                                <div >
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
-                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
-                                </div>
-                                
-                            </div>
+                                <%}%>
+                            </div> 
                         </div>
-                            
                     </div>
 
                 </div>
