@@ -6,7 +6,9 @@ nav ul li .sa:after {
   transition: transform 200ms ease-in-out;
   
 }
-
+.ftco-navbar-light{
+    top:0;
+}
 nav ul li .sa:hover:after{
   transform: scaleX(1);
 }
@@ -17,3 +19,46 @@ nav ul li .sa:hover:after{
 nav ul li a{
     font-weight: 200;
 }
+
+.modal-header{
+    background-color:#85b0e9;
+    align-content: center;
+    color: white;
+
+}
+.modal-body1 .feedback{
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+.modal-body1{
+    
+}
+.modal-body1 .form-group label{
+    
+    font-weight: 500;  
+}
+
+.border-pro{
+box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+} 
+.descrip{
+    align-content: flex-start;
+}
+.infomation{
+    background-color: gray;
+    color: white;
+    font-weight: 500;
+}
+.feedback {
+    border-left: 5px;
+    
+}
+.feedback .head{
+    align-content: center;
+    text-align: center;
+    color: #85b0e9;
+}
+.feedback .form-group .usfeed {
+    
+}
+

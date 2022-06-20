@@ -10,27 +10,22 @@
         <title>Service</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
-
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
-
         <link rel="stylesheet" href="css/aos.css">
-
         <link rel="stylesheet" href="css/ionicons.min.css">
-
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/menu.css">
     </head>
     <body>
 
@@ -47,8 +42,8 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="home.jsp" class="nav-link">Trang chủ</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
+                        <li class="nav-item active"><a href="home.jsp" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
@@ -64,10 +59,10 @@
                                 %>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="DoctorController" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
-                        <li class="nav-item"><a href="login.html" class="nav-link">Đăng nhập</a></li>
+                        <li class="nav-item"><a href="DoctorController" class="nav-link sa">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="blog.html" class="nav-link sa">Blog</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link sa">Liên hệ</a></li>
+                        <li class="nav-item"><a href="login.html" class="nav-link sa">Đăng nhập</a></li>
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -168,7 +163,7 @@
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
                                     </div>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>
@@ -348,29 +343,82 @@
                 for (ServiceDTO service : listService) {
             %>
         <div  class="modal fade" id="service<%=service.getServiceID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalRequestLabel">Thông Tin Dịch Vụ</h5>
+                        <h5 class="modal-title" id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="appointment_name" style="color:black"><%=service.getServiceName()%></label>
+                    <div class="modal-body1 row col-12">
+                        <div class="col-md-5 infomation">
+                            <div class="form-group ">
+                                <label for="name" style="color:white" ><strong>Tên Dịch Vụ: </strong></label>
+                                <label><%=service.getServiceName()%></label>
                             </div>
                             <div class="form-group">
-                                <label for="appointment_email" style="color:black"><%=service.getServicePrice()%> VND</label>
+                                <label for="price" style="color:white" ><strong>Giá: </strong></label>
+                                <label><%=service.getServicePrice()%> VND</label>
                             </div>
                             <div class="form-group">
-                                <img style="width: 200px;height:150px; vertical-align: middle; " src="<%=service.getImage()%>">
+                                <img style="width: 350px;height:300px; margin-left: auto;margin-right: auto;display: block " src="<%=service.getImage()%>">
                             </div>
                             <div class="form-group">
-                                <label for="appointment_email" style="color:black"><%=service.getDescription()%></label>
+                                <label for="appointment_email" style="color:white"> <strong>Mô tả: </strong></label>
+                                <label class="descrip"><%=service.getDescription()%></label>
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-7 feedback">
+                            <div class="form-group ">
+                                <h5 class="head"><strong>Đánh Giá Dịch Vụ</strong></h5>
+                            </div>
+                            
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center">Người dùng 1</label><br>
+                                    <label for="user-date-feedback" style="color: #cccccc;align-content: center;text-align: center">26/10/2001</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group border-primary ">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center" class="usfeed" >Người dùng 1</label><br>
+                                    <label for="user-feedback"> hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em hi nhô anh em</label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                            
                     </div>
 
                 </div>
