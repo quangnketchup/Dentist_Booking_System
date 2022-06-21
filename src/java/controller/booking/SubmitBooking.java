@@ -4,12 +4,19 @@
  */
 package controller.booking;
 
+import booking.BookingDAO;
+import booking.BookingDTO;
+import bookingdetail.BookingDetailDAO;
+import bookingdetail.BookingDetailDTO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
@@ -26,20 +33,48 @@ public class SubmitBooking extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    private static final String ERROR = "Booking.jsp";
+    private static final String TRUE = "Booking.jsp";
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PrintScheduleController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PrintScheduleController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url=ERROR;
+        try {
+            int doctorID=Integer.parseInt(request.getParameter("doctorID"));
+            int serviceID= Integer.parseInt(request.getParameter("serviceID"));
+            int discount = Integer.parseInt(request.getParameter("discount"));
+            int expectedFee= Integer.parseInt(request.getParameter("expectedFee"));
+            int patientID = Integer.parseInt(request.getParameter("patientID"));
+            String dateBooking= request.getParameter("dateBooking");
+            int slotID = Integer.parseInt(request.getParameter("slotID"));
+            BookingDTO booking =new BookingDTO(1, patientID);
+            BookingDetailDTO bkDetail= new BookingDetailDTO(doctorID,slotID,dateBooking,serviceID,expectedFee);
+            BookingDAO bkDao= new BookingDAO();
+            BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
+            boolean check_valid = bkDao.checkExistBooking(dateBooking, slotID);
+            if(!check_valid){
+                boolean check1=bkDao.createBooking(booking);
+                int bkID=bkDao.getNewBkID();
+                if(check1){
+                    boolean check2=bkDetailDAO.createBookingDetail(bkDetail, bkID);
+                    if(check2){
+                        url=TRUE;
+                    request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
+                                request.setAttribute("add-green", booking);
+                    }
+                }
+                
+            }else{
+                request.setAttribute("FAIL_ADD_BOOKING", "Đặt lịch thất bại");
+            }
+        } catch (Exception e) {
+              log("Error at HandleServiceDoctorController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+     
         }
     }
 

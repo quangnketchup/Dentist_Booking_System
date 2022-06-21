@@ -83,7 +83,7 @@
         <servlet-class>controller.booking.SearchService_BookingController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PrintScheduleController</servlet-name>
+        <servlet-name>SubmitBooking</servlet-name>
         <servlet-class>controller.booking.SubmitBooking</servlet-class>
     </servlet>
     <servlet>
@@ -177,8 +177,8 @@
         <url-pattern>/SearchService_BookingController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PrintScheduleController</servlet-name>
-        <url-pattern>/PrintScheduleController</url-pattern>
+        <servlet-name>SubmitBooking</servlet-name>
+        <url-pattern>/SubmitBooking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HandleServiceDoctorController</servlet-name>

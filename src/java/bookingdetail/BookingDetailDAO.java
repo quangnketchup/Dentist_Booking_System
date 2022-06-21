@@ -4,6 +4,7 @@
  */
 package bookingdetail;
 
+import booking.BookingDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,36 @@ import utils.DBUtils;
  */
 public class BookingDetailDAO {
     private static final String GET_BOOKING_DETAIL_BYDOCTORID = "SELECT  * FROM tblBookingDetails WHERE bookingDate> getdate() AND doctorID = ?";
+    private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [bookingDate], [bookingID], [doctorID], [slotID], [serviceID]) VALUES ( ?, ?, ?, ?, ?, ?)";
+    
+     public boolean createBookingDetail(BookingDetailDTO bkDetail, int bkID) throws SQLException {
+        boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(INSERT_BOOKINGDETAIL);
+                pstm.setInt(1, bkDetail.getExpectedFee());
+                pstm.setString(2, bkDetail.getDateBooking());
+                pstm.setInt(3, bkID);
+                pstm.setInt(4, bkDetail.getIdDoctor());
+                pstm.setInt(5, bkDetail.getSlotID());
+                pstm.setInt(6, bkDetail.getServiceID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
     public List<BookingDetailDTO> getBookingDetailByDoctorID(int id) throws SQLException {
         List<BookingDetailDTO> list = new ArrayList<>();

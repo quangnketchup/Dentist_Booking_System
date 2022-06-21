@@ -4,6 +4,8 @@
     Author     : Doan
 --%>
 
+<%@page import="booking.BookingDTO"%>
+<%@page import="patients.PatientDTO"%>
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="bookingdetail.BookingDetailDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -30,19 +32,46 @@
         DoctorDTO doctorBk= (DoctorDTO)session.getAttribute("doctorBk");
          ServiceDTO serviceBk = (ServiceDTO) session.getAttribute("serviceBk");
          DiscountDTO discount= (DiscountDTO) session.getAttribute("discount");
+         PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+         BookingDTO check= (BookingDTO)request.getAttribute("add-green");
     %>
-
+    
    <div class="container">
     <div class="progress-bar">
         <ul class="progressbar">
             <li class="active serviceTitle">Chọn Loại Dịch Vụ</li>
             <li class="doctorTitle <%=(listService !=null)? "active" : ""%>">Chọn Nha Sĩ</li>
             <li class="dateTitle <%=( doctorBk != null)? "active" : ""%>" >Chọn Ngày& Giờ</li>
-            <li class="comfirmTitle">Đặt lịch</li>
-            <li class="checkoutTitle">Hoàn Thành Đặt Lịch</li>
+            <li class="comfirmTitle <%=(check !=null) ? "active" : ""%>">Đặt lịch</li>
+            <li class="checkoutTitle <%=(check !=null) ? "active" : ""%>">Hoàn Thành Đặt Lịch</li>
           </ul>
  
     </div>
+            
+             <!<!-- Toast thông báo đặt lịch thành công -->
+
+        <%
+            String msg = (String) request.getAttribute("SUCCESS_ADD_BOOKING");
+            if (msg == null) {
+                msg = "";
+            } else {
+        %>
+        
+                <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header1">
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body1">
+                <%=msg%>
+            </div>
+        </div>
+
+        <%}%>
+        
       <div class="booking">
        
             <div class="booking-service">
@@ -137,6 +166,8 @@
                 <div class="day">
                     <label for="dateDetail">Chon Ngày & Giờ</label>
                 </div>
+              </div>
+                
               </div>
               <div class="dateTitle<%=doctorBk.getWorkDayID()%>"> <%int wkDay= doctorBk.getWorkDayID();
                   if(wkDay==1){%>Bác sĩ <%=doctorBk.getFullName()%> làm việc vào thứ 2, 4, 6 <%}else{%>Bác sĩ <%=doctorBk.getFullName()%> làm việc vào thứ 3, 5, 7 <%}%></div>
@@ -240,14 +271,14 @@
                     </div>
                                      
         <%  
-            }  
+            }
 }
 else{
-
+           
 
 }%>
       </div>
-      
+
 
 
    </div>
@@ -284,6 +315,7 @@ else{
                  <input name="expectedFee" readonly type="hidden" value="<%=serviceBk.getServicePrice()*discount.getPercentDiscount()%>">
                  <label for="gia tien">Mức phí dự định: </label>
                  <%=serviceBk.getServicePrice()*discount.getPercentDiscount()%>
+                 <input type="hidden" name="patientID" value="<%=loginPatient.getPatientID()%>">
             </div>
            </div>  
     <div class="modal-footer">
@@ -296,10 +328,17 @@ else{
 </div>
 
 <%
-          }%>
+          }
+
+%>
 
   <script src="js/booking.js"></script>
   <script type="text/javascript">  
+      
+        function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
       
       ////
        var dateTitle1=document.getElementsByClassName("dateTitle1");

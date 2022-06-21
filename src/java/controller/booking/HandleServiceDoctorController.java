@@ -60,6 +60,7 @@ public class HandleServiceDoctorController extends HttpServlet {
             session.setAttribute("serviceBk", service);
             session.setAttribute("listBookingDetail", listBookingDetail);
             session.setAttribute("discount", discount);
+
             url=TRUE;
         } catch (Exception e) {
               log("Error at HandleServiceDoctorController: " + e.toString());

@@ -40,7 +40,7 @@ public class ServiceDAO {
                 while(rs.next()){
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
-                    float servicePrice = rs.getFloat("servicePrice");
+                    int servicePrice = rs.getInt("servicePrice");
                     String image = rs.getString("image");
                     String description = rs.getString("description");
                     int status = rs.getInt("status");
@@ -200,7 +200,7 @@ public class ServiceDAO {
                     int serviceID = resultSet.getInt("serviceID");
                     String serviceName = resultSet.getString("serviceName");
                     String image = resultSet.getNString("image");
-                    float servicePrice = resultSet.getFloat("servicePrice");
+                    int servicePrice = resultSet.getInt("servicePrice");
                     String description = resultSet.getString("description");
                     ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description));
                 }
@@ -236,7 +236,7 @@ public class ServiceDAO {
                 while(rs.next()){
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
-                    float servicePrice = rs.getFloat("servicePrice");
+                    int servicePrice = rs.getInt("servicePrice");
                     String image = rs.getString("image");
                     String description = rs.getString("description");
                     int status = rs.getInt("status");

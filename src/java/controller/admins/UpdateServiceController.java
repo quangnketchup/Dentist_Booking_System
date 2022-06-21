@@ -29,7 +29,7 @@ public class UpdateServiceController extends HttpServlet {
         try {
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
             String serviceName =request.getParameter("serviceName");
-            float servicePrice = Float.parseFloat(request.getParameter("servicePrice"));
+            int servicePrice =Integer.parseInt(request.getParameter("servicePrice"));
             String description = request.getParameter("description");
             String image =request.getParameter("image");
             int status= Integer.parseInt(request.getParameter("status"));
