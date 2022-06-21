@@ -77,6 +77,7 @@
         <servlet-class>controller.main.SearchServiceHomeController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>LoadDoctorController</servlet-name>
         <servlet-class>controller.load.LoadDoctorController</servlet-class>
         <servlet-name>SearchService_BookingController</servlet-name>
@@ -93,6 +94,22 @@
     <servlet>
         <servlet-name>ShowBookingController</servlet-name>
         <servlet-class>controller.booking.ShowBookingController</servlet-class>
+=======
+        <servlet-name>RegisterUserController</servlet-name>
+        <servlet-class>controller.users.RegisterUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchDiscountController</servlet-name>
+        <servlet-class>controller.admins.SearchDiscountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDiscountController</servlet-name>
+        <servlet-class>controller.admins.UpdateDiscountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowDiscountController</servlet-name>
+        <servlet-class>controller.admins.ShowDiscountController</servlet-class>
+>>>>>>> d314f2a (Page Register)
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -171,6 +188,7 @@
         <url-pattern>/SearchServiceHomeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>LoadDoctorController</servlet-name>
         <url-pattern>/LoadDoctorController</url-pattern>
         <servlet-name>SearchService_BookingController</servlet-name>
@@ -187,6 +205,22 @@
     <servlet-mapping>
         <servlet-name>ShowBookingController</servlet-name>
         <url-pattern>/ShowBookingController</url-pattern>
+=======
+        <servlet-name>RegisterUserController</servlet-name>
+        <url-pattern>/RegisterUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchDiscountController</servlet-name>
+        <url-pattern>/SearchDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDiscountController</servlet-name>
+        <url-pattern>/UpdateDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDiscountController</servlet-name>
+        <url-pattern>/ShowDiscountController</url-pattern>
+>>>>>>> d314f2a (Page Register)
     </servlet-mapping>
     <session-config>
         <session-timeout>

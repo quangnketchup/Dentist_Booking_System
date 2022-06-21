@@ -5,7 +5,6 @@ package controller.main;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,13 +23,18 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_ADMIN_CONTROLLER = "LoginController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String UPDATE_SERVICE ="UpdateService";
+    private static final String UPDATE_SERVICE = "UpdateService";
     private static final String UPDATE_SERVICE_CONTROLLER = "UpdateServiceController";
     private static final String LOAD = "Load";
     private static final String LOAD_CONTROLLER = "LoadController";
     // Sua lai cho nay
     private static final String SHOW_SERVICE = "UpdateService";
     private static final String SHOW_SERVICE_CONTROLLER = "UpdateServiceController";
+    private static final String REGISTER = "Register";
+    private static final String REGISTER_USER_CONTROLLER = "RegisterUserController";
+    private static final String UPDATE_DISCOUNT = "Update Discount";
+    private static final String UPDATE_DISCOUNT_CONTROLLER = "UpdateDiscountController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,8 +50,12 @@ public class MainController extends HttpServlet {
                 url = SHOW_SERVICE_CONTROLLER;
             } else if (UPDATE_SERVICE.equals(action)) {
                 url = UPDATE_SERVICE_CONTROLLER;
+            } else if (UPDATE_DISCOUNT.equals(action)) {
+                url = UPDATE_DISCOUNT_CONTROLLER;
             } else if (LOAD.equals(action)) {
                 url = LOAD_CONTROLLER;
+            } else if (REGISTER.equals(action)) {
+                url = REGISTER_USER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController:" + e.toString());

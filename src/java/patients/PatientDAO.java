@@ -18,6 +18,40 @@ public class PatientDAO {
             + " WHERE patientID =? ";
     private static final String SEARCH_PATIENT_BY_NAME = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE fullName like ?";
     private static String CHECK_DUPLICATE = "SELECT fullName FROM tblPatients WHERE patientID=?";
+    private static String CHECK_DUPLICATE_GMAIL = "SELECT gmail FROM tblPatients WHERE gmail=?";
+    private static final String REGISTER_USER = "INSERT tblPatients ([fullName], [password], [gmail], [phone], [address], [gender], [status], [roleID]) VALUES (?,?,?,?,?,?,?,?)";
+                     
+
+    public boolean registerUser(PatientDTO patient) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                pstm = conn.prepareStatement(REGISTER_USER);
+                pstm.setString(1, patient.getFullName());
+                pstm.setString(2, patient.getPassword());
+                pstm.setString(3, patient.getGmail());
+                pstm.setInt(4, patient.getPhone());
+                pstm.setString(5, patient.getAddress());
+                pstm.setString(6, patient.getGender());
+                pstm.setInt(7, patient.getStatus());
+                pstm.setString(8, patient.getRoleID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                pstm.close();
+            }
+        }
+        return check;
+    }
 
     public PatientDTO checkLogin(String gmail, String password) throws SQLException {
         PatientDTO patient = null;
@@ -104,7 +138,7 @@ public class PatientDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                pstm = conn.prepareStatement(UPDATE_PATIENT);                
+                pstm = conn.prepareStatement(UPDATE_PATIENT);
                 pstm.setInt(1, patient.getStatus());
                 pstm.setInt(2, patient.getPatientID());
                 check = pstm.executeUpdate() > 0 ? true : false;
@@ -163,7 +197,7 @@ public class PatientDAO {
         }
         return list;
     }
-    
+
     public boolean checkDuplicate(String patientID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -182,45 +216,13 @@ public class PatientDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            if(ptm != null) {
+            if (ptm != null) {
                 ptm.close();
             }
-            if(conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
-    
-    public boolean checkDuplicate (PatientDTO patient) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if(conn != null) {
-                String sql = "SELECT patientID FROM tblPatients WHERE patientID=?";
-                ptm = conn.prepareStatement(sql);
-                ptm.setInt(1, patient.getPatientID());
-                rs = ptm.executeQuery();
-                if(rs.next()) {
-                    check = true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(rs != null) {
-                rs.close();
-            }
-            if(ptm != null) {
-                ptm.close();
-            }
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
         }

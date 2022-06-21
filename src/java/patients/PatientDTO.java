@@ -34,19 +34,7 @@ public class PatientDTO {
         this.gender = gender;
         this.status = status;
     }
-
-    public PatientDTO(int patientID, String fullName, String password, String roleID, String gmail, int phone, String address, String gender) {
-        this.patientID = patientID;
-        this.fullName = fullName;
-        this.password = password;
-        this.roleID = roleID;
-        this.gmail = gmail;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-    }
-
-    
+ 
     public int getPatientID() {
         return patientID;
     }
