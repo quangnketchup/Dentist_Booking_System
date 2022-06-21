@@ -21,7 +21,54 @@ public class ServiceDAO {
     private static final String CREATE_SERVICE ="INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
     private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
+    private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
     private static final String GET_LIST_FEEDBACK_SERVICE = "SELECT s.serviceID, s.serviceName, s.servicePrice, s.image, s.description, s.adminID, s.serviceTypeID, s.status, pa.fullName, paf.dateFeedback, paf.content, paf.status, ds.percentDiscount, ds.createDate, ds.expiredDate, ds.status FROM tblDiscounts ds, tblServices s, tblPatientFeedbacks paf, tblPatients pa WHERE s.ServiceID = paf.serviceID AND pa.patientID = paf.patientID AND ds.serviceID= s.serviceID and s.status = 1";
+   
+    
+    
+    public ServiceDTO getServiceById(int id) throws SQLException{
+        ServiceDTO sv = new ServiceDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn !=null){
+                ptm = conn.prepareStatement(SEARCH_SERVICE_CONTROLLER_BY_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int serviceID = rs.getInt("serviceID");
+                    String serviceName = rs.getString("serviceName");
+                    float servicePrice = rs.getFloat("servicePrice");
+                    String image = rs.getString("image");
+                    String description = rs.getString("description");
+                    int status = rs.getInt("status");
+                    int adminID = rs.getInt("adminID");
+                    int serviceTypeID = rs.getInt("serviceTypeID");
+                    sv= new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status);
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            } 
+        }
+        return sv;
+    }
+    
+    
+    
+    
     public boolean updateService(ServiceDTO service) throws SQLException {
         boolean check = false;
         Connection conn = null;

@@ -20,6 +20,95 @@ public class DoctorDAO {
     private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?, status=?"
                         + " WHERE doctorID =? ";
     private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [workDayID], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
+     private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
+    
+     
+    
+    public DoctorDTO getDoctorByID(int id) throws SQLException{
+        DoctorDTO dr = new DoctorDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn !=null){
+                ptm = conn.prepareStatement(SEARCH_DOCTOR_BY_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int doctorID = rs.getInt("doctorID");
+                    String serviceTypeName=rs.getString("serviceTypeName");
+                    String fullName = rs.getString("fullName");
+                    String password = "***";
+                    String gender = rs.getString("gender");
+                    String gmail = rs.getString("gmail");
+                    int phone = rs.getInt("phone");
+                    String image = rs.getString("image");
+                    int status =rs.getInt("status");
+                    String roleID="DR";
+                    int workDayID=rs.getInt("workDayID");
+                    dr=new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status);
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            } 
+        }
+        return dr;
+    }
+    
+    public List<DoctorDTO> getAllListDoctor2() throws SQLException {
+        List<DoctorDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_LIST_DOCTOR2);
+                rs= ptm.executeQuery();
+                while (rs.next()) {
+                    int doctorID = rs.getInt("doctorID");
+                    String serviceTypeName=String.valueOf(rs.getInt("serviceTypeID"));
+                    String fullName = rs.getString("fullName");
+                    String password = "***";
+                    String gender = rs.getString("gender");
+                    String gmail = rs.getString("gmail");
+                    int phone = rs.getInt("phone");
+                    String image = rs.getString("image");
+                    int status =rs.getInt("status");
+                    String roleID="DR";
+                    int workDayID=rs.getInt("workDayID");
+                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
+    
     
     public boolean createDoctor(DoctorDTO doctor) throws SQLException{
          boolean check=false;

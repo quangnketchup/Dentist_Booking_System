@@ -14,8 +14,49 @@ public class DiscountDAO {
     private static final String SEARCH_DISCOUNT_BY_TITLE = "SELECT discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID FROM tblDiscounts WHERE title like ?";
     private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?," 
                         + " WHERE discountID =? ";
-   
+    private static final String GET_DISCOUNT_BY_SERVICE_ID= "select * from tblDiscounts WHERE expiredDate> GETDate() AND status =1 AND serviceID =?";
 
+     public DiscountDTO getDiscountByServiceID(int id) throws SQLException{
+        DiscountDTO ds = new DiscountDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn !=null){
+                ptm = conn.prepareStatement(GET_DISCOUNT_BY_SERVICE_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int discountID = rs.getInt("discountID");
+                    String title = rs.getString("title");
+                    String description = rs.getString("description");
+                    int percentDiscount = rs.getInt("percentDiscount");
+                    String createDate = rs.getString("createDate");
+                    String expiredDate = rs.getString("expiredDate");
+                    int status = 1;
+                    int adminID = rs.getInt("adminID");
+                    int serviceID = rs.getInt("serviceID");
+                    ds= new DiscountDTO(discountID, title, description, percentDiscount, status,  createDate, expiredDate,adminID);
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            } 
+        }
+        return ds;
+    }
+    
     public List<DiscountDTO> getAllListDiscount() throws SQLException {
         List<DiscountDTO> list = new ArrayList<>();
 

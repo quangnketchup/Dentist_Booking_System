@@ -14,10 +14,21 @@ public class DiscountDTO {
     String createDate;
     String expiredDate;
     int adminID;
-
     public DiscountDTO() {
     }
+    
+    public DiscountDTO(int discountID, String title, String description, int percentDiscount, int status, String createDate, String expiredDate, int adminID) {
+        this.discountID = discountID;
+        this.title = title;
+        this.description = description;
+        this.percentDiscount = percentDiscount;
+        this.status = status;
+        this.createDate = createDate;
+        this.expiredDate = expiredDate;
+        this.adminID = adminID;
+    }
 
+    
     public DiscountDTO(int discountID, String title, String description, int percentDiscount, int status, String image, String createDate, String expiredDate, int adminID) {
         this.discountID = discountID;
         this.title = title;
