@@ -77,10 +77,8 @@
         <servlet-class>controller.main.SearchServiceHomeController</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>LoadDoctorController</servlet-name>
         <servlet-class>controller.load.LoadDoctorController</servlet-class>
-=======
         <servlet-name>SearchService_BookingController</servlet-name>
         <servlet-class>controller.booking.SearchService_BookingController</servlet-class>
     </servlet>
@@ -95,7 +93,6 @@
     <servlet>
         <servlet-name>ShowBookingController</servlet-name>
         <servlet-class>controller.booking.ShowBookingController</servlet-class>
->>>>>>> 8dacf90 (doannnnn123333)
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -174,10 +171,8 @@
         <url-pattern>/SearchServiceHomeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>LoadDoctorController</servlet-name>
         <url-pattern>/LoadDoctorController</url-pattern>
-=======
         <servlet-name>SearchService_BookingController</servlet-name>
         <url-pattern>/SearchService_BookingController</url-pattern>
     </servlet-mapping>
@@ -192,7 +187,6 @@
     <servlet-mapping>
         <servlet-name>ShowBookingController</servlet-name>
         <url-pattern>/ShowBookingController</url-pattern>
->>>>>>> 8dacf90 (doannnnn123333)
     </servlet-mapping>
     <session-config>
         <session-timeout>
