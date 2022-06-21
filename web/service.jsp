@@ -125,30 +125,27 @@
                         <%
                             if (listService != null) {
                                 for (ServiceDTO service : listService) {
-                                    if (service.getStatus() != 1) {
                         %>
                         <div class="col-md-3">
                             <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
                                 <div class="services text-center ">
-                                    <h5  style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
                                     <div>
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
                                     </div>
-                                    <p style="color: white"><%=service.getServicePrice() * service.getPercentDiscount() / 100%> VND</p>
-                                    <button class="btn btn-light"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>
 
                         </div>
                         <%
-                                    }
                                 }
                             }
                         %>
                     </div>
                 </form>
-
                 <%
                 } else {
                     List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");

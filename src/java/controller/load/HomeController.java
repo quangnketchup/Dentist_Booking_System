@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.main;
+package controller.load;
 
 import admins.AdminDTO;
 import doctors.DoctorDAO;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import patients.PatientDAO;
 import patients.PatientDTO;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
@@ -27,7 +28,8 @@ import services.ServiceDTO;
  * @author quang
  */
 public class HomeController extends HttpServlet {
-    private static final String ERROR ="login.jsp";
+
+    private static final String ERROR = "login.jsp";
     private static String USER = "home.jsp";
     private static String DOCTOR = "home.jsp";
     private static String ADMIN = "home.jsp";
@@ -40,9 +42,11 @@ public class HomeController extends HttpServlet {
             try {
                 ServiceDAO serviceDao = new ServiceDAO();
                 ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+                PatientDAO patientDao = new PatientDAO();
 
-                List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getAllListService();
+                List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getListFeedBackService();
                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) serviceTypeDao.getListServiceType();
+                List<PatientDTO> listPatient = (List<PatientDTO>) patientDao.getAllListPatient();
 
                 DoctorDAO doctorDAO = new DoctorDAO();
                 List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
@@ -53,11 +57,24 @@ public class HomeController extends HttpServlet {
                 doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
                 admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
 
+                int countPatient = 0;
+                for (PatientDTO patient : listPatient) {
+                    countPatient++;
+                }
+
+                int countService = 0;
+                for (ServiceDTO service : listService) {
+                    countService++;
+                }
+
                 if (loginUser != null || "PA".equals(loginUser.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        
+                        request.setAttribute("COUNT_PATIENT", countPatient);
+                        request.setAttribute("COUNT_SERVICE", countService);
                         url = USER;
                     }
                 } else if ("DR".equals(loginDoctor.getRoleID())) {
@@ -65,6 +82,9 @@ public class HomeController extends HttpServlet {
                         request.setAttribute("LIST_SERVICE", listService);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        request.setAttribute("COUNT_PATIENT", countPatient);
+                        request.setAttribute("COUNT_SERVICE", countService);
+
                         url = DOCTOR;
                     }
                 } else if ("AD".equals(loginAdmin.getRoleID())) {
@@ -72,6 +92,9 @@ public class HomeController extends HttpServlet {
                         request.setAttribute("LIST_SERVICE", listService);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        
+                        request.setAttribute("COUNT_PATIENT", countPatient);
+                        request.setAttribute("COUNT_SERVICE", countService);
                         url = ADMIN;
                     }
                 }

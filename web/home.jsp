@@ -52,15 +52,15 @@
                         <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                                if (listServiceType != null) {
-                                    for (ServiceTypeDTO svType : listServiceType) {
-                            %>	
+                                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                    if (listServiceType != null) {
+                                        for (ServiceTypeDTO svType : listServiceType) {
+                                %>	
                                 <a class="dropdown-item nav-link text-primary" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
-                            <%
+                                <%
+                                        }
                                     }
-                                }
-                            %>
+                                %>
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link">Bác sĩ</a></li>
@@ -242,12 +242,8 @@
                 </div>
             </div>
         </section>
-        
-        <!--List service -->
-        <%
-            List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
-        %>
-        
+
+
         <section class="ftco-section ftco-services">
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-5">
@@ -255,54 +251,42 @@
                         <h2 class="mb-2">Our Service Keeps you Smile</h2>
                     </div>
                 </div>
-                
+                <!--List service -->
+                <%
+                    List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
+                %>
                 <div class="row">
+                    <%
+                        int count = 0;
+                        if (listService != null) {
+                            for (ServiceDTO service : listService) {
+                                if (service.getDateFeedback() == null) {
+                                    continue;
+                                }
+                                count++;
+                                if (count == 5)
+                                    break;
+                    %>
                     <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="flaticon-tooth-1"></span>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <div><h3 class="heading">Teeth Whitening</h3></div>
-                                <div><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p></div>
+                        <div class="staff media block-6 services d-block text-center">
+                            <div class="justify-content-center align-items-center">
+                                <div class=" img mb-4" style="background-image: url(<%=service.getImage()%>);"></div>
+
+                                <div class="media-body p-2 mt-3">
+                                    <div><h3 class="heading"><%=service.getServiceName()%></h3></div>
+                                    <div><p><%=service.getDescription()%></p></div>
+                                </div>
                             </div>
                         </div>      
                     </div>
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="flaticon-dental-care"></span>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Teeth Cleaning</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="flaticon-tooth-with-braces"></span>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Quality Brackets</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>      
-                    </div>
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="flaticon-anesthesia"></span>
-                            </div>
-                            <div class="media-body p-2 mt-3">
-                                <h3 class="heading">Modern Anesthetic</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>      
-                    </div>
+                    <%
+
+                            }
+                        }
+                    %>
                 </div>
             </div>
+
             <div class="container-wrap mt-5">
                 <div class="row d-flex no-gutters">
                     <div class="col-md-6 img" style="background-image: url(images/about-2.jpg);">
@@ -355,79 +339,42 @@
                         <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences</p>
                     </div>
                 </div>
+
+                <%
+                    List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
+                %>
                 <div class="row">
+                    <%
+                        int countDoctor = 0;
+                        if (listService != null) {
+                            for (DoctorDTO doctor : listDoctor) {
+                                if (doctor.getStatus() == 0) {
+                                    continue;
+                                }
+                                countDoctor++;
+                                if (countDoctor == 5)
+                                    break;
+                    %>
                     <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
                         <div class="staff">
-                            <div class="img mb-4" style="background-image: url(images/person_5.jpg);"></div>
+                            <div class="img mb-4" style="background-image: url(<%=doctor.getImage()%>);"></div>
                             <div class="info text-center">
-                                <h3><a href="teacher-single.html">Tom Smith</a></h3>
-                                <span class="position">Dentist</span>
+                                <h3><a href="teacher-single.html"><%=doctor.getFullName()%></a></h3>
+                                <span class="position"><%=doctor.getServiceTypeName()%></span>
                                 <div class="text">
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-                                    <ul class="ftco-social">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    </ul>
+                                    <div class="text">
+                                        <p>Ngày Làm việc trong tuần</p>
+                                        <p><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-                        <div class="staff">
-                            <div class="img mb-4" style="background-image: url(images/person_6.jpg);"></div>
-                            <div class="info text-center">
-                                <h3><a href="teacher-single.html">Mark Wilson</a></h3>
-                                <span class="position">Dentist</span>
-                                <div class="text">
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-                                    <ul class="ftco-social">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-                        <div class="staff">
-                            <div class="img mb-4" style="background-image: url(images/person_7.jpg);"></div>
-                            <div class="info text-center">
-                                <h3><a href="teacher-single.html">Patrick Jacobson</a></h3>
-                                <span class="position">Dentist</span>
-                                <div class="text">
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-                                    <ul class="ftco-social">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-                        <div class="staff">
-                            <div class="img mb-4" style="background-image: url(images/person_8.jpg);"></div>
-                            <div class="info text-center">
-                                <h3><a href="teacher-single.html">Ivan Dorchsner</a></h3>
-                                <span class="position">System Analyst</span>
-                                <div class="text">
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-                                    <ul class="ftco-social">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%
+
+                            }
+                        }
+                    %>
                 </div>
             </div>
         </section>
@@ -454,24 +401,29 @@
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="10">0</strong>
+                                        <strong class="number" data-number="<%=listDoctor.size()%>">0</strong>
                                         <span>Đội ngũ nha sĩ chất lượng cao</span>
                                     </div>
                                 </div>
                             </div>
+                            <%
+                                int countPatient = (int) request.getAttribute("COUNT_PATIENT");
+                            %>
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="1100">0</strong>
+                                        <strong class="number" data-number="<%=countPatient%>">0</strong>
                                         <span>Số lượng bệnh nhân đã thành công</span>
                                     </div>
                                 </div>
                             </div>
-
+                            <%
+                                int countService = (int) request.getAttribute("COUNT_SERVICE");
+                            %>
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18">
                                     <div class="text">
-                                        <strong class="number" data-number="320">0</strong>
+                                        <strong class="number" data-number="<%=countService%>">0</strong>
                                         <span>Số lượng bệnh nhân trong năm</span>
                                     </div>
                                 </div>
