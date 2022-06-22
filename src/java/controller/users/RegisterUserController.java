@@ -63,7 +63,7 @@ public class RegisterUserController extends HttpServlet {
                     boolean check = dao.registerUser(patient);
                     if (check) {
                         request.setAttribute("SUCCESS", "Tạo tài khoản thành công!");
-                        url=SUCCESS
+                        url=SUCCESS;
                     }
                 } else {
                     request.setAttribute("PATIENT_ERROR", patientError);

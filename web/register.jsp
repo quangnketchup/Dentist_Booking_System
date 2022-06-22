@@ -1,9 +1,9 @@
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="patients.PatientError"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>DentaCare</title>
 
@@ -19,47 +19,49 @@
         <link rel="stylesheet" href="css/adminlte.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body class="hold-transition register-page">
+
+    <body class="hold-transition register-page" style="background-image: url('images/register1.jpg');">
         <div class="register-box">
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a href="index.html" class="h1"><b>DENTA</b>CARE</a>
+                    <a href="index.jsp" class="h1"><b>DENTA</b>CARE</a>
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Đăng kí tài khoản mới</p>
-
-                    <form action="index.html" method="post">
+                    <%
+                        PatientError patientError = (PatientError) request.getAttribute("PATIENT_ERROR");
+                        if (patientError == null) {
+                            patientError = new PatientError();
+                        }
+                    %>
+                    <form action="MainController" method="POST">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Họ tên">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fa fa-user"></span>
-                                </div>
-                            </div>
+                            <input name ="fullName" type="text" class="form-control" placeholder="Họ và tên">                           
+                        </div>
+                        <%=patientError.getFullNameError()%>
+                        <div class="input-group mb-3">
+                            <input name ="gmail" type="email" class="form-control" placeholder="Email">                            
+                        </div>
+                        <%=patientError.getGmailError()%>
+                        <div class="input-group mb-3">
+                            <input name = "password" type="password" class="form-control" placeholder="Mật khẩu">                          
+                        </div>                      
+                        <div class="input-group mb-3">
+                            <input name ="confirmpassword" type="password" class="form-control" placeholder="Nhập lại mật khẩu">                            
+                        </div>
+                        <%=patientError.getConfirmError()%>
+                        <div class="input-group mb-3">
+                            <label for="gender" value="">Giới tính</label>
+                            <select name="gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>                              
+                            </select>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fa fa-envelope"></span>
-                                </div>
-                            </div>
+                            <input  name ="phone" type="number" class="form-control" placeholder="Phone">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Mật khẩu">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fa fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Nhập lại mật khẩu">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fa fa-lock"></span>
-                                </div>
-                            </div>
+                            <input name ="address" type="text" class="form-control" placeholder="Address">
                         </div>
                         <div class="row">
                             <div class="col-8">
@@ -72,7 +74,7 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Đăng kí</button>
+                                <button type="submit" name ="action" value = "Register" class="btn btn-primary btn-block">Đăng kí</button>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -84,8 +86,14 @@
                             Đăng nhập bằng Google
                         </a>
                     </div>
+                    <% String success = (String) request.getAttribute("SUCCESS");
+                        if (success == null) {
+                            success = "";
+                        }
+                    %>
+                    <%=success%>
+                    <a href="login.jsp">Đăng nhập</a></br>
 
-                    <a href="login.html" class="text-center">Bạn đã có tài khoản</a>
                 </div>
                 <!-- /.form-box -->
             </div><!-- /.card -->
