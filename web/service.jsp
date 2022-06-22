@@ -62,7 +62,7 @@
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="blog.html" class="nav-link sa">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link sa">Liên hệ</a></li>
-                        <%if (loginPatient == null) {%>
+                            <%if (loginPatient == null) {%>
                         <li class="nav-item"><a href="login.jsp" class="nav-link">Đăng nhập</a></li>
                             <%} else {%> 
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -364,76 +364,83 @@
             <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title " id="modalRequestLabel" style="color:#40407a">CHI TIẾT DỊCH VỤ</h5>
+                        <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body1 row col-12">
-                        <div class="col-md-7 infomation">
-                            <div class="form-group ">
-                                <label for="name" style="color:white" ><strong>Tên Dịch Vụ: </strong></label>
-                                <label><%=service.getServiceName()%></label>
+                    <div class="modal-body1 col-12">
+                        <div class="row">
+                            <div class="col-md-7 infomation" style="border-right:4px solid #227093">
+                                <div class="form-group">
+                                    <img src="<%=service.getImage()%>">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="name" ><strong><h2><%=service.getServiceName()%></h2></strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price" style="color:red; font-size: medium"><strong>Giá Gốc: <%=service.getServicePrice()%> VND</strong></label>
+                                    <label><h3 class="animate-charcter">Giảm Giá tới 50% Cho đến ngày 23/02/2002</h3></label>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="price" style="color:white" ><strong>Giá Gốc: </strong></label>
-                                <label><%=service.getServicePrice()%> VND</label><br>
-                                <label><h3 class="animate-charcter">Giảm Giá tới 50%<br> Cho đến ngày 23/02/2002</h3></label>
-                                
+                            <div class="col-md-5  feedback">
+                                <div class="form-group">
+                                    <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
+                                    <label class="descrip"><%=service.getDescription()%></label>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                
-                                <img style="width: 350px;height:300px; margin-left: auto;margin-right: auto;display: block " src="<%=service.getImage()%>">
-                            </div>
-                            
                         </div>
-                        <div class="col-md-5  feedback">
-                            <div class="form-group">
-                                <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
-                                <label class="descrip"><%=service.getDescription()%></label>
-                            </div>
-                            <div class="form-group ">
+                        <div class="col-12 " style="border-top: 4px solid #227093; overflow-y: auto">
+                            <div class="form-group mt-1 mb-2">
                                 <h5 class="head animate-charcter1"><strong>Đánh Giá Dịch Vụ</strong></h5>
                             </div>
                             <%if (service.getDateFeedback() != null) {%>
-                            <div class="form-group border-primary ">
-                                <div>
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center"><%=service.getFullName()%></label><br>
-                                    <label for="user-date-feedback" style="color: #cccccc;align-content: center;text-align: center"><%=service.getDateFeedback()%></label><br>
+                            <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
+                                <div class="form-group col-md-4 border-primary">
+                                    <div >
+                                        <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=service.getFullName()%></strong>
+                                            <h6 style="color: gray;align-content: center;text-align: center">(<%=service.getDateFeedback()%>)</h6></label>
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-8 border-primary">
                                     <label for="user-feedback"><%=service.getContent()%></label>
                                 </div>
-                            </div> 
-                                
+
+                            </div>
                             <%} else {%>
                             <div class="form-group border-primary ">
                                 <div>
-                                    <label for="user-name-feedback" style="color: #85b0e9;align-content: center;text-align: center">Không có bình luận nào</label><br>
+                                    <label for="user-name-feedback" style="color: #227093;align-content: center;text-align: center">Không có bình luận nào</label><br>
                                 </div>
-                                <%}%>
+                                <%}%> 
                             </div> 
                         </div>
+
                     </div>
 
                 </div>
+
             </div>
         </div>
-        <%}%>
+    </div>
+    <%}%>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.stellar.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/jquery.animateNumber.min.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/jquery.timepicker.min.js"></script>
-        <script src="js/scrollax.min.js"></script>
-        <script src="js/main.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
 
-    </body>
+</body>
 </html>
