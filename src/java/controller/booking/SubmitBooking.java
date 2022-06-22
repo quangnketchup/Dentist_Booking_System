@@ -35,7 +35,7 @@ public class SubmitBooking extends HttpServlet {
      */
     
     private static final String ERROR = "Booking.jsp";
-    private static final String TRUE = "Booking.jsp";
+    private static final String TRUE = "HandleServiceDoctorController";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +54,7 @@ public class SubmitBooking extends HttpServlet {
             BookingDetailDTO bkDetail= new BookingDetailDTO(doctorID,slotID,dateBooking,serviceID,expectedFee);
             BookingDAO bkDao= new BookingDAO();
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
-            boolean check_valid = bkDao.checkExistBooking(dateBooking, slotID);
+            boolean check_valid = bkDao.checkExistBooking(dateBooking, slotID,doctorID);
             if(!check_valid){
                 boolean check1=bkDao.createBooking(booking);
                 int bkID=bkDao.getNewBkID();

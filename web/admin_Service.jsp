@@ -349,7 +349,7 @@
 
 
                         <div class="col-md-12 ">
-                            <div class="card card-body">
+                            <div >
 
                                 <%
                                     List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE");
@@ -357,11 +357,11 @@
                                         if (!listService.isEmpty()) {
                                 %>
 
-                                <table  class="table table-image table-bordered table-hover text-align-center">
+                                <table  class="table table-bordered table-hover table-service">
                                     <thead class="bg-light align-content-center">
                                         <tr>
                                             <th>Số Thứ Tự</th>
-                                            <th >Mã Dịch Vụ</th>
+                                            <th>Mã Dịch Vụ</th>
                                             <th>Tên Dịch Vụ</th>
                                             <th>Giá</th>
                                             <th>Mô Tả</th>
@@ -384,7 +384,7 @@
                                             <td><input type="number" name="servicePrice" value="<%=service.getServicePrice()%>" class="form-control-plaintext"/></td>
                                             <td><input type="text" name="description" value="<%=service.getDescription()%>" class="form-control-plaintext"/></td>
                                             <td>
-                                                <img id="rendered_image_<%=service.getServiceID()%>" style="width: 200px; vertical-align: middle; " src="<%=service.getImage()%>"/>
+                                                <img id="rendered_image_<%=service.getServiceID()%>" style="width: 200px;" src="<%=service.getImage()%>"/>
                                                 <input type="file" value="" onchange="return onSelectedImage(this,'<%=service.getServiceID()%>')" />
                                                 <input type="hidden" id="image_<%=service.getServiceID()%>" name="image" value=""/>
                                             </td>

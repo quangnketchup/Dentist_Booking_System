@@ -100,7 +100,7 @@
                     <div class="btn-group align-content-center">
                         <form action="SearchServiceHomeController">
                             <input type="search" style="width: 350px; height: 50px; border-radius: 20px" class="form" name="serviceName">
-                            <input class="btn btn-info" style="background: #2f89fc; color: white; height: 60px; margin-right: 5px;border-radius: 20px " type="submit" value="Tìm kiếm dịch vụ">
+                            <input class="btn btn-info" style="background: #227093; color: white; height: 60px; margin-right: 5px;border-radius: 20px " type="submit" value="Tìm kiếm dịch vụ">
                         </form>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                                 for (ServiceDTO service : listService) {
                         %>
                         <div class="col-md-3">
-                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #227093;">
                                 <div class="services text-center ">
                                     <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
                                     <div>
@@ -364,13 +364,13 @@
             <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
+                        <h5 class="modal-title " id="modalRequestLabel" style="color:#40407a">CHI TIẾT DỊCH VỤ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body1 row col-12">
-                        <div class="col-md-5 infomation">
+                        <div class="col-md-7 infomation">
                             <div class="form-group ">
                                 <label for="name" style="color:white" ><strong>Tên Dịch Vụ: </strong></label>
                                 <label><%=service.getServiceName()%></label>
@@ -385,12 +385,13 @@
                                 
                                 <img style="width: 350px;height:300px; margin-left: auto;margin-right: auto;display: block " src="<%=service.getImage()%>">
                             </div>
+                            
+                        </div>
+                        <div class="col-md-5  feedback">
                             <div class="form-group">
-                                <label for="appointment_email" style="color:white"> <strong>Mô tả: </strong></label>
+                                <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
                                 <label class="descrip"><%=service.getDescription()%></label>
                             </div>
-                        </div>
-                        <div class="col-md-7 feedback">
                             <div class="form-group ">
                                 <h5 class="head animate-charcter1"><strong>Đánh Giá Dịch Vụ</strong></h5>
                             </div>
@@ -401,7 +402,8 @@
                                     <label for="user-date-feedback" style="color: #cccccc;align-content: center;text-align: center"><%=service.getDateFeedback()%></label><br>
                                     <label for="user-feedback"><%=service.getContent()%></label>
                                 </div>
-                            </div>            
+                            </div> 
+                                
                             <%} else {%>
                             <div class="form-group border-primary ">
                                 <div>

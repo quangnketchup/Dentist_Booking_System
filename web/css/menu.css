@@ -4,7 +4,7 @@ nav ul li .sa:after {
     border-bottom: solid 3px #019fb6;  
     transform: scaleX(0);  
     transition: transform 200ms ease-in-out;
-
+    
 }
 .ftco-navbar-light{
     top:0;
@@ -18,12 +18,13 @@ nav ul li .sa:hover:after{
 }
 nav ul li a{
     font-weight: 200;
+    
 }
 
 .modal-header{
-    background-color:#85b0e9;
+    background-color:#f7f1e3;
     align-content: center;
-    color: white;
+    color: #40407a;
 
 }
 .modal-body1 .feedback{
@@ -48,8 +49,8 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     align-content: flex-start;
 }
 .infomation{
-    background-color: gray;
-    color: white;
+    background-color: #fff;
+    color: black;
     font-weight: 500;
 }
 .feedback {
@@ -57,6 +58,7 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     
 }
 .feedback .head{
+    display: block;
     align-content: center;
     text-align: center;
 }
@@ -151,3 +153,11 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
     background-position: 200% center;
   }
 }
+.table thead tr th:nth-child(6){
+    width: 50px;
+    text-align: center;
+}
+
+.table thead tr td:nth-child(6){
+                     width: 50px;               
+                                }

@@ -18,7 +18,7 @@ import utils.DBUtils;
  * @author Doan
  */
 public class BookingDAO {
-    private static final String CHECK_VALID = "select * from tblBookings b, tblBookingDetails d where b.bookingID=d.bookingID AND slotID=?  AND bookingDate like ?";
+    private static final String CHECK_VALID = "select * from tblBookings b, tblBookingDetails d where b.bookingID=d.bookingID AND slotID=?  AND bookingDate like ? AND doctorID =?";
     private static final String INSERT_BOOKING ="INSERT tblBookings ( [status], [patientID]) VALUES (?,?)";
     private static final String GET_NEW_ID="select TOP(1) * from tblBookings ORDER BY   bookingID DESC";
     
@@ -80,7 +80,7 @@ public class BookingDAO {
         return check;
     }
     
-    public boolean checkExistBooking(String date, int slotID) throws SQLException {
+    public boolean checkExistBooking(String date, int slotID, int drID) throws SQLException {
         List<BookingDetailDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -92,6 +92,7 @@ public class BookingDAO {
                 ptm = conn.prepareStatement(CHECK_VALID);
                 ptm.setInt(1, slotID);
                 ptm.setString(2, date);
+                ptm.setInt(3,drID);
                 rs = ptm.executeQuery();
                 if (rs.next()) {                    
                     check=true;
