@@ -45,7 +45,6 @@
             <li class="comfirmTitle <%=(check !=null) ? "active" : ""%>">Đặt lịch</li>
             <li class="checkoutTitle <%=(check !=null) ? "active" : ""%>">Hoàn Thành Đặt Lịch</li>
           </ul>
- 
     </div>
             
              <!<!-- Toast thông báo đặt lịch thành công -->
@@ -179,8 +178,7 @@
                                         int lam=0;
                                         for(BookingDetailDTO BookingDetail : listBookingDetail){
                                         lam++;
-                                            int slotBooked= BookingDetail.getSlotID();
-                                            String wkBookedDay= BookingDetail.getDateBooking();
+                                            int slotBooked= BookingDetail.getScheduleID();
                                           %>
                                    
                                        

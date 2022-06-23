@@ -8,7 +8,6 @@ public class ServiceDTO {
     int serviceTypeID;
     String serviceName;
     int servicePrice;
-    String image;
     String description;
     int adminID;
     int status;
@@ -31,13 +30,12 @@ public class ServiceDTO {
         this.serviceTypeID = 0;
         this.serviceName = "";
         this.servicePrice = 0;
-        this.image = "";
         this.description = "";
         this.adminID = 0;
         this.status = 0;
     }
 
-    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String image, String description, int adminID, int status, String fullName, Date dateFeedback, String content, int statusFeedback, int percentDiscount,
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String description, int adminID, int status, String fullName, Date dateFeedback, String content, int statusFeedback, int percentDiscount,
             Date createDate,
             Date expiredDate,
             int statusDiscount) {
@@ -45,7 +43,6 @@ public class ServiceDTO {
         this.serviceTypeID = serviceTypeID;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.image = image;
         this.description = description;
         this.adminID = adminID;
         this.status = status;
@@ -59,41 +56,37 @@ public class ServiceDTO {
         this.statusDiscount = statusDiscount;
     }
 
-    public ServiceDTO(int serviceID, String serviceName, int servicePrice, String image, String description, int adminID, int status) {
+    public ServiceDTO(int serviceID, String serviceName, int servicePrice,  String description, int adminID, int status) {
         this.serviceID = serviceID;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.image = image;
         this.description = description;
         this.adminID = adminID;
         this.status = status;
     }
 
-    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String image, String description, int status) {
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice,String description, int status) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.image = image;
         this.description = description;
         this.status = status;
     }
 
-    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String image, String description) {
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String description) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.image = image;
         this.description = description;
     }
 
-    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String image, String description, int adminID, int status) {
+    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice,String description, int adminID, int status) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.image = image;
         this.description = description;
         this.adminID = adminID;
         this.status = status;
@@ -137,14 +130,6 @@ public class ServiceDTO {
 
     public void setServicePrice(int servicePrice) {
         this.servicePrice = servicePrice;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getDescription() {

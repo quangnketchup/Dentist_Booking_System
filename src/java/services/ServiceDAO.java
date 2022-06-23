@@ -41,12 +41,11 @@ public class ServiceDAO {
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
                     int servicePrice = rs.getInt("servicePrice");
-                    String image = rs.getString("image");
                     String description = rs.getString("description");
                     int status = rs.getInt("status");
                     int adminID = rs.getInt("adminID");
                     int serviceTypeID = rs.getInt("serviceTypeID");
-                    sv= new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status);
+                    sv= new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status);
                 }
             }
             
@@ -80,7 +79,6 @@ public class ServiceDAO {
                         + " WHERE serviceID =? ";
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, service.getServiceName());
-                pstm.setNString(2, service.getImage());
                 pstm.setInt(3, (int) service.getServicePrice());
                 pstm.setInt(4, service.getStatus());
                 pstm.setInt(5, service.getServiceID());
@@ -112,12 +110,11 @@ public class ServiceDAO {
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
                     int servicePrice = rs.getInt("servicePrice");
-                    String image = rs.getString("image");
                     String description = rs.getString("description");
                     int adminID = rs.getInt("adminID");
                     int serviceTypeID = rs.getInt(  "serviceTypeID");
                     int status = rs.getInt("status");
-                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status));
+                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status));
                 }
             }
         } catch (Exception e) {
@@ -162,7 +159,7 @@ public class ServiceDAO {
                     Date createDate = rs.getDate("createDate");
                     Date expiredDate = rs.getDate("expiredDate");
                     int statusDiscount = rs.getInt("status");
-                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status, fullName , dateFeedback, content, statusFeedback, percentDiscount, createDate, expiredDate, statusDiscount));
+                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status, fullName , dateFeedback, content, statusFeedback, percentDiscount, createDate, expiredDate, statusDiscount));
                 }
             }
         } catch (Exception e) {
@@ -202,7 +199,7 @@ public class ServiceDAO {
                     String image = resultSet.getNString("image");
                     int servicePrice = resultSet.getInt("servicePrice");
                     String description = resultSet.getString("description");
-                    ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description));
+                    ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description));
                 }
             }
         } catch (Exception e) {
@@ -242,7 +239,7 @@ public class ServiceDAO {
                     int status = rs.getInt("status");
                     int adminID = rs.getInt("adminID");
                     int serviceTypeID = rs.getInt("serviceTypeID");
-                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status));
+                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status));
                 }
             }
             
@@ -272,7 +269,7 @@ public class ServiceDAO {
                 pstm = conn.prepareStatement(CREATE_SERVICE);
                 pstm.setString(1, service.getServiceName());
                 pstm.setFloat(2, service.getServicePrice());
-                pstm.setString(3, service.getImage());
+//                pstm.setString(3, service.getImage());
                 pstm.setString(4, service.getDescription());
                 pstm.setInt(5, service.getStatus());
                 pstm.setInt(6, service.getAdminID());

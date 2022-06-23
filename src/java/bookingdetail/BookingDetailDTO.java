@@ -9,14 +9,22 @@ package bookingdetail;
  * @author Doan
  */
 public class BookingDetailDTO {
-    String service;
-    int idDoctor;
-    int slotID;
-    String dateBooking;
+    String service;;
     int ServiceID;
     int bookingID;
     int expectedFee;
+    int scheduleID;
 
+    public int getScheduleID() {
+        return scheduleID;
+    }
+
+    public void setScheduleID(int scheduleID) {
+        this.scheduleID = scheduleID;
+    }
+
+    
+    
     public int getServiceID() {
         return ServiceID;
     }
@@ -35,32 +43,21 @@ public class BookingDetailDTO {
         this.expectedFee = expectedFee;
     }
 
-    public BookingDetailDTO(int idDoctor, int slotID, String dateBooking, int ServiceID, int bookingID, int expectedFee) {
+    public BookingDetailDTO( int ServiceID, int bookingID, int expectedFee) {
 
-        this.idDoctor = idDoctor;
-        this.slotID = slotID;
-        this.dateBooking = dateBooking;
+
         this.ServiceID = ServiceID;
         this.bookingID = bookingID;
         this.expectedFee = expectedFee;
     }
     
-    public BookingDetailDTO(int idDoctor, int slotID, String dateBooking, int ServiceID, int expectedFee) {
+    public BookingDetailDTO( int ServiceID, int expectedFee) {
 
-        this.idDoctor = idDoctor;
-        this.slotID = slotID;
-        this.dateBooking = dateBooking;
+
         this.ServiceID = ServiceID;
         this.expectedFee = expectedFee;
     }
-    
-    
-    public BookingDetailDTO(int slotID, int idDoctor, String dateBooking){
-        this.idDoctor=idDoctor;
-        this.slotID=slotID;
-        this.dateBooking=dateBooking;
-    }
-    
+
     public String getService() {
         return service;
     }
@@ -69,28 +66,5 @@ public class BookingDetailDTO {
         this.service = service;
     }
 
-    public int getIdDoctor() {
-        return idDoctor;
-    }
 
-    public void setIdDoctor(int idDoctor) {
-        this.idDoctor = idDoctor;
-    }
-
-    public int getSlotID() {
-        return slotID;
-    }
-
-    public void setSlotID(int slotID) {
-        this.slotID = slotID;
-    }
-
-    public String getDateBooking() {
-        return dateBooking;
-    }
-
-    public void setDateBooking(String dateBooking) {
-        this.dateBooking = dateBooking;
-    }
-    
 }

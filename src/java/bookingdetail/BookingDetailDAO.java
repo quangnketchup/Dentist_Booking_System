@@ -32,8 +32,6 @@ public class BookingDetailDAO {
                 pstm.setInt(1, bkDetail.getExpectedFee());
                 pstm.setString(2, bkDetail.getDateBooking());
                 pstm.setInt(3, bkID);
-                pstm.setInt(4, bkDetail.getIdDoctor());
-                pstm.setInt(5, bkDetail.getSlotID());
                 pstm.setInt(6, bkDetail.getServiceID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
@@ -64,9 +62,8 @@ public class BookingDetailDAO {
                 while (rs.next()) {                    
                     int idDoctor = rs.getInt("doctorID");
                     int slotID = rs.getInt("slotID");
-                    String dateBooking = rs.getString("bookingDate");
                     
-                    list.add(new BookingDetailDTO( slotID,idDoctor, dateBooking));
+                    list.add(new BookingDetailDTO( slotID,idDoctor));
                 }
             }
         } catch (Exception e) {
