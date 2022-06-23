@@ -36,7 +36,7 @@
                 position: fixed;
                 padding-left: 10px;
                 right: 10px;
-                top:10px;
+                top:80px;
                 z-index: 100;
                 width: 210px;
                 background-color: #28a745;
@@ -46,7 +46,29 @@
                 text-align: left;
                 color:white;
                 font-size: 18px;
+                animation: slideInleft ease .3s, fadeOut linear 1s 3s forwards;
             }
+            
+            @keyframes slideInleft {
+                
+                from{
+                    opacity: 0;
+                    transform: translateX(calc(100%+40px));
+                    
+                }
+                to{
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes fadeOut{
+                to{
+                    opacity: 0;
+                    
+                }
+            }
+            
             #toast-close{
                 color: white;
                 width: 240px;
@@ -115,7 +137,7 @@
                 msg = "";
             } else {
         %>
-        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true"">
             <div class="toast-header1">
                 <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
 
@@ -404,11 +426,11 @@
         <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
-        <script>
-
+        <script>    const check = ()=>{alert('hello')}
+                                                    
                                 function toastClose() {
                                     var toast1 = document.getElementById("toast-msg");
-                                    toast1.style.display = "none";
+                                    toast1.style.display = "none";  
                                 }
         </script>
     </body>

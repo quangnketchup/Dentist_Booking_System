@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
 
-    <body class="hold-transition login-page "  style="background-image: url('images/login.jpg');">
+    <body class="hold-transition login-page"  style="background-image: url('images/login1.jpg');">
         <div class="login-box">
             <!-- /.login-logo -->
             <div class="card card-outline card-primary">

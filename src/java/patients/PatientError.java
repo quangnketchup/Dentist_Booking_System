@@ -1,30 +1,34 @@
 package patients;
 
 public class PatientError {
-    int patientIDError;
+    String patientIDError;
     String fullNameError;
     String passwordError;
     String confirmPassword;
     String roleIDError;
     String gmailError;
-    int phoneError;
+    String phoneError;
     String addressError;
     String genderError;
-    int statusError;
+    String statusError;
+    String confirmError;
 
+    
     public PatientError() {
-        this.patientIDError = 0;
+        this.patientIDError = "";
         this.fullNameError = "";
         this.passwordError = "";
         this.confirmPassword = "";
         this.roleIDError = "";
         this.gmailError = "";
-        this.phoneError = 0;
+        this.phoneError = "";
         this.addressError = "";
         this.genderError = "";
-        this.statusError = 0;
+        this.statusError = "";
+        this.confirmError = "";
     }
-    public PatientError(int patientIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String gmailError, int phoneError, String addressError, String genderError, int statusError) {
+
+    public PatientError(String patientIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String gmailError, String phoneError, String addressError, String genderError, String statusError, String confirmError) {
         this.patientIDError = patientIDError;
         this.fullNameError = fullNameError;
         this.passwordError = passwordError;
@@ -35,26 +39,14 @@ public class PatientError {
         this.addressError = addressError;
         this.genderError = genderError;
         this.statusError = statusError;
+        this.confirmError = confirmError;
     }
 
-    public PatientError(int patientIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String gmailError, int phoneError, String addressError, String genderError) {
-        this.patientIDError = patientIDError;
-        this.fullNameError = fullNameError;
-        this.passwordError = passwordError;
-        this.confirmPassword = confirmPassword;
-        this.roleIDError = roleIDError;
-        this.gmailError = gmailError;
-        this.phoneError = phoneError;
-        this.addressError = addressError;
-        this.genderError = genderError;
-    }
-
-    
-    public int getPatientIDError() {
+    public String getPatientIDError() {
         return patientIDError;
     }
 
-    public void setPatientIDError(int patientIDError) {
+    public void setPatientIDError(String patientIDError) {
         this.patientIDError = patientIDError;
     }
 
@@ -98,11 +90,11 @@ public class PatientError {
         this.gmailError = gmailError;
     }
 
-    public int getPhoneError() {
+    public String getPhoneError() {
         return phoneError;
     }
 
-    public void setPhoneError(int phoneError) {
+    public void setPhoneError(String phoneError) {
         this.phoneError = phoneError;
     }
 
@@ -122,13 +114,21 @@ public class PatientError {
         this.genderError = genderError;
     }
 
-    public int getStatusError() {
+    public String getStatusError() {
         return statusError;
     }
 
-    public void setStatusError(int statusError) {
+    public void setStatusError(String statusError) {
         this.statusError = statusError;
     }
+
+    public String getConfirmError() {
+        return confirmError;
+    }
+
+    public void setConfirmError(String confirmError) {
+        this.confirmError = confirmError;
+    }
     
-    
+   
 }

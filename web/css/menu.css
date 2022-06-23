@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+}
 nav ul li .sa:after {
     display:block;
     content: '';
     border-bottom: solid 3px #019fb6;  
     transform: scaleX(0);  
     transition: transform 200ms ease-in-out;
-
+    
 }
 .ftco-navbar-light{
     top:0;
@@ -18,45 +22,55 @@ nav ul li .sa:hover:after{
 }
 nav ul li a{
     font-weight: 200;
+    
 }
 
 .modal-header{
-    background-color:#85b0e9;
+    background-color:#227093;
     align-content: center;
     color: white;
+    font-weight: bold;
+}
 
-}
-.modal-body1 .feedback{
-    max-height: calc(100vh - 210px);
-    overflow-y: auto;
-}
-.modal-body1{
+.modal-body1 img{
+    width: 500px;height:300px; margin-left: auto;margin-right: auto;display: block; margin-top: 5px;
+    border-image:  linear-gradient ;
     
 }
 .modal-body1 .form-group label{
-    font-weight: 500;  
+    font-weight: 500; 
+    align-content: center;
+    text-align: center;
+    display: block
+   
 }
 .modal-body1 .form-group label h3{
     display: flex;
   align-content: center;
   justify-content: center;
 }
+.modal-body1 .infomation label{
+    display: block;
+  align-content: center;
+  justify-content: center;
+  background-color: #fff;
+    color: black;
+    font-weight: 500;
+}
+
 .border-pro{
 box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 } 
 .descrip{
     align-content: flex-start;
 }
-.infomation{
-    background-color: gray;
-    color: white;
-    font-weight: 500;
-}
+
 .feedback {
     border-left: 5px;
     
 }
 .feedback .head{
+    display: block;
     align-content: center;
     text-align: center;
 }
@@ -99,10 +113,10 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
    text-transform: uppercase;
   background-image: linear-gradient(
     -225deg,
-    #9FB4FF 0%,
-    #99FFCD 29%,
-    #FFF56D 67%,
-    #FFD36E 100%
+    #990000 0%,
+    #FF5B00 29%,
+    #D4D925 67%,
+    #FF5B00 100%
   );
   background-size: auto auto;
   background-clip: border-box;
@@ -113,7 +127,7 @@ box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8)
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;
-  display: inline-block;
+  
       font-size: 20px;
       
 }

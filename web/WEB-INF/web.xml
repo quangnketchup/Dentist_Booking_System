@@ -79,6 +79,8 @@
     <servlet>
         <servlet-name>LoadDoctorController</servlet-name>
         <servlet-class>controller.load.LoadDoctorController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchService_BookingController</servlet-name>
         <servlet-class>controller.booking.SearchService_BookingController</servlet-class>
     </servlet>
@@ -93,6 +95,22 @@
     <servlet>
         <servlet-name>ShowBookingController</servlet-name>
         <servlet-class>controller.booking.ShowBookingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterUserController</servlet-name>
+        <servlet-class>controller.users.RegisterUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchDiscountController</servlet-name>
+        <servlet-class>controller.admins.SearchDiscountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDiscountController</servlet-name>
+        <servlet-class>controller.admins.UpdateDiscountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowDiscountController</servlet-name>
+        <servlet-class>controller.admins.ShowDiscountController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -173,6 +191,8 @@
     <servlet-mapping>
         <servlet-name>LoadDoctorController</servlet-name>
         <url-pattern>/LoadDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchService_BookingController</servlet-name>
         <url-pattern>/SearchService_BookingController</url-pattern>
     </servlet-mapping>
@@ -187,6 +207,22 @@
     <servlet-mapping>
         <servlet-name>ShowBookingController</servlet-name>
         <url-pattern>/ShowBookingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterUserController</servlet-name>
+        <url-pattern>/RegisterUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchDiscountController</servlet-name>
+        <url-pattern>/SearchDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDiscountController</servlet-name>
+        <url-pattern>/UpdateDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDiscountController</servlet-name>
+        <url-pattern>/ShowDiscountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
