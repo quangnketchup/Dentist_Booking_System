@@ -10,6 +10,8 @@ import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import patients.PatientDAO;
 import patients.PatientDTO;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
@@ -41,10 +45,12 @@ public class HomeController extends HttpServlet {
             String url = USER;
             try {
                 ServiceDAO serviceDao = new ServiceDAO();
+                ServiceImageDAO serviceImageDao = new ServiceImageDAO();
                 ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
                 PatientDAO patientDao = new PatientDAO();
 
-                List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getListFeedBackService();
+                List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getAllListService();
+                List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) serviceImageDao.getAllListServiceImage();
                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) serviceTypeDao.getListServiceType();
                 List<PatientDTO> listPatient = (List<PatientDTO>) patientDao.getAllListPatient();
 
@@ -53,7 +59,7 @@ public class HomeController extends HttpServlet {
 
                 HttpSession session = request.getSession();
 
-                patients.PatientDTO loginUser = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+                patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
                 doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
                 admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
 
@@ -67,12 +73,16 @@ public class HomeController extends HttpServlet {
                     countService++;
                 }
 
-                if (loginUser != null || "PA".equals(loginUser.getRoleID())) {
+                
+
+//                tra ve trang home
+                if (loginPatient != null || "PA".equals(loginPatient.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
-                        
+
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
                         url = USER;
@@ -80,6 +90,7 @@ public class HomeController extends HttpServlet {
                 } else if ("DR".equals(loginDoctor.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
                         request.setAttribute("COUNT_PATIENT", countPatient);
@@ -90,9 +101,10 @@ public class HomeController extends HttpServlet {
                 } else if ("AD".equals(loginAdmin.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
-                        
+
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
                         url = ADMIN;

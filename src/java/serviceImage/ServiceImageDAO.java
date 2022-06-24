@@ -18,12 +18,11 @@ import utils.DBUtils;
  * @author Doan
  */
 public class ServiceImageDAO {
-    
+
     public String GET_IMAGE_BY_SERVICE_ID = "select * from tblServiceImages WHERE serviceID = ?";
-    
-    
+
     public List<ServiceImageDTO> getImageByServiceID(int id) throws SQLException {
-        List<ServiceImageDTO> list =new ArrayList<>();
+        List<ServiceImageDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -35,7 +34,7 @@ public class ServiceImageDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String image = rs.getString("image");
-                    int serviceID = rs.getInt("serviceID");                   
+                    int serviceID = rs.getInt("serviceID");
                     list.add(new ServiceImageDTO(image, serviceID));
                 }
             }
@@ -53,5 +52,39 @@ public class ServiceImageDAO {
             }
         }
         return list;
-}
+    }
+    
+    //lay het image serviceimage theo service
+     public List<ServiceImageDTO> getAllListServiceImage() throws SQLException {
+        List<ServiceImageDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                String url = "select s.serviceID, si.image from tblServiceImages si, tblServices s WHERE s.serviceID = si.serviceID";
+                ptm = conn.prepareStatement(url);
+                rs= ptm.executeQuery();
+                while (rs.next()) {
+                    String image = rs.getString("image");
+                    int serviceID = rs.getInt("serviceID");
+                    list.add(new ServiceImageDTO(image, serviceID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
 }

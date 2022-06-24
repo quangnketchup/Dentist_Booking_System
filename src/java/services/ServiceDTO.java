@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Date;
+import java.util.List;
 
 public class ServiceDTO {
 
@@ -12,18 +13,8 @@ public class ServiceDTO {
     int adminID;
     int status;
     String serviceTypeName;
-
-    //khai bao feedback cua service
-    String fullName;
-    Date dateFeedback;
-    String content;
-    int statusFeedback;
-
-    //khai bao discount 
-    int percentDiscount;
-    Date createDate;
-    Date expiredDate;
-    int statusDiscount;
+    
+    String image;
 
     public ServiceDTO() {
         this.serviceID = 0;
@@ -35,36 +26,8 @@ public class ServiceDTO {
         this.status = 0;
     }
 
-    public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice, String description, int adminID, int status, String fullName, Date dateFeedback, String content, int statusFeedback, int percentDiscount,
-            Date createDate,
-            Date expiredDate,
-            int statusDiscount) {
-        this.serviceID = serviceID;
-        this.serviceTypeID = serviceTypeID;
-        this.serviceName = serviceName;
-        this.servicePrice = servicePrice;
-        this.description = description;
-        this.adminID = adminID;
-        this.status = status;
-        this.fullName = fullName;
-        this.dateFeedback = dateFeedback;
-        this.content = content;
-        this.statusFeedback = statusFeedback;
-        this.percentDiscount = percentDiscount;
-        this.createDate = createDate;
-        this.expiredDate = expiredDate;
-        this.statusDiscount = statusDiscount;
-    }
-
-    public ServiceDTO(int serviceID, String serviceName, int servicePrice,  String description, int adminID, int status) {
-        this.serviceID = serviceID;
-        this.serviceName = serviceName;
-        this.servicePrice = servicePrice;
-        this.description = description;
-        this.adminID = adminID;
-        this.status = status;
-    }
-
+    
+    
     public ServiceDTO(int serviceID, int serviceTypeID, String serviceName, int servicePrice,String description, int status) {
         this.serviceID = serviceID;
         this.serviceTypeID = serviceTypeID;
@@ -156,69 +119,11 @@ public class ServiceDTO {
         this.status = status;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getImage() {
+        return image;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-    public Date getDateFeedback() {
-        return dateFeedback;
-    }
-
-    public void setDateFeedback(Date dateFeedback) {
-        this.dateFeedback = dateFeedback;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getStatusFeedback() {
-        return statusFeedback;
-    }
-
-    public void setStatusFeedback(int statusFeedback) {
-        this.statusFeedback = statusFeedback;
-    }
-
-    public int getPercentDiscount() {
-        return percentDiscount;
-    }
-
-    public void setPercentDiscount(int percentDiscount) {
-        this.percentDiscount = percentDiscount;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getExpiredDate() {
-        return expiredDate;
-    }
-
-    public void setExpiredDate(Date expiredDate) {
-        this.expiredDate = expiredDate;
-    }
-
-    public int getStatusDiscount() {
-        return statusDiscount;
-    }
-
-    public void setStatusDiscount(int statusDiscount) {
-        this.statusDiscount = statusDiscount;
-    }
-
-    
 }

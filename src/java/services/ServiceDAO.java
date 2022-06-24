@@ -22,7 +22,7 @@ public class ServiceDAO {
     private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
     private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
-    private static final String GET_LIST_FEEDBACK_SERVICE = "SELECT s.serviceID, s.serviceName, s.servicePrice, s.image, s.description, s.adminID, s.serviceTypeID, s.status, pa.fullName, paf.dateFeedback, paf.content, paf.status, ds.percentDiscount, ds.createDate, ds.expiredDate, ds.status FROM tblDiscounts ds, tblServices s, tblPatientFeedbacks paf, tblPatients pa WHERE s.ServiceID = paf.serviceID AND pa.patientID = paf.patientID AND ds.serviceID= s.serviceID and s.status = 1";
+    private static final String GET_LIST_FEEDBACK_SERVICE = "SELECT s.serviceID, s.serviceName, s.servicePrice, s.description, s.adminID, s.serviceTypeID , pa.fullName, paf.dateFeedback, paf.content FROM tblServices s, tblPatientFeedbacks paf, tblPatients pa WHERE s.serviceID = paf.serviceID AND pa.patientID = paf.patientID AND s.status = 1";
    
     
     
@@ -150,16 +150,14 @@ public class ServiceDAO {
                     String description = rs.getString("description");
                     int adminID = rs.getInt("adminID");
                     int serviceTypeID = rs.getInt(  "serviceTypeID");
-                    int status = rs.getInt("status");
                     String fullName = rs.getString("fullName");
                     Date dateFeedback = rs.getDate("dateFeedback");
                     String content = rs.getString("content");
-                    int statusFeedback = rs.getInt("status");
                     int percentDiscount = rs.getInt("percentDiscount");
                     Date createDate = rs.getDate("createDate");
                     Date expiredDate = rs.getDate("expiredDate");
                     int statusDiscount = rs.getInt("status");
-                    list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status, fullName , dateFeedback, content, statusFeedback, percentDiscount, createDate, expiredDate, statusDiscount));
+                    list.add(new ServiceDTO());
                 }
             }
         } catch (Exception e) {

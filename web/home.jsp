@@ -1,4 +1,5 @@
 
+<%@page import="serviceImage.ServiceImageDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="doctors.DoctorDTO"%>
 <%@page import="admins.AdminDTO"%>
@@ -255,32 +256,40 @@
                 <%
                     List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
                 %>
+
                 <div class="row">
+                    <!--khai bao de dua service ra-->
                     <%
                         int count = 0;
                         if (listService != null) {
                             for (ServiceDTO service : listService) {
-                                if (service.getDateFeedback() == null) {
-                                    continue;
-                                }
-                                count++;
-                                if (count == 5)
-                                    break;
                     %>
                     <div class="col-md-3 d-flex align-self-stretch ftco-animate">
                         <div class="staff media block-6 services d-block text-center">
                             <div class="justify-content-center align-items-center">
-                                <div class=" img mb-4" style="background-image: url(<%=service.getImage()%>);"></div>
+                                <!--thong bao de dua image ra-->
+                                <%
+                                    List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("LIST_SERVICE_IMAGE");
+                                    for (ServiceImageDTO Image : listServiceImage) {
+                                        if (service.getServiceID() != Image.getServiceID()) {
+                                            continue;
+                                        }
+                                %>
 
+                                <div class="img mb-4" style="background-image: url(<%=Image.getImage()%>);"></div>
+                                <%}%>
                                 <div class="media-body p-2 mt-3">
                                     <div><h3 class="heading"><%=service.getServiceName()%></h3></div>
-                                    <div><p><%=service.getDescription()%></p></div>
+                                    <div><p><%=service.getServicePrice()%> VND</p></div>
                                 </div>
                             </div>
                         </div>      
                     </div>
                     <%
-
+                                count++;
+                                if (count == 4) {
+                                    break;
+                                }
                             }
                         }
                     %>
@@ -346,7 +355,8 @@
                 <div class="row">
                     <%
                         int countDoctor = 0;
-                        if (listService != null) {
+                        if (listService
+                                != null) {
                             for (DoctorDTO doctor : listDoctor) {
                                 if (doctor.getStatus() == 0) {
                                     continue;
@@ -364,7 +374,7 @@
                                 <div class="text">
                                     <div class="text">
                                         <p>Ngày Làm việc trong tuần</p>
-                                        <p><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></p>
+                                        <p><%if (doctor.getWorkDayID() == 1) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></p>
                                     </div>
                                 </div>
                             </div>
