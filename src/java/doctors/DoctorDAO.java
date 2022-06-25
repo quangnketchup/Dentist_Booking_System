@@ -13,15 +13,15 @@ import doctors.DoctorDTO;
 
 public class DoctorDAO {
 
-    private static final String GET_ALL_LIST_DOCTOR = "SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID";
-    private static String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, workDayID, gmail, phone, image, status FROM tblDoctors WHERE gmail=? AND password=?";
+    private static final String GET_ALL_LIST_DOCTOR = "SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID";
+    private static String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, workDayID, gmail, phone, image, status, achievement FROM tblDoctors WHERE gmail=? AND password=?";
     private static String CHECK_DUPLICATE = "SELECT fullName FROM tblDoctors WHERE doctorID=?";
-    private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
-    private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, workDayID =?, status=?"
+    private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
+    private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, achievement =?, status=?"
                         + " WHERE doctorID =? ";
-    private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [workDayID], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [achievement], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
-     private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
+    private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
     
      
     
@@ -47,8 +47,8 @@ public class DoctorDAO {
                     String image = rs.getString("image");
                     int status =rs.getInt("status");
                     String roleID="DR";
-                    int workDayID=rs.getInt("workDayID");
-                    dr=new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status);
+                    String achievement = rs.getString("image");
+                    dr=new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail, phone, image, status, achievement);
                 }
             }
             
@@ -89,8 +89,8 @@ public class DoctorDAO {
                     String image = rs.getString("image");
                     int status =rs.getInt("status");
                     String roleID="DR";
-                    int workDayID=rs.getInt("workDayID");
-                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status));
+                    String achievement = rs.getString("achievement");
+                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail,phone ,image,status, achievement));
                 }
             }
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class DoctorDAO {
                 pstm.setString(6, doctor.getImage());
                 pstm.setInt(7, doctor.getStatus());
                 pstm.setString(8, doctor.getRoleID());
-                pstm.setInt(9, doctor.getWorkDayID());
+                pstm.setString(9, doctor.getAchievement());
                 pstm.setString( 10,doctor.getServiceTypeName());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
@@ -177,7 +177,7 @@ public class DoctorDAO {
             if (conn != null) {      
                 pstm = conn.prepareStatement(UPDATE_DOCTOR);
                 pstm.setString(1, doctor.getServiceTypeName());
-                pstm.setInt(2, doctor.getWorkDayID());  
+                pstm.setString(2, doctor.getAchievement());  
                 pstm.setInt(3, doctor.getStatus());
                 pstm.setInt(4, doctor.getDoctorID());
                 check = pstm.executeUpdate() > 0 ? true : false;
@@ -219,8 +219,8 @@ public class DoctorDAO {
                     String image = rs.getString("image");
                     int status =rs.getInt("status");
                     String roleID="DR";
-                    int workDayID=rs.getInt("workDayID");
-                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status));
+                    String achievement = rs.getString("achievement");
+                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail, phone, image, status,achievement));
                 }
             }
             
@@ -261,8 +261,8 @@ public class DoctorDAO {
                     String image = rs.getString("image");
                     int status =rs.getInt("status");
                     String roleID="DR";
-                    int workDayID=rs.getInt("workDayID");
-                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail,phone ,image,status));
+                    String achievement = rs.getString("achievement");
+                    list.add(new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail, phone, image, status, achievement));
                 }
             }
         } catch (Exception e) {
@@ -303,7 +303,8 @@ public class DoctorDAO {
                     int phone = rs.getInt("phone");
                     String image = rs.getString("image");
                     int status = rs.getInt("status");
-                    doctor = new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, workDayID, gmail, phone, image, status);
+                    String achievement = rs.getString("achievement");
+                    doctor = new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail, phone, image, status, achievement);
                 }
             }
         } catch (Exception e) {

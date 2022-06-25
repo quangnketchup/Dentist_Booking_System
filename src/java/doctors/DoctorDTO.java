@@ -7,11 +7,11 @@ public class DoctorDTO {
     String password;
     String roleID;
     String gender;
-    int workDayID;
     String gmail;
     int phone;
     String image;
     int status;
+    String achievement;
 
     public DoctorDTO() {
         this.doctorID = 0;
@@ -20,25 +20,25 @@ public class DoctorDTO {
         this.password = "";
         this.roleID = "";
         this.gender = "";
-        this.workDayID = 0;
         this.gmail = "";
         this.phone = 0;
         this.image = "";
         this.status = 0;
+        this.achievement="";
     }
     
-    public DoctorDTO(int doctorID, String serviceTypeName, String fullName, String password, String roleID, String gender, int workDayID, String gmail, int phone, String image, int status) {
+    public DoctorDTO(int doctorID, String serviceTypeName, String fullName, String password, String roleID, String gender, String gmail, int phone, String image, int status, String achievement) {
         this.doctorID = doctorID;
         this.serviceTypeName = serviceTypeName;
         this.fullName = fullName;
         this.password = password;
         this.roleID = roleID;
         this.gender = gender;
-        this.workDayID = workDayID;
         this.gmail = gmail;
         this.phone = phone;
         this.image = image;
         this.status = status;
+        this.achievement = achievement;
     }
 
 
@@ -91,14 +91,6 @@ public class DoctorDTO {
         this.gender = gender;
     }
 
-    public int getWorkDayID() {
-        return workDayID;
-    }
-
-    public void setWorkDayID(int workDayID) {
-        this.workDayID = workDayID;
-    }
-
     public String getGmail() {
         return gmail;
     }
@@ -129,6 +121,14 @@ public class DoctorDTO {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getAchievement() {
+        return achievement;
+    }
+
+    public void setAchievement(String achievement) {
+        this.achievement = achievement;
     }
     
     

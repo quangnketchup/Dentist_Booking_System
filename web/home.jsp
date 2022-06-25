@@ -1,4 +1,7 @@
 
+<%@page import="discounts.DiscountDTO"%>
+<%@page import="feedbacks.FeedbackDTO"%>
+<%@page import="schedule.scheduleDTO"%>
 <%@page import="serviceImage.ServiceImageDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="doctors.DoctorDTO"%>
@@ -267,17 +270,31 @@
                     <div class="col-md-3 d-flex align-self-stretch ftco-animate">
                         <div class="staff media block-6 services d-block text-center">
                             <div class="justify-content-center align-items-center">
-                                <!--thong bao de dua image ra-->
-                                <%
-                                    List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("LIST_SERVICE_IMAGE");
-                                    for (ServiceImageDTO Image : listServiceImage) {
-                                        if (service.getServiceID() != Image.getServiceID()) {
-                                            continue;
-                                        }
-                                %>
 
-                                <div class="img mb-4" style="background-image: url(<%=Image.getImage()%>);"></div>
-                                <%}%>
+                                <section class="ftco-section testimony-section bg-light">
+                                    <div class="container">
+                                        <div class="row justify-content-center ftco-animate">
+                                            <div class="carousel-testimony owl-carousel ftco-owl">
+                                                <!--thong bao de dua image ra-->
+                                                <%
+                                                    List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("LIST_SERVICE_IMAGE");
+                                                    for (ServiceImageDTO Image : listServiceImage) {
+                                                        if (service.getServiceID() != Image.getServiceID()) {
+                                                            continue;
+                                                        }
+                                                %>
+                                                <div class="item">
+                                                    <div class="testimony-wrap p-4 pb-5">
+                                                        <div class="user-img mb-5" style="background-image: url(<%=Image.getImage()%>)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
                                 <div class="media-body p-2 mt-3">
                                     <div><h3 class="heading"><%=service.getServiceName()%></h3></div>
                                     <div><p><%=service.getServicePrice()%> VND</p></div>
@@ -351,6 +368,7 @@
 
                 <%
                     List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
+                    List<scheduleDTO> listSchedule = (List<scheduleDTO>) request.getAttribute("LIST_SCHEDULE_DOCTOR");
                 %>
                 <div class="row">
                     <%
@@ -358,12 +376,15 @@
                         if (listService
                                 != null) {
                             for (DoctorDTO doctor : listDoctor) {
-                                if (doctor.getStatus() == 0) {
-                                    continue;
-                                }
-                                countDoctor++;
-                                if (countDoctor == 5)
-                                    break;
+                                for (scheduleDTO schedule : listSchedule) {
+                                    if (schedule.getDoctorID() != doctor.getDoctorID()) {
+                                        continue;
+                                    } else if (doctor.getStatus() == 0) {
+                                        continue;
+                                    }
+                                    countDoctor++;
+                                    if (countDoctor == 5)
+                                        break;
                     %>
                     <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
                         <div class="staff">
@@ -373,15 +394,31 @@
                                 <span class="position"><%=doctor.getServiceTypeName()%></span>
                                 <div class="text">
                                     <div class="text">
-                                        <p>Ngày Làm việc trong tuần</p>
-                                        <p><%if (doctor.getWorkDayID() == 1) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></p>
+                                        <p>Lịch Làm Việc</p>
+                                        <%String dayOfWeek = "";
+                                            if (schedule.getDayOfWeek().equals("FRI")) {
+                                                dayOfWeek = "Thứ 6";%>
+                                        <p><%=dayOfWeek%></p></br>
+                                        <%} else if (schedule.getDayOfWeek().equals("TUE")) {
+                                            dayOfWeek = "Thứ 3";%>
+                                        <p><%=dayOfWeek%></p></br>
+                                        <% } else if (schedule.getDayOfWeek().equals("MON")) {
+                                            dayOfWeek = "Thứ 2";%>
+                                        <p><%=dayOfWeek%></p></br>
+                                        <%} else if (schedule.getDayOfWeek().equals("THU")) {
+                                            dayOfWeek = "Thứ 5";%>
+                                        <p><%=dayOfWeek%></p>
+                                        <% } else if (schedule.getDayOfWeek().equals("WED")) {
+                                            dayOfWeek = "Thứ 4";%>
+                                        <p><%=dayOfWeek%></p>
+                                        <%}%>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <%
-
+                                }
                             }
                         }
                     %>
@@ -466,93 +503,43 @@
             </div>
         </section>
 
+        <%List<DiscountDTO> listDiscount = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");%>
         <section class="ftco-section testimony-section bg-light">
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-3">
                     <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-2">Testimony</h2>
-                        <span class="subheading">Our Happy Customer Says</span>
+                        <h2 class="mb-2">Đại Giảm Giá</h2>
+                        <span class="subheading">Khách Hàng Là Niềm Hạnh Phúc Của Chúng Tôi</span>
                     </div>
                 </div>
+
+
                 <div class="row justify-content-center ftco-animate">
                     <div class="col-md-8">
                         <div class="carousel-testimony owl-carousel ftco-owl">
+                            <%for (DiscountDTO discount : listDiscount) {
+                            %>
                             <div class="item">
                                 <div class="testimony-wrap p-4 pb-5">
-                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                                    <div class="user-img mb-5" style="background-image: url(<%=discount.getImage()%>)">
                                         <span class="quote d-flex align-items-center justify-content-center">
                                             <i class="icon-quote-left"></i>
                                         </span>
                                     </div>
                                     <div class="text text-center">
-                                        <p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                                        <p class="name">Dennis Green</p>
-                                        <span class="position">Marketing Manager</span>
+                                        <p class="mb-5"><%=discount.getDescription()%></p>
+                                        <p class="name"><%=discount.getTitle()%></p>
+                                        <span class="position"><%=discount.getPercentDiscount()%> %</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="testimony-wrap p-4 pb-5">
-                                    <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
-                                        <span class="quote d-flex align-items-center justify-content-center">
-                                            <i class="icon-quote-left"></i>
-                                        </span>
-                                    </div>
-                                    <div class="text text-center">
-                                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                        <p class="name">Dennis Green</p>
-                                        <span class="position">Interface Designer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="testimony-wrap p-4 pb-5">
-                                    <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
-                                        <span class="quote d-flex align-items-center justify-content-center">
-                                            <i class="icon-quote-left"></i>
-                                        </span>
-                                    </div>
-                                    <div class="text text-center">
-                                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                        <p class="name">Dennis Green</p>
-                                        <span class="position">UI Designer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="testimony-wrap p-4 pb-5">
-                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                                        <span class="quote d-flex align-items-center justify-content-center">
-                                            <i class="icon-quote-left"></i>
-                                        </span>
-                                    </div>
-                                    <div class="text text-center">
-                                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                        <p class="name">Dennis Green</p>
-                                        <span class="position">Web Developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="testimony-wrap p-4 pb-5">
-                                    <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-                                        <span class="quote d-flex align-items-center justify-content-center">
-                                            <i class="icon-quote-left"></i>
-                                        </span>
-                                    </div>
-                                    <div class="text text-center">
-                                        <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                        <p class="name">Dennis Green</p>
-                                        <span class="position">System Analytics</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
-
         <section class="ftco-gallery">
             <div class="container-wrap">
                 <div class="row no-gutters">
@@ -793,8 +780,6 @@
                 </div>
             </div>
         </div>
-
-
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
         <script src="js/popper.min.js"></script>

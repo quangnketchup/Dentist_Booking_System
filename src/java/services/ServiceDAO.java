@@ -17,27 +17,24 @@ import utils.DBUtils;
 import services.ServiceDTO;
 
 public class ServiceDAO {
-    
-    private static final String CREATE_SERVICE ="INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
+
+    private static final String CREATE_SERVICE = "INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
     private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
     private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
-    private static final String GET_LIST_FEEDBACK_SERVICE = "SELECT s.serviceID, s.serviceName, s.servicePrice, s.description, s.adminID, s.serviceTypeID , pa.fullName, paf.dateFeedback, paf.content FROM tblServices s, tblPatientFeedbacks paf, tblPatients pa WHERE s.serviceID = paf.serviceID AND pa.patientID = paf.patientID AND s.status = 1";
    
-    
-    
-    public ServiceDTO getServiceById(int id) throws SQLException{
+    public ServiceDTO getServiceById(int id) throws SQLException {
         ServiceDTO sv = new ServiceDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn !=null){
+            if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_SERVICE_CONTROLLER_BY_ID);
                 ptm.setInt(1, id);
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
                     int servicePrice = rs.getInt("servicePrice");
@@ -45,29 +42,26 @@ public class ServiceDAO {
                     int status = rs.getInt("status");
                     int adminID = rs.getInt("adminID");
                     int serviceTypeID = rs.getInt("serviceTypeID");
-                    sv= new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status);
+                    sv = new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status);
                 }
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
-            if(ptm != null) {
+            if (ptm != null) {
                 ptm.close();
-            } 
+            }
         }
         return sv;
     }
-    
-    
-    
-    
+
     public boolean updateService(ServiceDTO service) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -96,6 +90,7 @@ public class ServiceDAO {
         }
         return check;
     }
+
     public List<ServiceDTO> getAllListService() throws SQLException {
         List<ServiceDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -103,16 +98,16 @@ public class ServiceDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null) {
+            if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_LIST_SERVICE);
-                rs= ptm.executeQuery();
-                while (rs.next()) {                    
+                rs = ptm.executeQuery();
+                while (rs.next()) {
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
                     int servicePrice = rs.getInt("servicePrice");
                     String description = rs.getString("description");
                     int adminID = rs.getInt("adminID");
-                    int serviceTypeID = rs.getInt(  "serviceTypeID");
+                    int serviceTypeID = rs.getInt("serviceTypeID");
                     int status = rs.getInt("status");
                     list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status));
                 }
@@ -120,56 +115,13 @@ public class ServiceDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
-            if(ptm != null) {
-                ptm.close();
-            }
-        }
-        return list;
-    }
-    public List<ServiceDTO> getListFeedBackService() throws SQLException {
-        List<ServiceDTO> list = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if(conn != null) {
-                ptm = conn.prepareStatement(GET_LIST_FEEDBACK_SERVICE);
-                rs= ptm.executeQuery();
-                while (rs.next()) {                    
-                    int serviceID = rs.getInt("serviceID");
-                    String serviceName = rs.getString("serviceName");
-                    int servicePrice = rs.getInt("servicePrice");
-                    String image = rs.getString("image");
-                    String description = rs.getString("description");
-                    int adminID = rs.getInt("adminID");
-                    int serviceTypeID = rs.getInt(  "serviceTypeID");
-                    String fullName = rs.getString("fullName");
-                    Date dateFeedback = rs.getDate("dateFeedback");
-                    String content = rs.getString("content");
-                    int percentDiscount = rs.getInt("percentDiscount");
-                    Date createDate = rs.getDate("createDate");
-                    Date expiredDate = rs.getDate("expiredDate");
-                    int statusDiscount = rs.getInt("status");
-                    list.add(new ServiceDTO());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(rs != null) {
-                rs.close();
-            }
-            if(conn != null) {
-                conn.close();
-            }
-            if(ptm != null) {
+            if (ptm != null) {
                 ptm.close();
             }
         }
@@ -216,19 +168,19 @@ public class ServiceDAO {
         }
         return ListService;
     }
-    
-    public List<ServiceDTO> searchServiceByName(String name) throws SQLException{
+
+    public List<ServiceDTO> searchServiceByName(String name) throws SQLException {
         List<ServiceDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn !=null){
+            if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_SERVICE_CONTROLLER);
-                ptm.setString(1, "%"+name+"%");
+                ptm.setString(1, "%" + name + "%");
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     int serviceID = rs.getInt("serviceID");
                     String serviceName = rs.getString("serviceName");
                     int servicePrice = rs.getInt("servicePrice");
@@ -240,30 +192,30 @@ public class ServiceDAO {
                     list.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status));
                 }
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            if(conn != null) {
+            if (conn != null) {
                 conn.close();
             }
-            if(ptm != null) {
+            if (ptm != null) {
                 ptm.close();
-            } 
+            }
         }
         return list;
     }
-    
+
     public boolean createService(ServiceDTO service) throws SQLException {
-        boolean check=false;
+        boolean check = false;
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {      
+            if (conn != null) {
                 pstm = conn.prepareStatement(CREATE_SERVICE);
                 pstm.setString(1, service.getServiceName());
                 pstm.setFloat(2, service.getServicePrice());

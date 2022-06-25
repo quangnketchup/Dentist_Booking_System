@@ -13,20 +13,20 @@ public class FeedbackDTO {
     String content;
     int rateStar;
     String patientName;
-    String serviceName;
+    int serviceID;
     int status;
 
     public FeedbackDTO() {
         
     }
     
-    public FeedbackDTO(int serviceFeedBackID, Date dateFeedback, String content, int rateStar, String patientName, String serviceName, int status) {
+    public FeedbackDTO(int serviceFeedBackID, Date dateFeedback, String content, int rateStar, String patientName, int serviceID, int status) {
         this.serviceFeedBackID = serviceFeedBackID;
         this.dateFeedback = dateFeedback;
         this.content = content;
         this.rateStar = rateStar;
         this.patientName = patientName;
-        this.serviceName = serviceName;
+        this.serviceID = serviceID;
         this.status = status;
     }
 
@@ -70,12 +70,12 @@ public class FeedbackDTO {
         this.patientName = patientName;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public int getServiceName() {
+        return serviceID;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setServiceName(int serviceID) {
+        this.serviceID = serviceID;
     }
 
     public int getStatus() {

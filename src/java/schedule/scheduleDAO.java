@@ -5,6 +5,7 @@
 package schedule;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,25 +19,26 @@ import utils.DBUtils;
  * @author Doan
  */
 public class scheduleDAO {
-     private static final String GET_SCHEDULE_BY_DOCTOR_ID ="select * from tblSchedules where day>GETDATE() and status =1 and  doctorID= ?";
-     private static final String SET_OFF_SCHEDULE ="update tblSchedules set status= 0 where slot =? and day = ? and doctorID = ?";
-     private static final String SET_ON_SCHEDULE ="update tblSchedules set status= 1 where slot =? and day = ? and doctorID = ?";
-     private static final String CREATE_SCHEDULE = "Insert tblSchedules (dayOfWeek,day,slot,status,doctorID) values(?,?,?,?,?)";
-     
-     
-     public boolean createDoctor(scheduleDTO scheduleDTO) throws SQLException{
-         boolean check=false;
+
+    private static final String GET_ALL_LIST_SCHEDULE = "SELECT sch.scheduleID, sch.doctorID, sch.day, sch.dayOfWeek, sch.slot, sch.status FROM tblSchedules sch, tblDoctors dr WHERE sch.doctorID = dr.doctorID";
+    private static final String GET_SCHEDULE_BY_DOCTOR_ID = "select * from tblSchedules where day>GETDATE() and status =1 and  doctorID= ?";
+    private static final String SET_OFF_SCHEDULE = "update tblSchedules set status= 0 where slot =? and day = ? and doctorID = ?";
+    private static final String SET_ON_SCHEDULE = "update tblSchedules set status= 1 where slot =? and day = ? and doctorID = ?";
+    private static final String CREATE_SCHEDULE = "Insert tblSchedules (dayOfWeek,day,slot,status,doctorID) values(?,?,?,?,?)";
+
+    public boolean createDoctor(scheduleDTO scheduleDTO) throws SQLException {
+        boolean check = false;
         Connection conn = null;
         PreparedStatement pstm = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {      
+            if (conn != null) {
                 pstm = conn.prepareStatement(CREATE_SCHEDULE);
                 pstm.setString(1, scheduleDTO.getDayOfWeek());
-                pstm.setString(2, scheduleDTO.getDay());
+                pstm.setDate(2, scheduleDTO.getDay());
                 pstm.setInt(3, scheduleDTO.getSlot());
                 pstm.setInt(4, 1);
-                pstm.setInt(5, scheduleDTO.getDoctorID());                
+                pstm.setInt(5, scheduleDTO.getDoctorID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -51,15 +53,15 @@ public class scheduleDAO {
         }
         return check;
     }
-     
-      public boolean setOnSchedule(int slot,String day, int doctorID) throws SQLException{
+
+    public boolean setOnSchedule(int slot, String day, int doctorID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {       
+            if (conn != null) {
                 ptm = conn.prepareStatement(SET_ON_SCHEDULE);
                 ptm.setInt(1, slot);
                 ptm.setString(2, day);
@@ -83,16 +85,16 @@ public class scheduleDAO {
             }
         }
         return check;
-     }
-     
-     public boolean setOffSchedule(int slot,String day, int doctorID) throws SQLException{
+    }
+
+    public boolean setOffSchedule(int slot, String day, int doctorID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {       
+            if (conn != null) {
                 ptm = conn.prepareStatement(SET_OFF_SCHEDULE);
                 ptm.setInt(1, slot);
                 ptm.setString(2, day);
@@ -116,26 +118,26 @@ public class scheduleDAO {
             }
         }
         return check;
-     }
-     
-     public List<scheduleDTO> getScheduleByDoctorID(int id) throws SQLException {
-        List<scheduleDTO> list =new ArrayList<>();
+    }
+
+    public List<scheduleDTO> getAllListSchedule() throws SQLException {
+        List<scheduleDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(GET_SCHEDULE_BY_DOCTOR_ID);
-                ptm.setInt(1, id);
+                ptm = conn.prepareStatement(GET_ALL_LIST_SCHEDULE);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    int scheduleID = rs.getInt("scheduleID");
+                    int doctorID = rs.getInt("doctorID");
+                    Date day = rs.getDate("day");
                     String dayOfWeek = rs.getString("dayOfWeek");
-                    String day = rs.getString("day");  
-                    int slot =rs.getInt("slot");
-                    int status=rs.getInt("status");
-                    int doctorID= rs.getInt("doctorID");
-                    list.add(new scheduleDTO(dayOfWeek,day,slot,doctorID,status));
+                    int slot = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    list.add(new scheduleDTO(scheduleID, dayOfWeek, day, slot, doctorID, status));
                 }
             }
         } catch (Exception e) {
@@ -152,5 +154,41 @@ public class scheduleDAO {
             }
         }
         return list;
-}
+    }
+
+    public List<scheduleDTO> getScheduleByDoctorID(int id) throws SQLException {
+        List<scheduleDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_SCHEDULE_BY_DOCTOR_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String dayOfWeek = rs.getString("dayOfWeek");
+                    Date day = rs.getDate("day");
+                    int slot = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    int doctorID = rs.getInt("doctorID");
+                    list.add(new scheduleDTO(dayOfWeek, day, slot, doctorID, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
 }

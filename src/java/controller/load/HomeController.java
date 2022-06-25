@@ -6,8 +6,12 @@
 package controller.load;
 
 import admins.AdminDTO;
+import discounts.DiscountDAO;
+import discounts.DiscountDTO;
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
+import feedbacks.FeedBackDAO;
+import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import patients.PatientDAO;
 import patients.PatientDTO;
+import schedule.scheduleDAO;
+import schedule.scheduleDTO;
 import serviceImage.ServiceImageDAO;
 import serviceImage.ServiceImageDTO;
 import serviceTypes.ServiceTypeDAO;
@@ -45,14 +51,20 @@ public class HomeController extends HttpServlet {
             String url = USER;
             try {
                 ServiceDAO serviceDao = new ServiceDAO();
+                FeedBackDAO servicefeedbackDao = new FeedBackDAO();
                 ServiceImageDAO serviceImageDao = new ServiceImageDAO();
                 ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
                 PatientDAO patientDao = new PatientDAO();
+                scheduleDAO scheduleDao = new scheduleDAO();
+                DiscountDAO discountDao = new DiscountDAO();
 
                 List<ServiceDTO> listService = (List<ServiceDTO>) serviceDao.getAllListService();
+                List<FeedbackDTO> listServiceFeedback = (List<FeedbackDTO>) servicefeedbackDao.getListFeedBackService();
                 List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) serviceImageDao.getAllListServiceImage();
                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) serviceTypeDao.getListServiceType();
                 List<PatientDTO> listPatient = (List<PatientDTO>) patientDao.getAllListPatient();
+                List<scheduleDTO> listSchedule = (List<scheduleDTO>) scheduleDao.getAllListSchedule();
+                List<DiscountDTO> listDiscount = (List<DiscountDTO>) discountDao.getListDiscountService();
 
                 DoctorDAO doctorDAO = new DoctorDAO();
                 List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
@@ -79,9 +91,12 @@ public class HomeController extends HttpServlet {
                 if (loginPatient != null || "PA".equals(loginPatient.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        request.setAttribute("LIST_SCHEDULE_DOCTOR", listSchedule);
+                        request.setAttribute("LIST_DISCOUNT", listDiscount);
 
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
@@ -90,9 +105,13 @@ public class HomeController extends HttpServlet {
                 } else if ("DR".equals(loginDoctor.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        request.setAttribute("LIST_SCHEDULE_DOCTOR", listSchedule);
+                        request.setAttribute("LIST_DISCOUNT", listDiscount);
+                        
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
 
@@ -101,9 +120,12 @@ public class HomeController extends HttpServlet {
                 } else if ("AD".equals(loginAdmin.getRoleID())) {
                     if (listService != null) {
                         request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                         request.setAttribute("LIST_DOCTOR", listDoctor);
+                        request.setAttribute("LIST_SCHEDULE_DOCTOR", listSchedule);
+                        request.setAttribute("LIST_DISCOUNT", listDiscount);
 
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);

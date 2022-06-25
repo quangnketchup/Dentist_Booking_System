@@ -4,23 +4,43 @@
  */
 package schedule;
 
+import java.sql.Date;
+
 /**
  *
  * @author Doan
  */
 public class scheduleDTO {
+    int scheduleID;
     String dayOfWeek;
-    String day;
+    Date day;
     int slot;
     int doctorID;
     int status;
 
-    public scheduleDTO(String dayOfWeek, String day, int slot, int doctorID, int status) {
+    public scheduleDTO(String dayOfWeek, Date day, int slot, int doctorID, int status) {
         this.dayOfWeek = dayOfWeek;
         this.day = day;
         this.slot = slot;
         this.doctorID = doctorID;
         this.status = status;
+    }
+
+    public scheduleDTO(int scheduleID, String dayOfWeek, Date day, int slot, int doctorID, int status) {
+        this.scheduleID = scheduleID;
+        this.dayOfWeek = dayOfWeek;
+        this.day = day;
+        this.slot = slot;
+        this.doctorID = doctorID;
+        this.status = status;
+    }
+
+    public int getScheduleID() {
+        return scheduleID;
+    }
+
+    public void setScheduleID(int scheduleID) {
+        this.scheduleID = scheduleID;
     }
 
     public String getDayOfWeek() {
@@ -31,11 +51,11 @@ public class scheduleDTO {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getDay() {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(Date day) {
         this.day = day;
     }
 
