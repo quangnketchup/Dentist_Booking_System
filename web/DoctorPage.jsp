@@ -86,19 +86,20 @@
 
             <%}%>               
                             
-        <% List<scheduleDTO>  scheduleList= (List<scheduleDTO>)request.getAttribute("listScheduleDTO");
+        <% List<scheduleDTO>  scheduleList= (List<scheduleDTO>)request.getAttribute("scheduleList");
         int dem=0;
         %>
         
-        <div class="schedule ">
+        <div class="schedule none">
             <%
-            
+            if(scheduleList!=null){
             for(scheduleDTO schedule:scheduleList){
             dem++;%>
             <div id="schedule-day<%=dem%>"><%=schedule.getDay()%> </div>       
             <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%> </div>    
             <%
-              }%>
+              }
+}%>
               
                <div id="size-schedule"><%=dem%></div>
         </div>

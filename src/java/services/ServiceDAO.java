@@ -139,7 +139,7 @@ public class ServiceDAO {
                 ListService = new ArrayList<>();
                 String sql = " SELECT serviceID, serviceName, servicePrice, description, serviceTypeID "
                         + " FROM tblServices "
-                        + " WHERE serviceTypeID = ? ";
+                        + " WHERE status =1 and serviceTypeID = ? ";
                 pstm = conn.prepareStatement(sql);
                 pstm.setInt(1, serviceTypeID);
                 resultSet = pstm.executeQuery();
