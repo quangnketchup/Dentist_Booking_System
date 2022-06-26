@@ -42,9 +42,9 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item "><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
                         <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
+                        <li class="nav-item active dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
                                     if (listServiceType != null) {
