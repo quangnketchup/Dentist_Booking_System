@@ -85,8 +85,6 @@ public class HomeController extends HttpServlet {
                     countService++;
                 }
 
-                
-
 //                tra ve trang home
                 if (loginPatient != null || "PA".equals(loginPatient.getRoleID())) {
                     if (listService != null) {
@@ -111,7 +109,7 @@ public class HomeController extends HttpServlet {
                         request.setAttribute("LIST_DOCTOR", listDoctor);
                         request.setAttribute("LIST_SCHEDULE_DOCTOR", listSchedule);
                         request.setAttribute("LIST_DISCOUNT", listDiscount);
-                        
+
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
 

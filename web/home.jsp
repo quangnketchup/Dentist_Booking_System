@@ -373,15 +373,10 @@
                 <div class="row">
                     <%
                         int countDoctor = 0;
+                        List<String> dayOfWeek = null;
                         if (listService
                                 != null) {
                             for (DoctorDTO doctor : listDoctor) {
-                                for (scheduleDTO schedule : listSchedule) {
-                                    if (schedule.getDoctorID() != doctor.getDoctorID()) {
-                                        continue;
-                                    } else if (doctor.getStatus() == 0) {
-                                        continue;
-                                    }
                                     countDoctor++;
                                     if (countDoctor == 5)
                                         break;
@@ -394,24 +389,7 @@
                                 <span class="position"><%=doctor.getServiceTypeName()%></span>
                                 <div class="text">
                                     <div class="text">
-                                        <p>Lịch Làm Việc</p>
-                                        <%String dayOfWeek = "";
-                                            if (schedule.getDayOfWeek().equals("FRI")) {
-                                                dayOfWeek = "Thứ 6";%>
-                                        <p><%=dayOfWeek%></p></br>
-                                        <%} else if (schedule.getDayOfWeek().equals("TUE")) {
-                                            dayOfWeek = "Thứ 3";%>
-                                        <p><%=dayOfWeek%></p></br>
-                                        <% } else if (schedule.getDayOfWeek().equals("MON")) {
-                                            dayOfWeek = "Thứ 2";%>
-                                        <p><%=dayOfWeek%></p></br>
-                                        <%} else if (schedule.getDayOfWeek().equals("THU")) {
-                                            dayOfWeek = "Thứ 5";%>
-                                        <p><%=dayOfWeek%></p>
-                                        <% } else if (schedule.getDayOfWeek().equals("WED")) {
-                                            dayOfWeek = "Thứ 4";%>
-                                        <p><%=dayOfWeek%></p>
-                                        <%}%>
+                                        <p style="max-height: 150px; overflow-y: hidden"><%=doctor.getAchievement()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -420,7 +398,6 @@
                     <%
                                 }
                             }
-                        }
                     %>
                 </div>
             </div>
