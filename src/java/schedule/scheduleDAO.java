@@ -5,7 +5,7 @@
 package schedule;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +26,46 @@ public class scheduleDAO {
     private static final String SET_ON_SCHEDULE = "update tblSchedules set status= 1 where slot =? and day = ? and doctorID = ?";
     private static final String CREATE_SCHEDULE = "Insert tblSchedules (dayOfWeek,day,slot,status,doctorID) values(?,?,?,?,?)";
     private static final String GET_SCHEDULE_BY_SCHEDULE_ID ="select * from tblSchedules where scheduleID = ?";
+    private static final String GET_SCHEDULE_TO_SUBMIT ="select * from tblSchedules where slot = ? and doctorID = ? and day like ?";
+    
+     public scheduleDTO getScheduleToSubmit(int slot, int doctorID, String day) throws SQLException {
+        scheduleDTO sche=new scheduleDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_SCHEDULE_TO_SUBMIT);
+                ptm.setInt(1, slot);
+                ptm.setInt(2, doctorID);
+                ptm.setString(3, day);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String dayOfWeek = rs.getString("dayOfWeek");
+                    String day2 = rs.getString("day");
+                    int slot2 = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    int doctorID2 = rs.getInt("doctorID");
+                    int scheduleID=rs.getInt("scheduleID");
+                    sche=new scheduleDTO(scheduleID,dayOfWeek, day2, slot2, doctorID2, status);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return sche;
+    }
     
     public scheduleDTO getScheduleByScheduleID(int id) throws SQLException {
         scheduleDTO sche=new scheduleDTO();
@@ -40,7 +80,7 @@ public class scheduleDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String dayOfWeek = rs.getString("dayOfWeek");
-                    Date day = rs.getDate("day");
+                    String day = rs.getString("day");
                     int slot = rs.getInt("slot");
                     int status = rs.getInt("status");
                     int doctorID = rs.getInt("doctorID");
@@ -63,7 +103,7 @@ public class scheduleDAO {
         return sche;
     }
     
-    public boolean createDoctor(scheduleDTO scheduleDTO) throws SQLException {
+    public boolean createSchedule(scheduleDTO scheduleDTO) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -72,7 +112,7 @@ public class scheduleDAO {
             if (conn != null) {
                 pstm = conn.prepareStatement(CREATE_SCHEDULE);
                 pstm.setString(1, scheduleDTO.getDayOfWeek());
-                pstm.setDate(2, scheduleDTO.getDay());
+                pstm.setString(2, scheduleDTO.getDay());
                 pstm.setInt(3, scheduleDTO.getSlot());
                 pstm.setInt(4, 1);
                 pstm.setInt(5, scheduleDTO.getDoctorID());
@@ -170,7 +210,7 @@ public class scheduleDAO {
                 while (rs.next()) {
                     int scheduleID = rs.getInt("scheduleID");
                     int doctorID = rs.getInt("doctorID");
-                    Date day = rs.getDate("day");
+                    String day = rs.getString("day");
                     String dayOfWeek = rs.getString("dayOfWeek");
                     int slot = rs.getInt("slot");
                     int status = rs.getInt("status");
@@ -206,7 +246,7 @@ public class scheduleDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String dayOfWeek = rs.getString("dayOfWeek");
-                    Date day = rs.getDate("day");
+                    String day = rs.getString("day");
                     int slot = rs.getInt("slot");
                     int status = rs.getInt("status");
                     int doctorID = rs.getInt("doctorID");

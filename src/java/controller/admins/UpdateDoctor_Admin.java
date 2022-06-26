@@ -53,7 +53,7 @@ public class UpdateDoctor_Admin extends HttpServlet {
             String image = request.getParameter("image");
             int status = Integer.parseInt(request.getParameter("status"));
             String gender = request.getParameter("gender");
-            int workDayID = Integer.parseInt(request.getParameter("workDayID"));
+            String achievement=request.getParameter("achievement");
 
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
@@ -68,7 +68,7 @@ public class UpdateDoctor_Admin extends HttpServlet {
             DoctorDAO dao = new DoctorDAO();
             ServiceTypeDAO svDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listSV = svDao.getListServiceType();
-            DoctorDTO doctor = new DoctorDTO(id, serviceTypeName, fullName, "***", "DR", gender, workDayID, gmail, 1, image, status);
+            DoctorDTO doctor = new DoctorDTO(id, serviceTypeName, fullName, "***", "DR", gender, gmail, 1, image, status,achievement);
             for (ServiceTypeDTO svT : listSV) {
                 if (svT.getServiceTypeName().equals(doctor.getServiceTypeName())) {
                     doctor.setServiceTypeName(Integer.toString(svT.getServiceTypeID()));

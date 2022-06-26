@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
     private static final String PA="PA";
     private static final String PATIENT_PAGE = "HomeController";
     private static final String DR="DR";
-    private static final String DOCTOR_PAGE = "doctors.jsp";
+    private static final String DOCTOR_PAGE = "ShowDoctorSchedule";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

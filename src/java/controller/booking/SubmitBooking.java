@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import schedule.scheduleDAO;
+import schedule.scheduleDTO;
 
 
 /**
@@ -55,6 +57,9 @@ public class SubmitBooking extends HttpServlet {
             BookingDAO bkDao= new BookingDAO();
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
             boolean check_valid = bkDetailDAO.checkExistBookingDetai(dateBooking, slotID,doctorID);
+            scheduleDAO scheDAO =new scheduleDAO();
+            scheduleDTO schee= scheDAO.getScheduleToSubmit(slotID, doctorID, dateBooking);
+            bkDetail.setScheduleID(schee.getScheduleID());
             if(!check_valid){
                 boolean check1=bkDao.createBooking(booking);
                 int bkID=bkDao.getNewBkID();

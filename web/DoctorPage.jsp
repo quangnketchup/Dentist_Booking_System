@@ -4,6 +4,7 @@
     Author     : Doan
 --%>
 
+<%@page import="doctors.DoctorDTO"%>
 <%@page import="schedule.scheduleDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,6 +32,7 @@
        <link rel="stylesheet" href="css/dentistPage.css">
     </head>
     <body>
+        <%DoctorDTO login = (DoctorDTO) session.getAttribute("LOGIN_DOCTOR");%>
          <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="home.jsp">Denta<span>Care</span></a>
@@ -43,7 +45,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item "><a href="#" class="nav-link sa">Thời gian biểu</a></li>
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"></a>
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=login.getFullName()%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
@@ -60,11 +62,48 @@
                 <div class="overlay"></div>
             </div>
         </section>
-        <% List<scheduleDTO> = (List<scheduleDTO>)request.getAttribute()%>
-        <div schedule>
+              <!<!-- Toast thông báo đăng ký lịch thành công -->
+
+            <%
+                String msg = (String) request.getAttribute("ADD_SLOT_SUCCES");
+                if (msg == null) {
+                    msg = "";
+                } else {
+            %>
+
+            <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header1">
+                    <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body1">
+                    <%=msg%>
+                </div>
+            </div>
+
+            <%}%>               
+                            
+        <% List<scheduleDTO>  scheduleList= (List<scheduleDTO>)request.getAttribute("listScheduleDTO");
+        int dem=0;
+        %>
+        
+        <div class="schedule ">
+            <%
             
+            for(scheduleDTO schedule:scheduleList){
+            dem++;%>
+            <div id="schedule-day<%=dem%>"><%=schedule.getDay()%> </div>       
+            <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%> </div>    
+            <%
+              }%>
+              
+               <div id="size-schedule"><%=dem%></div>
         </div>
         <div class="container">
+            <div class="title-table" style="font-size:24px; color: black">Lịch làm việc của bác sĩ</div>
               <table class="fl-table table">
         <thead>
             <tr >
@@ -78,14 +117,14 @@
                 <th>SUN</th>
             </tr>
             <tr id="day" >
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
+                                        <th class="day"></th>
             </tr>
         </thead>
         <tbody>
@@ -139,48 +178,44 @@
             </tr>                                      
         </tbody>
     </table>
-        
         </div>
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
         
          <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                     stroke="#F96D00" />
             </svg></div>
-
+        
+        <!-- Modal -->
+        
+         <div id="myModal" class="modal">
+            <div class="modal-dialog " role="document">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bác sĩ muốn đăng ký lịch vào:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="RegisterSlot" id="form-submit">
+                        <div class="modal-body">
+                            <input class="doctorID" name="doctorID" value="<%=login.getDoctorID()%>" type="hidden">
+                            <div id="schedule-view"></div>
+                        </div>  
+                        <div class="modal-footer">
+                            <input class="btn btn-primary" type="submit" value="Đăng kí đặt lịch" onclick="">
+                            <input class="btn btn-danger" type="button" value="Hủy" onclick="cancel()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-migrate-3.0.1.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -197,5 +232,6 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/dentistPage.js"></script>
+        
     </body>
 </html>

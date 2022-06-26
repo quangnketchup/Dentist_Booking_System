@@ -14,8 +14,8 @@ import doctors.DoctorDTO;
 public class DoctorDAO {
 
     private static final String GET_ALL_LIST_DOCTOR = "SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID";
-    private static String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, workDayID, gmail, phone, image, status, achievement FROM tblDoctors WHERE gmail=? AND password=?";
-    private static String CHECK_DUPLICATE = "SELECT fullName FROM tblDoctors WHERE doctorID=?";
+    private static final String LOGIN = "SELECT doctorID, serviceTypeID, fullName, password, roleID, gender, gmail, phone, image, status, achievement FROM tblDoctors WHERE gmail=? AND password=?";
+    private static final String CHECK_DUPLICATE = "SELECT fullName FROM tblDoctors WHERE doctorID=?";
     private static final String SEARCH_DOCTOR_BY_NAME ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.fullName like ? ";
     private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, achievement =?, status=?"
                         + " WHERE doctorID =? ";
@@ -295,11 +295,10 @@ public class DoctorDAO {
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     int doctorID = rs.getInt("doctorID");
-                    String serviceTypeName = rs.getString("serviceTypeName");
+                    String serviceTypeName = rs.getString("serviceTypeID");
                     String fullName = rs.getString("fullName");
                     String roleID = rs.getString("roleID");
                     String gender = rs.getString("gender");
-                    int workDayID = rs.getInt("workDayID");
                     int phone = rs.getInt("phone");
                     String image = rs.getString("image");
                     int status = rs.getInt("status");

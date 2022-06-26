@@ -4,7 +4,7 @@
  */
 package schedule;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.sql.Date;
 public class scheduleDTO {
     int scheduleID;
     String dayOfWeek;
-    Date day;
+    String day;
     int slot;
     int doctorID;
     int status;
@@ -21,7 +21,7 @@ public class scheduleDTO {
     public scheduleDTO() {
     }
 
-    public scheduleDTO(String dayOfWeek, Date day, int slot, int doctorID, int status) {
+    public scheduleDTO(String dayOfWeek, String day, int slot, int doctorID, int status) {
         this.dayOfWeek = dayOfWeek;
         this.day = day;
         this.slot = slot;
@@ -29,7 +29,7 @@ public class scheduleDTO {
         this.status = status;
     }
 
-    public scheduleDTO(int scheduleID, String dayOfWeek, Date day, int slot, int doctorID, int status) {
+    public scheduleDTO(int scheduleID, String dayOfWeek, String day, int slot, int doctorID, int status) {
         this.scheduleID = scheduleID;
         this.dayOfWeek = dayOfWeek;
         this.day = day;
@@ -54,11 +54,11 @@ public class scheduleDTO {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public Date getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(String day) {
         this.day = day;
     }
 

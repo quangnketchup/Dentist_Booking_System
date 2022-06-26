@@ -116,6 +116,10 @@
         <servlet-name>ShowDoctorSchedule</servlet-name>
         <servlet-class>controller.doctor.ShowDoctorSchedule</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterSlot</servlet-name>
+        <servlet-class>controller.doctor.RegisterSlot</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>ShowDoctorSchedule</servlet-name>
         <url-pattern>/ShowDoctorSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterSlot</servlet-name>
+        <url-pattern>/RegisterSlot</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

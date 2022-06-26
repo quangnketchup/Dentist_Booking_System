@@ -1,3 +1,4 @@
+
 function next2(){
     var tt=document.getElementsByClassName("dateTitle");
     tt[0].classList.add("active");
@@ -76,11 +77,11 @@ collection[7].innerHTML = listDay[0];
                                         dayDoctor[a] = n;
                                     }
                              
-                                     /// Get schedyle of doctor
+                                     /// Get schedule of doctor
                                     var dem = document.getElementById("size-schedule").innerHTML;
                                     dem = +dem;
                                     var scheduleDoctor = [];
-                                    for (let a = 1; a <= size; a++) {
+                                    for (let a = 1; a <= dem; a++) {
                                         var day = "schedule-day" + a;
                                         var slot = "schedule-slot" + a;
                                         var xx = document.getElementById(day);
@@ -98,10 +99,10 @@ collection[7].innerHTML = listDay[0];
                                         var n = {day: m, slot: k};
                                         scheduleDoctor[a] = n;
                                     }
-                                    
-                                     
+                                     console.log(scheduleDoctor);
+                                   
                                     ///So sánh ngày nào trong tuần trùng với lịch làm việc của bác sĩ
-                                    for (let i = 1; i < dayDoctor.length; i++) {
+                                    for (let i = 1; i < scheduleDoctor.length; i++) {
                                         for (let k = 1; k < days.length; k++) {
                                             if (days[k].innerHTML.includes(scheduleDoctor[i].day)) {
                                                 scheduleDoctor[i].day = "ngay" + k;
@@ -109,7 +110,7 @@ collection[7].innerHTML = listDay[0];
                                             }
                                         }
                                     }
-                       
+                                       
                                      ///So sánh ngày nào trong tuần trùng với lịch đã được booked của bác sĩ
                                     for (let i = 1; i < dayDoctor.length; i++) {
                                         for (let k = 1; k < days.length; k++) {
@@ -171,7 +172,7 @@ collection[7].innerHTML = listDay[0];
                                         addGreen1();
                                     };
                                     
-                                    /// Xác định ngày làm việc của bác sĩ theo thứ
+                                    /// Xác định ngày làm việc của bác sĩ theo thứ Đặt work shift vao calender;
 
                                     for (let i = 1; i < scheduleDoctor.length; i++) {
                                  
@@ -185,8 +186,7 @@ collection[7].innerHTML = listDay[0];
                                        }
                                     }
 
-                                    ///Đặt work shift vao calender;
-
+                                    ///xác định slot nào đã được đặt và thêm class vào <tr>
 
                                     for (let i = 1; i < dayDoctor.length; i++) {
                                         var work = document.getElementsByClassName(dayDoctor[i].day + " slot" + dayDoctor[i].slot);

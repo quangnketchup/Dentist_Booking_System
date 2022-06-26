@@ -15,6 +15,9 @@ public class BookingDetailDTO {
     int expectedFee;
     int scheduleID;
 
+    public BookingDetailDTO() {
+    }
+
     public int getScheduleID() {
         return scheduleID;
     }

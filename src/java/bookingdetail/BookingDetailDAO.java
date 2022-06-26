@@ -21,8 +21,7 @@ public class BookingDetailDAO {
     private static final String GET_BOOKING_DETAIL_BYDOCTORID = "SELECT  b.scheduleID, b.serviceID FROM tblBookingDetails b, tblSchedules s WHERE b.scheduleID=s.scheduleID and s.day>GETDATE() -7 and doctorID =?";
     private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [bookingID],[serviceID],[scheduleID]) VALUES ( ?, ?, ?, ?)";
     private static final String CHECK_VALID = "select bk.BookingDetailID from tblBookingDetails bk, tblSchedules s where bk.scheduleID=s.scheduleID and s.slot =? and s.day like ? and  doctorID = ?";
-    
-    
+
     public boolean checkExistBookingDetai(String date, int slotID, int drID) throws SQLException {
         List<BookingDetailDTO> list = new ArrayList<>();
         Connection conn = null;
