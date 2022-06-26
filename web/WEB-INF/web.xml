@@ -112,6 +112,10 @@
         <servlet-name>ShowDiscountController</servlet-name>
         <servlet-class>controller.admins.ShowDiscountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowDoctorSchedule</servlet-name>
+        <servlet-class>controller.doctor.ShowDoctorSchedule</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>ShowDiscountController</servlet-name>
         <url-pattern>/ShowDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDoctorSchedule</servlet-name>
+        <url-pattern>/ShowDoctorSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

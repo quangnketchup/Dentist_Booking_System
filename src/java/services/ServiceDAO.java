@@ -21,7 +21,7 @@ public class ServiceDAO {
     private static final String CREATE_SERVICE = "INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
     private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
-    private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.image, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
+    private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
    
     public ServiceDTO getServiceById(int id) throws SQLException {
         ServiceDTO sv = new ServiceDTO();
@@ -137,7 +137,7 @@ public class ServiceDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ListService = new ArrayList<>();
-                String sql = " SELECT serviceID, serviceName, servicePrice, image, description, serviceTypeID "
+                String sql = " SELECT serviceID, serviceName, servicePrice, description, serviceTypeID "
                         + " FROM tblServices "
                         + " WHERE serviceTypeID = ? ";
                 pstm = conn.prepareStatement(sql);
@@ -146,7 +146,6 @@ public class ServiceDAO {
                 while (resultSet.next()) {
                     int serviceID = resultSet.getInt("serviceID");
                     String serviceName = resultSet.getString("serviceName");
-                    String image = resultSet.getNString("image");
                     int servicePrice = resultSet.getInt("servicePrice");
                     String description = resultSet.getString("description");
                     ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description));

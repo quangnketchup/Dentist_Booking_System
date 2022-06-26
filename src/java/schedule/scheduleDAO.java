@@ -21,11 +21,48 @@ import utils.DBUtils;
 public class scheduleDAO {
 
     private static final String GET_ALL_LIST_SCHEDULE = "SELECT sch.scheduleID, sch.doctorID, sch.day, sch.dayOfWeek, sch.slot, sch.status FROM tblSchedules sch, tblDoctors dr WHERE sch.doctorID = dr.doctorID";
-    private static final String GET_SCHEDULE_BY_DOCTOR_ID = "select * from tblSchedules where day>GETDATE() and status =1 and  doctorID= ?";
+    private static final String GET_SCHEDULE_BY_DOCTOR_ID = "select * from tblSchedules where day>GETDATE()-7 and status =1 and  doctorID= ?";
     private static final String SET_OFF_SCHEDULE = "update tblSchedules set status= 0 where slot =? and day = ? and doctorID = ?";
     private static final String SET_ON_SCHEDULE = "update tblSchedules set status= 1 where slot =? and day = ? and doctorID = ?";
     private static final String CREATE_SCHEDULE = "Insert tblSchedules (dayOfWeek,day,slot,status,doctorID) values(?,?,?,?,?)";
-
+    private static final String GET_SCHEDULE_BY_SCHEDULE_ID ="select * from tblSchedules where scheduleID = ?";
+    
+    public scheduleDTO getScheduleByScheduleID(int id) throws SQLException {
+        scheduleDTO sche=new scheduleDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_SCHEDULE_BY_SCHEDULE_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String dayOfWeek = rs.getString("dayOfWeek");
+                    Date day = rs.getDate("day");
+                    int slot = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    int doctorID = rs.getInt("doctorID");
+                    sche=new scheduleDTO(dayOfWeek, day, slot, doctorID, status);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return sche;
+    }
+    
     public boolean createDoctor(scheduleDTO scheduleDTO) throws SQLException {
         boolean check = false;
         Connection conn = null;

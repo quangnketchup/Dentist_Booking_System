@@ -32,7 +32,7 @@ public class SearchService_BookingController extends HttpServlet {
      */
     
     private static final String ERROR = "home.jsp";
-    private static final String TRUE = "Booking.jsp";
+    private static final String TRUE = "newBooking.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

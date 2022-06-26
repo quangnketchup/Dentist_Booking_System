@@ -34,7 +34,7 @@ public class ShowBookingController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
         private static final String ERROR = "home.jsp";
-    private static final String TRUE = "Booking.jsp";
+    private static final String TRUE = "newBooking.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -44,7 +44,7 @@ public class ShowBookingController extends HttpServlet {
               ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
                doctors.DoctorDAO doctorDAO =new DoctorDAO();  
                 List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
-                      List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor2();
+                List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor2();
                 patients.PatientDTO login = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
                 if (login != null && "PA".equals(login.getRoleID())) {                    
                         session.setAttribute("LIST_SERVICE_TYPE", listServiceType);

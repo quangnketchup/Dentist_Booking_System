@@ -53,7 +53,8 @@ public class AddDoctorController extends HttpServlet {
             String gender = request.getParameter("gender");
             int workDayID = Integer.parseInt(request.getParameter("workDayID"));
             int phone =Integer.parseInt(request.getParameter("phone"));
-
+            String achievement=request.getParameter("achievement");
+            String image=request.getParameter("image");
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
             if (serviceTypeName.trim().length() == 0 || serviceTypeName.trim().length() > 50) {
@@ -67,7 +68,7 @@ public class AddDoctorController extends HttpServlet {
             DoctorDAO dao = new DoctorDAO();
             ServiceTypeDAO svDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listSV = svDao.getListServiceType();
-            DoctorDTO doctor = new DoctorDTO(1, serviceTypeName, fullName, password, "DR", gender, workDayID, email, 1, "./", status);
+            DoctorDTO doctor = new DoctorDTO(1, serviceTypeName, fullName, password, "DR", gender,email, phone,image, 1, achievement);
             
             if (check) {
                 boolean checkUpdate = dao.createDoctor(doctor);

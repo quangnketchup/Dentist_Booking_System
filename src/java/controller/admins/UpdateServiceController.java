@@ -31,7 +31,6 @@ public class UpdateServiceController extends HttpServlet {
             String serviceName =request.getParameter("serviceName");
             int servicePrice =Integer.parseInt(request.getParameter("servicePrice"));
             String description = request.getParameter("description");
-            String image =request.getParameter("image");
             int status= Integer.parseInt(request.getParameter("status"));
             int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
             int adminID = Integer.parseInt(request.getParameter("adminID"));
@@ -42,10 +41,7 @@ public class UpdateServiceController extends HttpServlet {
                 serviceError.setServiceNameError("Tên Không được để trống");
                 check = false;
             }
-            if (image.equals("")) {
-                serviceError.setImageError("không thể để trống Hình ảnh");
-                check = false;
-            }
+           
             
             if (servicePrice < 0) {
                 serviceError.setServicePriceError("Giá tiền không âm");
@@ -53,7 +49,7 @@ public class UpdateServiceController extends HttpServlet {
             }
             
             ServiceDAO dao = new ServiceDAO();
-            ServiceDTO service = new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, image, description, adminID, status);
+            ServiceDTO service = new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status);
                 if(check) {
                 boolean checkUpdate = dao.updateService(service);
                 if(checkUpdate) {

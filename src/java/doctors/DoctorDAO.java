@@ -20,7 +20,7 @@ public class DoctorDAO {
     private static final String UPDATE_DOCTOR = "UPDATE tblDoctors SET serviceTypeID =?, achievement =?, status=?"
                         + " WHERE doctorID =? ";
     private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [achievement], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status, d.workDayID from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
+    private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status ,d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
     private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
     
      
@@ -47,7 +47,7 @@ public class DoctorDAO {
                     String image = rs.getString("image");
                     int status =rs.getInt("status");
                     String roleID="DR";
-                    String achievement = rs.getString("image");
+                    String achievement = rs.getString("achievement");
                     dr=new DoctorDTO(doctorID, serviceTypeName, fullName, password, roleID, gender, gmail, phone, image, status, achievement);
                 }
             }

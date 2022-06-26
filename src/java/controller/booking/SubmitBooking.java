@@ -34,7 +34,7 @@ public class SubmitBooking extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    private static final String ERROR = "Booking.jsp";
+    private static final String ERROR = "newBooking.jsp";
     private static final String TRUE = "HandleServiceDoctorController";
     
     
@@ -51,10 +51,10 @@ public class SubmitBooking extends HttpServlet {
             String dateBooking= request.getParameter("dateBooking");
             int slotID = Integer.parseInt(request.getParameter("slotID"));
             BookingDTO booking =new BookingDTO(1, patientID);
-            BookingDetailDTO bkDetail= new BookingDetailDTO(doctorID,slotID,dateBooking,serviceID,expectedFee);
+            BookingDetailDTO bkDetail= new BookingDetailDTO(serviceID,expectedFee);
             BookingDAO bkDao= new BookingDAO();
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
-            boolean check_valid = bkDao.checkExistBooking(dateBooking, slotID,doctorID);
+            boolean check_valid = bkDetailDAO.checkExistBookingDetai(dateBooking, slotID,doctorID);
             if(!check_valid){
                 boolean check1=bkDao.createBooking(booking);
                 int bkID=bkDao.getNewBkID();

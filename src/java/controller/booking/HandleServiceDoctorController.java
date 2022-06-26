@@ -11,12 +11,15 @@ import discounts.DiscountDTO;
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import schedule.scheduleDAO;
+import schedule.scheduleDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -36,8 +39,8 @@ public class HandleServiceDoctorController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    private static final String ERROR = "Booking.jsp";
-    private static final String TRUE = "Booking.jsp";
+    private static final String ERROR = "newBooking.jsp";
+    private static final String TRUE = "newBooking.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,12 +58,19 @@ public class HandleServiceDoctorController extends HttpServlet {
             DiscountDAO dsDao = new DiscountDAO();
             DiscountDTO discount =dsDao.getDiscountByServiceID(svID);
             List<BookingDetailDTO> listBookingDetail=bookingDetailDAO.getBookingDetailByDoctorID(doctorID);
+            scheduleDAO scheduleDao= new scheduleDAO();
+            List<scheduleDTO> listScheduleDTO=scheduleDao.getScheduleByDoctorID(doctorID);
+            List<scheduleDTO> bookedList= new ArrayList<>();
+            for(BookingDetailDTO booked:listBookingDetail){
+                scheduleDTO sch =scheduleDao.getScheduleByScheduleID(booked.getScheduleID());
+                bookedList.add(sch);
+            }
             HttpSession session = request.getSession();
              session.setAttribute("doctorBk", doctor);
             session.setAttribute("serviceBk", service);
-            session.setAttribute("listBookingDetail", listBookingDetail);
+            session.setAttribute("listBookingDetail", bookedList);
             session.setAttribute("discount", discount);
-
+            session.setAttribute("listScheduleDTO",listScheduleDTO);
             url=TRUE;
         } catch (Exception e) {
               log("Error at HandleServiceDoctorController: " + e.toString());

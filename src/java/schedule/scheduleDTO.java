@@ -18,6 +18,9 @@ public class scheduleDTO {
     int doctorID;
     int status;
 
+    public scheduleDTO() {
+    }
+
     public scheduleDTO(String dayOfWeek, Date day, int slot, int doctorID, int status) {
         this.dayOfWeek = dayOfWeek;
         this.day = day;
