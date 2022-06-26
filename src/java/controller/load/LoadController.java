@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import patients.PatientDTO;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
@@ -53,6 +55,8 @@ public class LoadController extends HttpServlet {
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getAllListService();
 //            List<ServiceDTO> listServiceFeedback = serviceDao.getListFeedBackService();
+            ServiceImageDAO serviceImageDao = new ServiceImageDAO();
+            List<ServiceImageDTO> listServiceImage = serviceImageDao.getAllListServiceImage();
             
             ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
@@ -60,6 +64,7 @@ public class LoadController extends HttpServlet {
                     request.setAttribute("LIST_SERVICE", listService);
 //                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                     request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                    request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                     url = SUCCESS;
             }
         } catch (Exception e) {

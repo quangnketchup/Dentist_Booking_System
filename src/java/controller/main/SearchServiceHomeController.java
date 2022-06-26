@@ -12,6 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -23,16 +27,23 @@ public class SearchServiceHomeController extends HttpServlet {
 
     private static final String ERROR = "home.jsp";
     private static final String SUCCESS = "service.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            ServiceDAO dao=new ServiceDAO();
-            String servicename=request.getParameter("serviceName");
-            List<ServiceDTO> list= dao.searchServiceByName(servicename);  
+            ServiceImageDAO serviceImageDao = new ServiceImageDAO();
+            List<ServiceImageDTO> listServiceImage = serviceImageDao.getAllListServiceImage();
+            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
+            ServiceDAO dao = new ServiceDAO();
+            String servicename = request.getParameter("serviceName");
+            List<ServiceDTO> list = dao.searchServiceByName(servicename);
             request.setAttribute("LIST_SERVICE", list);
-                url=SUCCESS;          
+            request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at Search Service Home Controller: " + e.toString());
         } finally {

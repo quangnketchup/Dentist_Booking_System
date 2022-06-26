@@ -1,4 +1,5 @@
 
+<%@page import="serviceImage.ServiceImageDTO"%>
 <%@page import="patients.PatientDTO"%>
 <%@page import="services.ServiceDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
@@ -127,18 +128,25 @@
                                 for (ServiceDTO service : listService) {
                         %>
                         <div class="col-md-3">
-                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #227093;">
+                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
                                 <div class="services text-center ">
                                     <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <%
+                                        List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("LIST_SERVICE_IMAGE");
+                                        for (ServiceImageDTO Image : listServiceImage) {
+                                            if (service.getServiceID() != Image.getServiceID()) {
+                                                continue;
+                                            }
+                                    %>
                                     <div>
-                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=Image.getImage()%>">
                                     </div>
+                                    <%break;}%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadDetailServiceController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>
-
                         </div>
                         <%
                                 }
@@ -161,15 +169,22 @@
                             <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
                                 <div class="services text-center ">
                                     <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
+                                    <%
+                                        List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("LIST_SERVICE_IMAGE");
+                                        for (ServiceImageDTO Image : listServiceImage) {
+                                            if (service.getServiceID() != Image.getServiceID()) {
+                                                continue;
+                                            }
+                                    %>
                                     <div>
-                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=service.getImage()%>">
+                                        <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=Image.getImage()%>">
                                     </div>
+                                    <%break;}%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
                                     <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>
-
                         </div>
                         <%
                                     }
@@ -188,85 +203,6 @@
                     <li class="page-item previous-page"><a class="page-link" href="#">3</a></li>
                     <li class="page-item dots"><a class="page-link" href="#">...</a></li>
                     <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Section của sale -->
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-5">
-                    <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-3">Our Best Pricing</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Basic</h3>
-                                <p><span class="price">$24.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Standard</h3>
-                                <p><span class="price">$34.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry active pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Premium</h3>
-                                <p><span class="price">$54.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <div class="pricing-entry pb-5 text-center">
-                            <div>
-                                <h3 class="mb-4">Platinum</h3>
-                                <p><span class="price">$89.50</span> <span class="per">/ session</span></p>
-                            </div>
-                            <ul>
-                                <li>Diagnostic Services</li>
-                                <li>Professional Consultation</li>
-                                <li>Tooth Implants</li>
-                                <li>Surgical Extractions</li>
-                                <li>Teeth Whitening</li>
-                            </ul>
-                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -344,87 +280,6 @@
                 </div>
             </div>
         </footer>
-
-
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-            <%
-                int count = 0;
-                List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE");
-                List<ServiceDTO> listServiceFeedBack = (List<ServiceDTO>) request.getAttribute("LIST_SERVICE_FEEDBACK");
-                for (ServiceDTO service : listService) {
-            %>
-        <div  class="modal fade" id="service<%=service.getServiceID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-            <%
-                for (ServiceDTO serviceFeedback : listServiceFeedBack) {
-                    if (serviceFeedback.getServiceID() == service.getServiceID()) {
-                        service = serviceFeedback;
-                    }
-                }%>
-            <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT DỊCH VỤ</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body1 col-12">
-                        <div class="row">
-                            <div class="col-md-7 infomation" style="border-right:4px solid #227093">
-                                <div class="form-group">
-                                    <img src="<%=service.getImage()%>">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="name" ><strong><h2><%=service.getServiceName()%></h2></strong></label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price" style="color:red; font-size: medium"><strong>Giá Gốc: <%=service.getServicePrice()%> VND</strong></label>
-                                    <label><h3 class="animate-charcter">Giảm Giá tới 50% Cho đến ngày 23/02/2002</h3></label>
-                                </div>
-                            </div>
-                            <div class="col-md-5  feedback">
-                                <div class="form-group">
-                                    <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
-                                    <label class="descrip"><%=service.getDescription()%></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 " style="border-top: 4px solid #227093; overflow-y: auto">
-                            <div class="form-group mt-1 mb-2">
-                                <h5 class="head animate-charcter1"><strong>Đánh Giá Dịch Vụ</strong></h5>
-                            </div>
-                            <%if (service.getDateFeedback() != null) {%>
-                            <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
-                                <div class="form-group col-md-4 border-primary">
-                                    <div >
-                                        <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=service.getFullName()%></strong>
-                                            <h6 style="color: gray;align-content: center;text-align: center">(<%=service.getDateFeedback()%>)</h6></label>
-
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8 border-primary">
-                                    <label for="user-feedback"><%=service.getContent()%></label>
-                                </div>
-
-                            </div>
-                            <%} else {%>
-                            <div class="form-group border-primary ">
-                                <div>
-                                    <label for="user-name-feedback" style="color: #227093;align-content: center;text-align: center">Không có bình luận nào</label><br>
-                                </div>
-                                <%}%> 
-                            </div> 
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <%}%>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
