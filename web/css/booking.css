@@ -98,32 +98,54 @@ body{
 }
 
 #toast-msg{
-    position: fixed;
-    padding-left: 10px;
-    right: 10px;
-    top:10px;
-    z-index: 100;
-    width: 210px;
-    background-color: #28a745;
-    border-bottom-left-radius:10px;
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    text-align: left;
-    color:white;
-    font-size: 18px;
-}
-#toast-close{
-    color: white;
-    width: 240px;
-    background-color: rgb(231,210,14);
-    display: block;
-}
+                position: fixed;
+                padding-left: 10px;
+                right: 10px;
+                top:80px;
+                z-index: 100;
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
+                animation: slideInleft ease .3s, fadeOut linear 1s 3s forwards;
+            }
+            
+            @keyframes slideInleft {
+                
+                from{
+                    opacity: 0;
+                    transform: translateX(calc(100%+40px));
+                    
+                }
+                to{
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes fadeOut{
+                to{
+                    opacity: 0;
+                    
+                }
+            }
+            
+            #toast-close{
+                color: white;
+                width: 240px;
+                background-color: rgb(231,210,14);
+                display: block;
+            }
 
-#toast-msg strong{
-    color: white;
-    font-size: 15px;
+            #toast-msg strong{
+                color: white;
+                font-size: 15px;
 
-}
+            }
 /* Table Styles */
 
 .table-wrapper{
