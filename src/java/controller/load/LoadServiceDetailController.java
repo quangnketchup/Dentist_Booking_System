@@ -5,8 +5,10 @@
  */
 package controller.load;
 
-import doctors.DoctorDAO;
-import doctors.DoctorDTO;
+import discounts.DiscountDAO;
+import discounts.DiscountDTO;
+import feedbacks.FeedBackDAO;
+import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,8 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import patients.PatientDAO;
 import patients.PatientDTO;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
@@ -26,50 +29,47 @@ import services.ServiceDTO;
  *
  * @author quang
  */
-public class LoadDoctorController extends HttpServlet {
+public class LoadServiceDetailController extends HttpServlet {
 
-    private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "doctors.jsp";
+    private static final String ERROR = "LoadController";
+    private static final String SUCCESS = "service_detail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            DoctorDAO doctorDao = new DoctorDAO();
-            PatientDAO patientDao = new PatientDAO();
-            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
-            ServiceDAO serviceDao = new ServiceDAO();
             HttpSession session = request.getSession();
-
             patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-            List<DoctorDTO> listDoctor = doctorDao.getAllListDoctor();
-            List<PatientDTO> listPatient = patientDao.getAllListPatient();
+
+            ServiceImageDAO serviceImageDao = new ServiceImageDAO();
+            ServiceDAO serviceDao = new ServiceDAO();
+            ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
+            FeedBackDAO feedbackDao = new FeedBackDAO();
+            DiscountDAO discountDao = new DiscountDAO();
+
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
-            List<ServiceDTO> listService = serviceDao.getAllListService();
 
-            int countPatient = 0;
-            for (PatientDTO patient : listPatient) {
-                countPatient++;
-            }
-
-            int countService = 0;
-            for (ServiceDTO service : listService) {
-                countService++;
-            }
-
-            if (listDoctor.size() > 0) {
-                request.setAttribute("LIST_DOCTOR", listDoctor);
-                request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
-                request.setAttribute("COUNT_PATIENT", countPatient);
-                request.setAttribute("COUNT_SERVICE", countService);
-                url = SUCCESS;
-            }
+            int serviceID = Integer.parseInt(request.getParameter("serviceID"));
+            
+            ServiceDTO service = serviceDao.getServiceById(serviceID);
+            FeedbackDTO feedbackService = feedbackDao.getFeedbackByServiceID(serviceID);
+            List<ServiceImageDTO> serviceImage = serviceImageDao.getImageByServiceID(serviceID);
+            DiscountDTO discount = discountDao.getDiscountByServiceID(serviceID);
+            
+            
+            int discountOfService = service.getServicePrice()*discount.getPercentDiscount()/100;
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+            request.setAttribute("SERVICE_DETAIL_BY_ID", service);
+            request.setAttribute("SERVICE_FEEDBACK_BY_ID", feedbackService);
+            request.setAttribute("SERVICE_IMAGE_BY_ID", serviceImage);
+            request.setAttribute("DISCOUNT_BY_ID", discount);
+            
+            request.setAttribute("DISCOUNT_OF_SERVICE", discountOfService);
+            url = SUCCESS;
         } catch (Exception e) {
             url = ERROR;
-            log("Error at Load Doctor Controller: " + e.toString());
+            log("Error at Load Service Detail Controller");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

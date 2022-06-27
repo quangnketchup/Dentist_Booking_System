@@ -40,10 +40,9 @@ public class LoadController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     private static final String ERROR = "home.jsp";
     private static final String SUCCESS = "service.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -58,17 +57,20 @@ public class LoadController extends HttpServlet {
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             List<ServiceImageDTO> listServiceImage = serviceImageDao.getAllListServiceImage();
             
+            HttpSession session = request.getSession();
+            patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+            
             ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
             if (listService.size() > 0) {
-                    request.setAttribute("LIST_SERVICE", listService);
+                request.setAttribute("LIST_SERVICE", listService);
 //                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
-                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
-                    request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
-                    url = SUCCESS;
+                request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            url=ERROR;
+            url = ERROR;
             log("Error at Load Controller: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

@@ -120,6 +120,10 @@
         <servlet-name>RegisterSlot</servlet-name>
         <servlet-class>controller.doctor.RegisterSlot</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadServiceDetailController</servlet-name>
+        <servlet-class>controller.load.LoadServiceDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>RegisterSlot</servlet-name>
         <url-pattern>/RegisterSlot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadServiceDetailController</servlet-name>
+        <url-pattern>/LoadServiceDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

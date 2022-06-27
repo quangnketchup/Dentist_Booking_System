@@ -31,6 +31,9 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/menu.css">
     </head>
     <body>
         <%
@@ -113,16 +116,15 @@
                         if (listDoctor != null) {
                             for (DoctorDTO doctor : listDoctor) {
                     %>
-                    <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+                    <div class="col-lg-3 col-md-3 d-flex mb-sm-4 ftco-animate">
                         <div class="staff">
                             <div class="img mb-4" style="background-image: url(<%=doctor.getImage()%>);"/></div>
                         <div class="info text-center">
                             <h3><a><%=doctor.getFullName()%></a></h3>
                             <span class="position"><%=doctor.getServiceTypeName()%></span>
-                            <div class="text">
-                                <p>Ngày Làm việc trong tuần</p>
-                                <p><%if (doctor.getWorkDayID() == 2) {%>2, 4, 6<%} else {%>3, 5, 7<%}%></p>
-                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-light" style="border-radius: 25px"><a class=" nav-link text-info" data-toggle="modal" onclick='showDetail()'data-target="#doctor<%=doctor.getDoctorID()%>"><span>Chi Tiết</span></a></button>
                         </div>
                     </div>
                 </div>
@@ -267,7 +269,52 @@
         </div>
     </footer>
 
+    <!-- loader Modal doctor-->
+    <%
+        int count = 0;
+        List<DoctorDTO> listDoctorDTO = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
+        if (listDoctorDTO != null) {
+            for (DoctorDTO doctor : listDoctorDTO) {
+    %>
+    <div  class="modal fade" id="doctor<%=doctor.getDoctorID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT BÁC SĨ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body1 col-12">
+                    <div class="row">
+                        <div class="col-md-6 infomation" style="border-right:4px solid #227093">
 
+                            <div class="form-group">
+                                <img style="object-fit: contain" src="<%=doctor.getImage()%>">
+                            </div>
+                            <div class="form-group ">
+                                <label for="name" ><strong><h2><%=doctor.getFullName()%></h2></strong></label>
+                            </div>
+                            <div class="form-group ">
+                                <label for="name" ><strong><h2><%=doctor.getServiceTypeName()%></h2></strong></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6  infomation">
+                            <div class="form-group">
+                                <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
+                                <div style='display:none'><%=doctor.getAchievement()%></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <%}
+        }%>
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

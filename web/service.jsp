@@ -143,7 +143,7 @@
                                     </div>
                                     <%break;}%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadDetailServiceController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                     </div>
                                     <%break;}%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" data-toggle="modal" data-target="#service<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
 
                                 </div>
                             </div>

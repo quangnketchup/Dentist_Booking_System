@@ -19,7 +19,7 @@ import utils.DBUtils;
  */
 public class ServiceImageDAO {
 
-    public String GET_IMAGE_BY_SERVICE_ID = "select * from tblServiceImages WHERE serviceID = ?";
+    public String GET_IMAGE_BY_SERVICE_ID = "select image, serviceID from tblServiceImages WHERE serviceID = ?";
 
     public List<ServiceImageDTO> getImageByServiceID(int id) throws SQLException {
         List<ServiceImageDTO> list = new ArrayList<>();
