@@ -302,7 +302,7 @@
                         <div class="col-md-6  infomation">
                             <div class="form-group">
                                 <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
-                                <div style='display:none'><%=doctor.getAchievement()%></div>
+                                <div><%=doctor.getAchievement()%></div>
                             </div>
                         </div>
                     </div>
