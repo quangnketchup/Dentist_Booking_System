@@ -108,13 +108,30 @@ const showModal = function () {
 
 /// Bác sĩ đăng kí lịch đặt
 
-for (let i = 1; i < 8; i++) {
+for (let i = 1; i < 7; i++) {
     for (let k = 1; k < 5; k++) {
         var slot = document.getElementsByClassName(`ngay${i} slot${k}`);
         slot[0].classList.add("register");
         slot[0].innerHTML = "Đăng ký";
         slot[0].onclick = showModal;
     }
+}
+////Set null cho các slot đã qua trong tuần
+if(d==1){
+    
+}else{
+    for (let i=1;i<d+1;i++){
+    for (let k = 1; k < 5; k++) {
+        var slot = document.getElementsByClassName(`ngay${i} slot${k}`);
+        slot[0].classList.remove("register");
+        slot[0].style. backgroundColor= '#F0EBE3';
+        slot[0].style.borderRadius= '20px';
+        slot[0].style.padding= '2px 4px 2px 4px';
+        slot[0].style.color='black';
+        slot[0].onclick = ()=>{        
+        };
+    }
+}
 }
 
 /// Slot đã được đăng ký
@@ -158,7 +175,11 @@ for (let i = 1; i < scheduleDoctor.length; i++) {
     var work = document.getElementsByClassName(scheduleDoctor[i].day + " slot" + scheduleDoctor[i].slot);
     if (work.length > 0) {
         work[0].classList.add("register-done");
+        work[0].style.color='#76BA99';
+        work[0].style.backgroundColor="#3F4E4F";
         work[0].innerHTML = "Đã đăng ký";
+        work[0].onclick = ()=>{           
+        }
     }
 }
 ///Modal

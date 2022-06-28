@@ -195,7 +195,27 @@ collection[7].innerHTML = listDay[0];
                                         work[0].innerHTML = "Đã được đặt";
                                     }
                                 }
-
+  /// không cho bệnh nhân đặt các lịch đã qua trong tuần  
+                                if(d==1){
+    
+                            }else{
+                                for (let i=1;i<d+1;i++){
+                                for (let k = 1; k < 5; k++) {
+                                    var slot = document.getElementsByClassName(`ngay${i} slot${k}`);
+                                    if(slot[0].classList.contains('shift')){
+                                         slot[0].classList.remove("shift");
+                                    }
+                                   
+                                    slot[0].style. backgroundColor= '#F0EBE3';
+                                    slot[0].style.borderRadius= '20px';
+                                    slot[0].style.padding= '2px 4px 2px 4px';
+                                    slot[0].style.color='black';
+                                    slot[0].innerHTML="X";
+                                    slot[0].onclick = ()=>{        
+                                    };
+                                }
+                            }
+                            }
                                 function toastClose() {
                                     var toast1 = document.getElementById("toast-msg");
                                     toast1.style.display = "none";

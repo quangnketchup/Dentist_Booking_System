@@ -54,23 +54,20 @@ public class SubmitBooking extends HttpServlet {
             int slotID = Integer.parseInt(request.getParameter("slotID"));
             BookingDTO booking =new BookingDTO(1, patientID);
             BookingDetailDTO bkDetail= new BookingDetailDTO(serviceID,expectedFee);
-            BookingDAO bkDao= new BookingDAO();
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
             boolean check_valid = bkDetailDAO.checkExistBookingDetai(dateBooking, slotID,doctorID);
             scheduleDAO scheDAO =new scheduleDAO();
             scheduleDTO schee= scheDAO.getScheduleToSubmit(slotID, doctorID, dateBooking);
             bkDetail.setScheduleID(schee.getScheduleID());
             if(!check_valid){
-                boolean check1=bkDao.createBooking(booking);
-                int bkID=bkDao.getNewBkID();
-                if(check1){
-                    boolean check2=bkDetailDAO.createBookingDetail(bkDetail, bkID);
-                    if(check2){
+                    boolean check1 =scheDAO.setBookedSchedule(slotID, dateBooking, doctorID);
+                    boolean check2=bkDetailDAO.createBookingDetail(bkDetail);
+                    if(check2 && check1){
                         url=TRUE;
                     request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
                                 request.setAttribute("add-green", booking);
                     }
-                }
+                
                 
             }else{
                 request.setAttribute("FAIL_ADD_BOOKING", "Đặt lịch thất bại");

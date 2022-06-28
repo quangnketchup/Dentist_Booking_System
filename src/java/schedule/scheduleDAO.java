@@ -27,6 +27,79 @@ public class scheduleDAO {
     private static final String CREATE_SCHEDULE = "Insert tblSchedules (dayOfWeek,day,slot,status,doctorID) values(?,?,?,?,?)";
     private static final String GET_SCHEDULE_BY_SCHEDULE_ID ="select * from tblSchedules where scheduleID = ?";
     private static final String GET_SCHEDULE_TO_SUBMIT ="select * from tblSchedules where slot = ? and doctorID = ? and day like ?";
+    private static final String SET_BOOKED = "update tblSchedules set status= 2 where slot =? and day = ? and doctorID = ?";
+    private static final String GET_BOOKED ="select * from tblSchedules where day>GETDATE()-7 and status =2 and  doctorID= ?";
+    
+    
+    
+    public List<scheduleDTO> getBookedScheduleByDoctorID(int id) throws SQLException {
+        List<scheduleDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_BOOKED);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String dayOfWeek = rs.getString("dayOfWeek");
+                    String day = rs.getString("day");
+                    int slot = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    int doctorID = rs.getInt("doctorID");
+                    list.add(new scheduleDTO(dayOfWeek, day, slot, doctorID, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
+    
+     public boolean setBookedSchedule(int slot, String day, int doctorID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_BOOKED);
+                ptm.setInt(1, slot);
+                ptm.setString(2, day);
+                ptm.setInt(3, doctorID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
      public scheduleDTO getScheduleToSubmit(int slot, int doctorID, String day) throws SQLException {
         scheduleDTO sche=new scheduleDTO();

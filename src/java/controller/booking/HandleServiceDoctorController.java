@@ -61,10 +61,7 @@ public class HandleServiceDoctorController extends HttpServlet {
             scheduleDAO scheduleDao= new scheduleDAO();
             List<scheduleDTO> listScheduleDTO=scheduleDao.getScheduleByDoctorID(doctorID);
             List<scheduleDTO> bookedList= new ArrayList<>();
-            for(BookingDetailDTO booked:listBookingDetail){
-                scheduleDTO sch =scheduleDao.getScheduleByScheduleID(booked.getScheduleID());
-                bookedList.add(sch);
-            }
+            bookedList =scheduleDao.getBookedScheduleByDoctorID(doctorID);
             HttpSession session = request.getSession();
              session.setAttribute("doctorBk", doctor);
             session.setAttribute("serviceBk", service);

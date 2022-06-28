@@ -189,7 +189,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 
 .register-done{
-    background-color: #3AB0FF;
+    background-color: #9ADCFF;
     border-radius: 20px;
     color:white;
     padding: 2px 4px;
@@ -197,6 +197,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .none{
     display:none;
+}
+.passed{
+    background-color: #F0EBE3 !important;
+    border-radius: 20px;
+    color:black;
+    padding: 2px 4px;
 }
 
 #toast-msg{
@@ -246,5 +252,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 #toast-msg strong{
     color: white;
     font-size: 15px;
-
 }

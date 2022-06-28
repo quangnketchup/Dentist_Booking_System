@@ -19,7 +19,7 @@ import utils.DBUtils;
  */
 public class BookingDetailDAO {
     private static final String GET_BOOKING_DETAIL_BYDOCTORID = "SELECT  b.scheduleID, b.serviceID FROM tblBookingDetails b, tblSchedules s WHERE b.scheduleID=s.scheduleID and s.day>GETDATE() -7 and doctorID =?";
-    private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [bookingID],[serviceID],[scheduleID]) VALUES ( ?, ?, ?, ?)";
+    private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [serviceID],[scheduleID]) VALUES ( ?, ?,  ?)";
     private static final String CHECK_VALID = "select bk.BookingDetailID from tblBookingDetails bk, tblSchedules s where bk.scheduleID=s.scheduleID and s.slot =? and s.day like ? and  doctorID = ?";
 
     public boolean checkExistBookingDetai(String date, int slotID, int drID) throws SQLException {
@@ -55,7 +55,7 @@ public class BookingDetailDAO {
         }
         return check;
     }
-     public boolean createBookingDetail(BookingDetailDTO bkDetail, int bkID) throws SQLException {
+     public boolean createBookingDetail(BookingDetailDTO bkDetail) throws SQLException {
         boolean check=false;
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -64,9 +64,8 @@ public class BookingDetailDAO {
             if (conn != null) {      
                 pstm = conn.prepareStatement(INSERT_BOOKINGDETAIL);
                 pstm.setInt(1, bkDetail.getExpectedFee());
-                pstm.setInt(2, bkID);
-                pstm.setInt(3, bkDetail.getServiceID());
-                pstm.setInt(4, bkDetail.getScheduleID());
+                pstm.setInt(2, bkDetail.getServiceID());
+                pstm.setInt(3, bkDetail.getScheduleID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
