@@ -11,10 +11,26 @@ package bookingdetail;
 public class BookingDetailDTO {
     String service;;
     int serviceID;
-    int bookingID;
     int expectedFee;
     int scheduleID;
+    int status;
+    int patientID;
 
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     public BookingDetailDTO() {
     }
 
@@ -46,16 +62,21 @@ public class BookingDetailDTO {
         this.expectedFee = expectedFee;
     }
 
-    public BookingDetailDTO( int serviceID, int bookingID, int expectedFee) {
 
-
+     public BookingDetailDTO( int serviceID, int expectedFee,int patientID) {
         this.serviceID = serviceID;
-        this.bookingID = bookingID;
         this.expectedFee = expectedFee;
+        this.patientID =patientID;
     }
+
     
-    
-    public BookingDetailDTO( int serviceID, int scheduleID) {
+    public BookingDetailDTO( int serviceID, int scheduleID,int status,int check) {
+        this.serviceID = serviceID;
+        this.scheduleID = scheduleID;
+        this.status=status;
+    }
+
+    public BookingDetailDTO(int serviceID, int scheduleID) {
         this.serviceID = serviceID;
         this.scheduleID = scheduleID;
     }

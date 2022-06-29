@@ -63,11 +63,11 @@ public class HandleServiceDoctorController extends HttpServlet {
             List<scheduleDTO> bookedList= new ArrayList<>();
             bookedList =scheduleDao.getBookedScheduleByDoctorID(doctorID);
             HttpSession session = request.getSession();
-             session.setAttribute("doctorBk", doctor);
-            session.setAttribute("serviceBk", service);
-            session.setAttribute("listBookingDetail", bookedList);
-            session.setAttribute("discount", discount);
-            session.setAttribute("listScheduleDTO",listScheduleDTO);
+             request.setAttribute("doctorBk", doctor);
+            request.setAttribute("serviceBk", service);
+            request.setAttribute("listBookingDetail", bookedList);
+            request.setAttribute("discount", discount);
+            request.setAttribute("listScheduleDTO",listScheduleDTO);
             url=TRUE;
         } catch (Exception e) {
               log("Error at HandleServiceDoctorController: " + e.toString());

@@ -26,7 +26,37 @@ public class FeedBackDAO {
     private static final String GET_LIST_FEEDBACK_SERVICE_USER = "SELECT paf.serviceFeedBackID, paf.content, paf.rateStar, paf.dateFeedback, pa.fullName, paf.status "
             + "FROM tblServices s, tblPatientFeedbacks paf, tblPatients pa "
             + "WHERE s.serviceID = paf.serviceID AND pa.patientID = paf.patientID AND paf.status = 1";
-
+    private static final String CREATE_FB ="INSERT [dbo].[tblPatientFeedbacks] ([serviceID],[patientID],[dateFeedback],[rateStar],[content],[status]) VALUES (?,?,?,?,?,?)";
+    
+    public boolean createSchedule(int serviceID,int patientID,String dateFeedback,int rateStart,String content,int status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                pstm = conn.prepareStatement(CREATE_FB);
+                pstm.setInt(1, serviceID);
+                pstm.setInt(2, patientID);
+                pstm.setString(3, dateFeedback);
+                pstm.setInt(4, rateStart);
+                pstm.setString(5, content);
+                pstm.setInt(6, status);
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     public List<FeedbackDTO> getListFeedBackService() throws SQLException {
         List<FeedbackDTO> list = new ArrayList<>();
         Connection conn = null;

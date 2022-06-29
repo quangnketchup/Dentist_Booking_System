@@ -19,9 +19,172 @@ import utils.DBUtils;
  */
 public class BookingDetailDAO {
     private static final String GET_BOOKING_DETAIL_BYDOCTORID = "SELECT  b.scheduleID, b.serviceID FROM tblBookingDetails b, tblSchedules s WHERE b.scheduleID=s.scheduleID and s.day>GETDATE() -7 and doctorID =?";
-    private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [serviceID],[scheduleID]) VALUES ( ?, ?,  ?)";
+    private static final String INSERT_BOOKINGDETAIL ="INSERT tblBookingDetails ([expectedFee], [serviceID],[scheduleID],[patientID],[status]) VALUES ( ?,?,?,?,?)";
     private static final String CHECK_VALID = "select bk.BookingDetailID from tblBookingDetails bk, tblSchedules s where bk.scheduleID=s.scheduleID and s.slot =? and s.day like ? and  doctorID = ?";
-
+    private static final String GET_BOOKING_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE patientID = ?";
+    private static final String CANCEL_BOOKING = "update tblBookingDetails set status= 0 where scheduleID = ?";
+    private static final String GET_INCOME="SELECT SUM(bk.expectedFee) as money FROM tblBookingDetails bk, tblSchedules s WHERE  bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
+    private static final String NUMBER_BOOKING="SELECT COUNT(bk.BookingDetailID) as nb FROM tblBookingDetails bk,tblSchedules s WHERE  bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
+    private static final String NUMBER_FB="SELECT COUNT(serviceFeedBackID) as nb FROM tblPatientFeedbacks WHERE MONTH(dateFeedback)=?";
+    
+    
+     public int getNumberFB(int month) throws SQLException {
+        int nb=0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(NUMBER_FB);
+                ptm.setInt(1, month);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    nb=rs.getInt("nb");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return nb;
+    }
+    
+    public int getNumberBooking(int month) throws SQLException {
+        int nb=0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(NUMBER_BOOKING);
+                ptm.setInt(1, month);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    nb=rs.getInt("nb");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return nb;
+    }
+    
+     public int getMoneyMonth(int month) throws SQLException {
+        int money=0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_INCOME);
+                ptm.setInt(1, month);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    money=rs.getInt("money");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return money;
+    }
+    
+    
+    
+     public boolean cancelBooking(int scheduleID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CANCEL_BOOKING);
+                ptm.setInt(1, scheduleID);        
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public List<BookingDetailDTO> getBookingDetailByPatientID(int id) throws SQLException {
+        List<BookingDetailDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_BOOKING_DETAIL_BY_PATIENT_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    int serviceID=rs.getInt("serviceID");
+                    int scheduleID=rs.getInt("scheduleID");
+                    int status=rs.getInt("status");
+                    list.add(new BookingDetailDTO( serviceID,scheduleID,status,2));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
+    
     public boolean checkExistBookingDetai(String date, int slotID, int drID) throws SQLException {
         List<BookingDetailDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -66,6 +229,8 @@ public class BookingDetailDAO {
                 pstm.setInt(1, bkDetail.getExpectedFee());
                 pstm.setInt(2, bkDetail.getServiceID());
                 pstm.setInt(3, bkDetail.getScheduleID());
+                pstm.setInt(4, bkDetail.getPatientID());
+                pstm.setInt(5, 1);
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

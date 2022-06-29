@@ -126,12 +126,9 @@ collection[7].innerHTML = listDay[0];
                                         if (!this.className.includes("working")) {
                                             const split = this.className.split(' ');
                                             const valueDay = days[split[0][4]].innerHTML.slice(0, 10);
-                                            console.log(days);
                                             const [day, month, year] = valueDay.split('/');
                                             const result = [year, month, day].join('-');
-                                            console.log(result);
-                                            const slot = split[1];
-                                            console.log(slot);
+                                            const slot = split[1];;
                                             let time = "";
                                             switch (slot) {
                                                 case 'slot1':

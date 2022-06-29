@@ -32,19 +32,20 @@
             List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");           
             List<doctors.DoctorDTO> listDoctor = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
             List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
-            DoctorDTO doctorBk = (DoctorDTO) session.getAttribute("doctorBk");
-            ServiceDTO serviceBk = (ServiceDTO) session.getAttribute("serviceBk");
-            DiscountDTO discount = (DiscountDTO) session.getAttribute("discount");
+            DoctorDTO doctorBk = (DoctorDTO) request.getAttribute("doctorBk");
+            ServiceDTO serviceBk = (ServiceDTO) request.getAttribute("serviceBk");
+            DiscountDTO discount = (DiscountDTO) request.getAttribute("discount");
             PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-            BookingDTO check = (BookingDTO) request.getAttribute("add-green");
+            scheduleDTO check = (scheduleDTO) request.getAttribute("add_green");
+            
         %>
-
+        
         <div class="container-fluid">
             <div class="progress-bar1">
                 <ul class="progressbar1">
                     <li class="active serviceTitle">Chọn Loại Dịch Vụ</li>
                     <li class="doctorTitle <%=(listService != null) ? "active" : ""%>">Chọn Nha Sĩ</li>
-                    <li class="dateTitle <%=(doctorBk != null) ? "active" : ""%>" >Chọn Ngày& Giờ</li>
+                    <li class="dateTitle <%=(doctorBk != null || check !=null) ? "active" : ""%>" >Chọn Ngày& Giờ</li>
                     <li class="comfirmTitle <%=(check != null) ? "active" : ""%>">Đặt lịch</li>
                     <li class="checkoutTitle <%=(check != null) ? "active" : ""%>">Hoàn Thành Đặt Lịch</li>
                 </ul>
@@ -101,7 +102,7 @@
                     if (listService != null) {
 
                 %>  
-                <%       List<scheduleDTO> listBookingDetail = (List<scheduleDTO>) session.getAttribute("listBookingDetail");
+                <%       List<scheduleDTO> listBookingDetail = (List<scheduleDTO>) request.getAttribute("listBookingDetail");
 
                 %>
                 <form action="HandleServiceDoctorController">
@@ -204,7 +205,7 @@
                         %>
                         <div id="size-booked"><%=lam%></div>
                     </div> 
-                    <%List<scheduleDTO> listScheduleDTO = (List<scheduleDTO>)session.getAttribute("listScheduleDTO");%>
+                    <%List<scheduleDTO> listScheduleDTO = (List<scheduleDTO>)request.getAttribute("listScheduleDTO");%>
                     <!-- Get schedule of doctor -->
                     <div class="schedule-doctor none">
                         <%
@@ -359,6 +360,7 @@
 
             <%
                 }
+
 
             %>
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

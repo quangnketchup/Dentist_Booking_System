@@ -37,7 +37,7 @@ public class SubmitBooking extends HttpServlet {
      */
     
     private static final String ERROR = "newBooking.jsp";
-    private static final String TRUE = "HandleServiceDoctorController";
+    private static final String TRUE = "ShowBookingController";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -52,20 +52,21 @@ public class SubmitBooking extends HttpServlet {
             int patientID = Integer.parseInt(request.getParameter("patientID"));
             String dateBooking= request.getParameter("dateBooking");
             int slotID = Integer.parseInt(request.getParameter("slotID"));
-            BookingDTO booking =new BookingDTO(1, patientID);
-            BookingDetailDTO bkDetail= new BookingDetailDTO(serviceID,expectedFee);
+            BookingDetailDTO bkDetail= new BookingDetailDTO(serviceID,expectedFee,patientID);
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
             boolean check_valid = bkDetailDAO.checkExistBookingDetai(dateBooking, slotID,doctorID);
             scheduleDAO scheDAO =new scheduleDAO();
             scheduleDTO schee= scheDAO.getScheduleToSubmit(slotID, doctorID, dateBooking);
-            bkDetail.setScheduleID(schee.getScheduleID());
+            int scheID =schee.getScheduleID();
+            bkDetail.setScheduleID(scheID);
             if(!check_valid){
+                    
+                     boolean check2=bkDetailDAO.createBookingDetail(bkDetail);
                     boolean check1 =scheDAO.setBookedSchedule(slotID, dateBooking, doctorID);
-                    boolean check2=bkDetailDAO.createBookingDetail(bkDetail);
                     if(check2 && check1){
                         url=TRUE;
                     request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
-                                request.setAttribute("add-green", booking);
+                    request.setAttribute("add_green", schee);
                     }
                 
                 
