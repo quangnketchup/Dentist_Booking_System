@@ -137,18 +137,20 @@ public class ServiceDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ListService = new ArrayList<>();
-                String sql = " SELECT serviceID, serviceName, servicePrice, description, serviceTypeID "
+                String sql = " SELECT serviceID, serviceName, servicePrice, description, serviceTypeID, adminID ,status"
                         + " FROM tblServices "
-                        + " WHERE status =1 and serviceTypeID = ? ";
+                        + " WHERE status = 1 and serviceTypeID = ? ";
                 pstm = conn.prepareStatement(sql);
                 pstm.setInt(1, serviceTypeID);
                 resultSet = pstm.executeQuery();
                 while (resultSet.next()) {
                     int serviceID = resultSet.getInt("serviceID");
+                    int adminID = resultSet.getInt("adminID");
                     String serviceName = resultSet.getString("serviceName");
                     int servicePrice = resultSet.getInt("servicePrice");
                     String description = resultSet.getString("description");
-                    ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description));
+                    int status = resultSet.getInt("status");
+                    ListService.add(new ServiceDTO(serviceID, serviceTypeID, serviceName, servicePrice, description, adminID, status));
                 }
             }
         } catch (Exception e) {

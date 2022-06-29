@@ -127,20 +127,25 @@
                                 <%}%>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="product-dtl">
                                 <div class="product-info">
                                     <div class="product-name"><%=service.getServiceName()%></div>
                                     <!--lay ratestar cua feedback-->
-                                    <%
-                                        FeedbackDTO feedbackService = (FeedbackDTO) request.getAttribute("SERVICE_FEEDBACK_BY_ID");
-                                        String check1;
-                                        if (feedbackService.getRateStar() == 5) {
-                                        }
-                                    %>
                                     <div class="reviews-counter">
                                         <div class="rate">
                                             <div class="rate">
+                                                <%  int average = 0;
+                                                    int count = 1;
+                                                    List<FeedbackDTO> ListfeedbackService = (List<FeedbackDTO>) request.getAttribute("SERVICE_FEEDBACK_BY_ID");
+                                                    String check1;
+                                                    for (FeedbackDTO feedback : ListfeedbackService) {
+                                                        average += feedback.getRateStar();
+                                                        count++;
+                                                    }
+                                                    average = average / count;
+                                                %>
                                                 <input type="radio" id="star5" name="rate" value="5" checked=""/>
                                                 <label for="star5" title="text">5 stars</label>
                                                 <input type="radio" id="star4" name="rate" value="4" />
@@ -153,8 +158,11 @@
                                                 <label for="star1" title="text">1 star</label>
                                             </div>
                                         </div>
-                                        <%List<FeedbackDTO> listfeedbackService = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK_SERVICE");%>
-                                        <span><%=feedbackService.getPatientName().length()%> reviewer</span>
+                                        <%if (ListfeedbackService.size() != 0) {%>
+                                        <span><%=ListfeedbackService.size()%> reviewer</span>
+                                        <%} else { %>
+                                        <span>0 reviewer</span>
+                                        <%}%>
                                     </div>
                                     <%
                                         int discountOfService = (int) request.getAttribute("DISCOUNT_OF_SERVICE");
@@ -167,6 +175,8 @@
                                     <p>Từ ngày: <%=discount.getCreateDate()%></p>
                                     <p>Đến ngày: <%=discount.getExpiredDate()%></p>
                                 </div>
+                                <%} else {%>
+                                <div class="product-price-discount"><span><%=service.getServicePrice()%>VND</span></div>
                                 <%}%>
                             </div>
                         </div>
@@ -186,247 +196,214 @@
                             </div>
                             <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                 <div class="review-heading">ĐÁNH GIÁ DỊCH VỤ</div>
-                                <%
-                                    if (feedbackService == null) {
+                                <%  
+                                    for (FeedbackDTO feedbackService : ListfeedbackService) {
+                                        if (ListfeedbackService.isEmpty()) {
                                 %>
-                                <p class="mb-20">Hiện không có đánh giá.</p>
-                                <%} else {%>
-                                <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
-                                    <div class="form-group col-md-4 border-primary">
-                                        <div >
-                                            <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=feedbackService.getPatientName()%></strong>
-                                                <h6 style="color: gray;align-content: center;text-align: center">(<%=feedbackService.getDateFeedback()%>)</h6></label>
+                                <div><h3>Không có bình luận nào cả</h3></div>
+                            </div>
+                            <%} else {%>
+                            <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
+                                <div class="form-group col-md-4 border-primary">
+                                    <div >
+                                        <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=feedbackService.getPatientName()%></strong>
+                                            <h6 style="color: gray;align-content: center;text-align: center">(<%=feedbackService.getDateFeedback()%>)</h6></label>
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-8 border-primary">
-                                        <label for="user-feedback"><%=feedbackService.getContent()%></label>
                                     </div>
                                 </div>
-                                <%}%>
-                                <form class="review-form">
-                                    <div class="form-group">
-                                        <label>Đánh giá mức độ hài lòng của bạn:</label>
-                                        <div class="reviews-counter">
-                                            <div class="rate">
-                                                <input type="radio" id="star5" name="rate" value="5" checked=""/>
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Lời Đánh Giá:</label>
-                                        <textarea class="form-control" rows="10"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Name*">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Email Id*">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="round-black-btn">Gửi đánh giá</button>
-                                </form>
+                                <div class="form-group col-md-8 border-primary">
+                                    <label for="user-feedback"><%=feedbackService.getContent()%></label>
+                                </div>
                             </div>
+                            <%}
+                                }%>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer class="ftco-footer ftco-bg-dark ftco-section">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-md-3">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">DentaCare</h2>
-                            <p>Nha Khoa DentalCare cung cấp đầy đủ các loại hình điều trị như: Tổng quát, Phục hình răng sứ, Cấy ghép implant, Chỉnh nha - niềng răng, Thẩm mỹ nướu.</p>
-                        </div>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">DentaCare</h2>
+                        <p>Nha Khoa DentalCare cung cấp đầy đủ các loại hình điều trị như: Tổng quát, Phục hình răng sứ, Cấy ghép implant, Chỉnh nha - niềng răng, Thẩm mỹ nướu.</p>
+                    </div>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Thông tin</a></li>
+                            <li><a href="#" class="py-2 d-block">Tính năng</a></li>
+                            <li><a href="#" class="py-2 d-block">Dự án</a></li>
+                            <li><a href="#" class="py-2 d-block">Blog</a></li>
+                            <li><a href="#" class="py-2 d-block">Liên hệ</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-2">
-                        <div class="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 class="ftco-heading-2">Quick Links</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Thông tin</a></li>
-                                <li><a href="#" class="py-2 d-block">Tính năng</a></li>
-                                <li><a href="#" class="py-2 d-block">Dự án</a></li>
-                                <li><a href="#" class="py-2 d-block">Blog</a></li>
-                                <li><a href="#" class="py-2 d-block">Liên hệ</a></li>
+                </div>
+                <div class="col-md-4 pr-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Blog gần đây</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Office</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4 pr-md-4">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Blog gần đây</h2>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Office</h2>
-                            <div class="block-23 mb-3">
-                                <ul>
-                                    <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-
-                        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </a></p>
-                    </div>
                 </div>
             </div>
-        </footer>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
 
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.stellar.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/jquery.animateNumber.min.js"></script>
-        <script src="js/scrollax.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>
-                            $(document).ready(function () {
-                                var slider = $("#slider");
-                                var thumb = $("#thumb");
-                                var slidesPerPage = 4; //globaly define number of elements per page
-                                var syncedSecondary = true;
-                                slider.owlCarousel({
-                                    items: 1,
-                                    slideSpeed: 2000,
-                                    nav: false,
-                                    autoplay: false,
-                                    dots: false,
-                                    loop: true,
-                                    responsiveRefreshRate: 200
-                                }).on('changed.owl.carousel', syncPosition);
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+                        $(document).ready(function () {
+                            var slider = $("#slider");
+                            var thumb = $("#thumb");
+                            var slidesPerPage = 4; //globaly define number of elements per page
+                            var syncedSecondary = true;
+                            slider.owlCarousel({
+                                items: 1,
+                                slideSpeed: 2000,
+                                nav: false,
+                                autoplay: false,
+                                dots: false,
+                                loop: true,
+                                responsiveRefreshRate: 200
+                            }).on('changed.owl.carousel', syncPosition);
+                            thumb
+                                    .on('initialized.owl.carousel', function () {
+                                        thumb.find(".owl-item").eq(0).addClass("current");
+                                    })
+                                    .owlCarousel({
+                                        items: slidesPerPage,
+                                        dots: false,
+                                        nav: true,
+                                        item: 4,
+                                        smartSpeed: 200,
+                                        slideSpeed: 500,
+                                        slideBy: slidesPerPage,
+                                        navText: ['<svg width="18px" height="18px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="25px" height="25px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+                                        responsiveRefreshRate: 100
+                                    }).on('changed.owl.carousel', syncPosition2);
+                            function syncPosition(el) {
+                                var count = el.item.count - 1;
+                                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+                                if (current < 0) {
+                                    current = count;
+                                }
+                                if (current > count) {
+                                    current = 0;
+                                }
                                 thumb
-                                        .on('initialized.owl.carousel', function () {
-                                            thumb.find(".owl-item").eq(0).addClass("current");
-                                        })
-                                        .owlCarousel({
-                                            items: slidesPerPage,
-                                            dots: false,
-                                            nav: true,
-                                            item: 4,
-                                            smartSpeed: 200,
-                                            slideSpeed: 500,
-                                            slideBy: slidesPerPage,
-                                            navText: ['<svg width="18px" height="18px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg width="25px" height="25px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
-                                            responsiveRefreshRate: 100
-                                        }).on('changed.owl.carousel', syncPosition2);
-                                function syncPosition(el) {
-                                    var count = el.item.count - 1;
-                                    var current = Math.round(el.item.index - (el.item.count / 2) - .5);
-                                    if (current < 0) {
-                                        current = count;
-                                    }
-                                    if (current > count) {
-                                        current = 0;
-                                    }
-                                    thumb
-                                            .find(".owl-item")
-                                            .removeClass("current")
-                                            .eq(current)
-                                            .addClass("current");
-                                    var onscreen = thumb.find('.owl-item.active').length - 1;
-                                    var start = thumb.find('.owl-item.active').first().index();
-                                    var end = thumb.find('.owl-item.active').last().index();
-                                    if (current > end) {
-                                        thumb.data('owl.carousel').to(current, 100, true);
-                                    }
-                                    if (current < start) {
-                                        thumb.data('owl.carousel').to(current - onscreen, 100, true);
-                                    }
+                                        .find(".owl-item")
+                                        .removeClass("current")
+                                        .eq(current)
+                                        .addClass("current");
+                                var onscreen = thumb.find('.owl-item.active').length - 1;
+                                var start = thumb.find('.owl-item.active').first().index();
+                                var end = thumb.find('.owl-item.active').last().index();
+                                if (current > end) {
+                                    thumb.data('owl.carousel').to(current, 100, true);
                                 }
-                                function syncPosition2(el) {
-                                    if (syncedSecondary) {
-                                        var number = el.item.index;
-                                        slider.data('owl.carousel').to(number, 100, true);
-                                    }
+                                if (current < start) {
+                                    thumb.data('owl.carousel').to(current - onscreen, 100, true);
                                 }
-                                thumb.on("click", ".owl-item", function (e) {
-                                    e.preventDefault();
-                                    var number = $(this).index();
-                                    slider.data('owl.carousel').to(number, 300, true);
-                                });
-
-
-                                $(".qtyminus").on("click", function () {
-                                    var now = $(".qty").val();
-                                    if ($.isNumeric(now)) {
-                                        if (parseInt(now) - 1 > 0)
-                                        {
-                                            now--;
-                                        }
-                                        $(".qty").val(now);
-                                    }
-                                })
-                                $(".qtyplus").on("click", function () {
-                                    var now = $(".qty").val();
-                                    if ($.isNumeric(now)) {
-                                        $(".qty").val(parseInt(now) + 1);
-                                    }
-                                });
+                            }
+                            function syncPosition2(el) {
+                                if (syncedSecondary) {
+                                    var number = el.item.index;
+                                    slider.data('owl.carousel').to(number, 100, true);
+                                }
+                            }
+                            thumb.on("click", ".owl-item", function (e) {
+                                e.preventDefault();
+                                var number = $(this).index();
+                                slider.data('owl.carousel').to(number, 300, true);
                             });
-        </script>
-    </body>
+
+
+                            $(".qtyminus").on("click", function () {
+                                var now = $(".qty").val();
+                                if ($.isNumeric(now)) {
+                                    if (parseInt(now) - 1 > 0)
+                                    {
+                                        now--;
+                                    }
+                                    $(".qty").val(now);
+                                }
+                            })
+                            $(".qtyplus").on("click", function () {
+                                var now = $(".qty").val();
+                                if ($.isNumeric(now)) {
+                                    $(".qty").val(parseInt(now) + 1);
+                                }
+                            });
+                        });
+    </script>
+</body>
 </html>

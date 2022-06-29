@@ -53,12 +53,13 @@ public class LoadServiceDetailController extends HttpServlet {
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
             
             ServiceDTO service = serviceDao.getServiceById(serviceID);
-            FeedbackDTO feedbackService = feedbackDao.getFeedbackByServiceID(serviceID);
+            List<FeedbackDTO> feedbackService = feedbackDao.getFeedbackByServiceID(serviceID);
             List<ServiceImageDTO> serviceImage = serviceImageDao.getImageByServiceID(serviceID);
             DiscountDTO discount = discountDao.getDiscountByServiceID(serviceID);
             
             
             int discountOfService = service.getServicePrice()*discount.getPercentDiscount()/100;
+            if(service!=null) {
             request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
             request.setAttribute("SERVICE_DETAIL_BY_ID", service);
             request.setAttribute("SERVICE_FEEDBACK_BY_ID", feedbackService);
@@ -67,6 +68,7 @@ public class LoadServiceDetailController extends HttpServlet {
             
             request.setAttribute("DISCOUNT_OF_SERVICE", discountOfService);
             url = SUCCESS;
+            }
         } catch (Exception e) {
             url = ERROR;
             log("Error at Load Service Detail Controller");

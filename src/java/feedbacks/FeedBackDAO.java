@@ -94,8 +94,8 @@ public class FeedBackDAO {
         return list;
     }
 
-    public FeedbackDTO getFeedbackByServiceID(int serviceID) throws SQLException {
-        FeedbackDTO list = new FeedbackDTO();
+    public List<FeedbackDTO> getFeedbackByServiceID(int serviceID) throws SQLException {
+        List<FeedbackDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -112,7 +112,7 @@ public class FeedBackDAO {
                     int rateStar = rs.getInt("rateStar");
                     String fullName = rs.getString("fullName");
                     int status = rs.getInt("status");
-                    list = new FeedbackDTO(serviceFeedBackID, dateFeedback, content, rateStar, fullName, serviceID, status);
+                    list.add(new FeedbackDTO(serviceFeedBackID, dateFeedback, content, rateStar, fullName, serviceID, status));
                 }
             }
 

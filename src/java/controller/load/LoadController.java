@@ -7,6 +7,8 @@ package controller.load;
 
 import admins.AdminDTO;
 import doctors.DoctorDTO;
+import feedbacks.FeedBackDAO;
+import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -53,6 +55,8 @@ public class LoadController extends HttpServlet {
             //load vao trang cua service
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getAllListService();
+            FeedBackDAO feedbackDao= new FeedBackDAO();
+            List<FeedbackDTO> listFeedback = feedbackDao.getListFeedBackService();
 //            List<ServiceDTO> listServiceFeedback = serviceDao.getListFeedBackService();
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             List<ServiceImageDTO> listServiceImage = serviceImageDao.getAllListServiceImage();
@@ -66,6 +70,7 @@ public class LoadController extends HttpServlet {
                 request.setAttribute("LIST_SERVICE", listService);
 //                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                 request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                request.setAttribute("LIST_FEEDBACK", listFeedback);
                 request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                 url = SUCCESS;
             }

@@ -51,13 +51,11 @@
                                     if (listServiceType != null) {
                                         for (ServiceTypeDTO svType : listServiceType) {
                                 %>
-                                <form>
-                                    <button class="dropdown-item"><a href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a></button>
-                                </form>
-                                <%
+                                <button class="dropdown-item"><a href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a></button>
+                                    <%
+                                            }
                                         }
-                                    }
-                                %>
+                                    %>
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
@@ -141,9 +139,10 @@
                                     <div>
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=Image.getImage()%>">
                                     </div>
-                                    <%break;}%>
+                                    <%break;
+                                        }%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
                             </div>
@@ -179,9 +178,10 @@
                                     <div>
                                         <img style="width: 200px;height:150px; vertical-align: middle;margin-bottom: 12px; border-radius: 10px ; " src="<%=Image.getImage()%>">
                                     </div>
-                                    <%break;}%>
+                                    <%break;
+                                        }%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <button class="btn btn-light" style="border-radius: 25px"><a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>"><span>Chi Tiết</span></a></button>
+                                    <a href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
                             </div>
@@ -281,21 +281,21 @@
             </div>
         </footer>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="js/main.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/jquery.timepicker.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/main.js"></script>
 
-</body>
+    </body>
 </html>
