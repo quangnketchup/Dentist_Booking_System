@@ -164,6 +164,10 @@
         <servlet-name>DetailDoctorAdminController</servlet-name>
         <servlet-class>controller.admins.DetailDoctorAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadDiscountController</servlet-name>
+        <servlet-class>controller.admins.LoadDiscountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -327,6 +331,10 @@
     <servlet-mapping>
         <servlet-name>DetailDoctorAdminController</servlet-name>
         <url-pattern>/DetailDoctorAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadDiscountController</servlet-name>
+        <url-pattern>/LoadDiscountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

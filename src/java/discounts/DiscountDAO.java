@@ -77,11 +77,11 @@ public class DiscountDAO {
                     String description = rs.getString("description");
                     int percentDiscount = rs.getInt("percentDiscount");
                     int status = rs.getInt("status");
-                    String image = rs.getString("image");
                     String createDate = rs.getString("createDate");
                     String expiredDate = rs.getString("expiredDate");
                     int adminID = rs.getInt("adminID");
-                    list.add(new DiscountDTO(discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID));
+                    int serviceID=rs.getInt("serviceID");
+                    list.add(new DiscountDTO(discountID, title, description, percentDiscount, status, createDate, expiredDate, adminID,serviceID));
                 }
             }
         } catch (Exception e) {

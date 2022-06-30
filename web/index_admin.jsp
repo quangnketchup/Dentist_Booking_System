@@ -126,11 +126,35 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="index_Discount.jsp">
-                    <i class="fas fa-fw fa-percent"></i>
-                    <span>Mã Giảm Giá</span></a>
-            </li>
+                
+                <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Mã giảm giá</span>
+                </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                       <div class="row">
+                            <h6 class="collapse-header">Các loại dịch vụ</h6>
+                        
+                        </div>
+                 <%
+                                    if (listServiceType != null) {
+                                        for (ServiceTypeDTO svType : listServiceType) {
+                                %>
+              
+                       
+                       <div class="row service-item">
+                                    <a class="collapse-item col-sm float-left" href="LoadDiscountController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
 
+                                </div>
+                                <%
+                                        }
+                                    }
+                                %>
+                 </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

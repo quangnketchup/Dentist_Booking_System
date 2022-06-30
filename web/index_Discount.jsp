@@ -4,6 +4,8 @@
     Author     : Doan
 --%>
 
+<%@page import="java.time.LocalDate"%>
+<%@page import="discounts.DiscountDTO"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="java.util.List"%>
@@ -195,9 +197,266 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
+                <%List<DiscountDTO> listDiscountBySVType = (List<DiscountDTO>) request.getAttribute("listDiscountBySVType");%>
                 <!-- Begin Page Content -->
+                <div class="container-fluid">
 
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Thêm mã khuyến mãi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="AddDiscountController" method="GET">
+                                        <div class="modal-body">
+                                            <div class="register-box">
+                                                <div class="input-group mb-3">
+                                                    <input name="title" type="text" class="form-control" placeholder="Tên chủ đề">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="description" type="text" class="form-control" placeholder="Mô tả" >
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="percentDiscount" type="number" class="form-control" placeholder="Phần trăm khuyến mãi" required="">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="form-group">
+                                                        <label>Ngày tạo mã</label>
+                                                        <input type="date" name="createDate" class="form-control" min="<%=LocalDate.now()%>" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="form-group">
+                                                        <label>Ngày hết hạn</label>
+                                                        <input type="date" name="expiredDate" class="form-control" min="<%=LocalDate.now().minusDays(-1)%>" required="">
+                                                    </div>
+                                                </div>                                                          
+                                                <div class="input-group mb-3">
+                                                    <input name="adminID" type="text"  class="form-control" placeholder="Mã quản lí"> 
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="serviceID" type="text"  class="form-control" placeholder="Mã dịch vụ"> 
+                                                </div>
+                                            </div><!-- /.card -->
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" value="Add Discount" class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 offset-1">
+                            <div>
+                                <h3 class="text-primary">Quản lí khuyến mãi:</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 offset-1">
+                            <div class="btn-group">
+                                <form action="SearchDiscountController">
+                                    <input type="search" class="form" name="title">
+                                    <input class="btn"
+                                           style="background: #2f89fc; color: white; margin-right: 5px "
+                                           type="submit" value="Tìm kiếm mã khuyễn mãi">
+                                </form>
+                                <button class="btn btn-success" data-toggle="modal"
+                                        data-target="#exampleModal"
+                                        style="border-radius: 50px; position: absolute; left: 500px; "><i
+                                        class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="card-body">
+                                <% List<DiscountDTO> listSearchDiscount = (List<DiscountDTO>) request.getAttribute("SEARCH_DISCOUNT");
+                                    if (listSearchDiscount != null) {
+                                        List<DiscountDTO> listDiscount = listSearchDiscount;
+                                %>
+                                <table id="table_id" class="table table-bordered table-hover text-align-center">
+                                    <thead class="bg-light align-content-center">
+                                        <tr>
+                                            <th>Mã khuyến mãi</th>
+                                            <th>Chủ đề</th>
+                                            <th>Mô tả</th>
+                                            <th>Phần trăm khuyến mãi</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày tạo mã</th>
+                                            <th>Ngày hết hạn</th>
+                                            <th>Admin quản lí</th>
+                                            <th>Cập nhật</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-content-around">
+                                        <% int count = 1;
+                                            for (DiscountDTO discount : listDiscount) {%>
+                                    <form action="UpdateDiscountController" method="GET">
+                                        <tr>
+
+                                            <td><input type="text" name="discountID"
+                                                       value="<%=discount.getDiscountID()%>"
+                                                       class="form-control-plaintext"
+                                                       readonly /></td>
+                                            <td><input type="text" name="title"
+                                                       value="<%=discount.getTitle()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td><textarea class="form-control" name="description" cols="6" rows="6" id="description"> <%=discount.getDescription()%></textarea>
+                                            </td>
+                                            <td><input type="number"
+                                                       name="percentDiscount"
+                                                       value="<%=discount.getPercentDiscount()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td>
+                                                <select name="status">
+                                                    <option selected
+                                                            value="<%=discount.getStatus()%>">
+                                                        <%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%>
+                                                    </option>
+                                                    <option
+                                                        value="<%=Math.abs(discount.getStatus() - 1)%>">
+                                                        <%if (discount.getStatus() == 0) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%>
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" name="createDate"
+                                                       value="<%=discount.getCreateDate()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td><input type="text" name="expiredDate"
+                                                       value="<%=discount.getExpiredDate()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td>
+                                                <%=discount.getAdminID()%>
+                                            </td>
+                                            
+                                               <input type="hidden" name="serviceID"
+                                                       value="<%=discount.getServiceID()%>"
+                                                       class="form-control-plaintext" />
+                                            
+                                            <td><input type="submit"
+                                                       class="btn btn-block btn-outline-success"
+                                                       name="action"
+                                                       value="Update Discount"></td>
+                                        </tr>
+                                    </form>
+                                    <% } %>
+                                    </tbody>
+
+                                </table>
+                                <% } else {
+                                    List<DiscountDTO> listDiscount = listDiscountBySVType;
+                                    if (listDiscount != null) {
+                                        if (!listDiscount.isEmpty()) {
+                                %>
+
+
+                                <table id="serviceTB"
+                                       class="table table-image table-bordered table-hover text-align-center">
+                                    <thead class="bg-light align-content-center">
+                                        <tr>
+                                            <th>Mã khuyến mãi</th>
+                                            <th>Chủ đề</th>
+                                            <th>Mô tả</th>
+                                            <th>Phần trăm khuyến mãi</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày tạo mã</th>
+                                            <th>Ngày hết hạn</th>
+                                            <th>Admin quản lí</th>
+                                            <th>Cập nhật</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-content-around">
+                                        <% int count = 1;
+                                            for (DiscountDTO discount
+                                                    : listDiscount) {%>
+                                    <form action="UpdateDiscountController"
+                                          method="GET">
+                                        <tr>
+                                            <td><input type="text"
+                                                       name="discountID"
+                                                       value="<%=discount.getDiscountID()%>"
+                                                       class="form-control-plaintext"
+                                                       readonly /></td>
+                                            <td><input type="text" name="title"
+                                                       value="<%=discount.getTitle()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td><textarea class="form-control" name="description" cols="6" rows="6" id="description"> <%=discount.getDescription()%></textarea>
+                                            </td>
+                                            <td><input type="number"
+                                                       name="percentDiscount"
+                                                       value="<%=discount.getPercentDiscount()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td>
+                                                <select name="status">
+                                                    <option selected
+                                                            value="<%=discount.getStatus()%>">
+                                                        <%if (discount.getStatus() == 1) {%>Đang khuyến mại
+                                                        <%} else {%>Đã hết
+                                                        hạn<%}%>
+                                                    </option>
+                                                    <option
+                                                        value="<%=Math.abs(discount.getStatus() - 1)%>">
+                                                        <%if (discount.getStatus() == 0) {%>Đang khuyến mại
+                                                        <%} else {%>Đã hết
+                                                        hạn<%}%>
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" name="createDate"
+                                                       value="<%=discount.getCreateDate()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td><input type="text" name="expiredDate"
+                                                       value="<%=discount.getExpiredDate()%>"
+                                                       class="form-control-plaintext" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name="adminID"
+                                                       value="<%=discount.getAdminID()%>"
+                                                       class="form-control-plaintext" />
+
+                                            </td>
+                                          
+                                                <input type="hidden" name="serviceID"
+                                                       value="<%=discount.getServiceID()%>"
+                                                       class="form-control-plaintext" />
+
+                                        
+                                            <td><input type="submit"
+                                                       class="btn btn-block btn-outline-success"
+                                                       name="action"
+                                                       value="Update Discount">
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    </tbody>
+
+                                    <% } %>
+                                </table>
+                                <% }
+                                        }
+                                    }
+                                %>
+                            </div>
+                        </div>
+
+                    </div>
+                
+                
+                
+                
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -239,7 +498,12 @@
             </div>
         </div>
     </div>
-
+     <script src="ckeditor/ckeditor.js"></script>
+       <script>
+             var editor = CKEDITOR.replace('description');
+            CKFinder.setupCKEditor(editor, 'ckfinder/');
+            data["description"] = editor.getData();
+        </script>    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

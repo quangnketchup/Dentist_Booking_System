@@ -14,6 +14,29 @@ public class DiscountDTO {
     String createDate;
     String expiredDate;
     int adminID;
+    int serviceID;
+
+    public int getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(int serviceID) {
+        this.serviceID = serviceID;
+    }
+
+    public DiscountDTO(int discountID, String title, String description, int percentDiscount, int status, String createDate, String expiredDate, int adminID, int serviceID) {
+        this.discountID = discountID;
+        this.title = title;
+        this.description = description;
+        this.percentDiscount = percentDiscount;
+        this.status = status;
+
+        this.createDate = createDate;
+        this.expiredDate = expiredDate;
+        this.adminID = adminID;
+        this.serviceID = serviceID;
+    }
+    
     public DiscountDTO() {
     }
     
