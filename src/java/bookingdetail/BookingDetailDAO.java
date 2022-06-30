@@ -23,8 +23,8 @@ public class BookingDetailDAO {
     private static final String CHECK_VALID = "select bk.BookingDetailID from tblBookingDetails bk, tblSchedules s where bk.scheduleID=s.scheduleID and s.slot =? and s.day like ? and  doctorID = ?";
     private static final String GET_BOOKING_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE patientID = ?";
     private static final String CANCEL_BOOKING = "update tblBookingDetails set status= 0 where scheduleID = ?";
-    private static final String GET_INCOME="SELECT SUM(bk.expectedFee) as money FROM tblBookingDetails bk, tblSchedules s WHERE  bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
-    private static final String NUMBER_BOOKING="SELECT COUNT(bk.BookingDetailID) as nb FROM tblBookingDetails bk,tblSchedules s WHERE  bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
+    private static final String GET_INCOME="SELECT SUM(bk.expectedFee) as money FROM tblBookingDetails bk, tblSchedules s WHERE bk.status=2 and bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
+    private static final String NUMBER_BOOKING="SELECT COUNT(bk.BookingDetailID) as nb FROM tblBookingDetails bk,tblSchedules s WHERE bk.status=2 and bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
     private static final String NUMBER_FB="SELECT COUNT(serviceFeedBackID) as nb FROM tblPatientFeedbacks WHERE MONTH(dateFeedback)=?";
     
     

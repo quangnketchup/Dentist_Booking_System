@@ -14,12 +14,14 @@ import java.util.logging.Logger;
 
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 
 @WebServlet(name= "ShowDoctorController", urlPatterns = {"/ShowDoctorController"})
 public class ShowDoctorController extends HttpServlet {
 
-    private static final String ERROR ="login.jsp";
-    private static final String ADMIN = "admin_Doctor.jsp";
+    private static final String ERROR ="index_admin.jsp";
+    private static final String ADMIN = "index_doctor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -30,10 +32,12 @@ public class ShowDoctorController extends HttpServlet {
             List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor();
             HttpSession session = request.getSession();
             admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
-
+            ServiceTypeDAO svTypeDAO =new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = svTypeDAO.getListServiceType();
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listDoctor != null) {
-                    session.setAttribute("LIST_DOCTOR", listDoctor);
+                    request.setAttribute("listServiceType", listServiceType);
+                    request.setAttribute("LIST_DOCTOR", listDoctor);
                     url = ADMIN;
                 }
             }

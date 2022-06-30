@@ -4,22 +4,20 @@
  */
 package controller.admins;
 
-
-import doctors.DoctorDAO;
-import doctors.DoctorDTO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
 
 /**
  *
  * @author Doan
  */
-public class SearchDoctorController extends HttpServlet {
+public class UpdateImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,24 +28,29 @@ public class SearchDoctorController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static final String ERROR = "error.jsp";
+    public static final String SUCCESS = "DetailServiceAdminController";
     
-        public static final String ERROR = "index_doctor.jsp";
-        public static final String SUCCESS = "index_doctor.jsp";
-        
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url=ERROR;
         try {
-            DoctorDAO dao=new DoctorDAO();
-            String name=request.getParameter("fullName");
-            List<DoctorDTO>list= dao.searchDoctorByName(name);  
-            request.setAttribute("SEARCH_DOCTOR", list);
-                url=SUCCESS;          
+            int serviceID= Integer.parseInt(request.getParameter("serviceID"));
+            String img= request.getParameter("image");
+            ServiceImageDTO image= new ServiceImageDTO(img, serviceID);
+            ServiceImageDAO dao= new ServiceImageDAO();
+            boolean check=dao.createImage(image);
+            if(check){
+                request.setAttribute("serviceID", serviceID);
+                url=SUCCESS;
+                
+            }
+            
         } catch (Exception e) {
-            log("Error at ShowServiceController: " + e.toString());
+            log("Error at Update Service Image Controller"+ e);
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

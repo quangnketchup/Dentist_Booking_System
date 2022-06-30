@@ -68,7 +68,7 @@ public class LoadAdminController extends HttpServlet {
             request.setAttribute("numBooking", numBooking);
             request.setAttribute("IncomeMonthly", money);
             request.setAttribute("LIST_SERVICE", listService);                
-            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+            session.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
             url = SUCCESS;
        
         } catch (Exception e) {

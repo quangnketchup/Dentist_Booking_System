@@ -5,6 +5,7 @@
  */
 package controller.admins;
 
+import admins.AdminDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import serviceTypes.ServiceTypeDAO;
 import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
@@ -27,8 +29,8 @@ import services.ServiceError;
  */
 public class AddServiceController extends HttpServlet {
 
-    public static final String ERROR = "home.jsp";
-    public static final String SUCCESS = "ShowServiceController";
+    public static final String ERROR = "index_admin.jsp";
+    public static final String SUCCESS = "LoadServiceController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -36,22 +38,18 @@ public class AddServiceController extends HttpServlet {
         String url = ERROR;
         ServiceError serviceError = new ServiceError();
         try {
-            String serviceTypeName = request.getParameter("serviceTypeName");
+            int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
+            String serviceTypeName= request.getParameter("serviceTypeName");
             String serviceName = request.getParameter("serviceName");
             String description = request.getParameter("description");
-            String image = request.getParameter("image");
+
+            HttpSession session = request.getSession();
+            AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
+            int adminID=loginAdmin.getAdminID();
             int status = 1;
-            float servicePrice = Float.parseFloat(request.getParameter("servicePrice"));
+            int servicePrice = Integer.parseInt(request.getParameter("servicePrice"));
 //            check validation here: checkId, name, role , pass,...password
-            boolean check = true;
-            if (serviceTypeName.trim().length() == 0 || serviceTypeName.trim().length() > 50) {
-                serviceError.setServiceTypeNameError("Tên loai dich vu phải từ [1,50]");
-                check = false;
-            }
-            if (image.trim().length() == 0) {
-                serviceError.setImageError("Không thể để trống image");
-                check = false;
-            }
+            boolean check = true;      
             if (servicePrice < 0) {
                 serviceError.setServicePriceError("Giá tiền không âm");
                 check = false;
@@ -59,11 +57,13 @@ public class AddServiceController extends HttpServlet {
             ServiceDAO dao = new ServiceDAO();
             ServiceTypeDAO svDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listSV = svDao.getListServiceType();
-            ServiceDTO service = new ServiceDTO();
+            ServiceDTO service = new ServiceDTO(serviceTypeID,serviceName,servicePrice,description,adminID,1);
 
             if (check) {
                 boolean checkUpdate = dao.createService(service);
                 url = SUCCESS;
+                request.setAttribute("serviceTypeID", serviceTypeID);
+                request.setAttribute("serviceTypeName", serviceTypeName);
                 request.setAttribute("SSMSG", "Chỉnh sữa thành công !");
             } else {
                 request.setAttribute("SSMSG", "Chỉnh sữa thất bại !");

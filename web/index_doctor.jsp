@@ -4,6 +4,7 @@
     Author     : Doan
 --%>
 
+<%@page import="doctors.DoctorDTO"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="java.util.List"%>
@@ -77,13 +78,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
                  <%
-                                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                   List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                     if (listServiceType != null) {
                                         for (ServiceTypeDTO svType : listServiceType) {
                                 %>
-              
-                       
-                        <a class="collapse-item" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                                
+                        <div class="row service-item">
+                       <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                        </div>
                                 <%
                                         }
                                     }
@@ -154,7 +156,10 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
+                        <form class="form-inline my-2 my-lg-0" action="SearchDoctorController">
+                    <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên bác sĩ" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                  </form>
                         
                               
 
@@ -197,8 +202,66 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                <% List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
+                   List<DoctorDTO>listSearch = (List<DoctorDTO>) request.getAttribute("SEARCH_DOCTOR");
+                %>
+                <div class="container">
+                    <!-- Danh sach doctor search theo ten -->
+                    <%if(listSearch !=null){%>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Họ và Tên</th>
+                        <th>Chuyên khoa</th>                        
+                        <th>Gmail</th>
+                        <th>Số điện thoại</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <%for(DoctorDTO dr: listSearch){%>
+                      <tr>
+                        <td><%=dr.getFullName()%></td>
+                        <td><%=dr.getServiceTypeName()%></td>
+                        <td><%=dr.getGmail()%></td>
+                        <td>0<%=dr.getPhone()%></td>
+                        <td><a href="DetailDoctorAdminController?doctorID=<%=dr.getDoctorID()%>">Chi tiết</a></td>
+                      </tr>
+                      <%}%>
+                    </tbody>
+                  </table>
+               <%}else{%> 
+                    <!-- Danh sach tat ca doctor -->
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Họ và Tên</th>
+                        <th>Chuyên khoa</th>                        
+                        <th>Gmail</th>
+                        <th>Số điện thoại</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <%for(DoctorDTO dr:listDoctor){%>
+                      <tr>
+                        <td><%=dr.getFullName()%></td>
+                        <td><%=dr.getServiceTypeName()%></td>
+                        <td><%=dr.getGmail()%></td>
+                        <td>0<%=dr.getPhone()%></td>
+                        <td><a href="DetailDoctorAdminController?doctorID=<%=dr.getDoctorID()%>">Chi tiết</a></td>
+                      </tr>
+                      <%}%>
+                    </tbody>
+                  </table>
+                <%}%>
+                
+                
+                
+                
+                
 
-
+                </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
