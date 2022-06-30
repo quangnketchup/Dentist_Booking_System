@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="feedbacks.FeedbackDTO"%>
 <%@page import="serviceImage.ServiceImageDTO"%>
@@ -168,15 +169,16 @@
                                         int discountOfService = (int) request.getAttribute("DISCOUNT_OF_SERVICE");
                                         DiscountDTO discount = (DiscountDTO) request.getAttribute("DISCOUNT_BY_ID");
                                         if (discount.getDiscountID() > 0) {
-                                    %>
-                                    <div class="product-price-discount"><span><%=discountOfService%>VND</span><span class="line-through"><%=service.getServicePrice()%>VND</span></div>
-
+                                    %>              
+                                    <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                    <div class="product-price-discount"><span><%=formatter.format(discountOfService)%>VND</span><span class="line-through">VND</span></div>
                                     <p><%=discount.getDescription()%></p>
                                     <p>Từ ngày: <%=discount.getCreateDate()%></p>
                                     <p>Đến ngày: <%=discount.getExpiredDate()%></p>
                                 </div>
                                 <%} else {%>
-                                <div class="product-price-discount"><span><%=service.getServicePrice()%>VND</span></div>
+                                <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                <div class="product-price-discount"><span><%=formatter.format(service.getServicePrice())%>VND</span></div>
                                 <%}%>
                             </div>
                         </div>

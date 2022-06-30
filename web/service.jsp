@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="serviceImage.ServiceImageDTO"%>
 <%@page import="patients.PatientDTO"%>
 <%@page import="services.ServiceDTO"%>
@@ -141,7 +142,8 @@
                                     </div>
                                     <%break;
                                         }%>
-                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
+                                        <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND</p>
                                     <a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
