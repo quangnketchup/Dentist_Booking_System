@@ -25,6 +25,7 @@ public class DoctorDAO {
     
      
     
+    
     public DoctorDTO getDoctorByID(int id) throws SQLException{
         DoctorDTO dr = new DoctorDTO();
         Connection conn = null;

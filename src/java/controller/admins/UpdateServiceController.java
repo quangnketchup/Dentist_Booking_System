@@ -5,20 +5,22 @@
  */
 package controller.admins;
 
+import admins.AdminDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import services.ServiceDAO;
 import services.ServiceDTO;
 import services.ServiceError;
 
 public class UpdateServiceController extends HttpServlet {
 
-    public static final String ERROR = "admin_Service.jsp";
-    public static final String SUCCESS = "ShowServiceController";
+    public static final String ERROR = "error.jsp";
+    public static final String SUCCESS = "DetailServiceAdminController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -27,13 +29,15 @@ public class UpdateServiceController extends HttpServlet {
         String url = ERROR;
         ServiceError serviceError = new ServiceError();
         try {
+            HttpSession session = request.getSession();
+            AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
             String serviceName =request.getParameter("serviceName");
             int servicePrice =Integer.parseInt(request.getParameter("servicePrice"));
             String description = request.getParameter("description");
             int status= Integer.parseInt(request.getParameter("status"));
             int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
-            int adminID = Integer.parseInt(request.getParameter("adminID"));
+            int adminID = loginAdmin.getAdminID();
             
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
@@ -54,6 +58,7 @@ public class UpdateServiceController extends HttpServlet {
                 boolean checkUpdate = dao.updateService(service);
                 if(checkUpdate) {
                     url = SUCCESS;
+                    request.setAttribute("serviceID", serviceID);
                     request.setAttribute( "SSMSG","Chỉnh sữa thành công !");
                 }
             } else {

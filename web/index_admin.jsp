@@ -26,7 +26,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -68,6 +68,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                
                 <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -75,15 +76,21 @@
                 </a>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
+                       <div class="row">
+                            <h6 class="collapse-header">Các loại dịch vụ</h6>
+                        <a href="#"><i class="fa-solid fa-circle-plus"></i></a>
+                        </div>
                  <%
-                                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                     if (listServiceType != null) {
                                         for (ServiceTypeDTO svType : listServiceType) {
                                 %>
               
                        
-                        <a class="collapse-item" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                       <div class="row service-item">
+                                    <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                                    <a class="col-sm service-delete float-right" href="#"><i class="fa-solid fa-trash"></i></a>
+                                </div>
                                 <%
                                         }
                                     }
@@ -96,7 +103,7 @@
             <hr class="sidebar-divider">
             
             <li class="nav-item">
-                <a class="nav-link collapsed" href="index_doctor.jsp">
+                <a class="nav-link collapsed" href="ShowDoctorController">
                     <i class="fas fa-fw fa-bell"></i>
                     <span>Bác Sĩ</span>
                 </a>

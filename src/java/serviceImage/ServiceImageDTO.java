@@ -11,7 +11,21 @@ package serviceImage;
 public class ServiceImageDTO {
     private String image;
     private int serviceID;
+    private int imageID;
 
+    public int getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(int imageID) {
+        this.imageID = imageID;
+    }
+
+    public ServiceImageDTO(String image, int serviceID, int imageID) {
+        this.image = image;
+        this.serviceID = serviceID;
+        this.imageID = imageID;
+    }
     public ServiceImageDTO(String image, int serviceID) {
         this.image = image;
         this.serviceID = serviceID;

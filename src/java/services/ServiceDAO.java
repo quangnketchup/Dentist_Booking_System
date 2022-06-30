@@ -18,11 +18,11 @@ import services.ServiceDTO;
 
 public class ServiceDAO {
 
-    private static final String CREATE_SERVICE = "INSERT tblServices ( [serviceName], [servicePrice], [image], [description], [status],[adminID], [serviceTypeName]) VALUES (?,?,?,?,?,?,?)";
+    private static final String CREATE_SERVICE = "INSERT tblServices ( [serviceName], [servicePrice], [description], [status],[adminID], [serviceTypeID]) VALUES (?,?,?,?,?,?)";
     private static final String SEARCH_SERVICE_CONTROLLER = "SELECT s.serviceID, s.serviceTypeID, s.serviceName, s.servicePrice, s.description, s.status, s.adminID FROM tblServices s WHERE serviceName like ?";
     private static final String GET_ALL_LIST_SERVICE = "SELECT  * FROM tblServices";
     private static final String SEARCH_SERVICE_CONTROLLER_BY_ID = "SELECT s.serviceID, st.serviceTypeID, s.serviceName, s.servicePrice, s.description, s.status, s.adminID FROM tblServices s, tblServiceTypes st WHERE st.serviceTypeID = s.serviceTypeID AND s.serviceID = ?";
-   
+    
     public ServiceDTO getServiceById(int id) throws SQLException {
         ServiceDTO sv = new ServiceDTO();
         Connection conn = null;
@@ -69,13 +69,15 @@ public class ServiceDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " UPDATE tblServices SET serviceName=?, image =?, servicePrice =?, status = ?"
+                String sql = " UPDATE tblServices SET serviceName=?, servicePrice =?, description=?, status = ?, adminID=?"
                         + " WHERE serviceID =? ";
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, service.getServiceName());
-                pstm.setInt(3, (int) service.getServicePrice());
+                pstm.setInt(2, (int) service.getServicePrice());
+                pstm.setString(3,  service.getDescription());
                 pstm.setInt(4, service.getStatus());
-                pstm.setInt(5, service.getServiceID());
+                pstm.setInt(5, service.getAdminID());
+                pstm.setInt(6, service.getServiceID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -218,12 +220,11 @@ public class ServiceDAO {
             if (conn != null) {
                 pstm = conn.prepareStatement(CREATE_SERVICE);
                 pstm.setString(1, service.getServiceName());
-                pstm.setFloat(2, service.getServicePrice());
-//                pstm.setString(3, service.getImage());
-                pstm.setString(4, service.getDescription());
-                pstm.setInt(5, service.getStatus());
-                pstm.setInt(6, service.getAdminID());
-                pstm.setString(7, service.getServiceTypeName());
+                pstm.setInt(2, service.getServicePrice());
+                pstm.setString(3, service.getDescription());
+                pstm.setInt(4, service.getStatus());
+                pstm.setInt(5, service.getAdminID());
+                pstm.setInt(6, service.getServiceTypeID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
