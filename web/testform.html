@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/styles/core.css">
+    <link rel="stylesheet" type="text/css" href="vendor/styles/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/styles/jquery.steps.css">
+    <link rel="stylesheet" type="text/css" href="vendor/styles/style.css">
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="home.jsp" class="nav-link sa">Trang chủ</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
+                
+                    <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
+                    <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                    <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                     aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                            <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                        </div>
+                    </li>
+                    <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+
+                <div class="pd-20 card mb-30">
+                    <div class="clearfix">
+                        <h4 class="text-blue h4">Vui Lòng Chọn Lịch Khám:</h4>
+                        <p class="mb-30">Bệnh Nhân: Nguyễn A</p>
+                    </div>
+                    <div class="wizard-content">
+                        <form class="tab-wizard wizard-circle wizard">
+                            <h5>Loại Dịch Vụ</h5>
+                            <section style="height: 200px">
+                                <div class="card card-body">
+                                    <div class=" align-content-center pb-5">
+                                        <span><strong>Vui Lòng Chọn Loại Dịch Vụ:</strong></span>
+                                    </div>
+                                    <div class="row col-12 pl-3">
+                                        <div class="col-3">
+                                            <a href="#" class="btn btn-primary">Dich Vu 1</a>
+                                        </div>
+                                        <div class="col-3">
+                                            <a href="#" class="btn btn-primary">Dich Vu 1</a>
+                                        </div>
+                                        <div class="col-3 ">
+                                            <a href="#" class="btn btn-primary">Dich Vu 1</a>
+                                        </div>
+                                        <div class="col-3 ">
+                                            <a href="#" class="btn btn-primary">Dich Vu 1</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Step 2 -->
+                            <h5>Bác Sĩ</h5>
+                            <section>
+                                <div class="">
+                                    <table class="table table-bordered fl-table">
+                                        <thead>
+                                            <tr>
+                                                <th>BÁC SĨ</th>
+                                                <th>ĐẶT LỊCH</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>DR A</strong></td>
+                                                <td><input type="radio" name="doctorID"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DR A</strong></td>
+                                                <td><input type="radio" name="doctorID"></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </section>
+                            <!-- Step 3 -->
+                            <h5>Dịch Vụ</h5>
+                            <section>
+                                <div class="">
+                                    <table class="table table-bordered fl-table">
+                                        <thead>
+                                            <tr>
+                                                <th>DỊCH VỤ</th>
+                                                <th>GIÁ</th>
+                                                <th>CHỌN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td><strong>Dịch Vụ 1</strong></td>
+                                                <td>123</td>
+                                                <td><input type="radio" name="svID"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dịch Vụ 1</strong></td>
+                                                <td>123</td>
+                                                <td><input type="radio" name="svID"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dịch Vụ 1</strong></td>
+                                                <td>123</td>
+                                                <td><input type="radio" name="svID"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dịch Vụ 1</strong></td>
+                                                <td>123</td>
+                                                <td><input type="radio" name="svID"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dịch Vụ 1</strong></td>
+                                                <td>123</td>
+                                                <td><input type="radio" name="svID"> </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <!-- Step 4 -->
+                            <h5>Chọn Lịch Hẹn</h5>
+                            <section>
+                                <table class="fl-table table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>MON</th>
+                                            <th>TUE</th>
+                                            <th>WED</th>
+                                            <th>THU</th>
+                                            <th>FRI</th>
+                                            <th>SAT</th>
+                                            <th>SUN</th>
+                                        </tr>
+                                        <tr id="day">
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                            <th class="day"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                7:00 - 9:00 am
+                                            </td>
+                                            <td class="ngay1 slot1"></td>
+                                            <td class="ngay2 slot1"></td>
+                                            <td class="ngay3 slot1"></td>
+                                            <td class="ngay4 slot1"></td>
+                                            <td class="ngay5 slot1"></td>
+                                            <td class="ngay6 slot1"></td>
+                                            <td class="ngay7 slot1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                9:00 - 11:00 am
+                                            </td>
+                                            <td class="ngay1 slot2"></td>
+                                            <td class="ngay2 slot2"></td>
+                                            <td class="ngay3 slot2"></td>
+                                            <td class="ngay4 slot2"></td>
+                                            <td class="ngay5 slot2"></td>
+                                            <td class="ngay6 slot2"></td>
+                                            <td class="ngay7 slot2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                13:00 - 15:00 am
+                                            </td>
+                                            <td class="ngay1 slot3"></td>
+                                            <td class="ngay2 slot3"></td>
+                                            <td class="ngay3 slot3"></td>
+                                            <td class="ngay4 slot3"></td>
+                                            <td class="ngay5 slot3"></td>
+                                            <td class="ngay6 slot3"></td>
+                                            <td class="ngay7 slot3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                15:00 - 17:00 am
+                                            </td>
+                                            <td class="ngay1 slot4"></td>
+                                            <td class="ngay2 slot4"></td>
+                                            <td class="ngay3 slot4"></td>
+                                            <td class="ngay4 slot4"></td>
+                                            <td class="ngay5 slot4"></td>
+                                            <td class="ngay6 slot4"></td>
+                                            <td class="ngay7 slot4"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                            <h5>Xác Nhận</h5>
+                            <section>
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Thông tin lịch khám</h5>
+                                </div>
+                                <form action="SubmitBooking" id="form-submit">
+                                    <div class="modal-body">
+
+                                        <div class="doctor-booking">
+                                            <label for="doctor">Bác sĩ: </label>
+                                            DR A
+                                            <input name="doctorID" type="hidden" value="" readonly>
+                                        </div>
+                                        <div class="service-booking">
+                                            <label for="sv">Dịch vụ: </label>
+                                            Dịch Vụ 1
+                                            <input name="serviceID" type="hidden"
+                                                value="<%=serviceBk.getServiceID()%>"></br>
+
+                                            <label for="discount">Hiện đang có chương trình giảm giá: </label>
+                                            <input name="discount" type="hidden" value="<%=discount.getDiscountID()%>">
+
+                                            </br>
+                                            <input name="expectedFee" readonly type="hidden"
+                                                value="<%=serviceBk.getServicePrice() - (serviceBk.getServicePrice() * discount.getPercentDiscount()) / 100%>">
+                                            <label for="gia tien">Mức phí dự định: </label>
+                                            100000<span> VND</span>
+                                            <input type="hidden" name="patientID"
+                                                value="<%=loginPatient.getPatientID()%>">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input class="btn btn-primary" type="submit" value="Đăng kí đặt lịch"
+                                            onclick="">
+                                    </div>
+                                </form>
+
+                            </section>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <!-- success Popup html Start -->
+                <div class="modal fade" id="success-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h3 class="mb-20">Form Submitted!</h3>
+                                <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- success Popup html End -->
+            </div>
+            <div class="footer-wrap pd-20 mb-20 card-box">
+                DentaCare
+            </div>
+        </div>
+    </div>
+    <!-- js -->
+    <script src="vendor/script/core.js"></script>
+    <script src="vendor/script/script.min.js"></script>
+    <script src="vendor/script/process.js"></script>
+    <script src="vendor/script/layout-settings.js"></script>
+    <script src="vendor/script/jquery.steps.js"></script>
+    <script src="vendor/script/steps-setting.js"></script>
+</body>
+
+</html>
