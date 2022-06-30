@@ -116,10 +116,13 @@
 <body>
     <%
             String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-        List<BookingDetailDTO> listBooking= (List<BookingDetailDTO>)request.getAttribute("ListBooking");
-     List<scheduleDTO> listSchedule =(List<scheduleDTO>)request.getAttribute("listSchedule");
      List<DoctorDTO>listDoctor = (List<DoctorDTO>) request.getAttribute("listDoctor");
      List<ServiceDTO>listService = (List<ServiceDTO>) request.getAttribute("listService");
+     List<BookingDetailDTO> listFinishBooking= (List<BookingDetailDTO>)request.getAttribute("listFinishBooking");
+     List<scheduleDTO> listFinishSchedule =(List<scheduleDTO>)request.getAttribute("listFinishSchedule");
+     
+     List<BookingDetailDTO> listDuringBooking= (List<BookingDetailDTO>)request.getAttribute("listDuringBooking");
+     List<scheduleDTO> listDuringSchedule =(List<scheduleDTO>)request.getAttribute("listDuringSchedule");
      int demm=0;
     %>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -153,7 +156,7 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-                    <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal"
+                    <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" data-toggle="modal"
                             data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
                 </ul>
             </div>
@@ -267,15 +270,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                             <%for(BookingDetailDTO bk:listBooking){%> 
-                                 <%for(scheduleDTO sche:listSchedule){%>
+                             <%for(BookingDetailDTO bk: listDuringBooking){%> 
+                             <%
+                                 demm++;%>
+                                 <%for(scheduleDTO sche: listDuringSchedule){%>
                                  <%if(bk.getScheduleID()==sche.getScheduleID()){%>     
                                  <%for(DoctorDTO dr:listDoctor){  %>                           
                                  <%if(sche.getDoctorID()==dr.getDoctorID()){%>
                                  <%for(ServiceDTO sv:listService){%>
                                  <%if(bk.getServiceID()==sv.getServiceID()){%>
-                                 <%if(bk.getStatus()==1){
-                                 demm++;%>
+                                 
                             <tr>
 
                                 <td>
@@ -331,16 +335,17 @@
                                     <button class="btn btn-danger delete1">Hủy</button>
                                 </td>
                             </tr>
-                             <%}}}}}}}}%>
-                             <%for(BookingDetailDTO bk:listBooking){%> 
-                                 <%for(scheduleDTO sche:listSchedule){%>
+                             <%}}}}}}}%>
+                             <%for(BookingDetailDTO bk: listFinishBooking){%> 
+                              <%
+                                 demm++;%>
+                                 <%for(scheduleDTO sche: listFinishSchedule){%>
                                  <%if(bk.getScheduleID()==sche.getScheduleID()){%>     
                                  <%for(DoctorDTO dr:listDoctor){%>   
                                  <%if(sche.getDoctorID()==dr.getDoctorID()){%>
                                  <%for(ServiceDTO sv:listService){%>
                                  <%if(bk.getServiceID()==sv.getServiceID()){%>
-                                 <%if(bk.getStatus()==2){
-                                 demm++;%>
+                                
                                  <tr>
                                 <td>
                                     <div
@@ -440,7 +445,7 @@
             </div>
         </div>
 
-                               <%}}}}}}}}%>
+                               <%}}}}}}}%>
                             
                              
 

@@ -166,7 +166,7 @@
                                                         demm++;%>
                                                 <tr>
                                                     <td><strong><%=sv.getServiceName()%></strong></td>    
-                                                    <td><%=sv.getServicePrice()%></td>
+                                                    <td><%=sv.getServicePrice()%><span> VND</span></td>
                                                     <td><input type="radio" name="svID" <%if (serviceBk != null && sv.getServiceID() == serviceBk.getServiceID()) {%>checked<%} else {
                                                                    if (demm == 1) {%> checked <%}
                                                                        }%> value="<%=sv.getServiceID()%>"> </td>                     

@@ -50,24 +50,26 @@ public class ShowBookingPatientController extends HttpServlet {
             BookingDetailDAO bkDetailDAO= new BookingDetailDAO();
             patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
             int id=loginPatient.getPatientID();
-            List<BookingDetailDTO> listBooking=bkDetailDAO.getBookingDetailByPatientID(id);
+            List<BookingDetailDTO> listDuringBooking=bkDetailDAO.getBookingDuringDetailByDoctorID(id);
+            List<BookingDetailDTO> listFinishBooking=bkDetailDAO.getBookingFinishDetailByDoctorID(id);
             scheduleDAO sche = new scheduleDAO();
             DoctorDAO drDao=new DoctorDAO();
             ServiceDAO svDao= new ServiceDAO();
-            List<scheduleDTO>listSchedule =new ArrayList<>();
-            for(BookingDetailDTO bkDetal:listBooking){
-                listSchedule.add(sche.getScheduleByScheduleID(bkDetal.getScheduleID()));
-                int idz=bkDetal.getScheduleID();
-                int mm =idz;
+            List<scheduleDTO>listDuringSchedule =new ArrayList<>();
+            List<scheduleDTO>listFinishSchedule =new ArrayList<>();
+            for(BookingDetailDTO bkDetal:listDuringBooking){
+                listDuringSchedule.add(sche.getScheduleByScheduleID(bkDetal.getScheduleID()));       
             }
-            for(scheduleDTO schem:listSchedule){
-                int idz=schem.getScheduleID();
-                int mm =idz;
+            for(BookingDetailDTO bkDetal:listFinishBooking){
+                listFinishSchedule.add(sche.getScheduleByScheduleID(bkDetal.getScheduleID()));       
             }
+          
             List<ServiceDTO>listService=svDao.getAllListService();
             List<DoctorDTO>listDoctor = drDao.getAllListDoctor();
-            request.setAttribute("ListBooking", listBooking);
-            request.setAttribute("listSchedule", listSchedule);
+            request.setAttribute("listDuringBooking", listDuringBooking);
+            request.setAttribute("listDuringSchedule", listDuringSchedule);
+            request.setAttribute("listFinishBooking", listFinishBooking);
+            request.setAttribute("listFinishSchedule", listFinishSchedule);
             request.setAttribute("listDoctor", listDoctor);
             request.setAttribute("listService", listService);
             url=TRUE;
