@@ -48,8 +48,8 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="HomeController" class="nav-link">Trang chủ</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">Thông tin</a></li>
+                        <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
                         <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
@@ -64,11 +64,11 @@
                                 %>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="LoadDoctorController" class="nav-link">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+                        <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
+                        <li class="nav-item"><a href="blog.html" class="nav-link sa">Blog</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link sa">Liên hệ</a></li>
                             <%if (loginPatient == null) {%>
-                        <li class="nav-item"><a href="login.html" class="nav-link">Đăng nhập</a></li>
+                        <li class="nav-item"><a href="login.html" class="nav-link sa">Đăng nhập</a></li>
                             <%} else {%> 
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
@@ -103,8 +103,8 @@
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-5">
                     <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-3">Đội Ngũ Y Bác Sĩ Nha Khoa</h2>
-                        <p>Tận Tâm - Chuyên Nghiệp - Trách Nhiệm</p>
+                        <h2 class="mb-3"><strong>Đội Ngũ Y Bác Sĩ Nha Khoa</strong></h2>
+                        <p><strong>Tận Tâm - Chuyên Nghiệp - Trách Nhiệm</strong></p>
                     </div>
                 </div>
                 <%
@@ -124,7 +124,7 @@
                             <span class="position"><%=doctor.getServiceTypeName()%></span>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-light" style="border-radius: 25px"><a class=" nav-link text-info" data-toggle="modal" onclick='showDetail()'data-target="#doctor<%=doctor.getDoctorID()%>"><span>Chi Tiết</span></a></button>
+                            <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info" data-toggle="modal" onclick='showDetail()'data-target="#doctor<%=doctor.getDoctorID()%>"><strong>Chi Tiết</strong></a></button>
                         </div>
                     </div>
                 </div>
@@ -277,8 +277,8 @@
             for (DoctorDTO doctor : listDoctorDTO) {
     %>
     <div  class="modal fade" id="doctor<%=doctor.getDoctorID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-xl " role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-xl " role="document">
+            <div class="modal-content " >
                 <div class="modal-header">
                     <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT BÁC SĨ</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -288,29 +288,25 @@
                 <div class="modal-body1 col-12">
                     <div class="row">
                         <div class="col-md-6 infomation" style="border-right:4px solid #227093">
-
                             <div class="form-group">
                                 <img style="object-fit: contain" src="<%=doctor.getImage()%>">
                             </div>
                             <div class="form-group ">
-                                <label for="name" ><strong><h2><%=doctor.getFullName()%></h2></strong></label>
+                                <label><strong><h2><%=doctor.getFullName()%></h2></strong></label>
                             </div>
                             <div class="form-group ">
-                                <label for="name" ><strong><h2><%=doctor.getServiceTypeName()%></h2></strong></label>
+                                <label>Chuyên Khoa: <strong><span class="text-primary"><%=doctor.getServiceTypeName()%></span></strong></label>
                             </div>
                         </div>
                         <div class="col-md-6  infomation">
                             <div class="form-group">
-                                <label for="appointment_email" style="color:black"><h5 class="head">Mô tả: </h5></label>
-                                <div><%=doctor.getAchievement()%></div>
+                                <label class="pt-2" for="appointment_email" style="color:black"><h5>TRÌNH ĐỘ CHUYÊN MÔN</h5></label>
+                                <div class="pt-2"><p class="text-primary "><%=doctor.getAchievement()%></p></div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
     <%}
@@ -320,71 +316,7 @@
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalRequestLabel">Đặt lịch khám</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#">
-                        <div class="form-group">
-                            <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
-                            <input type="text" class="form-control" id="appointment_name" placeholder="Họ tên người đặt">
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="appointment_email" class="text-black">Email</label> -->
-                            <input type="text" class="form-control" id="appointment_email" placeholder="Email">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                                    <input type="text" class="form-control appointment_date" placeholder="Ngày đặt">
-                                </div>    
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                                    <input type="text" class="form-control appointment_time" placeholder="Giờ khám">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select name="" id="" class="form-control">
-                                        <option value="" class="text-primary">Teeth Whitening</option>
-                                        <option value="" class="text-primary">Teeth CLeaning</option>
-                                        <option value="" class="text-primary">Quality Brackets</option>
-                                        <option value="" class="text-primary">Modern Anesthetic</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <select name="" id="" class="form-control">
-                                    <option value="" class="text-primary">Service2</option>
-                                    <option value="" class="text-primary">Service2</option>
-                                    <option value="" class="text-primary">Service2</option>
-                                    <option value="" class="text-primary">Service2</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Đặt lịch khám" class="btn btn-primary">
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -397,11 +329,7 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/jquery.timepicker.min.js"></script>
     <script src="js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

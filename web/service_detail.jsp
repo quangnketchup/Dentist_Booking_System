@@ -97,7 +97,7 @@
         </section>
 
         <section class="ftco-section">
-            <div class="pd-wrap">
+            
                 <div class="container">
                     <div class="heading-section">
                         <h2>Chi Tiết Dịch Vụ</h2>
@@ -113,7 +113,7 @@
                                     for (ServiceImageDTO Image : listServiceImage) {
                                 %>
                                 <div class="item">
-                                    <img src="<%=Image.getImage()%>" />
+                                    <img style="height: 300px; width: 540px" src="<%=Image.getImage()%>" />
                                 </div>
                                 <%
                                     }%>
@@ -123,16 +123,16 @@
                                     for (ServiceImageDTO Image : listServiceImage) {
                                 %>
                                 <div class="item">
-                                    <img src="<%=Image.getImage()%>" />
+                                    <img  src="<%=Image.getImage()%>" />
                                 </div>
                                 <%}%>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="product-dtl">
+                            <div class="product-dtl ml-5">
                                 <div class="product-info">
-                                    <div class="product-name"><%=service.getServiceName()%></div>
+                                    <h1 class="animate-charcter" style="font-size: 30px"><%=service.getServiceName()%></h1>
                                     <!--lay ratestar cua feedback-->
                                     <div class="reviews-counter">
                                         <div class="rate">
@@ -171,6 +171,7 @@
                                         if (discount.getDiscountID() > 0) {
                                     %>              
                                     <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+<<<<<<< HEAD
                                     <div class="product-price-discount"><span class="line-through"><%=formatter.format(service.getServicePrice())%> VND</span></div>
                                     <div class="product-price-discount"><span><%=formatter.format(discountOfService)%> VND</span></div>
                                     <p><%=discount.getDescription()%></p>
@@ -180,6 +181,24 @@
                                 <%} else {%>
                                 <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
                                 <div class="product-price-discount"><span><%=formatter.format(service.getServicePrice())%> VND</span></div>
+=======
+                                    <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(discountOfService)%>VND</span><span class="line-through">VND</span></div>
+                                    <p style="font-size:20px;font-weight: bolder"><%=discount.getDescription()%></p>
+                                    <div class="row col-12 pl-0">
+                                        <div class="col-md-6">
+                                            <p style="font-size:18px;font-weight: 200">Từ Ngày: <%=discount.getCreateDate()%></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p style="font-size:18px;font-weight: 200">Đến Ngày: <%=discount.getExpiredDate()%></p>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <%} else {%>
+                                <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(service.getServicePrice())%>VND</span></div>
+>>>>>>> 50d0899 (css userpage)
                                 <%}%>
                             </div>
                         </div>
@@ -223,7 +242,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
 
@@ -327,7 +345,7 @@
                         $(document).ready(function () {
                             var slider = $("#slider");
                             var thumb = $("#thumb");
-                            var slidesPerPage = 4; //globaly define number of elements per page
+                            var slidesPerPage = 3; //globaly define number of elements per page
                             var syncedSecondary = true;
                             slider.owlCarousel({
                                 items: 1,
@@ -346,7 +364,7 @@
                                         items: slidesPerPage,
                                         dots: false,
                                         nav: true,
-                                        item: 4,
+                                        item: 3,
                                         smartSpeed: 200,
                                         slideSpeed: 500,
                                         slideBy: slidesPerPage,

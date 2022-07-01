@@ -20,8 +20,6 @@
         <link rel="stylesheet" href="css/magnific-popup.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/ionicons.min.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="css/jquery.timepicker.css">
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
@@ -143,8 +141,13 @@
                                     <%break;
                                         }%>
                                         <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+<<<<<<< HEAD
                                     <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND/1 liệu trình</p>
                                     <a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
+=======
+                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND</p>
+                                    <a class="btn btn-primary" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
+>>>>>>> 50d0899 (css userpage)
 
                                 </div>
                             </div>
@@ -294,8 +297,6 @@
         <script src="js/jquery.magnific-popup.min.js"></script>
         <script src="js/aos.js"></script>
         <script src="js/jquery.animateNumber.min.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
 
