@@ -100,7 +100,7 @@
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="index_doctor.jsp">
+                   <a class="nav-link collapsed" href="ShowDoctorController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Bác Sĩ</span>
                     </a>
@@ -276,17 +276,7 @@
                     </div> 
                     
                                 <!-- Modal -->
-                <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Lịch của bác sĩ</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                         <div>
+               
                         <div class="table-wrapper">
                             <table class="fl-table table">
                                 <thead>
@@ -363,13 +353,7 @@
                                 </tbody>
                             </table>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      
                                 
                     <!-- End of Footer -->
 

@@ -338,13 +338,13 @@
                              <%}}}}}}}%>
                              <%for(BookingDetailDTO bk: listFinishBooking){%> 
                               <%
-                                 demm++;%>
+                                 %>
                                  <%for(scheduleDTO sche: listFinishSchedule){%>
                                  <%if(bk.getScheduleID()==sche.getScheduleID()){%>     
                                  <%for(DoctorDTO dr:listDoctor){%>   
                                  <%if(sche.getDoctorID()==dr.getDoctorID()){%>
                                  <%for(ServiceDTO sv:listService){%>
-                                 <%if(bk.getServiceID()==sv.getServiceID()){%>
+                                 <%if(bk.getServiceID()==sv.getServiceID()){demm++;%>
                                 
                                  <tr>
                                 <td>

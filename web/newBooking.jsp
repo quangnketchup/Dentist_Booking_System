@@ -4,6 +4,7 @@
     Author     : Doan
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="schedule.scheduleDTO"%>
 <%@page import="booking.BookingDTO"%>
 <%@page import="patients.PatientDTO"%>
@@ -165,8 +166,9 @@
                                                     for (ServiceDTO sv : listService) {
                                                         demm++;%>
                                                 <tr>
-                                                    <td><strong><%=sv.getServiceName()%></strong></td>    
-                                                    <td><%=sv.getServicePrice()%><span> VND</span></td>
+                                                    <td><strong><%=sv.getServiceName()%></strong></td>   
+                                                    <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                                    <td><%=formatter.format(sv.getServicePrice())%><span> VND</span></td>
                                                     <td><input type="radio" name="svID" <%if (serviceBk != null && sv.getServiceID() == serviceBk.getServiceID()) {%>checked<%} else {
                                                                    if (demm == 1) {%> checked <%}
                                                                        }%> value="<%=sv.getServiceID()%>"> </td>                     

@@ -73,7 +73,7 @@
                             </div>
                         </li>
                         <%}%>
-                        <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
+                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -143,7 +143,7 @@
                                     <%break;
                                         }%>
                                         <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND</p>
+                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND/1 liệu trình</p>
                                     <a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>

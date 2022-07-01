@@ -2,27 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.booking;
+package controller.admins;
 
-import doctors.DoctorDAO;
-import doctors.DoctorDTO;
+import bookingdetail.BookingDetailDAO;
+import static controller.admins.UpdateImageController.ERROR;
+import static controller.admins.UpdateImageController.SUCCESS;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import patients.PatientDTO;
-import serviceTypes.ServiceTypeDAO;
-import serviceTypes.ServiceTypeDTO;
+import serviceImage.ServiceImageDAO;
+import serviceImage.ServiceImageDTO;
 
 /**
  *
  * @author Doan
  */
-public class ShowBookingController extends HttpServlet {
+public class UpdateBookingAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,29 +31,28 @@ public class ShowBookingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        private static final String ERROR = "login.jsp";
-    private static final String TRUE = "newBooking.jsp";
+    public static final String ERROR = "index_book.jsp";
+    public static final String SUCCESS = "ShowBookingAdminController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-             String url = ERROR;
-              try {                   
-            HttpSession session = request.getSession();       
-              ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
-               doctors.DoctorDAO doctorDAO =new DoctorDAO();  
-                List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
-                List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor2();
-                patients.PatientDTO login = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-                if (login != null && "PA".equals(login.getRoleID())) {                    
-                        session.setAttribute("LIST_SERVICE_TYPE", listServiceType);
-                         session.setAttribute("LIST_DOCTOR", listDoctor);
-                        url = TRUE;             
-              
+        String url=ERROR;
+        try {
+            int BookingDetailID= Integer.parseInt(request.getParameter("BookingDetailID"));
+            int expectedFee= Integer.parseInt(request.getParameter("expectedFee"));
+            BookingDetailDAO bkDao=new BookingDetailDAO();
+            boolean check=bkDao.updateBooking(BookingDetailID, expectedFee);
+            if(check){
+
+                url=SUCCESS;
+                
             }
+            
         } catch (Exception e) {
-      log("Error at ShowBookingController: " + e.toString());
+            log("Error at Update Service Image Controller"+ e);
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

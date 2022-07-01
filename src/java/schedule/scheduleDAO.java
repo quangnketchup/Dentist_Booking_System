@@ -30,6 +30,44 @@ public class scheduleDAO {
     private static final String SET_BOOKED = "update tblSchedules set status= 2 where slot =? and day = ? and doctorID = ?";
     private static final String GET_BOOKED ="select * from tblSchedules where day>GETDATE()-7 and status =2 and  doctorID= ?";
     private static final String SET_ON_SCHEDULE_BOOKED = "update tblSchedules set status= 1 where scheduleID = ?";
+    private static final String GET_ALL_LIST_SCHEDULE_BOOKED = "SELECT sch.scheduleID, sch.doctorID, sch.day, sch.dayOfWeek, sch.slot, sch.status FROM tblSchedules sch, tblDoctors dr WHERE sch.status=2 and sch.doctorID = dr.doctorID";
+    
+    
+    public List<scheduleDTO> getAllListScheduleBooked() throws SQLException {
+        List<scheduleDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_LIST_SCHEDULE_BOOKED);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int scheduleID = rs.getInt("scheduleID");
+                    int doctorID = rs.getInt("doctorID");
+                    String day = rs.getString("day");
+                    String dayOfWeek = rs.getString("dayOfWeek");
+                    int slot = rs.getInt("slot");
+                    int status = rs.getInt("status");
+                    list.add(new scheduleDTO(scheduleID, dayOfWeek, day, slot, doctorID, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
     
     public boolean setOnScheduleBooked(int scheduleID) throws SQLException {
         boolean check = false;

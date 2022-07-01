@@ -15,7 +15,25 @@ public class BookingDetailDTO {
     int scheduleID;
     int status;
     int patientID;
+    int BookingDetailID;
 
+    public int getBookingDetailID() {
+        return BookingDetailID;
+    }
+
+    public void setBookingDetailID(int BookingDetailID) {
+        this.BookingDetailID = BookingDetailID;
+    }
+
+    public BookingDetailDTO(int serviceID, int expectedFee, int scheduleID, int status, int patientID, int BookingDetailID) {
+        this.serviceID = serviceID;
+        this.expectedFee = expectedFee;
+        this.scheduleID = scheduleID;
+        this.status = status;
+        this.patientID = patientID;
+        this.BookingDetailID = BookingDetailID;
+    }
+    
     public int getPatientID() {
         return patientID;
     }
@@ -67,6 +85,14 @@ public class BookingDetailDTO {
         this.serviceID = serviceID;
         this.expectedFee = expectedFee;
         this.patientID =patientID;
+    }
+
+    public BookingDetailDTO(int serviceID, int expectedFee, int scheduleID, int status, int patientID) {
+        this.serviceID = serviceID;
+        this.expectedFee = expectedFee;
+        this.scheduleID = scheduleID;
+        this.status = status;
+        this.patientID = patientID;
     }
 
     

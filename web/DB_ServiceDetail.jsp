@@ -107,7 +107,7 @@
             <!-- Nav Item - Utilities Collapse Menu -->
     
                <li class="nav-item">
-                <a class="nav-link collapsed" href="index_doctor.jsp">
+               <a class="nav-link collapsed" href="ShowDoctorController">
                     <i class="fas fa-fw fa-bell"></i>
                     <span>Bác Sĩ</span>
                 </a>
@@ -241,41 +241,44 @@
               
               
               <div class=" general-des">
-                  <div clas="row-col-12">
-                      <form action="UpdateServiceController">
-                      <div class="col-6" >
+                  <div clas="row-col-12 float">
+                      <form action="UpdateServiceController" class="col-12">
+                          <div class="col-md-6 text-center float-md-left">
+                      <div >
                           <label for="name">Tên dịch vụ</label>
                           <input name="serviceName" value="<%=service.getServiceName()%>">
                       </div>
-                      <div class="col-6">
+                      <div >
                              <label for="status">Trạng thái hoạt động</label>
                                     <select name ="status">
                                             <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
                                             <option value="<%=Math.abs(service.getStatus() - 1)%>"><%if (service.getStatus() == 0) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
                                         </select>         
                         </div>                
-                      <div class="col-6">
+                      <div >
                           <label for="price">Giá tiền </label>
                           <input name="servicePrice" value="<%=service.getServicePrice()%>">VND
                       </div>
                           <input type="hidden" name ="serviceID" value="<%=service.getServiceID()%>">
                           <input type="hidden" name="serviceTypeID" value="<%=service.getServiceTypeID()%>">
                           <div class="col-6">
-                              <label>AdminID: </label>
+                              <label>AdminID đã chỉnh sửa: </label>
                           <p><%=service.getAdminID()%></p>
                       </div>
-                      <div class="p-2" >
+                          </div>
+                      
+                      <div class="col-md-6 float-md-right" >
                           <label>Mô tả :</label>
                           <textarea class="form-control" name="description" cols="6" rows="4" id="description"> <%=service.getDescription()%></textarea>
-                      </div>
+                     
                       
                       <input type="submit" value="Chỉnh sửa">
-                     
+                      </div>
                        </form >
                   </div>    
                            
-                           <div class="row">
-                               <h2>Ảnh của dịch vụ</h2>
+                           <div class="clearfix">
+                               <h2 class="float">Ảnh của dịch vụ</h2>
                                <table class="table">
   <thead>
     <tr>

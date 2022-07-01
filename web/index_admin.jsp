@@ -4,6 +4,7 @@
     Author     : Doan
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="java.util.List"%>
@@ -119,7 +120,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="index_book.jsp">
+                <a class="nav-link" href="ShowBookingAdminController">
                     <i class="fas fa-fw fa-calendar-check"></i>
                     <span>Lịch Hẹn</span></a>
             </li>
@@ -248,7 +249,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Thu nhập (Trong tháng)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%=money%>VND</div>
+                                            <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%=formatter.format(money)%>VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>

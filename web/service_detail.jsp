@@ -75,7 +75,7 @@
                             </div>
                         </li>
                         <%}%>
-                        <li class="nav-item cta"><a href="contact.html" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Đặt lịch khám</span></a></li>
+                        <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -171,14 +171,15 @@
                                         if (discount.getDiscountID() > 0) {
                                     %>              
                                     <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-                                    <div class="product-price-discount"><span><%=formatter.format(discountOfService)%>VND</span><span class="line-through">VND</span></div>
+                                    <div class="product-price-discount"><span class="line-through"><%=formatter.format(service.getServicePrice())%> VND</span></div>
+                                    <div class="product-price-discount"><span><%=formatter.format(discountOfService)%> VND</span></div>
                                     <p><%=discount.getDescription()%></p>
                                     <p>Từ ngày: <%=discount.getCreateDate()%></p>
                                     <p>Đến ngày: <%=discount.getExpiredDate()%></p>
                                 </div>
                                 <%} else {%>
                                 <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-                                <div class="product-price-discount"><span><%=formatter.format(service.getServicePrice())%>VND</span></div>
+                                <div class="product-price-discount"><span><%=formatter.format(service.getServicePrice())%> VND</span></div>
                                 <%}%>
                             </div>
                         </div>
@@ -189,7 +190,7 @@
                                 <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">MÔ TẢ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">ĐÁNH GIÁ (0)</a>
+                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">ĐÁNH GIÁ (<%=count-1%>)</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">

@@ -168,6 +168,14 @@
         <servlet-name>LoadDiscountController</servlet-name>
         <servlet-class>controller.admins.LoadDiscountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowBookingAdminController</servlet-name>
+        <servlet-class>controller.admins.ShowBookingAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBookingAdminController</servlet-name>
+        <servlet-class>controller.admins.UpdateBookingAdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -335,6 +343,14 @@
     <servlet-mapping>
         <servlet-name>LoadDiscountController</servlet-name>
         <url-pattern>/LoadDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowBookingAdminController</servlet-name>
+        <url-pattern>/ShowBookingAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookingAdminController</servlet-name>
+        <url-pattern>/UpdateBookingAdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

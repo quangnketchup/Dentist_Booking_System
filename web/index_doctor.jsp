@@ -114,7 +114,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="index_book.jsp">
+                <a class="nav-link" href="ShowBookingAdminController">
                     <i class="fas fa-fw fa-calendar-check"></i>
                     <span>Lịch Hẹn</span></a>
             </li>

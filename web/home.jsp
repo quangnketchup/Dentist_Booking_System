@@ -1,4 +1,5 @@
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="feedbacks.FeedbackDTO"%>
 <%@page import="schedule.scheduleDTO"%>
@@ -115,14 +116,10 @@
                     <div class="col-md-6 color-2 p-4">
                         <h3 class="mb-4">Giờ mở cửa</h3>
                         <p class="openinghours d-flex">
-                            <span>Thứ Hai - Thứ Sáu</span>
+                            <span>Thứ Hai - Thứ Bảy</span>
                             <span>8:00 - 19:00</span>
                         </p>
-                        <p class="openinghours d-flex">
-                            <span>Thứ Bảy</span>
-                            <span>10:00 - 17:00</span>
-                        </p>
-                        
+                       
                     </div>
 
                 </div>
@@ -229,8 +226,10 @@
                                 </section>
 
                                 <div class="media-body p-2 mt-3">
+                                    <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
                                     <div style="padding-bottom:10px"><h3 class="heading" style="color: #85b0e9" ><%=service.getServiceName()%></h3></div>
-                                    <div class="border-success"><span style="color:red" class="icon-thumb-tack "></span> <%=service.getServicePrice()%> VND</div>
+                                    
+                                    <div class="border-success"><span style="color:red" class="icon-thumb-tack "></span><%=formatter.format(service.getServicePrice())%><span> VND</span></div>
                                 </div>
                             </div>
                         </div>      
@@ -321,9 +320,9 @@
                             <div class="info text-center">
                                 <h3><%=doctor.getFullName()%></h3>
                                 <span class="position"><%=doctor.getServiceTypeName()%></span>
-                                <div class="pt-3">
-                                    <div>
-                                        <p style="overflow: hidden; display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;"><%=doctor.getAchievement()%></p>
+                                <div class="pt-3" > 
+                                    <div style="overflow: hidden;height: 100px">
+                                        <p style="overflow-y: hidden;  display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;"><%=doctor.getAchievement()%></p>
                                     </div>
                                 </div>
                             </div>

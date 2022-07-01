@@ -28,6 +28,108 @@ public class BookingDetailDAO {
     private static final String NUMBER_FB="SELECT COUNT(serviceFeedBackID) as nb FROM tblPatientFeedbacks WHERE MONTH(dateFeedback)=?";
     private static final String GET_BOOKING_DURING_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE status =1 and patientID = ?";
     private static final String GET_BOOKING_FINISH_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE status =2 and patientID = ?";
+    private static final String GET_ALL_BOOKING_DETAIL = "SELECT  * FROM tblBookingDetails WHERE status = 1";
+    private static final String UPDATE_BOOKING = "update tblBookingDetails set status= 2 , expectedFee = ? where BookingDetailID = ?";
+    
+     public boolean updateBooking(int BookingDetailID,int fee) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_BOOKING);
+                ptm.setInt(1, fee);
+                ptm.setInt(2, BookingDetailID);        
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    
+     public List<BookingDetailDTO> getAllBookingDetail1() throws SQLException {
+        List<BookingDetailDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_BOOKING_DETAIL);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    int serviceID=rs.getInt("serviceID");
+                    int scheduleID=rs.getInt("scheduleID");
+                    int status=rs.getInt("status");
+                    int expectedFee=rs.getInt("expectedFee");
+                    int patientID=rs.getInt("patientID");
+                    int BookingDetailID=rs.getInt("BookingDetailID");
+                    list.add(new BookingDetailDTO( serviceID,expectedFee,scheduleID,status,patientID,BookingDetailID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
+    
+    public List<BookingDetailDTO> getAllBookingDetail() throws SQLException {
+        List<BookingDetailDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_BOOKING_DETAIL);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    int serviceID=rs.getInt("serviceID");
+                    int scheduleID=rs.getInt("scheduleID");
+                    int status=rs.getInt("status");
+                    list.add(new BookingDetailDTO( serviceID,scheduleID,status,2));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
+    }
+    
     
     public List<BookingDetailDTO> getBookingFinishDetailByDoctorID(int id) throws SQLException {
         List<BookingDetailDTO> list = new ArrayList<>();

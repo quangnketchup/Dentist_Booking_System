@@ -4,6 +4,12 @@
     Author     : Doan
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="services.ServiceDTO"%>
+<%@page import="patients.PatientDTO"%>
+<%@page import="doctors.DoctorDTO"%>
+<%@page import="schedule.scheduleDTO"%>
+<%@page import="bookingdetail.BookingDetailDTO"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="java.util.List"%>
@@ -26,10 +32,25 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/style.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+        integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .ftco-section {
+    padding: 0;
+}
+    </style>
 </head>
 
 <body id="page-top">
@@ -197,7 +218,160 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                <%List<BookingDetailDTO>listBooking=(List<BookingDetailDTO>) request.getAttribute("listBooking");
+                   List<scheduleDTO>listSchedule=(List<scheduleDTO>) request.getAttribute("listSchedule");
+                List<DoctorDTO>listDoctor=(List<DoctorDTO>) request.getAttribute("listDoctor");
+                   List<PatientDTO>listPatient=(List<PatientDTO>) request.getAttribute("listPatient");
+                List<ServiceDTO>listService=(List<ServiceDTO>) request.getAttribute("listService");
+                %>
+                <di class="container">
+        <section class="ftco-section">
+        <div class="container overflow-hidden rounded-2xl">
+            <div class="flex flex-row bg-white items-center">
+                <div class="app-bg-blue-1 px-6 py-3">
+                    <span class="text-lg text-white font-bold">.</span>
+                </div>
 
+                <div class="flex flex-row pl-5 items-center mr-auto">
+                    <div class="h-9 w-9 app-bg-blue-2 flex justify-center items-center rounded-xl">
+                        <svg class="w-6 h-6 app-color-blue-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col pl-5">
+                        <span class="font-semibold text-lg app-color-black">Danh sách các lịch hẹn</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col app-bg-white-1 px-12 pb-10">
+                <div class="flex flex-row py-5">
+                    <span class="text-lg font-bold app-color-black">Danh Sách:</span>
+                </div>
+
+                <div class="flex flex-row bg-white p-10 relative">
+                    <div class="absolute app-bg-yellow-3 text-xs font-semibold px-3 py-0.5 rounded-br-md rounded-tl-md text-white"
+                        style="top: 76px;"></div>
+                    <table class="w-full table-striped ">
+                        <thead>
+                            <tr>
+                                <th class="text-left text-xs app-color-black pb-5">STT</th>
+                                <th class="text-left text-xs app-color-black pb-5">BÁC SĨ</th>
+                                <th class="text-left text-xs app-color-black pb-5">DỊCH VỤ</th>
+                                <th class="text-left text-xs app-color-black pb-5">NGÀY HẸN</th>
+                                <th class="text-left text-xs app-color-black pb-5">GIỜ HẸN</th>
+                                <th class="text-left text-xs app-color-black pb-5">KHÁCH HÀNG</th>
+                                <th class="text-left text-xs app-color-black pb-5">CHI PHÍ</th>
+                                <th class="text-left text-xs app-color-black pb-5">TRẠNG THÁI</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%int demm=0;
+                            for(BookingDetailDTO bk: listBooking){
+                            for(scheduleDTO schedule: listSchedule){
+                            if(bk.getScheduleID()==schedule.getScheduleID()){
+                            for(DoctorDTO doctor: listDoctor){
+                            if(schedule.getDoctorID()==doctor.getDoctorID()){
+                            for(PatientDTO patient: listPatient){                        
+                            if(bk.getPatientID()== patient.getPatientID()){
+                            for(ServiceDTO service: listService){
+                            if(bk.getServiceID()==service.getServiceID()){ demm++;             
+                            %>  
+                            <form action="UpdateBookingAdminController">
+                            <tr>
+                                <td>
+                                    <div
+                                        class="flex justify-center items-center rounded-md w-8 h-8 app-bg-yellow-2 app-color-yellow-1 text-lg font-semibold">
+                                        <%=demm%></div>
+                                </td>
+                                <input type="hidden" name="BookingDetailID" value="<%=bk.getBookingDetailID()%>">
+                                <td>
+                                    <div class="flex flex-row py-3">
+                                        <div class="flex flex-col">
+                                            <span class="font-semibold text-sm app-color-black"><%=doctor.getFullName()%></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="font-semibold text-sm app-color-gray-1"><%=service.getServiceName()%></span>
+                                </td>
+                                <td>
+                                    <span class="font-semibold text-sm app-color-gray-1"><%=schedule.getDay()%></span>
+                                </td>
+                                <td>
+                                    <span class="font-semibold text-sm app-color-gray-1"><%int slot= schedule.getSlot();
+                                        switch (slot) {
+                                                case 1:
+                                                    %>7:00 - 9:00 am<%
+                                                    break;
+                                                    case 2:
+                                                    %>9:00 - 11:00 am<%
+                                                    break;
+                                                    case 3:
+                                                    %>13:00 - 15:00 pm<%
+                                                    break;
+                                                    case 4:
+                                                    %>15:00 - 17:00 pm<%
+                                                    break;
+                                                default:
+                                                    throw new AssertionError();
+                                            }
+                                       %></span>
+                                </td>
+                                <td>
+                                    <div
+                                        class="app-bg-red-2 h-8 w-28 font-semibold text-sm flex justify-center items-center app-color-red-1 rounded-md">
+                                        <%=patient.getFullName()%>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="app-bg-red-2 h-8 w-28 font-semibold text-sm flex justify-center items-center app-color-red-1 rounded-md">
+                                        <input name="expectedFee" value="<%=bk.getExpectedFee()%>">
+                                    </div>
+                                </td>
+                                <td>
+                                    <input class="btn btn-primary" type="submit" value="Đã hoàn thành">
+                                </td>s
+                                <td>
+                                     <a class="btn btn-danger" href="">Xóa</a>
+                                </td>
+                            </tr>
+                            </form>
+                                <%
+                                    }
+                                }}
+                                }
+                                }
+                                }
+                                }
+                                }
+                                }%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+        </div>            
+                    
+                    
+                    
+               
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
