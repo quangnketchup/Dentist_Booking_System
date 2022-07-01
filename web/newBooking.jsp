@@ -25,20 +25,47 @@
         <title>Booking Page</title>
         <link rel="stylesheet" href="css/booking.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="css/booking.css">
+        <link rel="stylesheet" href="css/booking.css">
         <meta name="viewport" content="width=device-width">  
     </head>
     <body style="background-color: #DFF6FF">
+        <%
+                               PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+                               List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
+        %>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="HomeController">Denta<span>Care</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                        <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient.getFullName()%></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                            </div>
+                        </li>
+                        <li class="nav-item active cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div>
             <div class="card-body " style="">
                 <%
-                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_TYPE");
+   
                     List<doctors.DoctorDTO> listDoctor = (List<DoctorDTO>) session.getAttribute("LIST_DOCTOR");
                     List<ServiceDTO> listService = (List<ServiceDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
                     DoctorDTO doctorBk = (DoctorDTO) request.getAttribute("doctorBk");
                     ServiceDTO serviceBk = (ServiceDTO) request.getAttribute("serviceBk");
                     DiscountDTO discount = (DiscountDTO) request.getAttribute("discount");
-                    PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
                     scheduleDTO check = (scheduleDTO) request.getAttribute("add_green");
 
                 %>
@@ -137,9 +164,9 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><strong><%=doctor1.getFullName()%></strong></td>                             
-                                                        <td><input type="radio" name="doctorID" <% if (doctorBk != null && doctor1.getDoctorID() == doctorBk.getDoctorID()) {%>checked<%} else {
+                                                                   <td><input type="radio" name="doctorID" <% if (doctorBk != null && doctor1.getDoctorID() == doctorBk.getDoctorID()) {%>checked<%} else {
                                                                        if (count == 1) {%> checked <%}
-                                                                           }%>    value="<%=doctor1.getDoctorID()%>"> </td>                     
+                                                                                      }%>    value="<%=doctor1.getDoctorID()%>"> </td>                     
                                                     </tr>
                                                 </tbody>
                                                 <%
@@ -169,9 +196,9 @@
                                                     <td><strong><%=sv.getServiceName()%></strong></td>   
                                                     <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
                                                     <td><%=formatter.format(sv.getServicePrice())%><span> VND</span></td>
-                                                    <td><input type="radio" name="svID" <%if (serviceBk != null && sv.getServiceID() == serviceBk.getServiceID()) {%>checked<%} else {
+                                                               <td><input type="radio" name="svID" <%if (serviceBk != null && sv.getServiceID() == serviceBk.getServiceID()) {%>checked<%} else {
                                                                    if (demm == 1) {%> checked <%}
-                                                                       }%> value="<%=sv.getServiceID()%>"> </td>                     
+                                                                                  }%> value="<%=sv.getServiceID()%>"> </td>                     
                                                 </tr>
                                                 <%}%>
                                             </tbody>

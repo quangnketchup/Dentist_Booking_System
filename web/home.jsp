@@ -39,15 +39,14 @@
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Denta<span>Care</span></a>
+                <a class="navbar-brand" href="HomeController">Denta<span>Care</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="home.jsp" class="nav-link sa">Trang chủ</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
+                        <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
                         <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
@@ -293,8 +292,8 @@
             <div class="container">
                 <div class="row justify-content-center mb-5 pb-5">
                     <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-3">Meet Our Experience Dentist</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences</p>
+                        <h2 class="mb-3">Đội Ngũ Bác Sĩ Chất Lượng Cao</h2>
+                        
                     </div>
                 </div>
 
@@ -320,11 +319,7 @@
                             <div class="info text-center">
                                 <h3><%=doctor.getFullName()%></h3>
                                 <span class="position"><%=doctor.getServiceTypeName()%></span>
-                                <div class="pt-3" > 
-                                    <div style="overflow: hidden;height: 100px">
-                                        <p style="overflow-y: hidden;  display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;"><%=doctor.getAchievement()%></p>
-                                    </div>
-                                </div>
+                              
                             </div>
                         </div>
                     </div>

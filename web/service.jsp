@@ -42,36 +42,31 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item "><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link sa">Thông tin</a></li>
-                        <li class="nav-item active dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
+                        <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
                                     if (listServiceType != null) {
                                         for (ServiceTypeDTO svType : listServiceType) {
-                                %>
-                                <button class="dropdown-item"><a href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a></button>
-                                    <%
-                                            }
+                                %>	
+                                <a class="dropdown-item nav-link text-primary" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                                <%
                                         }
-                                    %>
+                                    }
+                                %>
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link sa">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link sa">Liên hệ</a></li>
-                            <%if (loginPatient == null) {%>
-                        <li class="nav-item"><a href="login.jsp" class="nav-link">Đăng nhập</a></li>
-                            <%} else {%> 
-                        <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                        <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
-                                <a href="admin_Account.html" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
-                        <%}%>
-                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
+                        <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -141,13 +136,8 @@
                                     <%break;
                                         }%>
                                         <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-<<<<<<< HEAD
-                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND/1 liệu trình</p>
-                                    <a class="nav-link text-info" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
-=======
-                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND</p>
-                                    <a class="btn btn-primary" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
->>>>>>> 50d0899 (css userpage)
+                                    <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND/ 1 Liệu Trình</p>
+                                    <a class="btn btn-outline-info" style="border-radius: 10px; color: white" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
                             </div>
@@ -185,8 +175,8 @@
                                     </div>
                                     <%break;
                                         }%>
-                                    <p style="color: white"><%=service.getServicePrice()%> VND</p>
-                                    <a href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
+                                    <p style="color: white"><%=service.getServicePrice()%> VND/1 Liệu Trình</p>
+                                    <a class="btn btn-primary" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
                             </div>
