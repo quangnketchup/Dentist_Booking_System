@@ -84,7 +84,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <div class="row">
                             <h6 class="collapse-header">Các loại dịch vụ</h6>
-                        <a href="#"><i class="fa-solid fa-circle-plus"></i></a>
                         </div>
                  <%
                                     List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
@@ -94,7 +93,6 @@
               
                                 <div class="row service-item">
                                     <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
-                                    <a class="col-sm service-delete float-right" href="#"><i class="fa-solid fa-trash"></i></a>
                                 </div>
                         
                                 <%
@@ -273,7 +271,7 @@
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><%=serviceTypeName%></h5>
+                            <h5 class="modal-title" class="text-primary" id="exampleModalLabel"><%=serviceTypeName%></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -281,17 +279,17 @@
                             <form action="AddServiceController">
                           <div class="modal-body">
                               <input type="hidden" name="serviceTypeID" value="<%=serviceTypeID%>">
-                              <label>Tên dịch vụ</label>
+                              <label class="text-primary">Tên dịch vụ: </label>
                               <input name="serviceName" type="text"></br>
-                              <label>Giá tiền</label>
-                              <input name="servicePrice" type="text"></br>
-                              <label>Mô tả dịch vụ: </label>
+                              <label class="text-primary">Giá tiền: </label>
+                              <input style="margin-left: 24px" name="servicePrice" type="text"></br>
+                              <label class="text-primary">Mô tả dịch vụ: </label>
                               <textarea class="form-control" name="description" rows="4" id="description"></textarea>
                               <input type="hidden" name="serviceTypeName" value="<%=serviceTypeName%>">
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" value="Tạo dịch vụ">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-success" value="Tạo dịch vụ">
                           </div>
                         </form>
                         </div>
