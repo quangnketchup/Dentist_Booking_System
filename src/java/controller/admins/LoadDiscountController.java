@@ -43,12 +43,15 @@ public class LoadDiscountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));           
+            int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));          
             ServiceDAO serviceDao = new ServiceDAO();
             ServiceTypeDAO svTypeDao =new ServiceTypeDAO();
             DiscountDAO discountDao =new DiscountDAO();
             List<ServiceDTO> listService = serviceDao.getServiceByServiceTypeID(serviceTypeID);
             List<DiscountDTO> listDiscount= discountDao.getAllListDiscount();
+            List<ServiceDTO> listAllService= serviceDao.getAllListService();
+            
+            
              List<DiscountDTO> listDiscountBySVType= new ArrayList<>();
             for(DiscountDTO discount:listDiscount){
                 for(ServiceDTO service: listService){
@@ -59,7 +62,8 @@ public class LoadDiscountController extends HttpServlet {
             }
             HttpSession session = request.getSession();
             request.setAttribute("listDiscountBySVType", listDiscountBySVType);
-           
+            request.setAttribute("LIST_DISCOUNT", listDiscount);
+            request.setAttribute("LIST_ALL_SERVICE", listAllService);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;

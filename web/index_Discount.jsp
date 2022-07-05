@@ -1,9 +1,5 @@
-<%-- 
-    Document   : index_admin
-    Created on : Jun 23, 2022, 4:39:03 PM
-    Author     : Doan
---%>
 
+<%@page import="services.ServiceDTO"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="admins.AdminDTO"%>
@@ -104,13 +100,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="ShowPatientController">
-                        <i class="fa-solid fa-bed-pulse"></i>
-                        <span>Bệnh nhân</span>
-                    </a>
-                </li>
-
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="index_feedback.jsp">
@@ -194,9 +183,9 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="LogoutController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Đăng xuất
                                     </a>
                                 </div>
                             </li>
@@ -243,10 +232,31 @@
                                                     </div>
                                                 </div>                                                          
                                                 <div class="input-group mb-3">
-                                                    <input name="adminID" type="text"  class="form-control" placeholder="Mã quản lí"> 
+                                                    <input name="adminID" type="hidden"  class="form-control" value="<%=loginAdmin.getFullName()%>"> 
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                    <input name="serviceID" type="text"  class="form-control" placeholder="Mã dịch vụ"> 
+                                                    <label for="serviceID">Dịch vụ</label>
+                                                    <select name="serviceID">
+                                                        <%  List<ServiceDTO> listAllService = (List<ServiceDTO>) request.getAttribute("LIST_ALL_SERVICE");
+                                                            List<DiscountDTO> DiscountService = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");
+                                                            int checkServiceDuplication=0;
+                                                            for (ServiceDTO service : listAllService) {
+                                                                for (DiscountDTO discountDTO : DiscountService) {
+                                                                        if(discountDTO.getServiceID()==service.getServiceID()){
+                                                                            ++checkServiceDuplication;
+                                                                        }
+                                                                    }
+                                                                %>
+                                                        
+                                                        <%
+                                                                if(checkServiceDuplication==0) {
+                                                        %>                                
+                                                            
+                                                        <option value="<%=service.getServiceID()%>"><%=service.getServiceName()%></option> 
+                                                        <%}else checkServiceDuplication=0;
+                                                                }%>
+                                                                
+                                                    </select>
                                                 </div>
                                             </div><!-- /.card -->
                                         </div>
@@ -293,13 +303,11 @@
                                         <tr>
                                             <th>Mã khuyến mãi</th>
                                             <th>Chủ đề</th>
-                                            <th>Mô tả</th>
                                             <th>Phần trăm khuyến mãi</th>
-                                            <th>Trạng thái</th>
                                             <th>Ngày tạo mã</th>
                                             <th>Ngày hết hạn</th>
                                             <th>Admin quản lí</th>
-                                            <th>Cập nhật</th>
+                                            <th>Chi Tiết</th>
                                         </tr>
                                     </thead>
                                     <tbody class="align-content-around">
@@ -314,34 +322,20 @@
                                                        readonly /></td>
                                             <td><input type="text" name="title"
                                                        value="<%=discount.getTitle()%>"
-                                                       class="form-control-plaintext" />
-                                            </td>
-                                            <td><textarea class="form-control" name="description" cols="6" rows="6" id="description"> <%=discount.getDescription()%></textarea>
+                                                       class="form-control-plaintext"readonly />
                                             </td>
                                             <td><input type="number"
                                                        name="percentDiscount"
                                                        value="<%=discount.getPercentDiscount()%>"
-                                                       class="form-control-plaintext" />
-                                            </td>
-                                            <td>
-                                                <select name="status">
-                                                    <option selected
-                                                            value="<%=discount.getStatus()%>">
-                                                        <%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%>
-                                                    </option>
-                                                    <option
-                                                        value="<%=Math.abs(discount.getStatus() - 1)%>">
-                                                        <%if (discount.getStatus() == 0) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%>
-                                                    </option>
-                                                </select>
+                                                       class="form-control-plaintext" readonly/>
                                             </td>
                                             <td><input type="text" name="createDate"
                                                        value="<%=discount.getCreateDate()%>"
-                                                       class="form-control-plaintext" />
+                                                       class="form-control-plaintext"readonly />
                                             </td>
                                             <td><input type="text" name="expiredDate"
                                                        value="<%=discount.getExpiredDate()%>"
-                                                       class="form-control-plaintext" />
+                                                       class="form-control-plaintext"readonly />
                                             </td>
                                             <td>
                                                 <%=discount.getAdminID()%>
@@ -349,12 +343,11 @@
 
                                         <input type="hidden" name="serviceID"
                                                value="<%=discount.getServiceID()%>"
-                                               class="form-control-plaintext" />
+                                               class="form-control-plaintext" readonly/>
 
-                                        <td><input type="submit"
-                                                   class="btn btn-block btn-outline-success"
-                                                   name="action"
-                                                   value="Update Discount"></td>
+                                        <td><div class="text-center">
+                                                <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info" data-toggle="modal" onclick='showDetail()'data-target="#discount<%=discount.getDiscountID()%>"><strong>Chi Tiết</strong></a></button>
+                                            </div></td>
                                         </tr>
                                     </form>
                                     <% } %>
@@ -374,13 +367,11 @@
                                         <tr>
                                             <th>Mã khuyến mãi</th>
                                             <th>Chủ đề</th>
-                                            <th>Mô tả</th>
                                             <th>Phần trăm khuyến mãi</th>
-                                            <th>Trạng thái</th>
                                             <th>Ngày tạo mã</th>
                                             <th>Ngày hết hạn</th>
                                             <th>Admin quản lí</th>
-                                            <th>Cập nhật</th>
+                                            <th>Chi Tiết</th>
                                         </tr>
                                     </thead>
                                     <tbody class="align-content-around">
@@ -397,55 +388,36 @@
                                                        readonly /></td>
                                             <td><input type="text" name="title"
                                                        value="<%=discount.getTitle()%>"
-                                                       class="form-control-plaintext" />
-                                            </td>
-                                            <td><textarea class="form-control" name="description" cols="6" rows="6" id="description"> <%=discount.getDescription()%></textarea>
+                                                       class="form-control-plaintext"readonly="" />
                                             </td>
                                             <td><input type="number"
                                                        name="percentDiscount"
                                                        value="<%=discount.getPercentDiscount()%>"
-                                                       class="form-control-plaintext" />
-                                            </td>
-                                            <td>
-                                                <select name="status">
-                                                    <option selected
-                                                            value="<%=discount.getStatus()%>">
-                                                        <%if (discount.getStatus() == 1) {%>Đang khuyến mại
-                                                        <%} else {%>Đã hết
-                                                        hạn<%}%>
-                                                    </option>
-                                                    <option
-                                                        value="<%=Math.abs(discount.getStatus() - 1)%>">
-                                                        <%if (discount.getStatus() == 0) {%>Đang khuyến mại
-                                                        <%} else {%>Đã hết
-                                                        hạn<%}%>
-                                                    </option>
-                                                </select>
+                                                       class="form-control-plaintext" readonly=""/>
                                             </td>
                                             <td><input type="text" name="createDate"
                                                        value="<%=discount.getCreateDate()%>"
-                                                       class="form-control-plaintext" />
+                                                       class="form-control-plaintext"readonly="" />
                                             </td>
                                             <td><input type="text" name="expiredDate"
                                                        value="<%=discount.getExpiredDate()%>"
-                                                       class="form-control-plaintext" />
+                                                       class="form-control-plaintext"readonly />
                                             </td>
                                             <td>
                                                 <input type="text" name="adminID"
                                                        value="<%=discount.getAdminID()%>"
-                                                       class="form-control-plaintext" />
+                                                       class="form-control-plaintext"readonly />
 
                                             </td>
 
                                         <input type="hidden" name="serviceID"
                                                value="<%=discount.getServiceID()%>"
-                                               class="form-control-plaintext" />
+                                               class="form-control-plaintext"readonly />
 
 
-                                        <td><input type="submit"
-                                                   class="btn btn-block btn-outline-success"
-                                                   name="action"
-                                                   value="Update Discount">
+                                        <td><div class="text-center">
+                                                <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info" data-toggle="modal" onclick='showDetail()'data-target="#discount<%=discount.getDiscountID()%>"><strong>Chi Tiết</strong></a></button>
+                                            </div>
                                         </td>
                                         </tr>
                                     </form>
@@ -487,6 +459,63 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
+            <!-- loader Modal doctor-->
+            <%
+                int count = 0;
+                List<DiscountDTO> listDiscoutDTO = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");
+                if (listDiscoutDTO != null) {
+                    for (DiscountDTO discount : listDiscoutDTO) {
+            %>
+            <div  class="modal fade" id="discount<%=discount.getDiscountID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl " role="document">
+                    <div class="modal-content " >
+                        <div class="modal-header">
+                            <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT KHUYẾN MÃI</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body1 col-12">
+                            <div class="row">
+                                <form action="UpdateDiscountController">
+                                    <div class="col-md-6 infomation float-left" style="border-right:4px solid #227093">
+                                        <div class="text-align-center">
+                                            <img style="height:250px;width: 250px; object-fit: contain" src="images/discounts.jpg" alt=""/>
+                                        </div>
+                                        <div class="">
+                                            <%=discount.getTitle()%>
+                                        </div>
+                                        <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
+                                            <option value="<%=Math.abs(discount.getStatus() - 1)%>"><%if (discount.getStatus() == 1) {%>Đã hết hạn<%} else {%>Đang khuyến mại<%}%></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 float-right">
+                                        <div class=""><span>Description</span><input type="text" name="description" value="<%=discount.getDescription()%>"/>
+                                        </div>
+                                        <div class="" >
+                                            <input type="hidden" name="discountID" value="<%=discount.getDiscountID()%>" readonly="">
+                                            <div><span>chủ đề</span><input type="text" name="Title" value="<%=discount.getTitle()%>"/></div>
+                                            <div><span>Phần trăm</span><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>"/></div>
+                                            <input type="hidden" name="status" value="<%=discount.getStatus()%>"/>
+                                            <div><span>Ngày tạo</span><input type="text" name="createDate" value="<%=discount.getCreateDate()%>"/></div>
+                                            <div><span>Ngày Hết hạn</span><input type="text" name="ExpectDate" value="<%=discount.getExpiredDate()%>"/></div>
+                                            <div><input type="hidden" name="AdminID" value="<%=discount.getAdminID()%>"/></div>
+                                        </div>
+                                        <input type="submit" value="Cập nhật">
+                                    </div>
+                                </form> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}
+                }%>
+
+            <!-- loader -->
+            <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
             <!-- Logout Modal-->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
@@ -508,9 +537,9 @@
             </div>
             <script src="ckeditor/ckeditor.js"></script>
             <script>
-                var editor = CKEDITOR.replace('description');
-                CKFinder.setupCKEditor(editor, 'ckfinder/');
-                data["description"] = editor.getData();
+                                                    var editor = CKEDITOR.replace('description');
+                                                    CKFinder.setupCKEditor(editor, 'ckfinder/');
+                                                    data["description"] = editor.getData();
             </script>    
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>

@@ -18,7 +18,40 @@ public class DiscountDAO {
     private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?," 
                         + " WHERE discountID =? ";
     private static final String GET_DISCOUNT_BY_SERVICE_ID= "select * from tblDiscounts WHERE expiredDate> GETDate() AND status =1 AND serviceID =?";
-
+    private static final String CREATE_DISCOUNT = "INSERT tblDiscounts ([title], [description], [percentDiscount], [status], [createDate], [expiredDate], [adminID], [serviceID]) VALUES (?,?,?,?,?,?,?,?)";
+    
+    public boolean createDiscount(DiscountDTO discount) throws SQLException{
+         boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(CREATE_DISCOUNT);
+                pstm.setString(1, discount.getTitle());
+                pstm.setString(2, discount.getDescription());
+                pstm.setInt(3, discount.getPercentDiscount());
+                pstm.setInt(4, discount.getStatus());
+                pstm.setString(5, discount.getCreateDate());
+                pstm.setString(6, discount.getExpiredDate());
+                pstm.setInt(7, discount.getAdminID());
+                pstm.setInt(8, discount.getServiceID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    
      public DiscountDTO getDiscountByServiceID(int id) throws SQLException{
         DiscountDTO ds = new DiscountDTO();
         Connection conn = null;
@@ -239,4 +272,5 @@ public class DiscountDAO {
         }
         return check;
     }
+     
 }

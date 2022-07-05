@@ -176,6 +176,14 @@
         <servlet-name>UpdateBookingAdminController</servlet-name>
         <servlet-class>controller.admins.UpdateBookingAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddDiscountController</servlet-name>
+        <servlet-class>controller.admins.AddDiscountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetServiceNameForDiscount</servlet-name>
+        <servlet-class>controller.admins.GetServiceNameForDiscount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -351,6 +359,14 @@
     <servlet-mapping>
         <servlet-name>UpdateBookingAdminController</servlet-name>
         <url-pattern>/UpdateBookingAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDiscountController</servlet-name>
+        <url-pattern>/AddDiscountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetServiceNameForDiscount</servlet-name>
+        <url-pattern>/GetServiceNameForDiscount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

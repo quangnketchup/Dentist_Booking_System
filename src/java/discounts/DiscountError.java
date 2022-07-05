@@ -11,8 +11,8 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-
 public class DiscountError {
+
     int discountIDError;
     String titleError;
     String descriptionError;
@@ -22,11 +22,12 @@ public class DiscountError {
     String createDateError;
     String expiredDateError;
     int adminIDError;
+    String serviceNameError;
 
     public DiscountError() {
     }
 
-    public DiscountError(int discountIDError, String titleError, String descriptionError, String percentDiscountError, int statusError, String imageError, String createDateError, String expiredDateError, int adminIDError) {
+    public DiscountError(int discountIDError, String titleError, String descriptionError, String percentDiscountError, int statusError, String imageError, String createDateError, String expiredDateError, int adminIDError, String serviceNameError) {
         this.discountIDError = discountIDError;
         this.titleError = titleError;
         this.descriptionError = descriptionError;
@@ -36,9 +37,8 @@ public class DiscountError {
         this.createDateError = createDateError;
         this.expiredDateError = expiredDateError;
         this.adminIDError = adminIDError;
+        this.serviceNameError = serviceNameError;
     }
-    
-    
 
     public int getDiscountIDError() {
         return discountIDError;
@@ -112,5 +112,11 @@ public class DiscountError {
         this.adminIDError = adminIDError;
     }
 
-          
+    public String getServiceNameError() {
+        return serviceNameError;
+    }
+
+    public void setServiceNameError(String serviceNameError) {
+        this.serviceNameError = serviceNameError;
+    }
 }
