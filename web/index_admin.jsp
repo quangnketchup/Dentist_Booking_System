@@ -103,10 +103,19 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ShowDoctorController">
-                        <i class="fas fa-fw fa-bell"></i>
+                        <i class="fa-solid fa-user-doctor"></i>
                         <span>Bác Sĩ</span>
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="ShowPatientController">
+                       <i class="fa-solid fa-bed-pulse"></i>
+                        <span>Bệnh nhân</span>
+                    </a>
+                </li>
+
+                
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">

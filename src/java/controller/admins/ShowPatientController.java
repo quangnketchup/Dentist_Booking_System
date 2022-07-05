@@ -28,7 +28,7 @@ import patients.PatientDTO;
 public class ShowPatientController extends HttpServlet {
 
     private static final String ERROR ="login.jsp";
-    private static final String ADMIN = "admin_User.jsp";
+    private static final String ADMIN = "index_Patient.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {

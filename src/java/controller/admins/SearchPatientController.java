@@ -22,7 +22,7 @@ import patients.PatientDTO;
 public class SearchPatientController extends HttpServlet {
 
         public static final String ERROR = "home.jsp";
-        public static final String SUCCESS = "admin_User.jsp";
+        public static final String SUCCESS = "index_Patient.jsp";
         
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
