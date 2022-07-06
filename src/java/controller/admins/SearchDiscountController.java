@@ -9,11 +9,15 @@ import discounts.DiscountDAO;
 import discounts.DiscountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import serviceTypes.ServiceTypeDAO;
+import services.ServiceDAO;
+import services.ServiceDTO;
 
 /**
  *
@@ -21,19 +25,32 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SearchDiscountController extends HttpServlet {
 
-    public static final String ERROR = "home.jsp";
-    public static final String SUCCESS = "admin_Discount.jsp";
+    public static final String ERROR = "LoginController";
+    public static final String SUCCESS = "index_Discount.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            DiscountDAO dao = new DiscountDAO();
+            DiscountDAO dao = new DiscountDAO();       
+            ServiceDAO serviceDao = new ServiceDAO();
+            ServiceTypeDAO svTypeDao =new ServiceTypeDAO();
+            DiscountDAO discountDao =new DiscountDAO();
+            List<DiscountDTO> listDiscount= discountDao.getAllListDiscount();
+            List<ServiceDTO> listAllService= serviceDao.getAllListService();
+            
+            
+             List<DiscountDTO> listDiscountBySVType= new ArrayList<>();
             String name = request.getParameter("title");
             List<DiscountDTO> list = dao.searchDiscountByTitle(name);
+            if(list!=null){
             request.setAttribute("SEARCH_DISCOUNT", list);
+            request.setAttribute("listDiscountBySVType", listDiscountBySVType);
+            request.setAttribute("LIST_DISCOUNT", listDiscount);
+            request.setAttribute("LIST_ALL_SERVICE", listAllService);
             url = SUCCESS;
+            }
         } catch (Exception e) {
             log("Error at ShowServiceController: " + e.toString());
         } finally {

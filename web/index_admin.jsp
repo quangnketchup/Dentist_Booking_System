@@ -81,7 +81,7 @@
                                 <h6 class="collapse-header">Các loại dịch vụ</h6>
                             </div>
                             <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                 if (listServiceType != null) {
                                     for (ServiceTypeDTO svType : listServiceType) {
                             %>

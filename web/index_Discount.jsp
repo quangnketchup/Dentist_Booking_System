@@ -66,6 +66,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
+
                     <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
@@ -73,7 +74,9 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
+                            <div class="row">
+                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                            </div>
                             <%
                                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                 if (listServiceType != null) {
@@ -81,7 +84,9 @@
                             %>
 
 
-                            <a class="collapse-item" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                            <div class="row service-item">
+                                <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                            </div>
                             <%
                                     }
                                 }
@@ -118,9 +123,33 @@
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index_Discount.jsp">
-                        <i class="fas fa-fw fa-percent"></i>
-                        <span>Mã Giảm Giá</span></a>
+
+                    <a class="nav-link collapsed" href="index_admin.jsp" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Mã giảm giá</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <div class="row">
+                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                            </div>
+                            <%
+                                
+                                if (listServiceType != null) {
+                                    for (ServiceTypeDTO svType : listServiceType) {
+                            %>
+
+                            <div class="row service-item">
+                                <a class="collapse-item col-sm float-left" href="LoadDiscountController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->
@@ -232,30 +261,31 @@
                                                     </div>
                                                 </div>                                                          
                                                 <div class="input-group mb-3">
-                                                    <input name="adminID" type="hidden"  class="form-control" value="<%=loginAdmin.getFullName()%>"> 
+                                                    <input name="adminID" type="hidden"  class="form-control" value="<%=loginAdmin.getAdminID()%>"> 
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <label for="serviceID">Dịch vụ</label>
                                                     <select name="serviceID">
                                                         <%  List<ServiceDTO> listAllService = (List<ServiceDTO>) request.getAttribute("LIST_ALL_SERVICE");
                                                             List<DiscountDTO> DiscountService = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");
-                                                            int checkServiceDuplication=0;
+                                                            int checkServiceDuplication = 0;
                                                             for (ServiceDTO service : listAllService) {
                                                                 for (DiscountDTO discountDTO : DiscountService) {
-                                                                        if(discountDTO.getServiceID()==service.getServiceID()){
-                                                                            ++checkServiceDuplication;
-                                                                        }
+                                                                    if (discountDTO.getServiceID() == service.getServiceID()) {
+                                                                        ++checkServiceDuplication;
                                                                     }
-                                                                %>
-                                                        
+                                                                }
+                                                        %>
+
                                                         <%
-                                                                if(checkServiceDuplication==0) {
+                                                            if (checkServiceDuplication == 0) {
                                                         %>                                
-                                                            
+
                                                         <option value="<%=service.getServiceID()%>"><%=service.getServiceName()%></option> 
-                                                        <%}else checkServiceDuplication=0;
-                                                                }%>
-                                                                
+                                                        <%} else
+                                                                    checkServiceDuplication = 0;
+                                                            }%>
+
                                                     </select>
                                                 </div>
                                             </div><!-- /.card -->
@@ -427,8 +457,7 @@
                                 </table>
                                 <% }
                                         }
-                                    }
-                                %>
+                                    } %>
                             </div>
                         </div>
 
@@ -458,6 +487,9 @@
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
+
+            <!-- loader -->
+            <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
             <!-- loader Modal doctor-->
             <%
@@ -495,12 +527,12 @@
                                         </div>
                                         <div class="" >
                                             <input type="hidden" name="discountID" value="<%=discount.getDiscountID()%>" readonly="">
-                                            <div><span>chủ đề</span><input type="text" name="Title" value="<%=discount.getTitle()%>"/></div>
+                                            <div><span>chủ đề</span><input type="text" name="title" value="<%=discount.getTitle()%>"/></div>
                                             <div><span>Phần trăm</span><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>"/></div>
                                             <input type="hidden" name="status" value="<%=discount.getStatus()%>"/>
                                             <div><span>Ngày tạo</span><input type="text" name="createDate" value="<%=discount.getCreateDate()%>"/></div>
-                                            <div><span>Ngày Hết hạn</span><input type="text" name="ExpectDate" value="<%=discount.getExpiredDate()%>"/></div>
-                                            <div><input type="hidden" name="AdminID" value="<%=discount.getAdminID()%>"/></div>
+                                            <div><span>Ngày Hết hạn</span><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>"/></div>
+                                            <div><input type="hidden" name="adminID" value="<%=discount.getAdminID()%>"/></div>
                                         </div>
                                         <input type="submit" value="Cập nhật">
                                     </div>
@@ -512,10 +544,6 @@
             </div>
             <%}
                 }%>
-
-            <!-- loader -->
-            <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
             <!-- Logout Modal-->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">

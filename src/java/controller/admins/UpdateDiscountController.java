@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UpdateDiscountController extends HttpServlet {
 
-    public static final String ERROR = "admin_Discount.jsp";
-    public static final String SUCCESS = "ShowDiscountController";
+    public static final String ERROR = "LoginController";
+    public static final String SUCCESS = "LoadAdminController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,7 +34,6 @@ public class UpdateDiscountController extends HttpServlet {
             String description = request.getParameter("description");
             int percentDiscount = Integer.parseInt(request.getParameter("percentDiscount"));
             int status = Integer.parseInt(request.getParameter("status"));
-            String image = request.getParameter("image");
             String createDate = request.getParameter("createDate");
             String expiredDate = request.getParameter("expiredDate");
             int adminID = Integer.parseInt(request.getParameter("adminID"));
@@ -45,17 +44,13 @@ public class UpdateDiscountController extends HttpServlet {
                 discountError.setTitleError("Tên chủ đề khuyến mãi phải từ [1,50]");
                 check = false;
             }
-            if (image.trim().length() == 0) {
-                discountError.setImageError("không thể để trống Hình ảnh");
-                check = false;
-            }
 
             if (percentDiscount < 0) {
                 discountError.setPercentDiscountError("Phần trăm khuyến mãi không âm");
                 check = false;
             }
             DiscountDAO dao = new DiscountDAO();
-            DiscountDTO discount = new DiscountDTO(discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID);
+            DiscountDTO discount = new DiscountDTO(discountID, title, description, percentDiscount, status, createDate, expiredDate, adminID);
 
             if (check) {
                 boolean checkUpdate = dao.updateDiscount(discount);

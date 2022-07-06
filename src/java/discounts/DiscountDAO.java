@@ -14,8 +14,8 @@ public class DiscountDAO {
     private static final String GET_LIST_DISCOUNT_SERVICE = "SELECT d.discountID, d.title, d.description, d.percentDiscount, d.status,si.image, d.createDate, d.expiredDate, d.adminID\n" +
 " FROM tblDiscounts d, tblServices s, tblServiceImages si \n" +
 " WHERE s.serviceID = si.serviceImageID AND s.serviceID = d.serviceID";
-    private static final String SEARCH_DISCOUNT_BY_TITLE = "SELECT discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID FROM tblDiscounts WHERE title like ?";
-    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?," 
+    private static final String SEARCH_DISCOUNT_BY_TITLE = "SELECT discountID, title, description, percentDiscount, status, createDate, expiredDate, adminID, serviceID FROM tblDiscounts WHERE title like ?";
+    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?, description=?, title=?" 
                         + " WHERE discountID =? ";
     private static final String GET_DISCOUNT_BY_SERVICE_ID= "select * from tblDiscounts WHERE expiredDate> GETDate() AND status =1 AND serviceID =?";
     private static final String CREATE_DISCOUNT = "INSERT tblDiscounts ([title], [description], [percentDiscount], [status], [createDate], [expiredDate], [adminID], [serviceID]) VALUES (?,?,?,?,?,?,?,?)";
@@ -190,11 +190,11 @@ public class DiscountDAO {
                     String description = rs.getString("description");
                     int percentDiscount = rs.getInt("percentDiscount");
                     int status = rs.getInt("status");
-                    String image = rs.getString("image");
                     String createDate = rs.getString("createDate");
                     String expiredDate = rs.getString("expiredDate");
                     int adminID = rs.getInt("adminID");
-                    list.add(new DiscountDTO(discountID, title, description, percentDiscount, status, image, createDate, expiredDate, adminID));
+                    int serviceID = rs.getInt("serviceID");
+                    list.add(new DiscountDTO(discountID, title, description, percentDiscount, status, createDate, expiredDate, adminID, serviceID));
                 }
             }
 
@@ -256,7 +256,9 @@ public class DiscountDAO {
                 pstm = conn.prepareStatement(UPDATE_DISCOUNT);
                 pstm.setInt(1, discount.getPercentDiscount());               
                 pstm.setInt(2, discount.getStatus());
-                pstm.setInt(3, discount.getDiscountID());
+                pstm.setString(3, discount.getDescription());
+                pstm.setString(4, discount.getTitle());
+                pstm.setInt(5, discount.getDiscountID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
