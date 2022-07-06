@@ -184,6 +184,14 @@
         <servlet-name>GetServiceNameForDiscount</servlet-name>
         <servlet-class>controller.admins.GetServiceNameForDiscount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <servlet-class>controller.main.LoginGoogleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginFaceBookController</servlet-name>
+        <servlet-class>controller.main.LoginFaceBookController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -367,6 +375,14 @@
     <servlet-mapping>
         <servlet-name>GetServiceNameForDiscount</servlet-name>
         <url-pattern>/GetServiceNameForDiscount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <url-pattern>/LoginGoogleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginFaceBookController</servlet-name>
+        <url-pattern>/LoginFaceBookController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

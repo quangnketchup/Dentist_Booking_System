@@ -34,6 +34,14 @@ public class PatientDTO {
         this.gender = gender;
         this.status = status;
     }
+
+    public PatientDTO(int patientID, String fullName, String gmail) {
+        this.patientID = patientID;
+        this.fullName = fullName;
+        this.gmail = gmail;
+    }
+    
+    
  
     public int getPatientID() {
         return patientID;

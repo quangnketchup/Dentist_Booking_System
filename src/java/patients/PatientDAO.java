@@ -12,16 +12,179 @@ import patients.PatientDTO;
 public class PatientDAO {
 
     private static final String GET_ALL_LIST_PATIENT = "SELECT  * FROM tblPatients";
-    private static String LOGIN = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE gmail=? AND password=?";
-    private static String SEARCH_PATIENT = "SELECT Patient,fullName,roleID FROM tblUsers WHERE fullName like ?";
+    private static final String LOGIN = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE gmail=? AND password=?";
+    private static final String LOGIN_BY_GMAIL = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE gmail=?";
+    private static final String SEARCH_PATIENT = "SELECT Patient,fullName,roleID FROM tblUsers WHERE fullName like ?";
     private static final String UPDATE_PATIENT = "UPDATE tblPatients SET status=?"
             + " WHERE patientID =? ";
     private static final String SEARCH_PATIENT_BY_NAME = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE fullName like ?";
-    private static String CHECK_DUPLICATE = "SELECT fullName FROM tblPatients WHERE patientID=?";
-    private static String CHECK_DUPLICATE_GMAIL = "SELECT gmail FROM tblPatients WHERE gmail=?";
+    private static final String CHECK_DUPLICATE = "SELECT fullName FROM tblPatients WHERE patientID=?";
+    private static final String CHECK_DUPLICATE_GMAIL = "SELECT * FROM tblPatients WHERE gmail= ?";
     private static final String REGISTER_USER = "INSERT tblPatients ([fullName], [password], [gmail], [phone], [address], [gender], [status], [roleID]) VALUES (?,?,?,?,?,?,?,?)";
-                     
-
+    private static final String REGISTER_USER_BY_GMAIL = "INSERT tblPatients ([fullName], [gmail], [status],[roleID] ) VALUES (?,?,?,'PA')";
+    private static final String CHECKDUPLICATE_ID = "select * from tblPatients where patientID = ?";
+    private static final String LOGIN_BY_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
+    
+    public PatientDTO checkLoginByID(long id) throws SQLException {
+        PatientDTO patient = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LOGIN_BY_ID);
+                ptm.setLong(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int patientID = rs.getInt("patientID");
+                    String fullName = rs.getString("fullName");
+                    String gmail=rs.getString("gmail");
+                    patient = new PatientDTO(patientID, fullName, gmail);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return patient;
+    }
+    
+     public boolean checkDuplicateByID(long id) throws SQLException {
+        List<PatientDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        boolean check=false;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(CHECKDUPLICATE_ID);
+                ptm.setLong(1, id);        
+                rs = ptm.executeQuery();
+                if (rs.next()) {                    
+                    check=true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return check;
+    }
+    
+    
+    public boolean registerUserbyGmail(PatientDTO patient) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String name=patient.getFullName();
+                String email=patient.getGmail();
+                pstm = conn.prepareStatement(REGISTER_USER_BY_GMAIL);
+                pstm.setString(1, name);
+                pstm.setString(2,email);
+                pstm.setInt(3, 1);
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                pstm.close();
+            }
+        }
+        return check;
+    }
+    
+    
+     public PatientDTO checkLoginByGmail(String gmail) throws SQLException {
+        PatientDTO patient = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LOGIN_BY_GMAIL);
+                ptm.setString(1, gmail);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int patientID = rs.getInt("patientID");
+                    String fullName = rs.getString("fullName");   
+                    patient = new PatientDTO(patientID, fullName, gmail);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return patient;
+    }
+    
+    public boolean checkDuplicateGmail (String gmail) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE_GMAIL);
+                ptm.setString(1, gmail);
+                rs = ptm.executeQuery();
+                if (rs.next()) {                    
+                    check=true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     public boolean registerUser(PatientDTO patient) throws SQLException {
         boolean check = false;
         Connection conn = null;

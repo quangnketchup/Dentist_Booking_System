@@ -17,9 +17,13 @@
         <!-- Theme style -->
         <link rel="stylesheet" href="css/adminlte.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <meta name="google-signin-client_id" content="326210504580-9jhmvl00cg3sabr664sav1p87gsnf90g.apps.googleusercontent.com
+">
     </head>
 
     <body class="hold-transition login-page"  style="background-image: url('images/login1.jpg');">
+        <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=560930585693096&autoLogAppEvents=1" nonce="nWftN8as"></script>
         <div class="login-box">
             <!-- /.login-logo -->
             <div class="card card-outline card-primary">
@@ -63,10 +67,13 @@
                         </div>
                     </form>
 
-                    <div class="social-auth-links text-center mt-2 mb-3">
-                        <a href="#" class="btn btn-block btn-danger">
+                    <div class="g-signin2 social-auth-links text-center mt-2 mb-3" >
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/DentistBookingSystem/LoginGoogleController&response_type=code
+		   &client_id=326210504580-9jhmvl00cg3sabr664sav1p87gsnf90g.apps.googleusercontent.com
+&approval_prompt=force" class="btn btn-block btn-danger">
                             <i class="fa fa-google"></i> Đăng nhập với Google
                         </a>
+                        <a class="btn btn-primary" href="https://www.facebook.com/dialog/oauth?client_id=560930585693096&redirect_uri=http://localhost:8080/DentistBookingSystem/LoginFaceBookController&scope=public_profile%2Cemail" class="social-button" id="facebook-connect"> <span>Login with Facebook</span></a>
                     </div>
                     <p class="mb-0">
                         <a href="register.jsp" class="text-center">Đăng kí tài khoản</a>
@@ -80,10 +87,16 @@
         <!-- /.login-box -->
 
         <!-- jQuery -->
+        <!-- Login with fb -->
+        
+      
+        
         <script src="js/js/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="js/js/bootstrap.bundle.min.js"></script>
         <script src="js/adminlte.min.js"></script>
+       
+        
     </body>
 
 </html>
