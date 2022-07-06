@@ -208,7 +208,7 @@
                                 %>
                                 <div><h3>Không có bình luận nào cả</h3></div>
                             </div>
-                            <%} else {%>
+                            <%}else if(feedbackService.getStatus()==1) {%>
                             <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
                                 <div class="form-group col-md-4 border-primary">
                                     <div >
