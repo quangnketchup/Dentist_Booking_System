@@ -129,7 +129,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="LoadAdminController">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -157,7 +157,7 @@
                                 <h6 class="collapse-header">Các loại dịch vụ</h6>
                             </div>
                             <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                 if (listServiceType != null) {
                                     for (ServiceTypeDTO svType : listServiceType) {
                             %>
@@ -184,7 +184,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link collapsed" href="ShowPatientController">
                         <i class="fa-solid fa-bed-pulse"></i>
                         <span>Bệnh nhân</span>
@@ -218,7 +218,7 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <div class="row">
-                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                                <h6 class="collapse-header">Các loại giảm giá</h6>
                             </div>
                             <%
                                 if (listServiceType != null) {
@@ -263,6 +263,11 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            
+                            <form class="form-inline my-2 my-lg-0" action="#">
+                                <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên bệnh nhân" aria-label="Search">
+                                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                            </form>
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->

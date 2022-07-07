@@ -24,7 +24,7 @@
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -50,7 +50,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="LoadAdminController">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -105,6 +105,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="ShowPatientController">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                        <span>Bệnh nhân</span>
+                    </a>
+                </li>
+
+
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="index_feedback.jsp">
@@ -119,12 +128,10 @@
                         <i class="fas fa-fw fa-calendar-check"></i>
                         <span>Lịch Hẹn</span></a>
                 </li>
-
-
                 <!-- Nav Item - Tables -->
-                <li class="nav-item">
+                <li class="nav-item active">
 
-                    <a class="nav-link collapsed" href="index_admin.jsp" data-toggle="collapse" data-target="#collapseThree"
+                    <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseThree"
                        aria-expanded="true" aria-controls="collapseThree">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Mã giảm giá</span>
@@ -132,10 +139,9 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <div class="row">
-                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                                <h6 class="collapse-header">Các loại giảm giá</h6>
                             </div>
                             <%
-                                
                                 if (listServiceType != null) {
                                     for (ServiceTypeDTO svType : listServiceType) {
                             %>
@@ -151,7 +157,6 @@
                         </div>
                     </div>
                 </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -159,7 +164,6 @@
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
-
 
             </ul>
             <!-- End of Sidebar -->
@@ -178,14 +182,13 @@
                             <i class="fa fa-bars"></i>
                         </button>
 
-
-
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
-
-
-
+                            <form class="form-inline my-2 my-lg-0" action="SearchDiscountController">
+                                <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên khuyến mãi" aria-label="Search">
+                                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                            </form>
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -306,18 +309,15 @@
                             </div>
                         </div>
 
-                        <div class="col-md-5 offset-1">
+                        <div class="col-md-7 offset-1">
                             <div class="btn-group">
                                 <form action="SearchDiscountController">
-                                    <input type="search" class="form" name="title">
-                                    <input class="btn"
-                                           style="background: #2f89fc; color: white; margin-right: 5px "
-                                           type="submit" value="Tìm kiếm mã khuyễn mãi">
+                                    <input type="search" class="form" name="title" style="width: 286px;height: 40px;border-radius: 10px;">
+                                    <input class="btn btn-primary" type="submit" value="Tìm kiếm mã khuyễn mãi">
                                 </form>
-                                <button class="btn btn-success" data-toggle="modal"
-                                        data-target="#exampleModal"
-                                        style="border-radius: 50px; position: absolute; left: 500px; "><i
-                                        class="fa fa-plus"></i></button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                             </div>
                         </div>
 
@@ -346,10 +346,8 @@
                                     <form action="UpdateDiscountController" method="GET">
                                         <tr>
 
-                                            <td><input type="text" name="discountID"
-                                                       value="<%=discount.getDiscountID()%>"
-                                                       class="form-control-plaintext"
-                                                       readonly /></td>
+                                            <td><input type="text" name="discountID" value="<%=discount.getDiscountID()%>"
+                                                       class="form-control-plaintext" readonly /></td>
                                             <td><input type="text" name="title"
                                                        value="<%=discount.getTitle()%>"
                                                        class="form-control-plaintext"readonly />
@@ -489,7 +487,6 @@
             </a>
 
             <!-- loader -->
-            <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
             <!-- loader Modal doctor-->
             <%
@@ -499,88 +496,90 @@
                     for (DiscountDTO discount : listDiscoutDTO) {
             %>
             <div  class="modal fade" id="discount<%=discount.getDiscountID()%>" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl " role="document">
+                <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                     <div class="modal-content " >
                         <div class="modal-header">
-                            <h5 class="modal-title " id="modalRequestLabel" style="color:white">CHI TIẾT KHUYẾN MÃI</h5>
+                            <h5 class="modal-title text-primary" id="modalRequestLabel" >CHI TIẾT KHUYẾN MÃI</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body1 col-12">
-                            <div class="row">
-                                <form action="UpdateDiscountController">
-                                    <div class="col-md-6 infomation float-left" style="border-right:4px solid #227093">
+                        <div class="modal-body">
+
+                            <form action="UpdateDiscountController">
+                                <div class="row col-12">
+                                    <div class="col-md-5">
                                         <div class="text-align-center">
-                                            <img style="height:250px;width: 250px; object-fit: contain" src="images/discounts.jpg" alt=""/>
+                                            <img class="border-radius-10" style="height:250px;width: 250px; object-fit: contain" src="images/discounts.jpg" alt=""/>
                                         </div>
-                                        <div class="">
+                                        <label class="text-primary text-align-center">
                                             <%=discount.getTitle()%>
-                                        </div>
+                                        </label><br>
                                         <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <option selected value="<%=discount.getStatus()%>"><%if (discount.getStatus() == 1) {%>Đang khuyến mại<%} else {%>Đã hết hạn<%}%></option>
                                             <option value="<%=Math.abs(discount.getStatus() - 1)%>"><%if (discount.getStatus() == 1) {%>Đã hết hạn<%} else {%>Đang khuyến mại<%}%></option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 float-right">
-                                        <div class=""><span>Description</span><input type="text" name="description" value="<%=discount.getDescription()%>"/>
-                                        </div>
-                                        <div class="" >
+                                    <div class="col-md-7 ">
+                                        <div class="text-primary">
+                                            <label>Description: <input type="text" name="description" value="<%=discount.getDescription()%>"/></label>
                                             <input type="hidden" name="discountID" value="<%=discount.getDiscountID()%>" readonly="">
-                                            <div><span>chủ đề</span><input type="text" name="title" value="<%=discount.getTitle()%>"/></div>
-                                            <div><span>Phần trăm</span><input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>"/></div>
+                                            <label>Dịch vụ: <input type="text" name="title" value="<%=discount.getTitle()%>"/></label>
+                                            <label>Phần Trăm: <input type="number" name="percentDiscount" value="<%=discount.getPercentDiscount()%>"/></label>
                                             <input type="hidden" name="status" value="<%=discount.getStatus()%>"/>
-                                            <div><span>Ngày tạo</span><input type="text" name="createDate" value="<%=discount.getCreateDate()%>"/></div>
-                                            <div><span>Ngày Hết hạn</span><input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>"/></div>
+                                            <label>Ngày tạo: <input type="text" name="createDate" value="<%=discount.getCreateDate()%>"/></label>
+                                            <label>Ngày Hết hạn: <input type="text" name="expiredDate" value="<%=discount.getExpiredDate()%>"/></label>
                                             <div><input type="hidden" name="adminID" value="<%=discount.getAdminID()%>"/></div>
                                         </div>
-                                        <input type="submit" value="Cập nhật">
+                                        <input class="btn btn-outline-primary mt-2" type="submit" value="Cập nhật">
                                     </div>
-                                </form> 
-                            </div>
+                                </div>
                         </div>
+                        </form> 
+
                     </div>
                 </div>
             </div>
-            <%}
+        </div>
+        <%}
                 }%>
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
                     </div>
                 </div>
             </div>
-            <script src="ckeditor/ckeditor.js"></script>
-            <script>
+        </div>
+        <script src="ckeditor/ckeditor.js"></script>
+        <script>
                                                     var editor = CKEDITOR.replace('description');
                                                     CKFinder.setupCKEditor(editor, 'ckfinder/');
                                                     data["description"] = editor.getData();
-            </script>    
-            <!-- Bootstrap core JavaScript-->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- Core plugin JavaScript-->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-            <!-- Custom scripts for all pages-->
-            <script src="js/sb-admin-2.min.js"></script>
-            <!-- Page level plugins -->
-            <script src="vendor/chart.js/Chart.min.js"></script>
-            <!-- Page level custom scripts -->
-            <script src="js/demo/chart-area-demo.js"></script>
-            <script src="js/demo/chart-pie-demo.js"></script>
+        </script>    
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
     </body>
 

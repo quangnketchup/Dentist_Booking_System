@@ -55,7 +55,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="LoadAdminController">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -99,7 +99,7 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <li class="nav-item">
+                <li class="nav-item active">
                    <a class="nav-link collapsed" href="ShowDoctorController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Bác Sĩ</span>

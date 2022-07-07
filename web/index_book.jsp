@@ -29,13 +29,12 @@
 
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/ionicons.min.css">
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
@@ -73,7 +72,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="LoadAdminController">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -89,6 +88,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
+
                     <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseTwo"
                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
@@ -96,7 +96,9 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
+                            <div class="row">
+                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                            </div>
                             <%
                                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                 if (listServiceType != null) {
@@ -104,7 +106,9 @@
                             %>
 
 
-                            <a class="collapse-item" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                            <div class="row service-item">
+                                <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                            </div>
                             <%
                                     }
                                 }
@@ -130,6 +134,8 @@
                     </a>
                 </li>
 
+
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="index_feedback.jsp">
@@ -139,19 +145,40 @@
                 </li>
 
                 <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index_book.jsp">
+                <li class="nav-item active">
+                    <a class="nav-link" href="ShowBookingAdminController">
                         <i class="fas fa-fw fa-calendar-check"></i>
                         <span>Lịch Hẹn</span></a>
                 </li>
-
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index_Discount.jsp">
-                        <i class="fas fa-fw fa-percent"></i>
-                        <span>Mã Giảm Giá</span></a>
-                </li>
 
+                    <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Mã giảm giá</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <div class="row">
+                                <h6 class="collapse-header">Các loại giảm giá</h6>
+                            </div>
+                            <%
+                                if (listServiceType != null) {
+                                    for (ServiceTypeDTO svType : listServiceType) {
+                            %>
+
+                            <div class="row service-item">
+                                <a class="collapse-item col-sm float-left" href="LoadDiscountController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -159,7 +186,6 @@
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
-
 
             </ul>
             <!-- End of Sidebar -->
@@ -343,7 +369,7 @@
                                                 </td>
                                                 <td>
                                                     <input class="btn btn-primary" type="submit" value="Đã hoàn thành">
-                                                </td>s
+                                                </td>
                                                 <td>
                                                     <a class="btn btn-danger" href="">Xóa</a>
                                                 </td>

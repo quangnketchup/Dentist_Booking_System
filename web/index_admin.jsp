@@ -107,15 +107,15 @@
                         <span>Bác Sĩ</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ShowPatientController">
-                       <i class="fa-solid fa-bed-pulse"></i>
+                        <i class="fa-solid fa-bed-pulse"></i>
                         <span>Bệnh nhân</span>
                     </a>
                 </li>
 
-                
+
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
@@ -142,7 +142,7 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <div class="row">
-                                <h6 class="collapse-header">Các loại dịch vụ</h6>
+                                <h6 class="collapse-header">Các loại giảm giá</h6>
                             </div>
                             <%
                                 if (listServiceType != null) {
