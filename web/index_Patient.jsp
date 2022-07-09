@@ -263,9 +263,13 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-                            
-                            <form class="form-inline my-2 my-lg-0" action="#">
-                                <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên bệnh nhân" aria-label="Search">
+                            <%            String search = request.getParameter("fullName");
+                                if (search == null) {
+                                    search = "";
+                                }
+                            %>
+                            <form class="form-inline my-2 my-lg-0" action="SearchPatientController">
+                                <input name="fullName" class="form-control mr-sm-2" type="search" value="<%=search%>" placeholder="Nhập tên bệnh nhân" aria-label="Search">
                                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
                             <div class="topbar-divider d-none d-sm-block"></div>
@@ -307,20 +311,12 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
+
                     <div class="container-fluid">
 
                         <div class="col-md-5 offset-1">
                             <div>
                                 <h3 class="text-primary">Quản lí bệnh nhân:</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-5 offset-1">
-                            <div class="btn-group">
-                                <form action="SearchPatientController">
-                                    <input type="search" class="form" name="fullName">
-                                    <input class="btn" style="background: #2f89fc; color: white; margin-right: 5px " type="submit" value="Tìm kiếm bệnh nhân">
-                                </form>                        
                             </div>
                         </div>
 

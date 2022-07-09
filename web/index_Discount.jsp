@@ -27,8 +27,89 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <style>
+            #toast-msg{
+                position: fixed;
+                padding-left: 10px;
+                right: 10px;
+                top:80px;
+                z-index: 100;
+                width: 210px;
+                background-color: #28a745;
+                border-bottom-left-radius:10px;
+                border-top-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                text-align: left;
+                color:white;
+                font-size: 18px;
+                animation: slideInleft ease .3s, fadeOut linear 1s 3s forwards;
+            }
 
+            @keyframes slideInleft {
+
+                from{
+                    opacity: 0;
+                    transform: translateX(calc(100%+40px));
+
+                }
+                to{
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes fadeOut{
+                to{
+                    opacity: 0;
+
+                }
+            }
+
+            #toast-close{
+                color: white;
+                width: 240px;
+                background-color: rgb(231,210,14);
+                display: block;
+            }
+
+            #toast-msg strong{
+                color: white;
+                font-size: 15px;
+
+            }
+        </style>
     </head>
+
+    <%
+        String error = (String) session.getAttribute("ERROR");
+        if (error == null) {
+            error = "";
+        }
+    %>
+    <%=error%>
+
+    <!<!-- Toast thông báo succeed update -->
+
+    <%
+        String msg = (String) request.getAttribute("SSMSG");
+        if (msg == null) {
+            msg = "";
+        } else {
+    %>
+    <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true"">
+        <div class="toast-header1">
+            <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body1">
+            <%=msg%>
+        </div>
+    </div>
+
+    <%}%>
 
     <body id="page-top">
         <%AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");%>
@@ -184,11 +265,20 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-
+                            <% String search = request.getParameter("title");
+                                if (search == null) {
+                                    search = "";
+                                }
+                            %>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <form class="form-inline my-2 my-lg-0" action="SearchDiscountController">
-                                <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên khuyến mãi" aria-label="Search">
+                                <input name="title" class="form-control mr-sm-2" type="search" value="<%=search%>" placeholder="Nhập tên khuyến mãi" aria-label="Search">
                                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
+
+
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -309,17 +399,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-7 offset-1">
-                            <div class="btn-group">
-                                <form action="SearchDiscountController">
-                                    <input type="search" class="form" name="title" style="width: 286px;height: 40px;border-radius: 10px;">
-                                    <input class="btn btn-primary" type="submit" value="Tìm kiếm mã khuyễn mãi">
-                                </form>
-                                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
+
 
                         <div class="col-md-12">
 
@@ -542,7 +622,7 @@
             </div>
         </div>
         <%}
-                }%>
+            }%>
         <!-- Logout Modal-->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -580,7 +660,13 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
+        <script>
 
+                                                    function toastClose() {
+                                                        var toast1 = document.getElementById("toast-msg");
+                                                        toast1.style.display = "none";
+                                                    }
+        </script>
     </body>
 
 </html>

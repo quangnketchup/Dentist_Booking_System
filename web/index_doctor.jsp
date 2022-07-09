@@ -189,8 +189,13 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            <%            String search = request.getParameter("fullName");
+                                if (search == null) {
+                                    search = "";
+                                }
+                            %>
                             <form class="form-inline my-2 my-lg-0" action="SearchDoctorController">
-                                <input name="fullName" class="form-control mr-sm-2" type="search" placeholder="Nhập tên bác sĩ" aria-label="Search">
+                                <input name="fullName" class="form-control mr-sm-2" type="search" value="<%=search%>" placeholder="Nhập tên bác sĩ" aria-label="Search">
                                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
                             </form>
 
