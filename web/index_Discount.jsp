@@ -316,7 +316,8 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    <%List<DiscountDTO> listDiscountBySVType = (List<DiscountDTO>) request.getAttribute("listDiscountBySVType");%>
+                    <%List<DiscountDTO> listDiscountBySVType = (List<DiscountDTO>) request.getAttribute("listDiscountBySVType");
+                    int serviceTypeID = listDiscountBySVType.get(0).getServiceID(); %>
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -344,6 +345,7 @@
                                                 <div class="input-group mb-3">
                                                     <div class="form-group">
                                                         <label>Ngày tạo mã</label>
+                                                        <input type="hidden" name="serviceTypeID" value="<%=serviceTypeID%>">
                                                         <input type="date" name="createDate" class="form-control" min="<%=LocalDate.now()%>" required="">
                                                     </div>
                                                 </div>

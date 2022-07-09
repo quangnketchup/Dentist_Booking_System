@@ -11,11 +11,22 @@ import bookingdetail.BookingDetailDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import patients.PatientDTO;
 import schedule.scheduleDAO;
 import schedule.scheduleDTO;
 
@@ -45,13 +56,17 @@ public class SubmitBooking extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url=ERROR;
         try {
+            HttpSession ss = request.getSession();     
+            patients.PatientDTO login = (PatientDTO) ss.getAttribute("LOGIN_PATIENT");
             int doctorID=Integer.parseInt(request.getParameter("doctorID"));
             int serviceID= Integer.parseInt(request.getParameter("serviceID"));
+            String serviceName= request.getParameter("serviceName");
+            String doctorName= request.getParameter("doctorName");
             int discount = Integer.parseInt(request.getParameter("discount"));
             int expectedFee= Integer.parseInt(request.getParameter("expectedFee"));
             int patientID = Integer.parseInt(request.getParameter("patientID"));
             String dateBooking= request.getParameter("dateBooking");
-            int slotID = Integer.parseInt(request.getParameter("slotID"));
+            int slotID = Integer.parseInt(request.getParameter("slotID"));      
             BookingDetailDTO bkDetail= new BookingDetailDTO(serviceID,expectedFee,patientID);
             BookingDetailDAO bkDetailDAO =new BookingDetailDAO();
             boolean check_valid = bkDetailDAO.checkExistBookingDetai(dateBooking, slotID,doctorID);
@@ -60,11 +75,59 @@ public class SubmitBooking extends HttpServlet {
             int scheID =schee.getScheduleID();
             bkDetail.setScheduleID(scheID);
             if(!check_valid){
-                    
                      boolean check2=bkDetailDAO.createBookingDetail(bkDetail);
                     boolean check1 =scheDAO.setBookedSchedule(slotID, dateBooking, doctorID);
                     if(check2 && check1){
                         url=TRUE;
+                        String gio="";
+                        switch (slotID) {
+                            case 1:
+                                gio="7:00 - 9:00 am";
+                                break;
+                                case 2:
+                                gio="9:00 - 11:00 am";
+                                break;
+                                case 3:
+                                gio="13:00 - 15:00 pm";
+                                break;
+                                case 4:
+                                gio="15:00 - 17:00 pm";
+                                break;
+                            default:
+                                throw new AssertionError();
+                        }
+                        ///Gui mail 
+                         final String fromEmail = "dentacare.noti@gmail.com";
+        // Mat khai email cua ban
+        final String password = "lknmisxclfdcplah";
+        // dia chi email nguoi nhan
+        final String toEmail = login.getGmail();
+        final String subject = "Denta Care Thông báo";
+        final String body = "Bạn đã đặt lịch thành công tại Nha khoa Denta Care vào ngày: "+dateBooking+" vào lúc "+ gio+"\n"+
+                "Dịch vụ: "+serviceName+" ,thực hiện bởi bác sĩ: "+doctorName+"\n"+" Cảm ơn bạn đã ủng hộ dịch vụ của Denta Care.\n Admin.";
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+        Authenticator auth = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+        Session session = Session.getInstance(props, auth);
+        MimeMessage msg = new MimeMessage(session);
+        //set message headers
+        msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+        msg.addHeader("format", "flowed");
+        msg.addHeader("Content-Transfer-Encoding", "8bit");
+        msg.setFrom(new InternetAddress(fromEmail, "DentaCare"));
+        msg.setReplyTo(InternetAddress.parse(fromEmail, false));
+        msg.setSubject(subject, "UTF-8");
+        msg.setText(body, "UTF-8");
+        msg.setSentDate(new Date());
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+        Transport.send(msg);
                     request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
                     request.setAttribute("add_green", schee);
                     }

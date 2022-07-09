@@ -363,11 +363,13 @@
                                             <label for="doctor">Bác sĩ: </label>
                                             <%=doctorBk.getFullName()%>
                                             <input name="doctorID" type ="hidden" value="<%=doctorBk.getDoctorID()%>" readonly> 
+                                            <input name="doctorName" type ="hidden" value="<%=doctorBk.getFullName()%>" readonly> 
                                         </div>
                                         <div class="service-booking"> 
                                             <label for ="sv">Dịch vụ: </label>
                                             <%=serviceBk.getServiceName()%>
                                             <input name="serviceID" type="hidden" value="<%=serviceBk.getServiceID()%>"></br>
+                                            <input name="serviceName" type="hidden" value="<%=serviceBk.getServiceName()%>"></br>
                                             <%if (discount != null) {%>
                                             <label for="discount">Hiện đang có chương trình giảm giá: </label>
                                             <input name="discount" type="hidden" value="<%=discount.getDiscountID()%>">
