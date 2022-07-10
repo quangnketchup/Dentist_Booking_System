@@ -60,7 +60,7 @@ public class LoginGoogleController extends HttpServlet {
                  url=PATIENT_PAGE;
             }else{
                 //Dang ki patient moi khi lan dau dang nhap bang gmail
-                PatientDTO newUser= new PatientDTO(1,user.getName(),user.getEmail());
+                PatientDTO newUser= new PatientDTO(1,user.getName(),user.getEmail(),"PA");
                 boolean create = dao.registerUserbyGmail(newUser);
                 if(create){
                     HttpSession session = request.getSession();

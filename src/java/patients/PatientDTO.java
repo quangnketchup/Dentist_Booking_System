@@ -35,10 +35,11 @@ public class PatientDTO {
         this.status = status;
     }
 
-    public PatientDTO(int patientID, String fullName, String gmail) {
+    public PatientDTO(int patientID, String fullName, String gmail,String role) {
         this.patientID = patientID;
         this.fullName = fullName;
         this.gmail = gmail;
+        this.roleID=role;
     }
     
     

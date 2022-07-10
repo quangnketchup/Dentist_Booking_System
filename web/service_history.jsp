@@ -318,7 +318,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger delete1">Hủy</button>
+                                    <a class="btn btn-danger " href="DeleteBookingDetailController?scheduleID=<%=sche.getScheduleID()%>">Hủy</a>
                                 </td>
                             </tr>
                              <%}}}}}}}%>

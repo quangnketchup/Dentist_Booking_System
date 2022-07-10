@@ -40,7 +40,7 @@ public class PatientDAO {
                     int patientID = rs.getInt("patientID");
                     String fullName = rs.getString("fullName");
                     String gmail=rs.getString("gmail");
-                    patient = new PatientDTO(patientID, fullName, gmail);
+                    patient = new PatientDTO(patientID, fullName, gmail,"PA");
                 }
             }
         } catch (Exception e) {
@@ -135,7 +135,7 @@ public class PatientDAO {
                 if (rs.next()) {
                     int patientID = rs.getInt("patientID");
                     String fullName = rs.getString("fullName");   
-                    patient = new PatientDTO(patientID, fullName, gmail);
+                    patient = new PatientDTO(patientID, fullName, gmail,"PA");
                 }
             }
         } catch (Exception e) {

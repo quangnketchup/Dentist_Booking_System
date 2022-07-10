@@ -81,7 +81,7 @@ public class AddDiscountController extends HttpServlet {
                     for(PatientDTO pa: listPatient){
                          final String fromEmail = "dentacare.noti@gmail.com";
         // Mat khai email cua ban
-        final String password = "lknmisxclfdcplah";
+        final String password = "asjvfvbgcycolnct";
         // dia chi email nguoi nhan
         final String toEmail = pa.getGmail();
         final String subject = "Khuyến mãi từ DentaCare";

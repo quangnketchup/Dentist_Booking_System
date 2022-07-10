@@ -66,7 +66,7 @@ public class LoginFaceBookController extends HttpServlet {
                  url=PATIENT_PAGE;
             }else{
                 String email =user.getEmail();
-                PatientDTO newUser= new PatientDTO(1,user.getName(),user.getId());
+                PatientDTO newUser= new PatientDTO(1,user.getName(),user.getId(),"PA");
                 boolean create = dao.registerUserbyGmail(newUser);
                 if(create){
                     HttpSession session = request.getSession();

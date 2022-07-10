@@ -78,7 +78,7 @@ public class SubmitBooking extends HttpServlet {
                      boolean check2=bkDetailDAO.createBookingDetail(bkDetail);
                     boolean check1 =scheDAO.setBookedSchedule(slotID, dateBooking, doctorID);
                     if(check2 && check1){
-                        url=TRUE;
+                                             url=TRUE; 
                         String gio="";
                         switch (slotID) {
                             case 1:
@@ -99,9 +99,10 @@ public class SubmitBooking extends HttpServlet {
                         ///Gui mail 
                          final String fromEmail = "dentacare.noti@gmail.com";
         // Mat khai email cua ban
-        final String password = "lknmisxclfdcplah";
+        final String password = "asjvfvbgcycolnct";
         // dia chi email nguoi nhan
         final String toEmail = login.getGmail();
+        String check=toEmail;
         final String subject = "Denta Care Thông báo";
         final String body = "Bạn đã đặt lịch thành công tại Nha khoa Denta Care vào ngày: "+dateBooking+" vào lúc "+ gio+"\n"+
                 "Dịch vụ: "+serviceName+" ,thực hiện bởi bác sĩ: "+doctorName+"\n"+" Cảm ơn bạn đã ủng hộ dịch vụ của Denta Care.\n Admin.";
@@ -130,9 +131,9 @@ public class SubmitBooking extends HttpServlet {
         Transport.send(msg);
                     request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
                     request.setAttribute("add_green", schee);
+
                     }
-                
-                
+      
             }else{
                 request.setAttribute("FAIL_ADD_BOOKING", "Đặt lịch thất bại");
             }
