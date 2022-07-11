@@ -8,6 +8,7 @@ import admins.AdminDTO;
 import bookingdetail.BookingDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,11 @@ public class LoadAdminController extends HttpServlet {
             int numBooking=bkDao.getNumberBooking(month);
             int numFeedBack=bkDao.getNumberFB(month);
 
-            
+            ArrayList listMoneyInYear = new ArrayList();
+            for (int i = 1; i <= 12; i++) {
+                listMoneyInYear.add(bkDao.getMoneyMonth(i));
+            }
+            request.setAttribute("LIST_MONEY_IN_YEAR", listMoneyInYear);
             request.setAttribute("numFeedBack", numFeedBack);
             request.setAttribute("numBooking", numBooking);
             request.setAttribute("IncomeMonthly", money);

@@ -4,6 +4,7 @@
     Author     : Doan
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
@@ -213,7 +214,7 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="LououtController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -333,10 +334,55 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <%
+                                        ArrayList listMoneyInMonth = (ArrayList) request.getAttribute("LIST_MONEY_IN_YEAR");
+                                    %>
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="chart-area">
-                                            <canvas id="myAreaChart"></canvas>
+                                            <canvas id="myAreaChart"></canvas><!-- comment -->
+                                            <div>
+                                                <input type="hidden" id="thang12" name="number" value="<%=listMoneyInMonth.get(11)%>"/>
+                                            </div><!-- id thang12 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang11" name="number" value="<%=listMoneyInMonth.get(10)%>"/>
+                                            </div><!-- id thang11 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang10" name="numbejr" value="<%=listMoneyInMonth.get(9)%>"/>
+                                            </div><!-- id thang10 trỏ tới chart-area -->
+                                            <div>
+                                                <input type="hidden" id="thang9" name="number" value="<%=listMoneyInMonth.get(8)%>"/>
+                                            </div><!-- id thang9 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang8" name="number" value="<%=listMoneyInMonth.get(7)%>"/>
+                                            </div><!-- id thang8 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang7" name="number" value="<%=listMoneyInMonth.get(6)%>"/>
+                                            </div><!-- id thang7 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang6" name="number" value="<%=listMoneyInMonth.get(5)%>"/>
+                                            </div><!-- id thang6 trỏ tới chart-area -->
+                                            
+                                            <div>
+                                                <input type="hidden" id="thang5" name="number" value="<%=listMoneyInMonth.get(4)%>"/>
+                                            </div><!-- id thang5 trỏ tới chart-area -->
+                                            <div>
+                                                <input type="hidden" id="thang4" name="number" value="<%=listMoneyInMonth.get(3)%>"/>
+                                            </div><!-- id thang4 trỏ tới chart-area -->
+                                            <div>
+                                                <input type="hidden" id="thang3" name="number" value="<%=listMoneyInMonth.get(2)%>"/>
+                                            </div><!-- id thang3 trỏ tới chart-area -->
+                                            <div>
+                                                <input type="hidden" id="thang2" name="number" value="<%=listMoneyInMonth.get(1)%>"/>
+                                            </div><!-- id thang2 trỏ tới chart-area -->
+                                            <div>
+                                                <input type="hidden" id="thang1" name="number" value="<%=listMoneyInMonth.get(0)%>"/>
+                                            </div><!-- id thang1 trỏ tới chart-area -->
                                         </div>
                                     </div>
                                 </div>
@@ -579,7 +625,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>
@@ -597,7 +643,6 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-
     </body>
 
 </html>
