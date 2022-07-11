@@ -132,7 +132,7 @@
                                         <div class="rate">
                                             <div class="rate">
                                                 <%  int average = 0;
-                                                    int count = 1;
+                                                    int count = 0;
                                                     List<FeedbackDTO> ListfeedbackService = (List<FeedbackDTO>) request.getAttribute("SERVICE_FEEDBACK_BY_ID");
                                                     String check1;
                                                     for (FeedbackDTO feedback : ListfeedbackService) {
@@ -141,15 +141,15 @@
                                                     }
                                                     average = average / count;
                                                 %>
-                                                <input type="radio" id="star5" name="rate" value="5" checked=""/>
+                                                <input type="radio" id="star5" name="rate" value="5" <%if(average==5){%>checked=""<%}%>/>
                                                 <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <input type="radio" id="star4" name="rate" value="4" <%if(average==4){%>checked=""<%}%>/>
                                                 <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <input type="radio" id="star3" name="rate" value="3" <%if(average==3){%>checked=""<%}%>/>
                                                 <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <input type="radio" id="star2" name="rate" value="2" <%if(average==2){%>checked=""<%}%>/>
                                                 <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <input type="radio" id="star1" name="rate" value="1" <%if(average==1){%>checked=""<%}%>/>
                                                 <label for="star1" title="text">1 star</label>
                                             </div>
                                         </div>
