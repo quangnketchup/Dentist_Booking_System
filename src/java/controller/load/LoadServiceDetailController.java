@@ -11,6 +11,7 @@ import feedbacks.FeedBackDAO;
 import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,14 @@ public class LoadServiceDetailController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
+            String loginDefault = "";
             patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+            ArrayList listLogin = new ArrayList();
+            listLogin.add(loginPatient);
+
+            if (loginPatient == null) {
+                loginDefault = "LoginDefault";
+            }
 
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             ServiceDAO serviceDao = new ServiceDAO();
@@ -51,23 +59,37 @@ public class LoadServiceDetailController extends HttpServlet {
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
 
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
-            
+
             ServiceDTO service = serviceDao.getServiceById(serviceID);
             List<FeedbackDTO> feedbackService = feedbackDao.getFeedbackByServiceID(serviceID);
             List<ServiceImageDTO> serviceImage = serviceImageDao.getImageByServiceID(serviceID);
             DiscountDTO discount = discountDao.getDiscountByServiceID(serviceID);
-            
-            
-            int discountOfService = service.getServicePrice()*discount.getPercentDiscount()/100;
-            if(service!=null) {
-            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
-            request.setAttribute("SERVICE_DETAIL_BY_ID", service);
-            request.setAttribute("SERVICE_FEEDBACK_BY_ID", feedbackService);
-            request.setAttribute("SERVICE_IMAGE_BY_ID", serviceImage);
-            request.setAttribute("DISCOUNT_BY_ID", discount);
-            
-            request.setAttribute("DISCOUNT_OF_SERVICE", discountOfService);
-            url = SUCCESS;
+
+            int discountOfService = service.getServicePrice() * discount.getPercentDiscount() / 100;
+            if (listLogin.get(0) != null) {
+                if (service != null) {
+                    session.setAttribute("LOGIN_USER", listLogin);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                    request.setAttribute("SERVICE_DETAIL_BY_ID", service);
+                    request.setAttribute("SERVICE_FEEDBACK_BY_ID", feedbackService);
+                    request.setAttribute("SERVICE_IMAGE_BY_ID", serviceImage);
+                    request.setAttribute("DISCOUNT_BY_ID", discount);
+
+                    request.setAttribute("DISCOUNT_OF_SERVICE", discountOfService);
+                    url = SUCCESS;
+                }
+            } else {
+                if (service != null) {
+                    session.setAttribute("LOGIN_DEFAULT", loginDefault);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                    request.setAttribute("SERVICE_DETAIL_BY_ID", service);
+                    request.setAttribute("SERVICE_FEEDBACK_BY_ID", feedbackService);
+                    request.setAttribute("SERVICE_IMAGE_BY_ID", serviceImage);
+                    request.setAttribute("DISCOUNT_BY_ID", discount);
+
+                    request.setAttribute("DISCOUNT_OF_SERVICE", discountOfService);
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             url = ERROR;

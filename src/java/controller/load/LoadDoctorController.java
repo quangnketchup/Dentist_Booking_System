@@ -9,6 +9,7 @@ import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,15 @@ public class LoadDoctorController extends HttpServlet {
             ServiceDAO serviceDao = new ServiceDAO();
             HttpSession session = request.getSession();
 
+            String loginDefault = "";
             patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
+            ArrayList listLogin = new ArrayList();
+            listLogin.add(loginPatient);
+            
+            if (loginPatient == null) {
+                loginDefault = "LoginDefault";
+            }
+
             List<DoctorDTO> listDoctor = doctorDao.getAllListDoctor();
             List<PatientDTO> listPatient = patientDao.getAllListPatient();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
@@ -59,8 +68,17 @@ public class LoadDoctorController extends HttpServlet {
             for (ServiceDTO service : listService) {
                 countService++;
             }
-
+            if(listLogin.get(0)!=null){
             if (listDoctor.size() > 0) {
+                session.setAttribute("LOGIN_USER", listLogin);
+                request.setAttribute("LIST_DOCTOR", listDoctor);
+                request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                request.setAttribute("COUNT_PATIENT", countPatient);
+                request.setAttribute("COUNT_SERVICE", countService);
+                url = SUCCESS;
+            }}
+            else {
+                session.setAttribute("LOGIN_DEFAULT", loginDefault);
                 request.setAttribute("LIST_DOCTOR", listDoctor);
                 request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                 request.setAttribute("COUNT_PATIENT", countPatient);

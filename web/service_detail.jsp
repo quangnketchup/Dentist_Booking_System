@@ -1,4 +1,5 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="discounts.DiscountDTO"%>
 <%@page import="feedbacks.FeedbackDTO"%>
@@ -33,7 +34,14 @@
     <body>
 
         <%
-            String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
+            String loginPatient = "";
+            ArrayList login= (ArrayList) session.getAttribute("LOGIN_USER");
+            if(login!=null) {
+                loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
+            }
+            else{
+            String loginDefault = (String) session.getAttribute("LOGIN_DEFAULT");
+            }
             List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -61,6 +69,7 @@
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                        <%if(!loginPatient.equals("")){%>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -68,6 +77,9 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
+                        <%} else {%>
+                        <li class="nav-item cta"><a href="LoginController" class="nav-link" ><span>Đăng nhập</span></a></li>
+                        <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>

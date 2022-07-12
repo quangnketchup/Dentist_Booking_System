@@ -406,7 +406,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>LoadIndexController</welcome-file>
+        <welcome-file>HomeController</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>ConnectorServlet</servlet-name>

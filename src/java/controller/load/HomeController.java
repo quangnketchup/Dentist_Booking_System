@@ -71,10 +71,18 @@ public class HomeController extends HttpServlet {
 
                 HttpSession session = request.getSession();
 
+                String loginDefault="";
                 patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
                 doctors.DoctorDTO loginDoctor = (DoctorDTO) session.getAttribute("LOGIN DOCTOR");
                 admins.AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");
-
+                ArrayList listLogin = new ArrayList();
+                listLogin.add(loginPatient);
+                listLogin.add(loginDoctor);
+                listLogin.add(loginAdmin);
+                
+                if(loginPatient == null && loginDoctor==null &&loginAdmin== null){
+                    loginDefault="LoginDefault";
+                }
                 int countPatient = 0;
                 for (PatientDTO patient : listPatient) {
                     countPatient++;
@@ -86,8 +94,9 @@ public class HomeController extends HttpServlet {
                 }
 
 //                tra ve trang home
-                if (loginPatient != null || "PA".equals(loginPatient.getRoleID())) {
+                if (listLogin.get(0)!=null) {
                     if (listService != null) {
+                        session.setAttribute("LOGIN_USER", listLogin);
                         request.setAttribute("LIST_SERVICE", listService);
                         request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
@@ -100,8 +109,9 @@ public class HomeController extends HttpServlet {
                         request.setAttribute("COUNT_SERVICE", countService);
                         url = USER;
                     }
-                } else if ("DR".equals(loginDoctor.getRoleID())) {
+                } else if (listLogin.get(1)!=null) {
                     if (listService != null) {
+                        session.setAttribute("LOGIN_USER", listLogin);
                         request.setAttribute("LIST_SERVICE", listService);
                         request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
@@ -115,9 +125,10 @@ public class HomeController extends HttpServlet {
 
                         url = DOCTOR;
                     }
-                } else if ("AD".equals(loginAdmin.getRoleID())) {
+                } else if (listLogin.get(2)!=null) {
                     if (listService != null) {
-                        request.setAttribute("LIST_SERVICE", listService);
+                        session.setAttribute("LOGIN_USER", listLogin);
+                        request.setAttribute("LIST_SERVICE", loginDefault);
                         request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                         request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
                         request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
@@ -128,6 +139,22 @@ public class HomeController extends HttpServlet {
                         request.setAttribute("COUNT_PATIENT", countPatient);
                         request.setAttribute("COUNT_SERVICE", countService);
                         url = ADMIN;
+                    }
+                }
+                else{
+                    if (listService != null) {
+                        session.setAttribute("LOGIN_DEFAULT", loginDefault);
+                        request.setAttribute("LIST_SERVICE", listService);
+                        request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
+                        request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
+                        request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                        request.setAttribute("LIST_DOCTOR", listDoctor);
+                        request.setAttribute("LIST_SCHEDULE_DOCTOR", listSchedule);
+                        request.setAttribute("LIST_DISCOUNT", listDiscount);
+
+                        request.setAttribute("COUNT_PATIENT", countPatient);
+                        request.setAttribute("COUNT_SERVICE", countService);
+                        url = USER;
                     }
                 }
             } catch (Exception e) {

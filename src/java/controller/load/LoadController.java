@@ -11,6 +11,7 @@ import feedbacks.FeedBackDAO;
 import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,18 +56,36 @@ public class LoadController extends HttpServlet {
             //load vao trang cua service
             ServiceDAO serviceDao = new ServiceDAO();
             List<ServiceDTO> listService = serviceDao.getAllListService();
-            FeedBackDAO feedbackDao= new FeedBackDAO();
+            FeedBackDAO feedbackDao = new FeedBackDAO();
             List<FeedbackDTO> listFeedback = feedbackDao.getListFeedBackService();
 //            List<ServiceDTO> listServiceFeedback = serviceDao.getListFeedBackService();
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             List<ServiceImageDTO> listServiceImage = serviceImageDao.getAllListServiceImage();
-            
+
             HttpSession session = request.getSession();
+            String loginDefault = "";
             patients.PatientDTO loginPatient = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-            
+            ArrayList listLogin = new ArrayList();
+            listLogin.add(loginPatient);
+
+            if (loginPatient == null) {
+                loginDefault = "LoginDefault";
+            }
+
             ServiceTypeDAO serviceTypeDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listServiceType = serviceTypeDao.getListServiceType();
-            if (listService.size() > 0) {
+            if (listLogin.get(0) != null) {
+                if (listService.size() > 0) {
+                    session.setAttribute("LOGIN_USER", listLogin);
+                    request.setAttribute("LIST_SERVICE", listService);
+//                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+                    request.setAttribute("LIST_FEEDBACK", listFeedback);
+                    request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
+                    url = SUCCESS;
+                }
+            } else {
+                session.setAttribute("LOGIN_DEFAULT", loginDefault);
                 request.setAttribute("LIST_SERVICE", listService);
 //                    request.setAttribute("LIST_SERVICE_FEEDBACK", listServiceFeedback);
                 request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
