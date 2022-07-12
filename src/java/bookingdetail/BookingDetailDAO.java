@@ -31,6 +31,44 @@ public class BookingDetailDAO {
     private static final String GET_ALL_BOOKING_DETAIL = "SELECT  * FROM tblBookingDetails WHERE status = 1";
     private static final String UPDATE_BOOKING = "update tblBookingDetails set status= 2 , expectedFee = ? where BookingDetailID = ?";
     
+    private static final String GET_BOOKING_BY_SCHEDULE_ID = "SELECT  * FROM tblBookingDetails WHERE status =1 and scheduleID = ?";
+    
+  
+     public BookingDetailDTO getBookingDetailByScheduleID(int id) throws SQLException {
+        BookingDetailDTO bk = new BookingDetailDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(GET_BOOKING_DURING_DETAIL_BY_PATIENT_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    int serviceID=rs.getInt("serviceID");
+                    int scheduleID=rs.getInt("scheduleID");
+                    int expectedFee=rs.getInt("expectedFee");
+                    int patientID=rs.getInt("patientID");
+                    bk=new BookingDetailDTO( serviceID,expectedFee,patientID);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return bk;
+    }
+    
      public boolean updateBooking(int BookingDetailID,int fee) throws SQLException {
         boolean check = false;
         Connection conn = null;

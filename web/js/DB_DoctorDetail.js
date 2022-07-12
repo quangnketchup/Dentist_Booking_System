@@ -70,7 +70,7 @@ collection[7].innerHTML = listDay[0];
                                         var m = [dd, mm, d.getFullYear()].join('/');
                                         var k = yy.innerHTML;
                                         //tao object gom ngay` va slot da duoc booked
-                                        var n = {day: m, slot: k};
+                                        var n = {day: m, slot:k,ngay:m};
                                         dayDoctor[a] = n;
                                     }
                              
@@ -93,17 +93,17 @@ collection[7].innerHTML = listDay[0];
                                         var m = [dd, mm, d.getFullYear()].join('/');
                                         var k = yy.innerHTML;
                                         //tao object gom ngay` va slot da duoc booked
-                                        var n = {day: m, slot: k};
+                                        var n = {day: m, slot:k,ngay:m};
                                         scheduleDoctor[a] = n;
                                     }
-                                     console.log(scheduleDoctor);
+
                                    
                                     ///So sánh ngày nào trong tuần trùng với lịch làm việc của bác sĩ
                                     for (let i = 1; i < scheduleDoctor.length; i++) {
                                         for (let k = 1; k < days.length; k++) {
                                             if (days[k].innerHTML.includes(scheduleDoctor[i].day)) {
                                                 scheduleDoctor[i].day = "ngay" + k;
-                                              
+                                                
                                             }
                                         }
                                     }
@@ -117,54 +117,51 @@ collection[7].innerHTML = listDay[0];
                                             }
                                         }
                                     }
-                                    
-                                    
-                                    const showModal = function () {
-                                        if (!this.className.includes("working")) {
-                                            const split = this.className.split(' ');
-                                            const valueDay = days[split[0][4]].innerHTML.slice(0, 10);
-                                            const [day, month, year] = valueDay.split('/');
+                                    var doctorID=document.getElementById('doctorID');
+                                    console.log(doctorID.innerHTML)
+                                 ///Function hủy slot làm việc của bác sĩ    
+                                    function cancelSlot (daym,slot){
+                                        if(confirm("Bạn có muốn hủy lịch") == true){
+                                            var form = document.createElement("form");
+                                            form.action="CancelSlotDoctorController";
+                                            
+                                            const day1 = document.createElement("input");
+                                            const slot1 = document.createElement("input");
+                                            const drID = document.createElement("input");
+                                            //format date
+                                            
+                                            const [day, month, year] = daym.split('/');
                                             const result = [year, month, day].join('-');
-                                            const slot = split[1];;
-                                            let time = "";
-                                            switch (slot) {
-                                                case 'slot1':
-                                                    time = "7:00 - 9:00 am";
-                                                    break;
-                                                case 'slot2':
-                                                    time = "9:00 - 11:00 am";
-                                                    break;
-                                                case 'slot3':
-                                                    time = "13:00 - 15:00 pm";
-                                                    break;
-                                                case 'slot4':
-                                                    time = "15:00 - 17:00 pm";
-                                                    break;
-                                            }
-                                            modal.style.display = "block";
-                                            var form = document.getElementById('form-submit');
-                                            const input = document.createElement("input");
-                                            input.id = "dayBookingNext";
-                                            input.type = "hidden"
-                                            input.value = result
-                                            input.name = "dateBooking"
-                                            form.appendChild(input);
-                                            console.log(time)
-                                            const dayDiv = document.createElement("div");
-                                            dayDiv.id = "ngay-gio";
-                                            dayDiv.innerHTML = "Vào ngày: " + valueDay + " vào lúc: " + time;
-                                            var serbooking = document.getElementsByClassName('service-booking');
-                                            serbooking[0].appendChild(dayDiv)
-                                            const slotID = document.createElement("input");
-                                            slotID.id = "slotBookingNext";
-                                            slotID.type = "hidden"
-                                            slotID.value = slot[4]
-                                            slotID.name = "slotID"
-                                            form.appendChild(slotID);
-
+                                            // Day input
+                                            day1.setAttribute("type", "text");
+                                            day1.type = "hidden"
+                                            day1.value = result;
+                                            day1.name = "day";
+                                           
+                                            // slot input
+                                            slot1.setAttribute("type", "text");
+                                            slot1.type = "hidden"
+                                            slot1.value = slot;
+                                            slot1.name = "slot";
+                                            
+                                            // doctor input
+                                            drID.setAttribute("type", "text");
+                                            drID.type = "hidden"
+                                            drID.value = doctorID.innerHTML;
+                                            drID.name = "doctorID";
+                                            
+                                            
+                                            form.appendChild(day1);
+                                            form.appendChild(slot1);
+                                            form.appendChild(drID);
+                                            
+                                            var body =document.getElementById('f');
+                                            body.appendChild(form)
+                                            form.submit()
                                         }
-                                        addGreen1();
-                                    };
+                                        
+                                    }
+                                
                                     
                                     /// Xác định ngày làm việc của bác sĩ theo thứ Đặt work shift vao calender;
 
@@ -175,8 +172,8 @@ collection[7].innerHTML = listDay[0];
                                        var ngaylamviec=document.getElementsByClassName(clName);
                                        if(ngaylamviec.length >0){
                                            ngaylamviec[0].classList.add("shift");
-                                           ngaylamviec[0].innerHTML = "Đặt";
-                                           ngaylamviec[0].onclick = showModal;
+                                           ngaylamviec[0].innerHTML = "Đã đăng ký";
+                                           ngaylamviec[0].onclick = () =>cancelSlot(scheduleDoctor[i].ngay,scheduleDoctor[i].slot);
                                        }
                                     }
 
@@ -187,6 +184,7 @@ collection[7].innerHTML = listDay[0];
                                         if(work.length>0){
                                         work[0].classList.add("working");
                                         work[0].innerHTML = "Đã được đặt";
+                                        work[0].onclick = ()=>cancelSlot(dayDoctor[i].ngay,dayDoctor[i].slot);
                                     }
                                 }
   /// không cho bệnh nhân đặt các lịch đã qua trong tuần  

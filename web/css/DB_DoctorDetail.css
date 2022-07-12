@@ -135,7 +135,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     color: #fff;
 }
 .working:hover{
-    cursor: default;
+    cursor: pointer;
 }
 .none{
     display: none;

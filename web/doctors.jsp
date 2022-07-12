@@ -36,9 +36,7 @@
         <link rel="stylesheet" href="css/menu.css">
     </head>
     <body>
-        <%
-            String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-        %>
+        
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="HomeController">Denta<span>Care</span></a>
@@ -65,6 +63,10 @@
                         </li>
                         <li class="nav-item active"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                        <%
+                          String loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
+                          if(loginPatient!=null){
+                      %>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -72,6 +74,7 @@
                                 <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
+                       
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>

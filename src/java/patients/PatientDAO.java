@@ -25,6 +25,43 @@ public class PatientDAO {
     private static final String CHECKDUPLICATE_ID = "select * from tblPatients where patientID = ?";
     private static final String LOGIN_BY_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
     
+    private static final String GET_PATIENT_BY_PATIENT_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
+    
+    
+     public PatientDTO getPatientByPatientID(int id) throws SQLException {
+        PatientDTO patient = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PATIENT_BY_PATIENT_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int patientID = rs.getInt("patientID");
+                    String fullName = rs.getString("fullName");   
+                    String gmail = rs.getString("gmail");  
+                    patient = new PatientDTO(patientID, fullName, gmail,"PA");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return patient;
+    }
+    
     public PatientDTO checkLoginByID(long id) throws SQLException {
         PatientDTO patient = null;
         Connection conn = null;

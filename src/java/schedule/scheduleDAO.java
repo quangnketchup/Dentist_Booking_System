@@ -33,6 +33,8 @@ public class scheduleDAO {
     private static final String GET_ALL_LIST_SCHEDULE_BOOKED = "SELECT sch.scheduleID, sch.doctorID, sch.day, sch.dayOfWeek, sch.slot, sch.status FROM tblSchedules sch, tblDoctors dr WHERE sch.status=2 and sch.doctorID = dr.doctorID";
     
     
+    
+    
     public List<scheduleDTO> getAllListScheduleBooked() throws SQLException {
         List<scheduleDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -309,7 +311,6 @@ public class scheduleDAO {
                 ptm.setInt(1, slot);
                 ptm.setString(2, day);
                 ptm.setInt(3, doctorID);
-                rs = ptm.executeQuery();
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

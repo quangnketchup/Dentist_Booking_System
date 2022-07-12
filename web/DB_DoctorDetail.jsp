@@ -209,6 +209,8 @@
                                 <div class="">
                                     <%=doctor.getFullName()%>
                                 </div>
+                                <div type="hidden" class="a" id="doctorID"><%=doctor.getDoctorID()%></div>
+                                
                                 <div class="">
                                     <%=doctor.getServiceTypeName()%>
                                 </div>
@@ -232,10 +234,7 @@
                             </div>
                         </form>
                     </div>
-                             <button style="margin-left: auto; margin-right: auto; display: block; margin-top: 20px" type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
-                        Xem lịch bác sĩ
-                      </button>
-                    
+                                <div class="text-center" style="margin-top: 15px">Lịch làm việc của bác sĩ</div>
                                 <!-- Hien lich cua bac si -->
                                 
                                 
@@ -245,12 +244,13 @@
                         <%
                         int dem =0;
                         for(scheduleDTO schedule : listScheduleDTO){
+                        if(schedule.getStatus()==1){
                             dem++;
                            %>
-                           <div id="schedule-day<%=dem%>"><%=schedule.getDay()%> </div>       
-                            <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%> </div>     
+                           <div id="schedule-day<%=dem%>"><%=schedule.getDay()%></div>       
+                            <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%></div>     
                         <% 
-                            }
+                            }}
                         %>
                         
                         <div id="size-schedule"><%=dem%></div>
@@ -276,7 +276,7 @@
                     </div> 
                     
                                 <!-- Modal -->
-               
+                                <div id="f"></div>
                         <div class="table-wrapper">
                             <table class="fl-table table">
                                 <thead>
@@ -387,6 +387,8 @@
                     </div>
                 </div>
             </div>
+             
+             
             <script src="ckeditor/ckeditor.js"></script>
        <script>
              var editor = CKEDITOR.replace('achievement');
@@ -405,7 +407,7 @@
             <!-- Page level custom scripts -->
             <script src="js/demo/chart-area-demo.js"></script>
             <script src="js/demo/chart-pie-demo.js"></script>
-            <script src="js/DB_DoctorDetail.js"></script>
+           <script src="js/DB_DoctorDetail.js"></script>
     </body>
 
 </html>
