@@ -22,6 +22,8 @@ import schedule.scheduleDAO;
 import schedule.scheduleDTO;
 import serviceImage.ServiceImageDAO;
 import serviceImage.ServiceImageDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -58,11 +60,14 @@ public class ShowBookingAdminController extends HttpServlet {
             List<DoctorDTO>listDoctor = drDAO.getAllListDoctor();
             List<PatientDTO>listPatient=patientDAO.getAllListPatient();
             List<ServiceDTO>listService=svDAO.getAllListService();
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
             request.setAttribute("listBooking", listBooking);
             request.setAttribute("listSchedule", listSchedule);
             request.setAttribute("listDoctor", listDoctor);
             request.setAttribute("listPatient", listPatient);
             request.setAttribute("listService", listService);
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;

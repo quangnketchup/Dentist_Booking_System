@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import serviceImage.ServiceImageDAO;
 import serviceImage.ServiceImageDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -32,26 +34,29 @@ public class LoadServiceController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-      private static final String ERROR = "home.jsp";
+    private static final String ERROR = "home.jsp";
     private static final String SUCCESS = "DB_Service.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             int serviceTypeID = Integer.parseInt(request.getParameter("serviceTypeID"));
-            String svTypeName= request.getParameter("serviceTypeName");
+            String svTypeName = request.getParameter("serviceTypeName");
             ServiceDAO serviceDao = new ServiceDAO();
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             List<ServiceDTO> listService = serviceDao.getServiceByServiceTypeID(serviceTypeID);
             HttpSession session = request.getSession();
-             List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) serviceImageDao.getAllListServiceImage();
+            List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) serviceImageDao.getAllListServiceImage();
             request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
             request.setAttribute("LIST_SERVICE_BYSV_TYPE", listService);
             request.setAttribute("serviceTypeName", svTypeName);
-             request.setAttribute("serviceTypeID", serviceTypeID);
-            url=SUCCESS;
+            request.setAttribute("serviceTypeID", serviceTypeID);
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
+            url = SUCCESS;
         } catch (Exception e) {
             url = ERROR;
             log("Error at ServiceController");
