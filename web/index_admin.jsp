@@ -4,7 +4,6 @@
     Author     : Doan
 --%>
 
-<%@page import="doctors.DoctorDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="admins.AdminDTO"%>
@@ -345,30 +344,30 @@
                                             <div>
                                                 <input type="hidden" id="thang12" name="number" value="<%=listMoneyInMonth.get(11)%>"/>
                                             </div><!-- id thang12 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang11" name="number" value="<%=listMoneyInMonth.get(10)%>"/>
                                             </div><!-- id thang11 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang10" name="numbejr" value="<%=listMoneyInMonth.get(9)%>"/>
                                             </div><!-- id thang10 trỏ tới chart-area -->
                                             <div>
                                                 <input type="hidden" id="thang9" name="number" value="<%=listMoneyInMonth.get(8)%>"/>
                                             </div><!-- id thang9 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang8" name="number" value="<%=listMoneyInMonth.get(7)%>"/>
                                             </div><!-- id thang8 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang7" name="number" value="<%=listMoneyInMonth.get(6)%>"/>
                                             </div><!-- id thang7 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang6" name="number" value="<%=listMoneyInMonth.get(5)%>"/>
                                             </div><!-- id thang6 trỏ tới chart-area -->
-
+                                            
                                             <div>
                                                 <input type="hidden" id="thang5" name="number" value="<%=listMoneyInMonth.get(4)%>"/>
                                             </div><!-- id thang5 trỏ tới chart-area -->
@@ -395,7 +394,7 @@
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Biểu đồ nhân lực</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                                         <div class="dropdown no-arrow">
                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -412,15 +411,6 @@
                                         </div>
                                     </div>
                                     <!-- Card Body -->
-                                    <%
-                                        List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
-                                        List<ServiceTypeDTO> listServicetype = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICETYPE");
-                                        for (ServiceTypeDTO serviceType : listServicetype) {
-                                                for (DoctorDTO doctor : listDoctor) {
-                                                        
-                                                    }
-                                            }
-                                    %>
                                     <div class="card-body">
                                         <div class="chart-pie pt-4 pb-2">
                                             <canvas id="myPieChart"></canvas>
@@ -653,44 +643,6 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-        
-        <script>
-            // Set new default font family and font color to mimic Bootstrap's default styling
-            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-            Chart.defaults.global.defaultFontColor = '#858796';
-
-// Pie Chart Example
-            var ctx = document.getElementById("myPieChart");
-            var myPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["ádfasasdfasdf", "Referradfasfdal", "Social", "ádfasdfasdfa", "ádfasdfasdf"],
-                    datasets: [{
-                            data: [55, 30, 15, 12, 12,12],
-                            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-                            hoverBorderColor: "rgba(234, 236, 244, 1)",
-                        }],
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    tooltips: {
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        caretPadding: 10,
-                    },
-                    legend: {
-                        display: false
-                    },
-                    cutoutPercentage: 80,
-                },
-            });
-        </script>
     </body>
 
 </html>
