@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import serviceImage.ServiceImageDAO;
 import serviceImage.ServiceImageDTO;
 import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -36,7 +37,7 @@ public class LoadDiscountController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     private static final String ERROR = "index_Discount.jsp";
+    private static final String ERROR = "index_Discount.jsp";
     private static final String SUCCESS = "index_Discount.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,9 +62,12 @@ public class LoadDiscountController extends HttpServlet {
                 }
             }
             HttpSession session = request.getSession();
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
             request.setAttribute("listDiscountBySVType", listDiscountBySVType);
             request.setAttribute("LIST_DISCOUNT", listDiscount);
             request.setAttribute("LIST_ALL_SERVICE", listAllService);
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;

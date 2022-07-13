@@ -19,15 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import patients.PatientDAO;
 import patients.PatientDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name= "ShowPatientController", urlPatterns = {"/ShowPatientController"})
+@WebServlet(name = "ShowPatientController", urlPatterns = {"/ShowPatientController"})
 public class ShowPatientController extends HttpServlet {
 
-    private static final String ERROR ="login.jsp";
+    private static final String ERROR = "login.jsp";
     private static final String ADMIN = "index_Patient.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,10 +41,13 @@ public class ShowPatientController extends HttpServlet {
             List<PatientDTO> listPatient = patientDAO.getAllListPatient();
             HttpSession session = request.getSession();
             admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
 
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listPatient != null) {
                     session.setAttribute("LIST_PATIENT", listPatient);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                     url = ADMIN;
                 }
             }

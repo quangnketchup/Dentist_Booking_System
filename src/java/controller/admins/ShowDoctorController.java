@@ -36,7 +36,7 @@ public class ShowDoctorController extends HttpServlet {
             List<ServiceTypeDTO> listServiceType = svTypeDAO.getListServiceType();
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listDoctor != null) {
-                    request.setAttribute("listServiceType", listServiceType);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                     request.setAttribute("LIST_DOCTOR", listDoctor);
                     url = ADMIN;
                 }

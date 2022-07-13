@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 
 /**
  *
@@ -39,10 +41,13 @@ public class ShowDiscountController extends HttpServlet {
             List<DiscountDTO> listDiscount = discountDAO.getAllListDiscount();
             HttpSession session = request.getSession();
             admins.AdminDTO loginAdmin = (admins.AdminDTO) session.getAttribute("LOGIN_ADMIN");
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
 
             if (loginAdmin != null && "AD".equals(loginAdmin.getRoleID())) {
                 if (listDiscount != null) {
                     session.setAttribute("LIST_DISCOUNT", listDiscount);
+                    request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
                     url = ADMIN;
                 }
             }
