@@ -22,9 +22,38 @@ public class DoctorDAO {
     private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [achievement], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status ,d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
     private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
+    private static final String COUNT_BOOKING_OF_DOCTOR= "SELECT COUNT(d.doctorID) AS nb FROM tblDoctors d, tblSchedules s, tblBookingDetails b WHERE b.status=2 AND d.doctorID = s.doctorID AND s.scheduleID = b.scheduleID AND d.doctorID=?";
     
-     
-    
+    public int getCountBookingOfDoctor(int doctorID) throws SQLException {
+        int nb=0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(COUNT_BOOKING_OF_DOCTOR);
+                ptm.setInt(1, doctorID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    nb=rs.getInt("nb");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return nb;
+    } 
     
     public DoctorDTO getDoctorByID(int id) throws SQLException{
         DoctorDTO dr = new DoctorDTO();

@@ -31,6 +31,7 @@ public class BookingDetailDAO {
     private static final String GET_ALL_BOOKING_DETAIL = "SELECT  * FROM tblBookingDetails WHERE status = 1";
     private static final String UPDATE_BOOKING = "update tblBookingDetails set status= 2 , expectedFee = ? where BookingDetailID = ?";
     
+    private static final String NUMBER_SERVICE_TYPE = "SELECT COUNT(st.serviceTypeID) as nb FROM tblBookingDetails bk,tblSchedules s, tblDoctors d, tblServiceTypes st WHERE bk.status=2 and bk.scheduleID=s.scheduleID AND s.doctorID = d.doctorID AND st.serviceTypeID=?";
     private static final String GET_BOOKING_BY_SCHEDULE_ID = "SELECT  * FROM tblBookingDetails WHERE status =1 and scheduleID = ?";
     
   
@@ -265,8 +266,7 @@ public class BookingDetailDAO {
         }
         return nb;
     }
-    
-    public int getNumberBooking(int month) throws SQLException {
+     public int getNumberBooking(int month) throws SQLException {
         int nb=0;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -276,6 +276,37 @@ public class BookingDetailDAO {
             if(conn != null) {
                 ptm = conn.prepareStatement(NUMBER_BOOKING);
                 ptm.setInt(1, month);
+                rs = ptm.executeQuery();
+                while (rs.next()) {                    
+                    nb=rs.getInt("nb");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+            if(ptm != null) {
+                ptm.close();
+            }
+        }
+        return nb;
+    }
+    
+    public int getNumberServiceType(int serviceTypeId) throws SQLException {
+        int nb=0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null) {
+                ptm = conn.prepareStatement(NUMBER_BOOKING);
+                ptm.setInt(1, serviceTypeId);
                 rs = ptm.executeQuery();
                 while (rs.next()) {                    
                     nb=rs.getInt("nb");

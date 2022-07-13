@@ -27,6 +27,7 @@ public class FeedBackDAO {
             + "FROM tblServices s, tblPatientFeedbacks paf, tblPatients pa "
             + "WHERE s.serviceID = paf.serviceID AND pa.patientID = paf.patientID AND paf.status = 1";
     private static final String CREATE_FB ="INSERT [dbo].[tblPatientFeedbacks] ([serviceID],[patientID],[dateFeedback],[rateStar],[content],[status]) VALUES (?,?,?,?,?,?)";
+    private static final String GET_LIST_LATEST_FEEDBACK = "SELECT paf.serviceFeedBackID, paf.content, paf.rateStar, paf.dateFeedback,paf.serviceID, pa.fullName, paf.status FROM tblPatientFeedbacks paf, tblPatients pa WHERE  pa.patientID=paf.patientID AND paf.status = 1 ORDER BY dateFeedback DESC";
     
     public boolean createSchedule(int serviceID,int patientID,String dateFeedback,int rateStart,String content,int status) throws SQLException {
         boolean check = false;
@@ -55,6 +56,43 @@ public class FeedBackDAO {
             }
         }
         return check;
+    }
+    
+    public List<FeedbackDTO> getListLatestFeedBack() throws SQLException {
+        List<FeedbackDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_LIST_LATEST_FEEDBACK);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int serviceFeedBackID = rs.getInt("serviceFeedBackID");
+                    String content = rs.getString("content");
+                    Date dateFeedback = rs.getDate("dateFeedback");
+                    int rateStar = rs.getInt("rateStar");
+                    String fullName = rs.getString("fullName");
+                    int serviceID = rs.getInt("serviceID");
+                    int status = rs.getInt("status");
+                    list.add(new FeedbackDTO(serviceFeedBackID, dateFeedback, content, rateStar, fullName, serviceID, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        return list;
     }
     
     public List<FeedbackDTO> getListFeedBackService() throws SQLException {

@@ -4,6 +4,8 @@
     Author     : Doan
 --%>
 
+<%@page import="doctors.DoctorDTO"%>
+<%@page import="feedbacks.FeedbackDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="admins.AdminDTO"%>
@@ -344,30 +346,30 @@
                                             <div>
                                                 <input type="hidden" id="thang12" name="number" value="<%=listMoneyInMonth.get(11)%>"/>
                                             </div><!-- id thang12 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang11" name="number" value="<%=listMoneyInMonth.get(10)%>"/>
                                             </div><!-- id thang11 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang10" name="numbejr" value="<%=listMoneyInMonth.get(9)%>"/>
                                             </div><!-- id thang10 trỏ tới chart-area -->
                                             <div>
                                                 <input type="hidden" id="thang9" name="number" value="<%=listMoneyInMonth.get(8)%>"/>
                                             </div><!-- id thang9 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang8" name="number" value="<%=listMoneyInMonth.get(7)%>"/>
                                             </div><!-- id thang8 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang7" name="number" value="<%=listMoneyInMonth.get(6)%>"/>
                                             </div><!-- id thang7 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang6" name="number" value="<%=listMoneyInMonth.get(5)%>"/>
                                             </div><!-- id thang6 trỏ tới chart-area -->
-                                            
+
                                             <div>
                                                 <input type="hidden" id="thang5" name="number" value="<%=listMoneyInMonth.get(4)%>"/>
                                             </div><!-- id thang5 trỏ tới chart-area -->
@@ -394,7 +396,7 @@
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Loại dịch vụ ưa thích</h6>
                                         <div class="dropdown no-arrow">
                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -411,20 +413,61 @@
                                         </div>
                                     </div>
                                     <!-- Card Body -->
+                                    <%
+                                        ArrayList listNumberServiceType = (ArrayList) request.getAttribute("LIST_NUMBER_SERVICE_TYPE");
+                                        ArrayList listServiceTypeNameByNumber = (ArrayList) request.getAttribute("LIST_SERVICE_TYPE_NAME_FOR_NUMBER");
+                                    %>
                                     <div class="card-body">
                                         <div class="chart-pie pt-4 pb-2">
                                             <canvas id="myPieChart"></canvas>
+                                            <div>
+                                                <input type="hidden" id="serviceType0" name="number" value="<%=listNumberServiceType.get(0)%>"/>
+                                                <input type="hidden" id="serviceTypeName0" name="number" value="<%=listServiceTypeNameByNumber.get(0)%>"/>
+                                            </div><!-- id serviceType0 trỏ tới chart-pie -->
+                                            <div>
+                                                <input type="hidden" id="serviceType1" name="number" value="<%=listNumberServiceType.get(1)%>"/>
+                                                <input type="hidden" id="serviceTypeName1" name="number" value="<%=listServiceTypeNameByNumber.get(1)%>"/>
+                                            </div><!-- id serviceType1 trỏ tới chart-pie -->
+                                            <div>
+                                                <input type="hidden" id="serviceType2" name="number" value="<%=listNumberServiceType.get(2)%>"/>
+                                                <input type="hidden" id="serviceTypeName2" name="number" value="<%=listServiceTypeNameByNumber.get(2)%>"/>
+                                            </div><!-- id serviceType2 trỏ tới chart-pie -->
+                                            <div>
+                                                <input type="hidden" id="serviceType3" name="number" value="<%=listNumberServiceType.get(3)%>"/>
+                                                <input type="hidden" id="serviceTypeName3" name="number" value="<%=listServiceTypeNameByNumber.get(3)%>"/>
+                                            </div><!-- id serviceType3 trỏ tới chart-pie -->
+                                            <div>
+                                                <input type="hidden" id="serviceType4" name="number" value="<%=listNumberServiceType.get(4)%>"/>
+                                                <input type="hidden" id="serviceTypeName4" name="number" value="<%=listServiceTypeNameByNumber.get(4)%>"/>
+                                            </div><!-- id serviceType4 trỏ tới chart-pie -->
+                                            <div>
+                                                <input type="hidden" id="serviceType5" name="number" value="<%=listNumberServiceType.get(5)%>"/>
+                                                <input type="hidden" id="serviceTypeName5" name="number" value="<%=listServiceTypeNameByNumber.get(5)%>"/>
+                                            </div><!-- id serviceType5 trỏ tới chart-pie -->
                                         </div>
                                         <div class="mt-4 text-center small">
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Direct
+                                                <i class="fas fa-circle" style="color: #4e73df"></i> <%=listServiceTypeNameByNumber.get(0)%>
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Social
+                                                <i class="fas fa-circle" style="color: #1cc88a"></i> <%=listServiceTypeNameByNumber.get(1)%>
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> Referral
+                                                <i class="fas fa-circle" style="color: #36b9cc"></i> <%=listServiceTypeNameByNumber.get(2)%>
+                                            </span></br>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle" style="color: #8b2bab"></i> <%=listServiceTypeNameByNumber.get(3)%>
                                             </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle" style="color: #f5c842"></i> <%=listServiceTypeNameByNumber.get(4)%>
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle" style="color: #42ad34"></i> <%=listServiceTypeNameByNumber.get(5)%>
+                                            </span>
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -435,214 +478,222 @@
                         <div class="row">
 
                             <!-- Content Column -->
-                            <div class="col-lg-6 mb-4">
+                            <div class="col-lg-8 mb-4">
 
                                 <!-- Project Card Example -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Lượng phản hồi mới nhất</h6>
                                     </div>
+                                    <%
+                                        List<FeedbackDTO> Listfeedback = (List<FeedbackDTO>) request.getAttribute("LIST_FEEDBACK");
+                                    %>
                                     <div class="card-body">
-                                        <h4 class="small font-weight-bold">Server Migration <span
-                                                class="float-right">20%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="review-heading">ĐÁNH GIÁ DỊCH VỤ</div>
+                                        <%
+                                            int count = 0;
+                                            for (FeedbackDTO feedbackService : Listfeedback) {
+                                                if (Listfeedback.size() == 0) {
+                                        %>
+                                        <div><h3>Không có bình luận nào cả</h3></div>
+                                        <%} else {
+                                            count++;
+                                            if (count == 11)
+                                                break;
+                                        %>
+                                        <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
+                                            <div class="form-group col-md-4 border-primary">
+                                                <div >
+                                                    <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=feedbackService.getPatientName()%></strong>
+                                                        <h6 style="color: gray;align-content: center;text-align: center">(<%=feedbackService.getDateFeedback()%>)</h6></label>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-8 border-primary">
+                                                <label for="user-feedback"><%=feedbackService.getContent()%></label>
+                                            </div>
                                         </div>
-                                        <h4 class="small font-weight-bold">Sales Tracking <span
-                                                class="float-right">40%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Customer Database <span
-                                                class="float-right">60%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Payout Details <span
-                                                class="float-right">80%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Account Setup <span
-                                                class="float-right">Complete!</span></h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        <%}
+                                            }%>
                                     </div>
                                 </div>
-
-                                <!-- Color System -->
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-primary text-white shadow">
-                                            <div class="card-body">
-                                                Primary
-                                                <div class="text-white-50 small">#4e73df</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-success text-white shadow">
-                                            <div class="card-body">
-                                                Success
-                                                <div class="text-white-50 small">#1cc88a</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-info text-white shadow">
-                                            <div class="card-body">
-                                                Info
-                                                <div class="text-white-50 small">#36b9cc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-warning text-white shadow">
-                                            <div class="card-body">
-                                                Warning
-                                                <div class="text-white-50 small">#f6c23e</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-danger text-white shadow">
-                                            <div class="card-body">
-                                                Danger
-                                                <div class="text-white-50 small">#e74a3b</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-secondary text-white shadow">
-                                            <div class="card-body">
-                                                Secondary
-                                                <div class="text-white-50 small">#858796</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-light text-black shadow">
-                                            <div class="card-body">
-                                                Light
-                                                <div class="text-black-50 small">#f8f9fc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-dark text-white shadow">
-                                            <div class="card-body">
-                                                Dark
-                                                <div class="text-white-50 small">#5a5c69</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-
-                            <div class="col-lg-6 mb-4">
+                            <div class="col-lg-4 mb-4">
 
                                 <!-- Illustrations -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Top 3 Bác Sĩ Ưu Tú</h6>
                                     </div>
+                                    <%
+                                        ArrayList<DoctorDTO> listDoctor = (ArrayList<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
+                                        ArrayList listNumberBookingDoctor = (ArrayList) request.getAttribute("LIST_NUMBER_BOOKING_DOCTOR");
+                                        int top=0;
+                                        for (int i = 0; i < listDoctor.size(); i++) {
+                                            top++;
+                                            if(top==4) break;
+                                    %>
                                     <div class="card-body">
                                         <div class="text-center">
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                                 src="img/undraw_posting_photo.svg" alt="...">
+                                                 src="<%=listDoctor.get(i).getImage()%>" alt="...">
                                         </div>
-                                        <p>Add some quality, svg illustrations to your project courtesy of <a
-                                                target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                            constantly updated collection of beautiful svg images that you can use
-                                            completely free and without attribution!</p>
-                                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                            unDraw &rarr;</a>
+                                        <div class="col-lg-3 col-md-3 d-flex mb-sm-4 ftco-animate text-center">
+                                            <div class="staff">
+                                                <div class="img mb-4" style="background-image: url(<%=listDoctor.get(i).getImage()%>);"/></div>
+                                            <div class="info text-center">
+                                                <h3><a><%=listDoctor.get(i).getFullName()%></a></h3>
+                                                <span class="position"><%=listDoctor.get(i).getServiceTypeName()%></span>
+                                            </div>
+                                            <div class="text-center">
+                                                <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info"><strong><%=listNumberBookingDoctor.get(i)%></strong></a></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Approach -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                            CSS bloat and poor page performance. Custom CSS classes are used to create
-                                            custom components and custom utility classes.</p>
-                                        <p class="mb-0">Before working with this theme, you should become familiar with the
-                                            Bootstrap framework, especially the utility classes.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- /.container-fluid -->
-
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                                <%}%>
                         </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="LogoutController">Logout</a>
-                    </div>
                 </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="LogoutController">Logout</a>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
-    </body>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<style>
+    .container1,.flip-box,.front,.back {
+        width: 100%;
+        height: 770px;
+    }
+    .container1{
+        background-image: url('https://assets.hongkiat.com/uploads/minimalist-dekstop-wallpapers/non-4k/original/26.jpg?3');
+    }
+
+    .container1,.flip_box {
+        position: relative;
+    }
+
+    .front,.back {
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip_box {
+        transition: all 0.5s ease-out;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    .back {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .flipped {
+        -webkit-transform: rotateY(-180deg);
+        -moz-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+    }
+
+    .r_wrap {
+        position: absolute;
+        right: 350px;
+        bottom: 650px;
+    }
+
+    .b_round,.s_round {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background-color: #D21849;
+        transition: all 0.2s linear;
+    }
+
+    .b_round {
+        opacity: 0;
+        background-color: #D21849;
+    }
+
+    .b_round_hover {
+        transform: scale(1.37);
+        opacity: 0.4;
+    }
+
+    .b_round_back_hover {
+        background-color: #F60044;
+    }
+
+    .s_round_click {
+        transform: scale(1.7);
+    }
+
+    .s_round_back {
+        background-color: #C30C3D;
+    }
+
+    .s_arrow {
+        width: 52px;
+        height: 52px;
+        background-image: url('https://img-fotki.yandex.ru/get/194549/29644339.5/0_d6c60_1d7815f0_orig');
+        background-color: transparent;
+        transition: all 0.35s linear;
+    }
+
+    .s_arrow_rotate {
+        transform: rotate(-180deg);
+    }
+</style>
+</body>
 
 </html>
