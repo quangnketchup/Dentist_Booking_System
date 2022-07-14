@@ -65,8 +65,9 @@
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
-                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                        
                         <%if(!loginPatient.equals("")){%>
+                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,9 +76,9 @@
                             </div>
                         </li>
                         <%} else {%>
-                        <li class="nav-item cta"><a href="LoginController" class="nav-link" ><span>Đăng nhập</span></a></li>
+                        <li class="nav-item "><a href="LoginController" class="nav-link sa" ><span>Đăng nhập</span></a></li>
                         <%}%>
-                        <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
+                        <li class="nav-item "><a href="ShowBookingController" class="nav-link sa" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>
                 </div>
@@ -132,7 +133,7 @@
                                 for (ServiceDTO service : listService) {
                         %>
                         <div class="col-md-3">
-                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                            <div class="card card-body mb-4 border-primary bg-primary" style="border-radius: 20px">
                                 <div class="services text-center ">
                                     <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
                                     <%
@@ -149,7 +150,7 @@
                                         }%>
                                         <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
                                     <p style="color: white"><%=formatter.format(service.getServicePrice())%>VND/ 1 Liệu Trình</p>
-                                    <a class="btn btn-outline-info" style="border-radius: 10px; color: white" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
+                                    <a class="btn btn-light Bold" style="border-radius: 20px; " href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
 
                                 </div>
                             </div>
@@ -172,7 +173,7 @@
                                     if (service.getStatus() == 1) {
                         %>
                         <div class="col-md-3">
-                            <div class="card card-body mb-4 border-primary" style="border-radius: 10px ; background-color: #85b0e9;">
+                            <div class="card card-body mb-4 border-primary bg-primary" style="border-radius: 20px ; ">
                                 <div class="services text-center ">
                                     <h5 style="height: 50px ; color: white; font-family: Arial, Helvetica, sans-serif;"><%=service.getServiceName()%></h5>
                                     <%
@@ -188,8 +189,7 @@
                                     <%break;
                                         }%>
                                     <p style="color: white"><%=service.getServicePrice()%> VND/1 Liệu Trình</p>
-                                    <a class="btn btn-primary" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>">Chi Tiết</a>
-
+                                    <a class="btn btn-light Bold" style="border-radius: 20px" href="LoadServiceDetailController?serviceID=<%=service.getServiceID()%>"><strong>Chi Tiết</strong></a>
                                 </div>
                             </div>
                         </div>
@@ -203,14 +203,7 @@
                 <%
                     }
                 %>
-                <div class="pagination align-content-center">
-                    <li class="page-item previous-page"><a class="page-link" href="#">Prev</a></li>
-                    <li class="page-item current-page"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item dots"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item previous-page"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item dots"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>
-                </div>
+                
             </div>
         </section>
 

@@ -23,16 +23,15 @@
         <title>SB Admin 2 - Dashboard</title>
 
         <!-- Custom fonts for this template-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link href="css/account.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/index_admin.css" rel="stylesheet">
-
+        
     </head>
 
     <body id="page-top">
@@ -295,8 +294,13 @@
                             </table>
                             <form id="form-anh" action="UpdateImageController" method ="POST">
                                 <label class="text-primary font-weight-bold">Thêm Ảnh Mới:</label><br>
-                                <img id="rendered_image_<%=service.getServiceID()%>" style="width: 200px; height: 250px" src="<%=service.getImage()%>"/>
-                                <input type="file" value="" onchange="return onSelectedImage(this, '<%=service.getServiceID()%>')" />
+                                <div id="dropBox" style="height: 400px;">
+                                    <div id="gallery" class="mb-2">
+                                        <img id="rendered_image_<%=service.getServiceID()%>" style="width: 300px; height: 200px" src="<%=service.getImage()%>"/>
+                                    </div><br> 
+                                    <input class="mt-5 btn btn-primary" type="file" value="" onchange="return onSelectedImage(this, '<%=service.getServiceID()%>')" />
+                                </div>
+                               
                                 <input type="hidden" id="image_<%=service.getServiceID()%>" name="image" value=""/>
                                 <input type="hidden" name="serviceID" value="<%=service.getServiceID()%>"><br>
                                 <input class="btn btn-primary mt-2" type="submit" value="Thêm ảnh">
@@ -355,6 +359,7 @@
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
             <script src="js/js/convertImageBase64.js"></script>
+            
     </body>
 
 </html>

@@ -20,14 +20,14 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
 
-    <body class="hold-transition register-page" style="background-image: url('images/register1.jpg');">
+    <body class="hold-transition register-page" style="background-color: #47B5FF;">
         <div class="register-box">
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a href="index.jsp" class="h1"><b>DENTA</b>CARE</a>
+                    <a href="HomeController" class="h1"><b>DENTA</b>CARE</a>
                 </div>
                 <div class="card-body">
-                    <p class="login-box-msg">Đăng kí tài khoản mới</p>
+                    <p class="login-box-msg Bold">ĐĂNG KÍ TÀI KHOẢN</p>
                     <%
                         PatientError patientError = (PatientError) request.getAttribute("PATIENT_ERROR");
                         if (patientError == null) {
@@ -52,7 +52,7 @@
                         <%=patientError.getConfirmError()%>
                         <div class="input-group mb-3">
                             <label for="gender" value="">Giới tính</label>
-                            <select name="gender">
+                            <select name="gender" class="ml-2">
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>                              
                             </select>
@@ -63,42 +63,31 @@
                         <div class="input-group mb-3">
                             <input name ="address" type="text" class="form-control" placeholder="Address">
                         </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                    <label for="agreeTerms">
-                                        Tôi đồng ý với các <a href="#">yêu cầu</a>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" name ="action" value = "Register" class="btn btn-primary btn-block">Đăng kí</button>
-                            </div>
-                            <!-- /.col -->
+                        <div style="width: 300px;display: block;margin-left: auto;margin-right: auto">
+                            <button type="submit" name ="action" value = "Register" class="btn btn-primary bg-primary btn-block">Đăng kí</button>
                         </div>
+                        <div class="social-auth-links "style="width: 300px;display: block;margin-left: auto;margin-right: auto">
+                            <a href="#" class="btn btn-block btn-danger" >
+                                <i class="fa fa-google mr-2"></i>
+                                Đăng nhập bằng Google
+                            </a>
+                        </div>
+
+
                     </form>
-
-                    <div class="social-auth-links text-center">
-                        <a href="#" class="btn btn-block btn-danger">
-                            <i class="fa fa-google mr-2"></i>
-                            Đăng nhập bằng Google
-                        </a>
-                    </div>
-                    <% String success = (String) request.getAttribute("SUCCESS");
-                        if (success == null) {
-                            success = "";
-                        }
-                    %>
-                    <%=success%>
-                    <a href="login.jsp">Đăng nhập</a></br>
-
                 </div>
-                <!-- /.form-box -->
-            </div><!-- /.card -->
+
+                <% String success = (String) request.getAttribute("SUCCESS");
+                    if (success == null) {
+                        success = "";
+                    }
+                %>
+                <%=success%>
+                <a href="login.jsp" class="clearfix" style="display: block;margin-left: auto;margin-right: auto">Đã có tài khoản đăng nhập</a></br>
+
+            </div>
+            <!-- /.form-box -->
         </div>
-        <!-- /.register-box -->
 
         <!-- jQuery -->
         <script src="../../plugins/jquery/jquery.min.js"></script>

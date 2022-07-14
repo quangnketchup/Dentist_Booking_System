@@ -96,11 +96,12 @@
                 <%
                     if (scheduleList != null) {
                         for (scheduleDTO schedule : scheduleList) {
+                            if(schedule.getStatus()==1){
                             dem++;%>
                 <div id="schedule-day<%=dem%>"><%=schedule.getDay()%> </div>       
                 <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%> </div>    
                 <%
-                        }
+                        }}
                     }%>
 
                 <div id="size-schedule"><%=dem%></div>
