@@ -224,6 +224,14 @@
         <servlet-name>DeleteFeedBackController</servlet-name>
         <servlet-class>controller.admins.DeleteFeedBackController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowProfileDoctorController</servlet-name>
+        <servlet-class>controller.admins.ShowProfileDoctorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfileDoctorController</servlet-name>
+        <servlet-class>controller.admins.UpdateProfileDoctorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -447,6 +455,14 @@
     <servlet-mapping>
         <servlet-name>DeleteFeedBackController</servlet-name>
         <url-pattern>/DeleteFeedBackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProfileDoctorController</servlet-name>
+        <url-pattern>/ShowProfileDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileDoctorController</servlet-name>
+        <url-pattern>/UpdateProfileDoctorController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

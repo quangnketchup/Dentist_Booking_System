@@ -13,6 +13,7 @@ public class DoctorError {
     String phoneError;
     String imageError;
     String statusError;
+    String achivement;
 
     public DoctorError() {
         this.doctorIDError = "";
@@ -27,6 +28,7 @@ public class DoctorError {
         this.phoneError = "";
         this.imageError = "";
         this.statusError = "";
+        this.achivement = "";
     }
     public DoctorError(String doctorIDError, String serviceTypeIDError, String fullNameError, String passwordError, String confirmPassword, String roleIDError, String genderError, String workDayIDError, String gmailError, String phoneError, String imageError, String statusError) {
         this.doctorIDError = doctorIDError;
@@ -43,6 +45,15 @@ public class DoctorError {
         this.statusError = statusError;
     }
 
+    public String getAchivement() {
+        return achivement;
+    }
+
+    public void setAchivement(String achivement) {
+        this.achivement = achivement;
+    }
+
+        
     public String getDoctorIDError() {
         return doctorIDError;
     }
