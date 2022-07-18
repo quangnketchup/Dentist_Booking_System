@@ -24,10 +24,80 @@ public class PatientDAO {
     private static final String REGISTER_USER_BY_GMAIL = "INSERT tblPatients ([fullName], [gmail], [status],[roleID] ) VALUES (?,?,?,'PA')";
     private static final String CHECKDUPLICATE_ID = "select * from tblPatients where patientID = ?";
     private static final String LOGIN_BY_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
-    
+    private static final String UPDATE_PATIENT_PROFILE="UPDATE tblPatients SET fullName=?, password=? , gmail=?, phone=?, address=?, gender=? WHERE patientID =? ";
     private static final String GET_PATIENT_BY_PATIENT_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
+    private static final String GET_PATIENT_PROFILE_BY_PATIENT_ID = "SELECT patientID, fullName, password, roleID, gmail, phone, address, gender, status FROM tblPatients WHERE patientID=?";
     
+    public boolean updatePatientProfile(PatientDTO patient) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                pstm = conn.prepareStatement(UPDATE_PATIENT_PROFILE);
+                pstm.setString(1, patient.getFullName());
+                pstm.setString(2, patient.getPassword());
+                pstm.setString(3, patient.getGmail());
+                pstm.setInt(4, patient.getPhone());
+                pstm.setString(5, patient.getAddress());
+                pstm.setString(6, patient.getGender());
+                pstm.setInt(7, patient.getPatientID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
+     public PatientDTO getPatientProfileByPatientID(int id) throws SQLException {
+        PatientDTO patient = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PATIENT_PROFILE_BY_PATIENT_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int patientID = rs.getInt("patientID");
+                    String fullName = rs.getString("fullName");   
+                    String password = rs.getString("password");  
+                    String roleID = "PA";
+                    String gmail = rs.getString("gmail");
+                    String address = rs.getString("address");
+                    String gender = rs.getString("gender");
+                    int phone = rs.getInt("phone");
+                    patient = new PatientDTO(patientID, fullName, password, roleID, gmail, phone, address, gender, 1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return patient;
+    }
+     
      public PatientDTO getPatientByPatientID(int id) throws SQLException {
         PatientDTO patient = null;
         Connection conn = null;

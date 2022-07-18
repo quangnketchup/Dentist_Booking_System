@@ -37,12 +37,11 @@
     <body>
         <%
             String loginPatient = "";
-            ArrayList login= (ArrayList) session.getAttribute("LOGIN_USER");
-            if(login!=null) {
+            ArrayList login = (ArrayList) session.getAttribute("LOGIN_USER");
+            if (login != null) {
                 loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-            }
-            else{
-            String loginDefault = (String) session.getAttribute("LOGIN_DEFAULT");
+            } else {
+                String loginDefault = (String) session.getAttribute("LOGIN_DEFAULT");
             }
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -71,17 +70,17 @@
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
                         <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
-                        <%if(!loginPatient.equals("")){%>
+                            <%if (!loginPatient.equals("")) {%>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
-                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                                <a href="ShowProfileAccountController" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
                         <%} else {%>
                         <li class="nav-item cta"><a href="LoginController" class="nav-link" ><span>Đăng nhập</span></a></li>
-                        <%}%>
+                            <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>
@@ -130,7 +129,7 @@
                             <span>Thứ Hai - Thứ Bảy</span>
                             <span>8:00 - 19:00</span>
                         </p>
-                       
+
                     </div>
 
                 </div>
@@ -239,7 +238,7 @@
                                 <div class="media-body p-2 mt-3">
                                     <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
                                     <div style="padding-bottom:10px"><h3 class="heading" style="color: #85b0e9" ><%=service.getServiceName()%></h3></div>
-                                    
+
                                     <div class="border-success"><span style="color:red" class="icon-thumb-tack "></span><%=formatter.format(service.getServicePrice())%><span> VND</span></div>
                                 </div>
                             </div>
@@ -305,7 +304,7 @@
                 <div class="row justify-content-center mb-5 pb-5">
                     <div class="col-md-7 text-center heading-section ftco-animate">
                         <h2 class="mb-3">Đội Ngũ Bác Sĩ Chất Lượng Cao</h2>
-                        
+
                     </div>
                 </div>
 
@@ -331,7 +330,7 @@
                             <div class="info text-center">
                                 <h3><%=doctor.getFullName()%></h3>
                                 <span class="position"><%=doctor.getServiceTypeName()%></span>
-                              
+
                             </div>
                         </div>
                     </div>
@@ -397,7 +396,7 @@
                 </div>
             </div>
         </section>
-        
+
 
         <%List<DiscountDTO> listDiscount = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");%>
         <section class="ftco-section testimony-section bg-light">
@@ -551,7 +550,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                         <div class="ftco-footer-widget mb-4">
                             <h2 class="ftco-heading-2">Thông Tin Cơ Sở Phòng Tư</h2>
