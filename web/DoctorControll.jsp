@@ -146,7 +146,7 @@
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle "style="font-weight: bold"><%=login.getFullName()%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
-                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                                <a href="ShowProfileDoctorController" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
 
