@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.booking;
+package controller.doctor;
 
+import bookingdetail.BookingDetailDAO;
+import bookingdetail.BookingDetailDTO;
 import doctors.DoctorDAO;
 import doctors.DoctorDTO;
 import java.io.IOException;
@@ -13,16 +15,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import patients.PatientDAO;
 import patients.PatientDTO;
-import serviceTypes.ServiceTypeDAO;
-import serviceTypes.ServiceTypeDTO;
+import schedule.scheduleDAO;
+import schedule.scheduleDTO;
+import services.ServiceDAO;
+import services.ServiceDTO;
 
 /**
  *
  * @author Doan
  */
-public class ShowBookingController extends HttpServlet {
+public class ShowBookingDoctorController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,33 +37,32 @@ public class ShowBookingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        private static final String ERROR = "login.jsp";
-    private static final String TRUE = "newBooking.jsp";
+    private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "DoctorControll.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-             String url = ERROR;
-              try {                   
-                  String msg = (String) request.getAttribute("SUCCESS_ADD_BOOKING");
-            HttpSession session = request.getSession();       
-              ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
-               doctors.DoctorDAO doctorDAO =new DoctorDAO();  
-                List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
-                List<DoctorDTO> listDoctor = doctorDAO.getAllListDoctor2();
-                patients.PatientDTO login = (PatientDTO) session.getAttribute("LOGIN_PATIENT");
-                if (login != null && "PA".equals(login.getRoleID())) {                    
-                        session.setAttribute("LIST_SERVICE_TYPE", listServiceType);
-                         session.setAttribute("LIST_DOCTOR", listDoctor);
-                         if(msg == null){
-                             
-                         }else{
-                             request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
-                         }
-                        url = TRUE;             
-              
-            }
+          String url = ERROR;
+        try {
+            BookingDetailDAO bkDAO =new BookingDetailDAO();
+            scheduleDAO scheDAO =new scheduleDAO();
+            DoctorDAO drDAO =new DoctorDAO();
+            PatientDAO patientDAO=new PatientDAO();
+            ServiceDAO svDAO=new ServiceDAO();
+            List<BookingDetailDTO>listBooking=bkDAO.getAllBookingDetail1();
+            List<scheduleDTO>listSchedule=scheDAO.getAllListScheduleBooked();
+            List<DoctorDTO>listDoctor = drDAO.getAllListDoctor();
+            List<PatientDTO>listPatient=patientDAO.getAllListPatient();
+            List<ServiceDTO>listService=svDAO.getAllListService();
+            request.setAttribute("listBooking", listBooking);
+            request.setAttribute("listSchedule", listSchedule);
+            request.setAttribute("listDoctor", listDoctor);
+            request.setAttribute("listPatient", listPatient);
+            request.setAttribute("listService", listService);
+            url=SUCCESS;
         } catch (Exception e) {
-      log("Error at ShowBookingController: " + e.toString());
+            url = ERROR;
+            log("Error at ServiceController");
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

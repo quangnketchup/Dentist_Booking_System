@@ -45,7 +45,8 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item "><a href="#" class="nav-link sa" style="font-weight: bold">Thời Gian Biểu</a></li>
+                        <li class="nav-item "><a href="ShowDoctorSchedule" class="nav-link sa" style="font-weight: bold">Thời Gian Biểu</a></li>
+                        <li class="nav-item "><a href="ShowBookingDoctorController" class="nav-link sa" style="font-weight: bold">Quản lý lịch đặt</a></li>
                         <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle "style="font-weight: bold"><%=login.getFullName()%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

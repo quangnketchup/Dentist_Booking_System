@@ -1,263 +1,219 @@
 <%-- 
-    Document   : index_admin
-    Created on : Jun 23, 2022, 4:39:03 PM
+    Document   : DoctorControll
+    Created on : Jul 18, 2022, 4:52:08 PM
     Author     : Doan
 --%>
 
-<%@page import="java.text.DecimalFormat"%>
 <%@page import="services.ServiceDTO"%>
 <%@page import="patients.PatientDTO"%>
-<%@page import="doctors.DoctorDTO"%>
-<%@page import="schedule.scheduleDTO"%>
 <%@page import="bookingdetail.BookingDetailDTO"%>
-<%@page import="admins.AdminDTO"%>
-<%@page import="serviceTypes.ServiceTypeDTO"%>
+<%@page import="schedule.scheduleDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="doctors.DoctorDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
-
+        <title>Bác sĩ</title>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>DentaCare-Admin</title>
-
-        <!-- Custom fonts for this template-->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/ionicons.min.css">
+        <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="css/jquery.timepicker.css">
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Custom styles for this template-->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-              integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <link rel="stylesheet" href="css/menu.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
-              integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            .ftco-section {
-                padding: 0;
-            }
-        </style>
+        <link rel="stylesheet" href="css/dentistPage.css">
+         <style>
+        .app-color-blue-1 {
+            color: #346EE1;
+        }
+
+        .app-color-blue-3 {
+            color: #A0B4D6;
+        }
+
+        .app-color-black {
+            color: #0d0f13;
+        }
+
+        .app-color-gray-1 {
+            color: #0f1011;
+        }
+
+        .app-color-red {
+            color: #949AA7;
+        }
+
+        .app-bg-blue-1 {
+            background: #346EE1;
+        }
+
+        .app-bg-blue-2 {
+            background: #F5F9FC;
+        }
+
+        .app-button-shadow {
+            box-shadow: 0px 5px 10px 0px rgb(145 167 210 / 25%);
+        }
+
+        .app-bg-blue-3 {
+            background: #4A7AE5;
+        }
+
+        .app-bg-blue-4 {
+            background: #518AEA;
+        }
+
+        .app-bg-white-1 {
+            background: #F4F8F9;
+        }
+
+        .app-color-yellow-1 {
+            color: #D7AC67;
+        }
+
+        .app-bg-yellow-2 {
+            background: #FFF9EB;
+        }
+
+        .app-bg-yellow-3 {
+            background: #FFBE4E;
+        }
+
+        .app-color-red-1 {
+            color: #d3274c;
+        }
+
+        .app-bg-red-2 {
+            background: #FEF5F6;
+        }
+
+        .app-color-green {
+            color: #0CBDA8;
+        }
+        table{
+            overflow-y: scroll;
+        }
+    </style>
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+        integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     </head>
+    <body>
+        <%DoctorDTO login = (DoctorDTO) session.getAttribute("LOGIN_DOCTOR");%>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="home.jsp">Denta<span>Care</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
 
-    <body id="page-top">
-        <%AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");%>
-        <!-- Page Wrapper -->
-        <div id="wrapper">
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item "><a href="ShowDoctorSchedule" class="nav-link sa" style="font-weight: bold">Thời Gian Biểu</a></li>
+                        <li class="nav-item "><a href="ShowBookingDoctorController" class="nav-link sa" style="font-weight: bold">Quản lý lịch đặt</a></li>
+                        <li class="nav-item dropdown"><a href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle "style="font-weight: bold"><%=login.getFullName()%></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="LogoutController" class="dropdown-item nav-link text-primary text-center">Đăng xuất</a>
+                                <a href="admin_Account.jsp" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
+                            </div>
+                        </li>
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-tooth"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Denta <strong>care</strong></div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item ">
-                    <a class="nav-link" href="LoadAdminController">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
+                    </ul>
                 </div>
+            </div>
+        </nav>  
+            <section class="home-slider owl-carousel">
+            <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');"
+                 data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+            </div>
+        </section>    
+                            <!-- Cancel Toast -->
+                             <%
+                        String msg = (String) request.getAttribute("CANCEL_SUCCES");
+                        if (msg == null) {
+                            msg = "";
+                        } else {
+                    %>
 
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                    <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header1">
+                            <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
 
-                    <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseTwo"
-                       aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Dịch Vụ</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <div class="row">
-                                <h6 class="collapse-header">Các loại dịch vụ</h6>
-                            </div>
-                            <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                                if (listServiceType != null) {
-                                    for (ServiceTypeDTO svType : listServiceType) {
-                            %>
-
-
-                            <div class="row service-item">
-                                <a class="collapse-item col-sm float-left" href="LoadServiceController?serviceTypeName=<%=svType.getServiceTypeName()%>&serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
-                            </div>
-                            <%
-                                    }
-                                }
-                            %>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body1">
+                            <%=msg%>
                         </div>
                     </div>
-                </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+                    <%}%>
+                    <!-- Update Toast -->
+                             <%
+                        String msg1 = (String) request.getAttribute("UPDATE_SUCCES");
+                        if (msg1 == null) {
+                            msg1 = "";
+                        } else {
+                    %>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="ShowDoctorController">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>Bác Sĩ</span>
-                    </a>
-                </li>
+                    <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header1">
+                            <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="ShowPatientController">
-                        <i class="fa-solid fa-bed-pulse"></i>
-                        <span>Bệnh nhân</span>
-                    </a>
-                </li>
-
-
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="index_feedback.jsp">
-                        <i class="fas fa-fw fa-bell"></i>
-                        <span>Đánh Giá</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Charts -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="ShowBookingAdminController">
-                        <i class="fas fa-fw fa-calendar-check"></i>
-                        <span>Lịch Hẹn</span></a>
-                </li>
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-
-                    <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseThree"
-                       aria-expanded="true" aria-controls="collapseThree">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Mã giảm giá</span>
-                    </a>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <div class="row">
-                                <h6 class="collapse-header">Các loại giảm giá</h6>
-                            </div>
-                            <%
-                                if (listServiceType != null) {
-                                    for (ServiceTypeDTO svType : listServiceType) {
-                            %>
-
-                            <div class="row service-item">
-                                <a class="collapse-item col-sm float-left" href="LoadDiscountController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
-
-                            </div>
-                            <%
-                                    }
-                                }
-                            %>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body1">
+                            <%=msg1%>
                         </div>
                     </div>
-                </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
-            </ul>
-            <!-- End of Sidebar -->
-
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
-
-                <!-- Main Content -->
-                <div id="content">
-
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-
-
-
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-
-
-
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=loginAdmin.getFullName()%></span>
-                                    <img class="img-profile rounded-circle"
-                                         src="https://www.kindpng.com/picc/m/699-6997452_administrator-network-icons-system-avatar-computer-transparent-admin.png">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </nav>
-                    <!-- End of Topbar -->
-
-                    <!-- Begin Page Content -->
+                    <%}%>
+                            
+                            <!-- Cac bookingDetail của bác si -->                
+                <!-- Begin Page Content -->
                     <%List<BookingDetailDTO> listBooking = (List<BookingDetailDTO>) request.getAttribute("listBooking");
                         List<scheduleDTO> listSchedule = (List<scheduleDTO>) request.getAttribute("listSchedule");
                         List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("listDoctor");
                         List<PatientDTO> listPatient = (List<PatientDTO>) request.getAttribute("listPatient");
                         List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("listService");
-                    %>
-                    <div class="container">
+                    %>    
+                            <div class="container">
                         <section class="ftco-section">
                             <div class="container overflow-hidden rounded-2xl">
                                 <div class="flex flex-row bg-white items-center">
@@ -307,7 +263,7 @@
                                                         for (scheduleDTO schedule : listSchedule) {
                                                             if (bk.getScheduleID() == schedule.getScheduleID()) {
                                                                 for (DoctorDTO doctor : listDoctor) {
-                                                                    if (schedule.getDoctorID() == doctor.getDoctorID()) {
+                                                                    if (schedule.getDoctorID() == doctor.getDoctorID() && schedule.getDoctorID()==login.getDoctorID()) {
                                                                         for (PatientDTO patient : listPatient) {
                                                                             if (bk.getPatientID() == patient.getPatientID()) {
                                                                                 for (ServiceDTO service : listService) {
@@ -315,7 +271,7 @@
                                                                                         demm++;
                                                 %> 
                                             <div id="f" type="hidden"></div>
-                                            <form action="UpdateBookingAdminController">
+                                            <form action="UpdateBookingDoctorController">
                                                 <tr>
                                                     <td>
                                                         <div
@@ -398,62 +354,21 @@
                 </div>            
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                            
+                            
+                            
+      <footer class="ftco-footer ftco-bg-dark ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved </a>
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Bootstrap core JavaScript-->
+        </footer>
+                           <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
@@ -465,11 +380,30 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/dentistPage.js"></script>
         <script>
+            function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
             function handleSubmit(id){
                 if(confirm("Bạn muốn xóa lịch đặt này?")){
                     var form = document.createElement("form");
-                    form.action="DeleteBookingDetail";  
+                    form.action="DeleteBookingDetailDoctorController";  
                     const BKid = document.createElement("input");
                     BKid.type = "hidden"
                     BKid.value = id;
@@ -483,7 +417,5 @@
                 }
             }
         </script>
-    </body>
-
+ </body>
 </html>
-

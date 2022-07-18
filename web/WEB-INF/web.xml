@@ -200,6 +200,22 @@
         <servlet-name>CancelSlotDoctorController</servlet-name>
         <servlet-class>controller.admins.CancelSlotDoctorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBookingDetail</servlet-name>
+        <servlet-class>controller.admins.DeleteBookingDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowBookingDoctorController</servlet-name>
+        <servlet-class>controller.doctor.ShowBookingDoctorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBookingDetailDoctorController</servlet-name>
+        <servlet-class>controller.doctor.DeleteBookingDetailDoctorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBookingDoctorController</servlet-name>
+        <servlet-class>controller.doctor.UpdateBookingDoctorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -399,6 +415,22 @@
     <servlet-mapping>
         <servlet-name>CancelSlotDoctorController</servlet-name>
         <url-pattern>/CancelSlotDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBookingDetail</servlet-name>
+        <url-pattern>/DeleteBookingDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowBookingDoctorController</servlet-name>
+        <url-pattern>/ShowBookingDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBookingDetailDoctorController</servlet-name>
+        <url-pattern>/DeleteBookingDetailDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookingDoctorController</servlet-name>
+        <url-pattern>/UpdateBookingDoctorController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

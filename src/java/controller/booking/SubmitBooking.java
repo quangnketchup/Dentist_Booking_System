@@ -79,6 +79,9 @@ public class SubmitBooking extends HttpServlet {
                     boolean check1 =scheDAO.setBookedSchedule(slotID, dateBooking, doctorID);
                     if(check2 && check1){
                                              url=TRUE; 
+                                             request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
+                    request.setAttribute("add_green", schee);
+
                         String gio="";
                         switch (slotID) {
                             case 1:
@@ -129,9 +132,7 @@ public class SubmitBooking extends HttpServlet {
         msg.setSentDate(new Date());
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
         Transport.send(msg);
-                    request.setAttribute("SUCCESS_ADD_BOOKING", "Bạn đã đặt lịch thành công");
-                    request.setAttribute("add_green", schee);
-
+                    
                     }
       
             }else{
