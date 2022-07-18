@@ -28,6 +28,36 @@ public class FeedBackDAO {
             + "WHERE s.serviceID = paf.serviceID AND pa.patientID = paf.patientID AND paf.status = 1";
     private static final String CREATE_FB ="INSERT [dbo].[tblPatientFeedbacks] ([serviceID],[patientID],[dateFeedback],[rateStar],[content],[status]) VALUES (?,?,?,?,?,?)";
     private static final String GET_LIST_LATEST_FEEDBACK = "SELECT paf.serviceFeedBackID, paf.content, paf.rateStar, paf.dateFeedback,paf.serviceID, pa.fullName, paf.status FROM tblPatientFeedbacks paf, tblPatients pa WHERE  pa.patientID=paf.patientID AND paf.status = 1 ORDER BY dateFeedback DESC";
+    private static final String UPDATE_FB = "update tblPatientFeedbacks set status= 0 where serviceFeedBackID = ?";
+    
+    
+    public boolean deleteFB(int serviceFeedBackID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_FB);
+                ptm.setInt(1, serviceFeedBackID);        
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
     public boolean createSchedule(int serviceID,int patientID,String dateFeedback,int rateStart,String content,int status) throws SQLException {
         boolean check = false;

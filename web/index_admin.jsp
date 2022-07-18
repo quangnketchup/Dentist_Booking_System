@@ -122,7 +122,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="index_feedback.jsp">
+                    <a class="nav-link collapsed" href="ShowFeedBackAdminController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Đánh Giá</span>
                     </a>

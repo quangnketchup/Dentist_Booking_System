@@ -85,6 +85,14 @@ public class FeedbackDTO {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public int getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(int serviceID) {
+        this.serviceID = serviceID;
+    }
     
     
 }

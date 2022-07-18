@@ -4,6 +4,9 @@
     Author     : Doan
 --%>
 
+<%@page import="services.ServiceDTO"%>
+<%@page import="patients.PatientDTO"%>
+<%@page import="feedbacks.FeedbackDTO"%>
 <%@page import="admins.AdminDTO"%>
 <%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="java.util.List"%>
@@ -29,7 +32,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+        
     </head>
 
     <body id="page-top">
@@ -118,7 +121,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item active">
-                    <a class="nav-link collapsed" href="index_feedback.jsp">
+                    <a class="nav-link collapsed" href="ShowFeedBackAdminController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Đánh Giá</span>
                     </a>
@@ -229,8 +232,62 @@
 
                     </nav>
                     <!-- End of Topbar -->
-
+                    <%
+                       List<FeedbackDTO>listFeedBack =(List<FeedbackDTO>) request.getAttribute("listFeedBack");
+                       
+                        List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("listService");
+                    %>    
+                    <div id="f" type="hidden"></div>
                     <!-- Begin Page Content -->
+                        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                          <thead>
+                            
+                             
+                            <tr>
+                                 <th class="th-sm">STT
+
+                              </th>
+                              <th class="th-sm">Tên khách hàng
+
+                              </th>
+                              <th class="th-sm">Dịch vụ
+
+                              </th>
+                              <th class="th-sm">Nội dung
+
+                              </th>
+                              <th class="th-sm">Ngày phản hồi
+
+                              </th>
+                              <th class="th-sm">Xóa
+
+                              </th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <%int demm = 0;
+                                for (FeedbackDTO fb : listFeedBack) {
+                                for (ServiceDTO sv : listService){
+                                if(fb.getServiceID()==sv.getServiceID()){
+                                 
+                                  
+                                demm++;
+                                                                                
+                                                %> 
+                          <form action="">
+                              <tr>
+                                <td><%=demm%></td>
+                                <td><%=fb.getPatientName()%></td>
+                                <td><%=sv.getServiceName()%></td>
+                                <td><%=fb.getContent()%></td>
+                                <td><%=fb.getDateFeedback()%></td>
+                                <td><input class="btn btn-danger" type="button" value="X" onclick="handleDelete(<%=fb.getServiceFeedBackID()%>)"></td>
+                              </tr>
+                          </form> 
+                                <%}}}%>
+                          </tbody>
+                          </table>
 
 
                     <!-- Footer -->
@@ -280,7 +337,24 @@
             <!-- Page level custom scripts -->
             <script src="js/demo/chart-area-demo.js"></script>
             <script src="js/demo/chart-pie-demo.js"></script>
-
+            <script>
+                function handleDelete(id){
+                    if(confirm("Bạn muốn xóa phản hồi này này?")){
+                    var form = document.createElement("form");
+                    form.action="DeleteFeedBackController";  
+                    const BKid = document.createElement("input");
+                    BKid.type = "hidden"
+                    BKid.value = id;
+                    BKid.name = "serviceFeedBackID";
+                    form.appendChild(BKid);
+                    var body =document.getElementById('f');
+                      body.appendChild(form)
+                       form.submit()
+                }else{
+                    
+                }
+                }
+            </script>
     </body>
 
 </html>

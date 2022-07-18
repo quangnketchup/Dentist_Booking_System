@@ -216,6 +216,14 @@
         <servlet-name>UpdateBookingDoctorController</servlet-name>
         <servlet-class>controller.doctor.UpdateBookingDoctorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowFeedBackAdminController</servlet-name>
+        <servlet-class>controller.admins.ShowFeedBackAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedBackController</servlet-name>
+        <servlet-class>controller.admins.DeleteFeedBackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -431,6 +439,14 @@
     <servlet-mapping>
         <servlet-name>UpdateBookingDoctorController</servlet-name>
         <url-pattern>/UpdateBookingDoctorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowFeedBackAdminController</servlet-name>
+        <url-pattern>/ShowFeedBackAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedBackController</servlet-name>
+        <url-pattern>/DeleteFeedBackController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
