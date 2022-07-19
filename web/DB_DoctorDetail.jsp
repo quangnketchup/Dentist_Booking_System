@@ -80,7 +80,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
                             <%
-                                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                     if (listServiceType != null) {
                                         for (ServiceTypeDTO svType : listServiceType) {
                             %>
@@ -234,6 +234,7 @@
                             </div>
                         </form>
                     </div>
+                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthBeforeController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng trước của <%=doctor.getFullName()%></a></div>
                                 <div class="text-center" style="margin-top: 15px">Lịch làm việc của bác sĩ</div>
                                 <!-- Hien lich cua bac si -->
                                 

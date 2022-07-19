@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller.admins;
 
@@ -25,21 +26,12 @@ import services.ServiceDTO;
 
 /**
  *
- * @author Doan
+ * @author quang
  */
-public class DetailDoctorAdminController extends HttpServlet {
+public class ScheduleDoctorMonthBeforeController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "DB_Service.jsp";
-    private static final String SUCCESS = "DB_DoctorDetail.jsp";
+    private static final String ERROR = "DB_DoctorDetail.jsp";
+    private static final String SUCCESS = "DB_Detail_Schedule_Month_Before.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,13 +44,10 @@ public class DetailDoctorAdminController extends HttpServlet {
 
             ServiceTypeDAO svTypeDAO =new ServiceTypeDAO();
             List<ServiceTypeDTO> listServiceType = svTypeDAO.getListServiceType();
-            
+           
             scheduleDAO scheDAO = new scheduleDAO();
-            List<scheduleDTO> bookedList = new ArrayList<>();
-            List<scheduleDTO> listScheduleDTO = scheDAO.getScheduleByDoctorID(doctorID);
-            bookedList = scheDAO.getBookedScheduleByDoctorID(doctorID);
+            List<scheduleDTO> listScheduleDTO = scheDAO.getListBookedMonthBefore(doctorID);
             request.setAttribute("DOCTOR_INFOR", doctor);
-            request.setAttribute("listBookingDetail", bookedList);
             request.setAttribute("listScheduleDTO", listScheduleDTO);
 
             request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);

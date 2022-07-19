@@ -244,6 +244,10 @@
         <servlet-name>AddAdminController</servlet-name>
         <servlet-class>controller.admins.AddAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ScheduleDoctorMonthBeforeController</servlet-name>
+        <servlet-class>controller.admins.ScheduleDoctorMonthBeforeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -487,6 +491,10 @@
     <servlet-mapping>
         <servlet-name>AddAdminController</servlet-name>
         <url-pattern>/AddAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ScheduleDoctorMonthBeforeController</servlet-name>
+        <url-pattern>/ScheduleDoctorMonthBeforeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
