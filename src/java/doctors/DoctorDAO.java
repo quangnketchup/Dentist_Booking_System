@@ -23,10 +23,13 @@ public class DoctorDAO {
     private static final String CREATE_DOCTOR ="INSERT tblDoctors( [fullName], [password], [gender], [gmail], [phone], [image], [status], [roleID], [achievement], [serviceTypeID]) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SEARCH_DOCTOR_BY_ID ="SELECT  d.doctorID, s.serviceTypeName, d.fullName,d.gender, d.gmail, d.phone, d.image, d.status ,d.achievement from tblDoctors d, tblServiceTypes s WHERE d.serviceTypeID=s.serviceTypeID AND d.doctorID=? ";
     private static final String GET_ALL_LIST_DOCTOR2 = "SELECT  * FROM tblDoctors";
-    private static final String COUNT_BOOKING_OF_DOCTOR= "SELECT COUNT(d.doctorID) AS nb FROM tblDoctors d, tblSchedules s, tblBookingDetails b WHERE b.status=2 AND d.doctorID = s.doctorID AND s.scheduleID = b.scheduleID AND d.doctorID=?";
+    private static final String COUNT_BOOKING_OF_DOCTOR= "SELECT d.doctorID, COUNT(d.doctorID) AS nb FROM tblDoctors d, tblSchedules s, tblBookingDetails b WHERE b.status=2 AND d.doctorID = s.doctorID AND s.scheduleID = b.scheduleID GROUP BY d.doctorID ORDER BY COUNT(d.doctorID) DESC";
     
-    public int getCountBookingOfDoctor(int doctorID) throws SQLException {
+    public ArrayList getCountBookingOfDoctor() throws SQLException {
         int nb=0;
+        int id=0;
+        ArrayList listCountAndID= new ArrayList<>();
+        
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -34,10 +37,12 @@ public class DoctorDAO {
             conn = DBUtils.getConnection();
             if(conn != null) {
                 ptm = conn.prepareStatement(COUNT_BOOKING_OF_DOCTOR);
-                ptm.setInt(1, doctorID);
                 rs = ptm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {  
+                    id=rs.getInt("doctorID");
+                    listCountAndID.add(id);
                     nb=rs.getInt("nb");
+                    listCountAndID.add(nb);
                 }
             }
         } catch (Exception e) {
@@ -53,7 +58,7 @@ public class DoctorDAO {
                 ptm.close();
             }
         }
-        return nb;
+        return listCountAndID;
     } 
     
     public DoctorDTO getDoctorByID(int id) throws SQLException{
