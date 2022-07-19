@@ -33,9 +33,37 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
     </head>
+    <%
+        String error = (String) session.getAttribute("ERROR");
+        if (error == null) {
+            error = "";
+        }
+    %>
+    <%=error%>
 
+    <!<!-- Toast thông báo succeed update -->
+
+    <%
+        String msg = (String) request.getAttribute("SSMSG");
+        if (msg == null) {
+            msg = "";
+        } else {
+    %>
+    <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true"">
+        <div class="toast-header1">
+            <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body1">
+            <%=msg%>
+        </div>
+    </div>
+
+    <%}%>
     <body id="page-top">
         <%AdminDTO loginAdmin = (AdminDTO) session.getAttribute("LOGIN_ADMIN");%>
         <!-- Page Wrapper -->
@@ -188,6 +216,10 @@
                             <i class="fa fa-bars"></i>
                         </button>
 
+                        <!-- dau cộng để thêm admin-->
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
+                            <i class="fa fa-plus"></i>
+                        </button>
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <div class="topbar-divider d-none d-sm-block"></div>
@@ -231,6 +263,39 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
+                        <!-- modal them admin-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Thêm admin khuyến mãi</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="AddAdminController" method="GET">
+                                        <div class="modal-body">
+                                            <div class="register-box">
+                                                <div class="input-group mb-3">
+                                                    <input name="fullName" type="text" class="form-control" placeholder="Tên admin">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="gmail" type="text" class="form-control" placeholder="Email" >
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="password" type="password" class="form-control" placeholder="Mật khẩu" required="">
+                                                </div>  
+                                            </div>
+                                        </div><!-- /.card -->
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" name="action"  value="Add " class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -498,8 +563,9 @@
                                         <div><h3>Không có bình luận nào cả</h3></div>
                                         <%} else {
                                             count++;
-                                            if (count == 11)
+                                            if (count == 11) {
                                                 break;
+                                            }
                                         %>
                                         <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
                                             <div class="form-group col-md-4 border-primary">
@@ -528,10 +594,12 @@
                                     <%
                                         ArrayList<DoctorDTO> listDoctor = (ArrayList<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
                                         ArrayList listNumberBookingDoctor = (ArrayList) request.getAttribute("LIST_NUMBER_BOOKING_DOCTOR");
-                                        int top=0;
+                                        int top = 0;
                                         for (int i = 0; i < listDoctor.size(); i++) {
                                             top++;
-                                            if(top==4) break;
+                                            if (top == 4) {
+                                                break;
+                                            }
                                     %>
                                     <div class="card-body">
                                         <div class="text-center">
@@ -552,148 +620,160 @@
                                     </div>
                                 </div>
                                 <%}%>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
-
+            <!-- End of Main Content -->
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Content Wrapper -->
+
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="LogoutController">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="LogoutController">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <script src="ckeditor/ckeditor.js"></script>
+    <script>
+                var editor = CKEDITOR.replace('description');
+                CKFinder.setupCKEditor(editor, 'ckfinder/');
+                data["description"] = editor.getData();
+    </script>    
+    <script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-<style>
-    .container1,.flip-box,.front,.back {
-        width: 100%;
-        height: 770px;
-    }
-    .container1{
-        background-image: url('https://assets.hongkiat.com/uploads/minimalist-dekstop-wallpapers/non-4k/original/26.jpg?3');
-    }
+        function toastClose() {
+            var toast1 = document.getElementById("toast-msg");
+            toast1.style.display = "none";
+        }
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <style>
+        .container1,.flip-box,.front,.back {
+            width: 100%;
+            height: 770px;
+        }
+        .container1{
+            background-image: url('https://assets.hongkiat.com/uploads/minimalist-dekstop-wallpapers/non-4k/original/26.jpg?3');
+        }
 
-    .container1,.flip_box {
-        position: relative;
-    }
+        .container1,.flip_box {
+            position: relative;
+        }
 
-    .front,.back {
-        position: absolute;
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
+        .front,.back {
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
 
-    .flip_box {
-        transition: all 0.5s ease-out;
-        -webkit-transform-style: preserve-3d;
-        -moz-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-    }
-    .back {
-        -webkit-transform: rotateY(180deg);
-        -moz-transform: rotateY(180deg);
-        -ms-transform: rotateY(180deg);
-        transform: rotateY(180deg);
-    }
-    .flipped {
-        -webkit-transform: rotateY(-180deg);
-        -moz-transform: rotateY(-180deg);
-        -ms-transform: rotateY(-180deg);
-        transform: rotateY(-180deg);
-    }
+        .flip_box {
+            transition: all 0.5s ease-out;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .back {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -ms-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .flipped {
+            -webkit-transform: rotateY(-180deg);
+            -moz-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
 
-    .r_wrap {
-        position: absolute;
-        right: 350px;
-        bottom: 650px;
-    }
+        .r_wrap {
+            position: absolute;
+            right: 350px;
+            bottom: 650px;
+        }
 
-    .b_round,.s_round {
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        background-color: #D21849;
-        transition: all 0.2s linear;
-    }
+        .b_round,.s_round {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #D21849;
+            transition: all 0.2s linear;
+        }
 
-    .b_round {
-        opacity: 0;
-        background-color: #D21849;
-    }
+        .b_round {
+            opacity: 0;
+            background-color: #D21849;
+        }
 
-    .b_round_hover {
-        transform: scale(1.37);
-        opacity: 0.4;
-    }
+        .b_round_hover {
+            transform: scale(1.37);
+            opacity: 0.4;
+        }
 
-    .b_round_back_hover {
-        background-color: #F60044;
-    }
+        .b_round_back_hover {
+            background-color: #F60044;
+        }
 
-    .s_round_click {
-        transform: scale(1.7);
-    }
+        .s_round_click {
+            transform: scale(1.7);
+        }
 
-    .s_round_back {
-        background-color: #C30C3D;
-    }
+        .s_round_back {
+            background-color: #C30C3D;
+        }
 
-    .s_arrow {
-        width: 52px;
-        height: 52px;
-        background-image: url('https://img-fotki.yandex.ru/get/194549/29644339.5/0_d6c60_1d7815f0_orig');
-        background-color: transparent;
-        transition: all 0.35s linear;
-    }
+        .s_arrow {
+            width: 52px;
+            height: 52px;
+            background-image: url('https://img-fotki.yandex.ru/get/194549/29644339.5/0_d6c60_1d7815f0_orig');
+            background-color: transparent;
+            transition: all 0.35s linear;
+        }
 
-    .s_arrow_rotate {
-        transform: rotate(-180deg);
-    }
-</style>
+        .s_arrow_rotate {
+            transform: rotate(-180deg);
+        }
+    </style>
 </body>
 
 </html>

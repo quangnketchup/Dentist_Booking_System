@@ -240,6 +240,10 @@
         <servlet-name>UpdateProfilePatientController</servlet-name>
         <servlet-class>controller.users.UpdateProfilePatientController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdminController</servlet-name>
+        <servlet-class>controller.admins.AddAdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -479,6 +483,10 @@
     <servlet-mapping>
         <servlet-name>UpdateProfilePatientController</servlet-name>
         <url-pattern>/UpdateProfilePatientController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdminController</servlet-name>
+        <url-pattern>/AddAdminController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

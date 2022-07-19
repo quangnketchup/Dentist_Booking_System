@@ -13,7 +13,35 @@ public class AdminDAO {
 
     private static final String LOGIN = "SELECT adminID, adminName, password, gmail, roleID FROM tblAdministrators WHERE gmail=? AND password =?";
     private static final String CHECK_DUPLICATE = "SELECT fullname FROM tblAdministrators WHERE adminID=?";
-
+    private static final String CREATE_ADMIN ="INSERT tblAdministrators( [adminName], [password], [gmail], [roleID]) VALUES (?,?,?,?)";
+    
+    public boolean createAdmin(AdminDTO admin) throws SQLException{
+         boolean check=false;
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {      
+                pstm = conn.prepareStatement(CREATE_ADMIN);
+                pstm.setString(1, admin.getFullName());
+                pstm.setString(2, admin.getPassword());
+                pstm.setString(3, admin.getGmail());
+                pstm.setString(4, admin.getRoleID());
+                check = pstm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     public AdminDTO checkLogin(String gmail, String password) throws SQLException {
         AdminDTO admin = null;
         Connection conn = null;

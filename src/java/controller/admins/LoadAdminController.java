@@ -87,11 +87,13 @@ public class LoadAdminController extends HttpServlet {
             List<DoctorDTO> AlllistDoctor = doctorDao.getAllListDoctor();
             ArrayList<DoctorDTO> listDoctor = new ArrayList<>();
             ArrayList listNumberBookingDoctor = new ArrayList<>();
-            int top1 = 0, top3 = 0, top2 = 0;
+            int top1 = 0, top3 = 0, top2 = 0, top4=0;
             for (DoctorDTO doctor : AlllistDoctor) {
                 int numberBookingOfDoctor = doctorDao.getCountBookingOfDoctor(doctor.getDoctorID());
-                listNumberBookingDoctor.add(numberBookingOfDoctor);
-                listDoctor.add(doctor);
+                if (numberBookingOfDoctor > 0) {
+                    listNumberBookingDoctor.add(numberBookingOfDoctor);
+                    listDoctor.add(doctor);
+                }
             }
 
             int numFeedBack = bkDao.getNumberFB(month);
