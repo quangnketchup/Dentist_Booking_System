@@ -69,8 +69,9 @@
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
+                         <%if (!loginPatient.equals("")) {%>
                         <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
-                            <%if (!loginPatient.equals("")) {%>
+                           
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -79,7 +80,7 @@
                             </div>
                         </li>
                         <%} else {%>
-                        <li class="nav-item cta"><a href="LoginController" class="nav-link" ><span>Đăng nhập</span></a></li>
+                        <li class="nav-item cta"><a href="login.jsp" class="nav-link" ><span>Đăng nhập</span></a></li>
                             <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 
@@ -121,7 +122,7 @@
                     <div class="col-md-6 color-1 p-4">
                         <h3 class="mb-4">Tình huống <strong>khẩn cấp</strong></h3>
                         <p>Hãy liên hệ nhanh chóng với đường dây để được tư vấn trực tiếp</p>
-                        <span class="phone-number">+ (123) 456 7890</span>
+                        <span class="phone-number">0393626592</span>
                     </div>
                     <div class="col-md-6 color-2 p-4">
                         <h3 class="mb-4">Giờ mở cửa</h3>
@@ -523,7 +524,7 @@
             </div>
         </section>
 
-        <div id="map"></div>
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.6103555296445!2d106.80832731549967!3d10.8411012489016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1658653902569!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
         <footer class="ftco-footer ftco-bg-dark ftco-section">
             <div class="container">
@@ -557,8 +558,8 @@
                             <div class="block-23 mb-3">
                                 <ul>
                                     <li><span class="icon icon-map-marker"></span><span class="text">Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">0393626592</span></a></li>
+                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">dentacare.noti@gmail.com</span></a></li>
                                 </ul>
                             </div>
                         </div>
