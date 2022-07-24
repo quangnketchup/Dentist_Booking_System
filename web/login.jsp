@@ -78,8 +78,7 @@
     
                             <div class="g-signin2 social-auth-links text-center mt-2 mb-3" >
                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/DentistBookingSystem/LoginGoogleController&response_type=code
-                &client_id=326210504580-9jhmvl00cg3sabr664sav1p87gsnf90g.apps.googleusercontent.com
-        &approval_prompt=force" class="btn btn-block btn-danger">
+                &client_id=326210504580-icsqk0q8ujacofhrnf72sjrh5nalabua.apps.googleusercontent.com&approval_prompt=force" class="btn btn-block btn-danger">
                                     <i class="fa fa-google"></i> Đăng nhập với Google
                                 </a>
                                 <a class="btn btn-block btn-primary" href="https://www.facebook.com/dialog/oauth?client_id=560930585693096&redirect_uri=http://localhost:8080/DentistBookingSystem/LoginFaceBookController&scope=public_profile%2Cemail" id="facebook-connect"> <i class="fa fa-facebook"></i> Login with Facebook</a>
