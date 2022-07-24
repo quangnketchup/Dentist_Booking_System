@@ -233,7 +233,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="text-center" style="margin-top: 15px">Lịch làm việc tháng trước của <a><%=doctor.getFullName()%></a></div>
+                    <div class="text-center" style="margin-top: 15px">Lịch làm việc tháng này của <a><%=doctor.getFullName()%></a></div>
                     <!-- Hien lich cua bac si -->
                 </div>
 
@@ -271,7 +271,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button onclick="Export2Doc('exportContent', '<%=doctor.getFullName()%>');">Lưu về máy</button>
+                <button onclick="Export2Doc('exportContent', '<%=doctor.getFullName()%>');">Lưu lịch về máy</button>
 
                 <!-- End of Footer -->
 

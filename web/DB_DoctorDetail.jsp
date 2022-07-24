@@ -234,7 +234,8 @@
                             </div>
                         </form>
                     </div>
-                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthBeforeController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng trước của <%=doctor.getFullName()%></a></div>
+                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthBeforeController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng trước của bác sĩ <%=doctor.getFullName()%></a></div>
+                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthCurrentController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng này của bác sĩ <%=doctor.getFullName()%></a></div>
                                 <div class="text-center" style="margin-top: 15px">Lịch làm việc của bác sĩ</div>
                                 <!-- Hien lich cua bac si -->
                                 
