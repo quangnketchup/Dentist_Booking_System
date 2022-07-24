@@ -80,7 +80,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
                             <%
-                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) session.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
                                 if (listServiceType != null) {
                                     for (ServiceTypeDTO svType : listServiceType) {
                             %>
@@ -97,18 +97,27 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
+<hr class="sidebar-divider">
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="ShowDoctorController">
-                        <i class="fas fa-fw fa-bell"></i>
+                        <i class="fas fa-fw fa-user-doctor"></i>
                         <span>Bác Sĩ</span>
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="ShowPatientController">
+                        <i class="fas fa-fw fa-bed-pulse"></i>
+                        <span>Bệnh nhân</span>
+                    </a>
+                </li>
+
+
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="index_feedback.jsp">
+                    <a class="nav-link collapsed" href="ShowFeedBackAdminController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Đánh Giá</span>
                     </a>
@@ -116,16 +125,38 @@
 
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index_book.jsp">
+                    <a class="nav-link" href="ShowBookingAdminController">
                         <i class="fas fa-fw fa-calendar-check"></i>
                         <span>Lịch Hẹn</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index_Discount.jsp">
-                        <i class="fas fa-fw fa-percent"></i>
-                        <span>Mã Giảm Giá</span></a>
+                    <a class="nav-link collapsed" href="index_service.jsp" data-toggle="collapse" data-target="#collapseThree"
+                       aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Mã giảm giá</span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <div class="row">
+                                <h6 class="collapse-header">Các loại giảm giá</h6>
+                            </div>
+                            <%
+                                if (listServiceType != null) {
+                                    for (ServiceTypeDTO svType : listServiceType) {
+                            %>
+
+                            <div class="row service-item">
+                                <a class="collapse-item col-sm float-left" href="LoadDiscountController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Divider -->

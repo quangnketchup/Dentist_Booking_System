@@ -103,14 +103,14 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ShowDoctorController">
-                        <i class="fa-solid fa-user-doctor"></i>
+                        <i class="fas fa-fw fa-user-doctor"></i>
                         <span>Bác Sĩ</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ShowPatientController">
-                        <i class="fa-solid fa-bed-pulse"></i>
+                        <i class="fas fa-fw fa-bed-pulse"></i>
                         <span>Bệnh nhân</span>
                     </a>
                 </li>
