@@ -239,7 +239,7 @@
 
                 <%List<scheduleDTO> listScheduleDTO = (List<scheduleDTO>) request.getAttribute("listScheduleDTO");%>
                 <!-- Modal -->
-                <div class="table-wrapper">
+                <div class="table-wrapper" id="exportContent">
                     <table style="width:100%">
                         <thead class="bg-light">
                             <tr>
@@ -263,15 +263,15 @@
                                     <%} else if (schedule.getSlot() == 4) {%>15:00 - 17:00 pm<%}%>
                                 </td>
                                 <td>
-                                    <%if (schedule.getStatus() == 0) {%>Đã hủy<%} else {%>Đã hoàn thành<%}%>
+                                    <%if (schedule.getStatus() == 0) {%>Đã hủy<%}else if(schedule.getStatus()==1){%>Đã đăng ký<% }else {%>Đã hoàn thành<%}%>
                                 </td>
                             </tr>     
                         </form>
                         <%}%>
                         </tbody>
                     </table>
-                    <input type="button" id="dwn-btn" value="Lưu về máy"/>
                 </div>
+                <button onclick="Export2Doc('exportContent', 'test');">Export as Doc</button>
 
                 <!-- End of Footer -->
 
@@ -309,9 +309,9 @@
 
         <script src="ckeditor/ckeditor.js"></script>
         <script>
-            var editor = CKEDITOR.replace('achievement');
-            CKFinder.setupCKEditor(editor, 'ckfinder/');
-            data["achievement"] = editor.getData();
+                    var editor = CKEDITOR.replace('achievement');
+                    CKFinder.setupCKEditor(editor, 'ckfinder/');
+                    data["achievement"] = editor.getData();
         </script>    
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
@@ -327,27 +327,37 @@
         <script src="js/demo/chart-pie-demo.js"></script>
         <script src="js/DB_DoctorDetail.js"></script>
         <script>
-            function downloadasTextFile(filename, text) {
-                var element = document.createElement('a');
-                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-                element.setAttribute('download', filename);
+                    function Export2Doc(element, filename = '') {
+                        var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+                        var postHtml = "</body></html>";
+                        var html = preHtml + document.getElementById(element).innerHTML + postHtml;
 
-                element.style.display = 'none';
-                document.body.appendChild(element);
+                        var blob = new Blob(['\ufeff', html], {
+                            type: 'application/msword'
+                        });
 
-                element.click();
+                        var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
 
-                document.body.removeChild(element);
-            }
+                        filename = filename ? filename + '.doc' : 'document.doc';
 
-// Start file download.
-            document.getElementById("dwn-btn").addEventListener("click", function () {
-                // Generate download of phpcodertech.txt file with some content
-                var text = document.getElementById("text-val").value;
-                var filename = "lịchlàmViệc.txt";
+                        var downloadLink = document.createElement("a");
 
-                downloadasTextFile(filename, text);
-            }, false);
+                        document.body.appendChild(downloadLink);
+
+                        if (navigator.msSaveOrOpenBlob) {
+                            navigator.msSaveOrOpenBlob(blob, filename);
+                        } else {
+                            downloadLink.href = url;
+
+                            downloadLink.download = filename;
+
+                            downloadLink.click();
+                        }
+
+                        document.body.removeChild(downloadLink);
+
+
+                    }
         </script>
     </body>
 
