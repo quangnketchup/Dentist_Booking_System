@@ -102,7 +102,7 @@ public class SubmitBooking extends HttpServlet {
                         ///Gui mail 
                          final String fromEmail = "dentacare.noti@gmail.com";
         // Mat khai email cua ban
-        final String password = "asjvfvbgcycolnct";
+        final String password = "kfvcboefxllyijef";
         // dia chi email nguoi nhan
         final String toEmail = login.getGmail();
         String check=toEmail;

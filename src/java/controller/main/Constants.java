@@ -11,9 +11,9 @@ package controller.main;
 public class Constants {
     
     /// Google login
-    public static String GOOGLE_CLIENT_ID = "326210504580-9jhmvl00cg3sabr664sav1p87gsnf90g.apps.googleusercontent.com";
+    public static String GOOGLE_CLIENT_ID = "326210504580-icsqk0q8ujacofhrnf72sjrh5nalabua.apps.googleusercontent.com";
 
-	public static String GOOGLE_CLIENT_SECRET = "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";
+	public static String GOOGLE_CLIENT_SECRET = "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";
 
 	public static String GOOGLE_REDIRECT_URI = "http://localhost:8080/DentistBookingSystem/LoginGoogleController";
 
