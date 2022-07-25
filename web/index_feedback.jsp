@@ -63,12 +63,6 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
 
@@ -186,15 +180,7 @@
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-
-
-
-                        <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-
-
-
-
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -208,22 +194,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+                                   
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Đăng xuất
                                     </a>
                                 </div>
                             </li>
@@ -232,37 +207,23 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    <%
+                    <div class="container">
+                        <%
                        List<FeedbackDTO>listFeedBack =(List<FeedbackDTO>) request.getAttribute("listFeedBack");
                        
                         List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("listService");
                     %>    
                     <div id="f" type="hidden"></div>
                     <!-- Begin Page Content -->
-                        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <table id="dtBasicExample" class="table table-striped">
                           <thead>
-                            
-                             
                             <tr>
-                                 <th class="th-sm">STT
-
-                              </th>
-                              <th class="th-sm">Tên khách hàng
-
-                              </th>
-                              <th class="th-sm">Dịch vụ
-
-                              </th>
-                              <th class="th-sm">Nội dung
-
-                              </th>
-                              <th class="th-sm">Ngày phản hồi
-
-                              </th>
-                              <th class="th-sm">Xóa
-
-                              </th>
-                              
+                              <th>STT</th>
+                              <th>Tên khách hàng</th>
+                              <th>Dịch vụ</th>
+                              <th style="max-width: 350px">Nội dung</th>
+                              <th>Ngày phản hồi</th>
+                              <th>Xóa</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -270,30 +231,23 @@
                                 for (FeedbackDTO fb : listFeedBack) {
                                 for (ServiceDTO sv : listService){
                                 if(fb.getServiceID()==sv.getServiceID()){
-                                 
-                                  
                                 demm++;
-                                                                                
-                                                %> 
+                              %> 
                           <form action="">
                               <tr>
                                 <td><%=demm%></td>
                                 <td><%=fb.getPatientName()%></td>
                                 <td><%=sv.getServiceName()%></td>
-                                <td><%=fb.getContent()%></td>
-                                <td><%=fb.getDateFeedback()%></td>
+                                <td style="max-width: 350px"><%=fb.getContent()%></td>
+                                <td ><%=fb.getDateFeedback()%></td>
                                 <td><input class="btn btn-danger" type="button" value="X" onclick="handleDelete(<%=fb.getServiceFeedBackID()%>)"></td>
                               </tr>
                           </form> 
                                 <%}}}%>
                           </tbody>
                           </table>
-
-
-                    <!-- Footer -->
+                    </div>
                     
-                    <!-- End of Footer -->
-
                 </div>
                 <!-- End of Content Wrapper -->
 
@@ -335,8 +289,6 @@
             <!-- Page level plugins -->
             <script src="vendor/chart.js/Chart.min.js"></script>
             <!-- Page level custom scripts -->
-            <script src="js/demo/chart-area-demo.js"></script>
-            <script src="js/demo/chart-pie-demo.js"></script>
             <script>
                 function handleDelete(id){
                     if(confirm("Bạn muốn xóa phản hồi này này?")){

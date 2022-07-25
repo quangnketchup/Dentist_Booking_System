@@ -121,12 +121,12 @@
                     <div class="col-md-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <img class="img-fouild rounded w-80 mb-3"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjLE9Ylr4f4BXaJfXkLC0YGydJDZVQoxK0Dg&usqp=CAU"
+                                <img class="img-fouild rounded w-80 img-fluid"
+                                     src="images/doan.jpg"
                                      alt="Sophie">
-                                <h4 class="pt-5">Nguyễn Hữu Đoan</h4>
+                                <h4 class="pt-4">Nguyễn Hữu Đoan</h4>
                                 <h5>Software Engineer</h5>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, recusandae.</p>
+                                <p style="font-size:20px">Leader</p>
                                 <div class="d-flex flex-row justify-content-center">
                                     <div class="p-4">
                                         <a href="#">
@@ -151,12 +151,12 @@
                     <div class="col-md-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <img class="img-fouild rounded w-80 mb-3"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjLE9Ylr4f4BXaJfXkLC0YGydJDZVQoxK0Dg&usqp=CAU"
+                                <img class="img-fouild rounded w-80  img-fluid"
+                                     src="images/quang.jpg"
                                      alt="lucy">
-                                <h4 class="pt-5">Nguyễn Văn Quang</h4>
+                                <h4 class="pt-4">Nguyễn Văn Quang</h4>
                                 <h5>Software Engineer</h5>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, recusandae.</p>
+                                <p style="font-size:20px">Back-End</p>
                                 <div class="d-flex flex-row justify-content-center">
                                     <div class="p-4">
                                         <a href="#">
@@ -181,12 +181,12 @@
                     <div class="col-md-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <img class="img-fouild rounded w-80 mb-3"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjLE9Ylr4f4BXaJfXkLC0YGydJDZVQoxK0Dg&usqp=CAU"
+                                <img class="img-fouild rounded w-80 img-fluid"
+                                     src="images/tu.jpg"
                                      alt="Brad">
-                                <h4 class="pt-5">Nguyễn Đoàn Tú</h4>
+                                <h4 class="pt-4">Nguyễn Đoàn Tú</h4>
                                 <h5>Software Engineer</h5>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, recusandae.</p>
+                                <p style="font-size:20px">Front-End</p>
                                 <div class="d-flex flex-row justify-content-center">
                                     <div class="p-4">
                                         <a href="#">
@@ -211,12 +211,12 @@
                     <div class="col-md-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <img class="img-fouild rounded w-80 mb-3"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjLE9Ylr4f4BXaJfXkLC0YGydJDZVQoxK0Dg&usqp=CAU"
+                                <img class="img-fouild rounded w-80 img-fluid"
+                                     src="images/tien.jpg"
                                      alt="andres">
-                                <h4 class="pt-5">Lê Văn Tiến</h4>
+                                <h4 class="pt-4">Lê Văn Tiến</h4>
                                 <h5>Software Engineer</h5>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, recusandae.</p>
+                                <p style="font-size:20px">Back-End</p>
                                 <div class="d-flex flex-row justify-content-center">
                                     <div class="p-4">
                                         <a href="#">

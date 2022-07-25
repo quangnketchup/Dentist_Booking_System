@@ -137,12 +137,6 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
 
@@ -195,7 +189,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="index_feedback.jsp">
+                    <a class="nav-link collapsed" href="ShowFeedBackAdminController">
                         <i class="fas fa-fw fa-bell"></i>
                         <span>Đánh Giá</span>
                     </a>
@@ -285,22 +279,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+                                    
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Đăng xuất
                                     </a>
                                 </div>
                             </li>
@@ -312,7 +295,7 @@
 
                     <!-- Begin Page Content -->
 
-                    <div class="container-fluid">
+                    <div class="container">
 
                         <div class="col-md-5 offset-1">
                             <div>
@@ -320,16 +303,14 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-
-                            <div class="card-body">
+                        
                                 <%
                                     List<patients.PatientDTO> listSearchPatient = (List<PatientDTO>) request.getAttribute("SEARCH_PATIENT");
                                     if (listSearchPatient != null) {
                                         List<patients.PatientDTO> listPatient = listSearchPatient;
                                 %>
-                                <table id="table_id" class="table table-bordered table-hover text-align-center">
-                                    <thead class="bg-light align-content-center">
+                                <table id="" class="table table-striped table-hover text-align-center">
+                                    <thead class=" align-content-center">
                                         <tr>
                                             <th>Mã bệnh nhân</th>
                                             <th>Họ và tên</th>
@@ -378,10 +359,10 @@
                                 %>
 
 
-                                <table id="serviceTB" class="table table-image table-bordered table-hover text-align-center">
-                                    <thead class="bg-light align-content-center">
+                                <table id="serviceTB" class="table table-striped table-hover text-align-center">
+                                    <thead class="align-content-center">
                                         <tr>                                     
-                                            <th>Mã bệnh nhân</th>
+                                            <th style="max-width: 10px">Mã</th>
                                             <th>Họ và tên</th>
                                             <th>Gmail</th>
                                             <th>Điện thoại</th>
@@ -399,7 +380,7 @@
                                     <form action="UpdatePatientController">
                                         <tr>
 
-                                            <td><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
+                                            <td style="max-width: 60px"><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
                                             <td><input type="text" name="fullName" value="<%=patient.getFullName()%>" class="form-control-plaintext" readonly/></td>
                                             <td><input type="text" name="gmail" value="<%=patient.getGmail()%>" class="form-control-plaintext" readonly/></td>
                                             <td><input type="text" name="phone" value="0<%=patient.getPhone()%>" class="form-control-plaintext" readonly/></td>
@@ -427,19 +408,12 @@
                                         }
                                     }
                                 %> 
-                            </div>
-                        </div>
+                           
 
                     </div>
-                    <!-- /.container-fluid -->
+
 
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                
-                <!-- End of Footer -->
-
             </div>
             <!-- End of Content Wrapper -->
 

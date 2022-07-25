@@ -228,7 +228,7 @@
                 %>
                 <div class="col-md-12">
                     <div class=" card-body " style="overflow-x:auto">
-                        <table class="table table-bordered table-hover" style="width:100%">
+                        <table class="table table-bordered table-hover">
                             <thead class="bg-light">
                                 <tr>
                                     <th>Số Thứ Tự</th>

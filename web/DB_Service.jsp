@@ -195,15 +195,8 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                  
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        
-                              
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -236,14 +229,10 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
               <!-- Noi dung Page -->
-              
                <div class="container">
-                   
              <% List<ServiceDTO> listService = (List<ServiceDTO>)request.getAttribute("LIST_SERVICE_BYSV_TYPE");
                           
              %> 
@@ -323,16 +312,8 @@
                             </div>
                         </div>
                                         <%}%>
-
                     </div>
-
-                 
-          
              </div>                    
-                                
-                                
-                          
-                                
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -352,9 +333,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
     <script src="ckeditor/ckeditor.js"></script>
        <script>
              var editor = CKEDITOR.replace('description');

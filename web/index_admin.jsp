@@ -93,11 +93,6 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
 
@@ -235,18 +230,7 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+                                    
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="LououtController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -299,8 +283,7 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                            
                         </div>
                         <% int money = (int) request.getAttribute("IncomeMonthly");%>
                         <!-- Content Row -->
@@ -386,20 +369,7 @@
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Biểu đồ doanh thu</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                 aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <%
                                         ArrayList listMoneyInMonth = (ArrayList) request.getAttribute("LIST_MONEY_IN_YEAR");
@@ -462,20 +432,7 @@
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Loại dịch vụ ưa thích</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                 aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <!-- Card Body -->
                                     <%
@@ -606,15 +563,15 @@
                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                                  src="<%=listDoctor.get(i).getImage()%>" alt="...">
                                         </div>
-                                        <div class="col-lg-3 col-md-3 d-flex mb-sm-4 ftco-animate text-center">
-                                            <div class="staff">
-                                                <div class="img mb-4" style="background-image: url(<%=listDoctor.get(i).getImage()%>);"/></div>
-                                            <div class="info text-center">
-                                                <h3><a><%=listDoctor.get(i).getFullName()%></a></h3>
+                                        <div class="text-center">
+                                            <div class="">
+                                                
+                                            <div class="text-center">
+                                                <h3><%=listDoctor.get(i).getFullName()%></h3>
                                                 <span class="position"><%=listDoctor.get(i).getServiceTypeName()%></span>
                                             </div>
                                             <div class="text-center">
-                                                <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info"><strong><%=listNumberBookingDoctor.get(i)%></strong></a></button>
+                                                <button class="btn btn-outline-primary" style="border-radius: 25px"><a class=" nav-link text-info"><strong>Lượt đặt: <%=listNumberBookingDoctor.get(i)%></strong></a></button>
                                             </div>
                                         </div>
                                     </div>

@@ -234,25 +234,25 @@
                         <div clas="row-col-12">
                             <form action="UpdateServiceController" class="col-12">
                                 <div class="col-md-5 float-left">
-                                    <div>
-                                        <label class="text-primary font-weight-bold">Tên dịch vụ</label>
+                                    <div class="pb-2">
+                                        <label style="font-size:20px" class="text-primary font-weight-bold">Tên dịch vụ</label>
                                         <input name="serviceName" value="<%=service.getServiceName()%>">
                                     </div>
-                                    <div >
-                                        <label class="text-primary font-weight-bold">Trạng thái hoạt động</label>
+                                    <div class="pb-2">
+                                        <label style="font-size:20px" class="text-primary font-weight-bold">Trạng thái hoạt động</label>
                                         <select name ="status">
                                             <option selected value="<%=service.getStatus()%>"><%if (service.getStatus() == 1) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
                                             <option value="<%=Math.abs(service.getStatus() - 1)%>"><%if (service.getStatus() == 0) {%>Đang hoạt động<%} else {%>Ngưng hoạt động<%}%></option>
                                         </select>         
                                     </div>                
-                                    <div >
-                                        <label class="text-primary font-weight-bold">Giá tiền </label>
-                                        <input name="servicePrice" value="<%=service.getServicePrice()%>">VND
+                                    <div class="pb-2">
+                                        <label style="font-size:20px" class="text-primary font-weight-bold">Giá tiền </label>
+                                        <input name="servicePrice" value="<%=service.getServicePrice()%>"><label>VND</label>
                                     </div>
                                     <input type="hidden" name ="serviceID" value="<%=service.getServiceID()%>">
                                     <input type="hidden" name="serviceTypeID" value="<%=service.getServiceTypeID()%>">
-                                    <div>
-                                        <label class="text-primary font-weight-bold">AdminID Đã Chỉnh Sửa: </label>
+                                    <div class="pb-2">
+                                        <label style="font-size:20px" class="text-primary font-weight-bold">AdminID Đã Chỉnh Sửa: </label>
                                         <label><%=service.getAdminID()%></label>
                                     </div>
                                 </div>
