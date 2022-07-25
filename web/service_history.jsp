@@ -10,6 +10,7 @@
 <%@page import="java.lang.Object"%>
 <%@page import="bookingdetail.BookingDetailDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="serviceTypes.ServiceTypeDTO"%>
 <%@page import="patients.PatientDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='shortcut icon' href="images/logo-icon.png" />
     <title>DentaCare</title>
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -134,10 +136,26 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item "><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
-                        
+                        <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item "><a href="team.jsp" class="nav-link sa">Nhóm phát triển</a></li>
+                        <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <%
+                                    List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                    if (listServiceType != null) {
+                                        for (ServiceTypeDTO svType : listServiceType) {
+                                %>	
+                                <a class="dropdown-item nav-link text-primary" href="ServiceTypeHomeController?serviceTypeID=<%=svType.getServiceTypeID()%>"><%=svType.getServiceTypeName()%></a>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </div>
+                        </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
-                        <li class="nav-item active"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                         <%if (!loginPatient.equals("")) {%>
+                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+                           
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -145,6 +163,9 @@
                                 <a href="ShowProfileAccountController" class="dropdown-item nav-link text-primary text-center">Hồ sơ cá nhân</a>
                             </div>
                         </li>
+                        <%} else {%>
+                        <li class="nav-item"><a href="login.jsp" class="nav-link sa" ><span>Đăng nhập</span></a></li>
+                            <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>

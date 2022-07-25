@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel='shortcut icon' href="images/logo-icon.png" />
         <title>DentaCare</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -54,6 +55,7 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
+                        <li class="nav-item "><a href="team.jsp" class="nav-link sa">Nhóm phát triển</a></li>
                         <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%
@@ -80,7 +82,7 @@
                             </div>
                         </li>
                         <%} else {%>
-                        <li class="nav-item cta"><a href="login.jsp" class="nav-link" ><span>Đăng nhập</span></a></li>
+                        <li class="nav-item"><a href="login.jsp" class="nav-link sa" ><span>Đăng nhập</span></a></li>
                             <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 

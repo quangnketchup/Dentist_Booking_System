@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='shortcut icon' href="images/logo-icon.png" />
         <title>DentaCare</title>
 
         <!-- Google Font: Source Sans Pro -->

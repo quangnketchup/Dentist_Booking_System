@@ -19,6 +19,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel='shortcut icon' href="images/logo-icon.png" />
         <meta charset="utf-8">
         <title>Booking Page</title>
         <link rel="stylesheet" href="css/booking.css">
