@@ -55,7 +55,7 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"><a href="HomeController" class="nav-link sa">Trang chủ</a></li>
-                        <li class="nav-item "><a href="team.jsp" class="nav-link sa">Nhóm phát triển</a></li>
+                        <li class="nav-item "><a href="ShowTeamController" class="nav-link sa">Nhóm phát triển</a></li>
                         <li class="nav-item dropdown"><a href="MainController?action=Load" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dịch vụ</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <%

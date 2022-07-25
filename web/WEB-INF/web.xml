@@ -252,6 +252,10 @@
         <servlet-name>ScheduleDoctorMonthCurrentController</servlet-name>
         <servlet-class>controller.admins.ScheduleDoctorMonthCurrentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowTeamController</servlet-name>
+        <servlet-class>controller.team.ShowTeamController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -503,6 +507,10 @@
     <servlet-mapping>
         <servlet-name>ScheduleDoctorMonthCurrentController</servlet-name>
         <url-pattern>/ScheduleDoctorMonthCurrentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowTeamController</servlet-name>
+        <url-pattern>/ShowTeamController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
