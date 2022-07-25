@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import serviceImage.ServiceImageDAO;
 import serviceImage.ServiceImageDTO;
+import serviceTypes.ServiceTypeDAO;
+import serviceTypes.ServiceTypeDTO;
 import services.ServiceDAO;
 import services.ServiceDTO;
 
@@ -43,11 +45,16 @@ public class DetailServiceAdminController extends HttpServlet {
         try {
             int serviceID = Integer.parseInt(request.getParameter("serviceID"));
             ServiceDAO serviceDao = new ServiceDAO();
+            
+            ServiceTypeDAO ServiceTypeDAO = new ServiceTypeDAO();
+            List<ServiceTypeDTO> listServiceType = ServiceTypeDAO.getListServiceType();
+            
             ServiceImageDAO serviceImageDao = new ServiceImageDAO();
             List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) serviceImageDao.getAllListServiceImage();          
             ServiceDTO service=serviceDao.getServiceById(serviceID);
             request.setAttribute("LIST_SERVICE_IMAGE", listServiceImage);
             request.setAttribute("SERVICE_INFOR", service);
+            request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;
