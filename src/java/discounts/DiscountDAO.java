@@ -73,7 +73,7 @@ public class DiscountDAO {
                     int status = 1;
                     int adminID = rs.getInt("adminID");
                     int serviceID = rs.getInt("serviceID");
-                    ds= new DiscountDTO(discountID, title, description, percentDiscount, status,  createDate, expiredDate,adminID);
+                    ds= new DiscountDTO(discountID, title, description, percentDiscount, status,  createDate, expiredDate,adminID,serviceID);
                 }
             }
             

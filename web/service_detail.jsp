@@ -68,9 +68,9 @@
                             </div>
                         </li>
                         <li class="nav-item"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
-                        
-                            <%if (!loginPatient.equals("")) {%>
-                            <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
+
+                        <%if (!loginPatient.equals("")) {%>
+                        <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -104,141 +104,155 @@
         </section>
 
         <section class="ftco-section">
-            
-                <div class="container">
-                    <div class="heading-section">
-                        <h2>Chi Tiết Dịch Vụ</h2>
-                    </div>
-                    <div class="row">
-                        <%
-                            ServiceDTO service = (ServiceDTO) request.getAttribute("SERVICE_DETAIL_BY_ID");
-                        %>
-                        <div class="col-md-6">
-                            <div id="slider" class="owl-carousel product-slider">
-                                <%
-                                    List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("SERVICE_IMAGE_BY_ID");
-                                    for (ServiceImageDTO Image : listServiceImage) {
-                                %>
-                                <div class="item">
-                                    <img style="height: 300px; width: 540px" src="<%=Image.getImage()%>" />
-                                </div>
-                                <%
-                                    }%>
-                            </div>
-                            <div id="thumb" class="owl-carousel product-thumb">
-                                <%
-                                    for (ServiceImageDTO Image : listServiceImage) {
-                                %>
-                                <div class="item">
-                                    <img  src="<%=Image.getImage()%>" />
-                                </div>
-                                <%}%>
-                            </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="product-dtl ml-5">
-                                <div class="product-info">
-                                    <h1 class="animate-charcter" style="font-size: 30px"><%=service.getServiceName()%></h1>
-                                    <!--lay ratestar cua feedback-->
-                                    <div class="reviews-counter">
+            <div class="container">
+                <div class="heading-section">
+                    <h2>Chi Tiết Dịch Vụ</h2>
+                </div>
+                <div class="row">
+                    <%
+                        ServiceDTO service = (ServiceDTO) request.getAttribute("SERVICE_DETAIL_BY_ID");
+                    %>
+                    <div class="col-md-6">
+                        <div id="slider" class="owl-carousel product-slider">
+                            <%
+                                List<ServiceImageDTO> listServiceImage = (List<ServiceImageDTO>) request.getAttribute("SERVICE_IMAGE_BY_ID");
+                                if (!listServiceImage.equals("")) {
+                                    for (ServiceImageDTO Image : listServiceImage) {
+                            %>
+                            <div class="item">
+                                <img style="height: 300px; width: 540px" src="<%=Image.getImage()%>" />
+                            </div>
+                            <%
+                                }
+                            } else {%>
+                            <div class="item">
+                                <h2>Không có ảnh nào cả</h2>
+                            </div>
+                            <%}%>
+                        </div>
+                        <div id="thumb" class="owl-carousel product-thumb">
+                            <%
+                                for (ServiceImageDTO Image : listServiceImage) {
+                            %>
+                            <div class="item">
+                                <img  src="<%=Image.getImage()%>" />
+                            </div>
+                            <%}%>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="product-dtl ml-5">
+                            <div class="product-info">
+                                <h1 class="animate-charcter" style="font-size: 30px"><%=service.getServiceName()%></h1>
+                                <!--lay ratestar cua feedback-->
+                                <div class="reviews-counter">
+                                    <div class="rate">
                                         <div class="rate">
-                                            <div class="rate">
-                                                <%  int average = 0;
-                                                    int count = 0;
-                                                    List<FeedbackDTO> ListfeedbackService = (List<FeedbackDTO>) request.getAttribute("SERVICE_FEEDBACK_BY_ID");
-                                                    String check1;
+                                            <%  int average = 0;
+                                                int count = 0;
+                                                List<FeedbackDTO> ListfeedbackService = (List<FeedbackDTO>) request.getAttribute("SERVICE_FEEDBACK_BY_ID");
+                                                String check1;
+                                                if (ListfeedbackService.get(0).getServiceID() == service.getServiceID()) {
                                                     for (FeedbackDTO feedback : ListfeedbackService) {
                                                         average += feedback.getRateStar();
                                                         count++;
                                                     }
                                                     average = average / count;
-                                                %>
-                                                <input type="radio" id="star5" name="rate" value="5" <%if(average==5){%>checked=""<%}%>/>
-                                                <label for="star5" title="text">5 stars</label>
-                                                <input type="radio" id="star4" name="rate" value="4" <%if(average==4){%>checked=""<%}%>/>
-                                                <label for="star4" title="text">4 stars</label>
-                                                <input type="radio" id="star3" name="rate" value="3" <%if(average==3){%>checked=""<%}%>/>
-                                                <label for="star3" title="text">3 stars</label>
-                                                <input type="radio" id="star2" name="rate" value="2" <%if(average==2){%>checked=""<%}%>/>
-                                                <label for="star2" title="text">2 stars</label>
-                                                <input type="radio" id="star1" name="rate" value="1" <%if(average==1){%>checked=""<%}%>/>
-                                                <label for="star1" title="text">1 star</label>
-                                            </div>
-                                        </div>
-                                        <%if (ListfeedbackService.size() != 0) {%>
-                                        <span><%=ListfeedbackService.size()%> reviewer</span>
-                                        <%} else { %>
-                                        <span>0 reviewer</span>
-                                        <%}%>
-                                    </div>
-                                    <%
-                                        int discountOfService = (int) request.getAttribute("DISCOUNT_OF_SERVICE");
-                                        DiscountDTO discount = (DiscountDTO) request.getAttribute("DISCOUNT_BY_ID");
-                                        if (discount.getDiscountID() > 0) {
-                                    %>              
-                                    <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-                                    <div class="product-price-discount"><span class="line-through"><%=formatter.format(service.getServicePrice())%> VND</span></div>
-                                    <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(discountOfService)%>VND</span></div>
-                                    <p style="font-size:20px;font-weight: bolder"><%=discount.getDescription()%></p>
-                                    <div class="row col-12 pl-0">
-                                        <div class="col-md-6">
-                                            <p style="font-size:18px;font-weight: 200">Từ Ngày: <%=discount.getCreateDate()%></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p style="font-size:18px;font-weight: 200">Đến Ngày: <%=discount.getExpiredDate()%></p>
+                                                }
+                                                if (average > 0) {
+                                            %>
+                                            <input type="radio" id="star5" name="rate" value="5" <%if (average == 5) {%>checked=""<%}%>/>
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" <%if (average == 4) {%>checked=""<%}%>/>
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" <%if (average == 3) {%>checked=""<%}%>/>
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" <%if (average == 2) {%>checked=""<%}%>/>
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="    star1" name="rate" value="1" <%if (average == 1) {%>checked=""<%}%>/>
+                                            <label for="star1" title="text">1 star</label>
+                                            <%} else {%>
+                                            <label>0 đánh giá</label>
+                                            <%}%>
                                         </div>
                                     </div>
-                                    
-                                    
-                                </div>
-                                <%} else {%>
-                                <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
-                                <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(service.getServicePrice())%>VND</span></div>
 
+                                </div>
+                                <%if (ListfeedbackService.get(0).getServiceID() == service.getServiceID()) {%>
+                                <span><%=ListfeedbackService.size()%> reviewer</span>
+                                <%} else { %>
+                                <span>0 reviewer</span>
+                                <%}%>
+                                <%
+                                    int discountOfService = (int) request.getAttribute("DISCOUNT_OF_SERVICE");
+                                    DiscountDTO discount = (DiscountDTO) request.getAttribute("DISCOUNT_BY_ID");
+                                    if (discount.getServiceID() != service.getServiceID()) {%>
+                                <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                <div class="product-price-discount"><span class="line-through"><%=formatter.format(service.getServicePrice())%> VND</span></div>
+                                <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(service.getServicePrice())%>VND</span></div>
+                                <p style="font-size:20px;font-weight: bolder">Nhanh tay đặt </p>
+                                <div class="row col-12 pl-0">
+                                </div>
+                                <%} else if (discount.getServiceID() == service.getServiceID()) {
+                                %>              
+                                <%DecimalFormat formatter = new DecimalFormat("###,###,###");%>
+                                <div class="product-price-discount"><span class="line-through"><%=formatter.format(service.getServicePrice())%> VND</span></div>
+                                <div class="product-price-discount"><span>Giá Dịch Vụ:  <%=formatter.format(discountOfService)%>VND</span></div>
+                                <p style="font-size:20px;font-weight: bolder"><%=discount.getDescription()%></p>
+                                <div class="row col-12 pl-0">
+                                    <div class="col-md-6">
+                                        <p style="font-size:18px;font-weight: 200">Từ Ngày: <%=discount.getCreateDate()%></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p style="font-size:18px;font-weight: 200">Đến Ngày: <%=discount.getExpiredDate()%></p>
+                                    </div>
+                                </div>
                                 <%}%>
                             </div>
                         </div>
                     </div>
-                    <div class="product-info-tabs">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">MÔ TẢ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">ĐÁNH GIÁ (<%=count-1%>)</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                <%=service.getDescription()%>
-                            </div>
-                            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                                <div class="review-heading">ĐÁNH GIÁ DỊCH VỤ</div>
-                                <%  
-                                    for (FeedbackDTO feedbackService : ListfeedbackService) {
-                                        if (ListfeedbackService.isEmpty()) {
-                                %>
-                                <div><h3>Không có bình luận nào cả</h3></div>
-                            </div>
-                            <%}else if(feedbackService.getStatus()==1) {%>
-                            <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
-                                <div class="form-group col-md-4 border-primary">
-                                    <div >
-                                        <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=feedbackService.getPatientName()%></strong>
-                                            <h6 style="color: gray;align-content: center;text-align: center">(<%=feedbackService.getDateFeedback()%>)</h6></label>
-
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8 border-primary">
-                                    <label for="user-feedback"><%=feedbackService.getContent()%></label>
-                                </div>
-                            </div>
-                            <%}
-                                }%>
+                </div>
+                <div class="product-info-tabs">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">MÔ TẢ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">ĐÁNH GIÁ (<%=count%>)</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <%=service.getDescription()%>
                         </div>
+                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                            <div class="review-heading">ĐÁNH GIÁ DỊCH VỤ</div>
+                            <%
+                                for (FeedbackDTO feedbackService : ListfeedbackService) {
+                                    if (feedbackService.getServiceID() != service.getServiceID()) {
+                            %>
+                            <div><h3>Không có bình luận nào cả</h3></div>
+                        </div>
+                        <%} else if (feedbackService.getStatus() == 1) {%>
+                        <div class="row" style="overflow-y: scroll; max-height:150px; padding-top: 10px">
+                            <div class="form-group col-md-4 border-primary">
+                                <div >
+                                    <label for="user-name-feedback" style="color: #40407a;align-content: center;text-align: center"><strong><%=feedbackService.getPatientName()%></strong>
+                                        <h6 style="color: gray;align-content: center;text-align: center">(<%=feedbackService.getDateFeedback()%>)</h6></label>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-8 border-primary">
+                                <label for="user-feedback"><%=feedbackService.getContent()%></label>
+                            </div>
+                        </div>
+                        <%}
+                            }%>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 
