@@ -546,10 +546,10 @@
                         <div class="ftco-footer-widget mb-4 ml-md-5">
                             <h2 class="ftco-heading-2">Quick Links</h2>
                             <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Thông Tin</a></li>
-                                <li><a href="#" class="py-2 d-block">Dịch Vụ</a></li>
-                                <li><a href="#" class="py-2 d-block">Bác Sĩ</a></li>
-                                <li><a href="#" class="py-2 d-block">Liên Hệ</a></li>
+                                <li><a href="HomeController" class="py-2 d-block">Thông Tin</a></li>
+                                <li><a href="LoadController" class="py-2 d-block">Dịch Vụ</a></li>
+                                <li><a href="LoadDoctorController" class="py-2 d-block">Bác Sĩ</a></li>
+                                <li><a href="ShowTeamController" class="py-2 d-block">Liên Hệ</a></li>
                             </ul>
                         </div>
                     </div>

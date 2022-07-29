@@ -39,12 +39,11 @@
     <body>
         <%
             String loginPatient = "";
-            ArrayList login= (ArrayList) session.getAttribute("LOGIN_USER");
-            if(login!=null) {
+            ArrayList login = (ArrayList) session.getAttribute("LOGIN_USER");
+            if (login != null) {
                 loginPatient = ((PatientDTO) session.getAttribute("LOGIN_PATIENT")).getFullName();
-            }
-            else{
-            String loginDefault = (String) session.getAttribute("LOGIN_DEFAULT");
+            } else {
+                String loginDefault = (String) session.getAttribute("LOGIN_DEFAULT");
             }
         %>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -73,8 +72,8 @@
                             </div>
                         </li>
                         <li class="nav-item active"><a href="LoadDoctorController" class="nav-link sa">Bác sĩ</a></li>
-                        
-                        <%if(!loginPatient.equals("")){%>
+
+                        <%if (!loginPatient.equals("")) {%>
                         <li class="nav-item"><a href="ShowBookingPatientController" class="nav-link sa">Lịch sử lịch đặt</a></li>
                         <li class="nav-item dropdown"><a href="LogoutController" id="navbarDropdown" role="button" data-toggle="dropdown"
                                                          aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><%=loginPatient%></a>
@@ -85,7 +84,7 @@
                         </li>
                         <%} else {%>
                         <li class="nav-item "><a href="LoginController" class="nav-link sa" ><span>Đăng nhập</span></a></li>
-                        <%}%>
+                            <%}%>
                         <li class="nav-item "><a href="ShowBookingController" class="nav-link sa" ><span>Đặt lịch khám</span></a></li>
 
                     </ul>
@@ -206,7 +205,7 @@
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">
             <div class="row mb-5">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">DentaCare</h2>
                         <p>Nha Khoa DentalCare cung cấp đầy đủ các loại hình điều trị như: Tổng quát, Phục hình răng sứ, Cấy ghép implant, Chỉnh nha - niềng răng, Thẩm mỹ nướu.</p>
@@ -217,53 +216,26 @@
                         <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
                     </ul>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="ftco-footer-widget mb-4 ml-md-5">
                         <h2 class="ftco-heading-2">Quick Links</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Thông tin</a></li>
-                            <li><a href="#" class="py-2 d-block">Tính năng</a></li>
-                            <li><a href="#" class="py-2 d-block">Dự án</a></li>
-                            <li><a href="#" class="py-2 d-block">Blog</a></li>
-                            <li><a href="#" class="py-2 d-block">Liên hệ</a></li>
+                            <li><a href="HomeController" class="py-2 d-block">Thông Tin</a></li>
+                            <li><a href="LoadController" class="py-2 d-block">Dịch Vụ</a></li>
+                            <li><a href="LoadDoctorController" class="py-2 d-block">Bác Sĩ</a></li>
+                            <li><a href="ShowTeamController" class="py-2 d-block">Liên Hệ</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4 pr-md-4">
+
+                <div class="col-md-4">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Blog gần đây</h2>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Office</h2>
+                        <h2 class="ftco-heading-2">Thông Tin Cơ Sở Phòng Tư</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text">Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">0393626592</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">dentacare.noti@gmail.com</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -271,8 +243,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-
-                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </a></p>
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> DentaCare </a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
             </div>
         </div>
@@ -325,7 +298,7 @@
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
     <!-- Modal -->
-    
+
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
