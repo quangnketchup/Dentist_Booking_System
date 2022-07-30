@@ -29,7 +29,6 @@ public class RegisterUserController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
             String url = ERROR;
             PatientError patientError = new PatientError();
             try {
@@ -45,8 +44,8 @@ public class RegisterUserController extends HttpServlet {
                 
                 boolean checkValidation = true;
 
-                if (fullName.length() < 5 || fullName.length() > 20) {
-                    patientError.setFullNameError("Họ và tên phải từ [5 20]");
+                if (fullName.length() < 5 || fullName.length() > 40) {
+                    patientError.setFullNameError("Họ và tên phải trên 5 kí tự");
                     checkValidation = false;
                 }
                 if (gmail.trim().length() == 0) {
@@ -57,6 +56,13 @@ public class RegisterUserController extends HttpServlet {
                     patientError.setConfirmError("Hai mật khẩu không giống nhau");
                     checkValidation = false;
                 }
+                
+                if (password.length() < 5 || password.length() > 40) {
+                    patientError.setPasswordError("Mật khẩu phải từ 5 đến 20 kí tự");
+                    checkValidation = false;
+                }
+                
+                
                 PatientDAO dao = new PatientDAO();
                 PatientDTO patient = new PatientDTO(1, fullName, password, "PA", gmail, phone, address, gender, status);
                 if (checkValidation) {
@@ -74,7 +80,6 @@ public class RegisterUserController extends HttpServlet {
             } finally {
                 request.getRequestDispatcher(url).forward(request, response);
             }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

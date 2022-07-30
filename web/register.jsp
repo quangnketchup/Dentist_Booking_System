@@ -1,5 +1,5 @@
 <%@page import="patients.PatientError"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +35,7 @@
                             patientError = new PatientError();
                         }
                     %>
-                    <form action="MainController" method="POST">
+                    <form action="RegisterUserController" method="POST">
                         <div class="input-group mb-3">
                             <input name ="fullName" type="text" class="form-control" placeholder="Họ và tên">                           
                         </div>
@@ -46,7 +46,8 @@
                         <%=patientError.getGmailError()%>
                         <div class="input-group mb-3">
                             <input name = "password" type="password" class="form-control" placeholder="Mật khẩu">                          
-                        </div>                      
+                        </div>
+                        <%=patientError.getPasswordError()%>
                         <div class="input-group mb-3">
                             <input name ="confirmpassword" type="password" class="form-control" placeholder="Nhập lại mật khẩu">                            
                         </div>
