@@ -15,7 +15,7 @@ public class DiscountDAO {
 " FROM tblDiscounts d, tblServices s, tblServiceImages si \n" +
 " WHERE s.serviceID = si.serviceImageID AND s.serviceID = d.serviceID";
     private static final String SEARCH_DISCOUNT_BY_TITLE = "SELECT discountID, title, description, percentDiscount, status, createDate, expiredDate, adminID, serviceID FROM tblDiscounts WHERE title like ?";
-    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?, description=?, title=?" 
+    private static final String UPDATE_DISCOUNT = "UPDATE tblDiscounts SET percentDiscount =?, status =?, description=?, title=?, createDate=? , expiredDate=?" 
                         + " WHERE discountID =? ";
     private static final String GET_DISCOUNT_BY_SERVICE_ID= "select * from tblDiscounts WHERE expiredDate> GETDate() AND status =1 AND serviceID =?";
     private static final String CREATE_DISCOUNT = "INSERT tblDiscounts ([title], [description], [percentDiscount], [status], [createDate], [expiredDate], [adminID], [serviceID]) VALUES (?,?,?,?,?,?,?,?)";
@@ -258,7 +258,9 @@ public class DiscountDAO {
                 pstm.setInt(2, discount.getStatus());
                 pstm.setString(3, discount.getDescription());
                 pstm.setString(4, discount.getTitle());
-                pstm.setInt(5, discount.getDiscountID());
+                pstm.setString(5, discount.getCreateDate());
+                pstm.setString(6, discount.getExpiredDate());
+                pstm.setInt(7, discount.getDiscountID());
                 check = pstm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

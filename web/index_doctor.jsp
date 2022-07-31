@@ -180,7 +180,10 @@
                         </button>
 
 
-
+                        <!-- dau cộng để thêm admin-->
+                                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
+                                    <i class="fa fa-plus"></i>
+                                </button>
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <%            String search = request.getParameter("fullName");
@@ -196,6 +199,7 @@
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
+                            
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -219,7 +223,59 @@
 
                     </nav>
                     <!-- End of Topbar -->
+                    
+                    <!-- modal them admin-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#2f89fc">Thông tin bác sĩ </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="AddDoctorController" method="GET">
+                                        <div class="modal-body">
+                                            <div class="register-box">
+                                                <div class="input-group mb-3">
+                                                    <input name="fullName" type="text" class="form-control" placeholder="Tên admin">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="gmail" type="text" class="form-control" placeholder="Email" >
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input name="password" type="password" class="form-control" placeholder="Mật khẩu" required="">
+                                                </div>  
+                                                <div class="input-group mb-3">
+                                                    <label for="gender" value="">Giới tính</label>
+                                                        <select name="gender" class="ml-2">
+                                                            <option value="Nam">Nam</option>
+                                                            <option value="Nữ">Nữ</option>                              
+                                                        </select>
+                                                </div>  
+                                                <div class="input-group mb-3">
+                                                    <input name="phone" type="text" class="form-control" placeholder="Phone" required="">
+                                                </div>  
+                                                <div class="input-group mb-3">
+                                                    <textarea name="achievement" id="achievement" class="form-control"></textarea>
+                                                </div> 
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="image" class="mt-5 btn btn-primary" />
+                                                </div>  
+                                                
+                                            </div>
+                                        </div><!-- /.card -->
 
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" name="action"  value="Add " class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
                     <!-- Begin Page Content -->
                     <% List<DoctorDTO> listDoctor = (List<DoctorDTO>) request.getAttribute("LIST_DOCTOR");
                         List<DoctorDTO> listSearch = (List<DoctorDTO>) request.getAttribute("SEARCH_DOCTOR");
@@ -305,7 +361,19 @@
                 </div>
             </div>
         </div>
-
+                        <script src="ckeditor/ckeditor.js"></script>
+       <script>
+            
+            var editor = CKEDITOR.replace('achievement');
+            CKFinder.setupCKEditor(editor, 'ckfinder/');
+            data["achievement"] = editor.getData();
+            CKEDITOR.editorConfig = function( config ) {
+    config.removePlugins = 'elementspath,save,font';
+    };
+            CKEDITOR.replace( 'editor', {
+            extraPlugins: 'testplugin'
+                } );
+        </script>    
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

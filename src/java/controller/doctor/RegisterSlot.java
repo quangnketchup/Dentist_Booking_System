@@ -54,6 +54,7 @@ public class RegisterSlot extends HttpServlet {
                     url=TRUE;
                        request.setAttribute("ADD_SLOT_SUCCES", "Đã đăng ký thành công");
                 }
+                url=TRUE;
             }
             
             

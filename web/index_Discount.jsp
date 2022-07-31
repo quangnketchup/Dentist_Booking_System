@@ -379,7 +379,29 @@
                                 </div>
                             </div>
                         </div>
+                            <!<!-- Toast thông báo đặt lịch thành công -->
 
+                    <%
+                        String msg1 = (String) request.getAttribute("SSMSG");
+                        if (msg1 == null) {
+                            msg1 = "";
+                        } else {
+                    %>
+
+                    <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header1">
+                            <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body1">
+                            <%=msg1%>
+                        </div>
+                    </div>
+
+                    <%}%>                                 
                         <div class="col-md-5 offset-1">
                             <div>
                                 <h3 class="text-primary">Quản lí khuyến mãi:</h3>
@@ -558,6 +580,7 @@
             <!-- loader Modal doctor-->
             <%
                 int count = 0;
+                int svType = (int) request.getAttribute("svType");
                 List<DiscountDTO> listDiscoutDTO = (List<DiscountDTO>) request.getAttribute("LIST_DISCOUNT");
                 if (listDiscoutDTO != null) {
                     for (DiscountDTO discount : listDiscoutDTO) {
@@ -589,6 +612,7 @@
                                     </div>
                                     <div class="col-md-7 ">
                                         <div class="text-primary">
+                                            <input type="hidden" name="serviceTypeID" value="<%=svType%>">
                                             <label>Description: <input type="text" name="description" value="<%=discount.getDescription()%>"/></label>
                                             <input type="hidden" name="discountID" value="<%=discount.getDiscountID()%>" readonly="">
                                             <label>Dịch vụ: <input type="text" name="title" value="<%=discount.getTitle()%>"/></label>
@@ -647,12 +671,15 @@
         <!-- Page level custom scripts -->
         <script src="js/demo/chart-area-demo.js"></script>
         <script src="js/demo/chart-pie-demo.js"></script>
-        <script>
+       
 
-                                                    function toastClose() {
-                                                        var toast1 = document.getElementById("toast-msg");
-                                                        toast1.style.display = "none";
-                                                    }
+                                                   
+                                                    <script>
+             function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
+       
         </script>
     </body>
 

@@ -71,9 +71,11 @@ public class CancelSlotDoctorController extends HttpServlet {
             PatientDTO pa=paDAO.getPatientByPatientID(bk.getPatientID());
             boolean check2=bkDAO.cancelBooking(sche.getScheduleID());
             if(check2){
+                 request.setAttribute("doctorID", doctorID);
+            url=SUCCESS;
                  final String fromEmail = "dentacare.noti@gmail.com";
         // Mat khai email cua ban
-        final String password = "asjvfvbgcycolnct";
+        final String password = "jfhtyhsviyufjhvr";
         // dia chi email nguoi nhan
         //format gio 
          String gio="";
@@ -127,8 +129,7 @@ public class CancelSlotDoctorController extends HttpServlet {
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
         Transport.send(msg);
             }
-            request.setAttribute("doctorID", doctorID);
-            url=SUCCESS;
+           
         } catch (Exception e) {
             url = ERROR;
             log("Error at ServiceController");

@@ -51,7 +51,6 @@ public class AddDoctorController extends HttpServlet {
             int status = 1;
             String password=request.getParameter("password");
             String gender = request.getParameter("gender");
-            int workDayID = Integer.parseInt(request.getParameter("workDayID"));
             int phone =Integer.parseInt(request.getParameter("phone"));
             String achievement=request.getParameter("achievement");
             String image=request.getParameter("image");
@@ -68,6 +67,12 @@ public class AddDoctorController extends HttpServlet {
             DoctorDAO dao = new DoctorDAO();
             ServiceTypeDAO svDao = new ServiceTypeDAO();
             List<ServiceTypeDTO> listSV = svDao.getListServiceType();
+            int sothutu=0;
+            for(ServiceTypeDTO svT:listSV){
+                if(svT.getServiceTypeName()==serviceTypeName)
+                    sothutu=svT.getServiceTypeID();
+            }
+            serviceTypeName=String.valueOf(sothutu);
             DoctorDTO doctor = new DoctorDTO(1, serviceTypeName, fullName, password, "DR", gender,email, phone,image, 1, achievement);
             
             if (check) {

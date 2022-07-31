@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UpdateDiscountController extends HttpServlet {
 
-    public static final String ERROR = "LoginController";
-    public static final String SUCCESS = "LoadAdminController";
+    public static final String ERROR = "LoadAdminController";
+    public static final String SUCCESS = "LoadDiscountController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +29,7 @@ public class UpdateDiscountController extends HttpServlet {
         String url = ERROR;
         DiscountError discountError = new DiscountError();
         try {
+            int svType= Integer.parseInt(request.getParameter("serviceTypeID"));
             int discountID = Integer.parseInt(request.getParameter("discountID"));
             String title = request.getParameter("title");
             String description = request.getParameter("description");
@@ -56,6 +57,7 @@ public class UpdateDiscountController extends HttpServlet {
                 boolean checkUpdate = dao.updateDiscount(discount);
                 if (checkUpdate) {
                     url = SUCCESS;
+                    request.setAttribute("serviceTypeID", svType);
                     request.setAttribute("SSMSG", "Chỉnh sữa thành công !");
                 }
             } else {
