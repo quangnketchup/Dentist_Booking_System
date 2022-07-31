@@ -77,7 +77,7 @@
                             </div>
                         </li>
                         <%} else {%>
-                        <li class="nav-item"><a href="LoginController" class="nav-link sa" ><span>Đăng nhập</span></a></li>
+                        <li class="nav-item"><a href="login.jsp" class="nav-link sa" ><span>Đăng nhập</span></a></li>
                             <%}%>
                         <li class="nav-item cta"><a href="ShowBookingController" class="nav-link" ><span>Đặt lịch khám</span></a></li>
 

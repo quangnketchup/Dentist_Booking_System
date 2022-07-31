@@ -83,7 +83,7 @@
                             </div>
                         </li>
                         <%} else {%>
-                        <li class="nav-item "><a href="LoginController" class="nav-link sa" ><span>Đăng nhập</span></a></li>
+                        <li class="nav-item "><a href="login.jsp" class="nav-link sa" ><span>Đăng nhập</span></a></li>
                             <%}%>
                         <li class="nav-item "><a href="ShowBookingController" class="nav-link sa" ><span>Đặt lịch khám</span></a></li>
 

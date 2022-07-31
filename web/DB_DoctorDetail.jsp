@@ -15,7 +15,7 @@
 <html lang="en">
 
     <head>
-        
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,11 +27,11 @@
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+              rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        
+
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/DB_DoctorDetail.css" rel="stylesheet">
@@ -82,9 +82,9 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Các Loại Dịch Vụ</h6>
                             <%
-                                 List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
-                                    if (listServiceType != null) {
-                                        for (ServiceTypeDTO svType : listServiceType) {
+                                List<ServiceTypeDTO> listServiceType = (List<ServiceTypeDTO>) request.getAttribute("LIST_SERVICE_BY_SVTYPE");
+                                if (listServiceType != null) {
+                                    for (ServiceTypeDTO svType : listServiceType) {
                             %>
 
                             <div class="row service-item">
@@ -191,8 +191,6 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-                           
-
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -206,20 +204,9 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="LogoutController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -243,153 +230,152 @@
                                     <%=doctor.getFullName()%>
                                 </div>
                                 <div type="hidden" class="a" id="doctorID"><%=doctor.getDoctorID()%></div>
-                                
+
                                 <div class="">
                                     <%=doctor.getServiceTypeName()%>
                                 </div>
                                 <select id="status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                            <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Đang làm việc<%} else {%>Đã nghỉ việc<%}%></option>
-                                            <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghỉ việc<%} else {%>Đang làm việc<%}%></option>
-                                        </select>
+                                    <option selected value="<%=doctor.getStatus()%>"><%if (doctor.getStatus() == 1) {%>Đang làm việc<%} else {%>Đã nghỉ việc<%}%></option>
+                                    <option value="<%=Math.abs(doctor.getStatus() - 1)%>"><%if (doctor.getStatus() == 1) {%>Đã nghỉ việc<%} else {%>Đang làm việc<%}%></option>
+                                </select>
                             </div>
-                                        <input type="hidden" name="doctorID" value="<%=doctor.getDoctorID()%>">
-                                        <input type="hidden" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>">
-                                        <input type="hidden" name="fullName" value="<%=doctor.getFullName()%>">
-                                        <input type="hidden" name="gmail" value="<%=doctor.getGmail()%>">
-                                        <input type="hidden" name="image" value="<%=doctor.getImage()%>">
-                                        <input type="hidden" name="gender" value="<%=doctor.getGender()%>">
+                            <input type="hidden" name="doctorID" value="<%=doctor.getDoctorID()%>">
+                            <input type="hidden" name="serviceTypeName" value="<%=doctor.getServiceTypeName()%>">
+                            <input type="hidden" name="fullName" value="<%=doctor.getFullName()%>">
+                            <input type="hidden" name="gmail" value="<%=doctor.getGmail()%>">
+                            <input type="hidden" name="image" value="<%=doctor.getImage()%>">
+                            <input type="hidden" name="gender" value="<%=doctor.getGender()%>">
                             <div class="col-md-6 float-md-right">
                                 <div class="p-2" >
-                          <label>Thành Tựu :</label>
-                          <textarea class="form-control" name="achievement" cols="6" rows="6" id="description"> <%=doctor.getAchievement()%></textarea>
+                                    <label>Thành Tựu :</label>
+                                    <textarea class="form-control" name="achievement" cols="6" rows="6" id="description"> <%=doctor.getAchievement()%></textarea>
                                 </div>
                                 <input type="submit" value="Chỉnh sửa">
                             </div>
                         </form>
                     </div>
-                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthBeforeController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng trước của bác sĩ <%=doctor.getFullName()%></a></div>
-                          <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthCurrentController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng này của bác sĩ <%=doctor.getFullName()%></a></div>
-                                <div class="text-center" style="margin-top: 15px">Lịch làm việc của bác sĩ</div>
-                                <!-- Hien lich cua bac si -->
-                                
-                                
-                                 <%List<scheduleDTO> listScheduleDTO = (List<scheduleDTO>)request.getAttribute("listScheduleDTO");%>
-                                  <!-- Get schedule of doctor -->
+                    <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthBeforeController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng trước của bác sĩ <%=doctor.getFullName()%></a></div>
+                    <div class="text-center" style="margin-top: 15px"><a style="color: orange" href="ScheduleDoctorMonthCurrentController?doctorID=<%=doctor.getDoctorID()%>">Lịch làm việc tháng này của bác sĩ <%=doctor.getFullName()%></a></div>
+                    <div class="text-center" style="margin-top: 15px">Lịch làm việc của bác sĩ</div>
+                    <!-- Hien lich cua bac si -->
+
+
+                    <%List<scheduleDTO> listScheduleDTO = (List<scheduleDTO>) request.getAttribute("listScheduleDTO");%>
+                    <!-- Get schedule of doctor -->
                     <div class="schedule-doctor none">
                         <%
-                        int dem =0;
-                        for(scheduleDTO schedule : listScheduleDTO){
-                        if(schedule.getStatus()==1){
-                            dem++;
-                           %>
-                           <div id="schedule-day<%=dem%>"><%=schedule.getDay()%></div>       
-                            <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%></div>     
-                        <% 
-                            }}
+                            int dem = 0;
+                            for (scheduleDTO schedule : listScheduleDTO) {
+                                if (schedule.getStatus() == 1) {
+                                    dem++;
                         %>
-                        
+                        <div id="schedule-day<%=dem%>"><%=schedule.getDay()%></div>       
+                        <div id="schedule-slot<%=dem%>"><%=schedule.getSlot()%></div>     
+                        <%
+                                }
+                            }
+                        %>
+
                         <div id="size-schedule"><%=dem%></div>
                     </div>
-                    
-                     <%       List<scheduleDTO> listBookingDetail = (List<scheduleDTO>) request.getAttribute("listBookingDetail");
 
-                %>
-                <div class="combo-booked none " >
-                        <%
+                    <%       List<scheduleDTO> listBookingDetail = (List<scheduleDTO>) request.getAttribute("listBookingDetail");
 
-                            int lam = 0;
+                    %>
+                    <div class="combo-booked none " >
+                        <%                            int lam = 0;
                             for (scheduleDTO BookingDetail : listBookingDetail) {
-                                lam++;                             
+                                lam++;
                         %>
 
                         <div id="booked-day<%=lam%>"><%=BookingDetail.getDay()%></div>    
-                         <div id="booked-slot<%=lam%>"><%=BookingDetail.getSlot()%></div>    
+                        <div id="booked-slot<%=lam%>"><%=BookingDetail.getSlot()%></div>    
                         <%
                             }
                         %>
                         <div id="size-booked"><%=lam%></div>
                     </div> 
-                    
-                                <!-- Modal -->
-                                <div id="f"></div>
-                        <div class="table-wrapper">
-                            <table class="fl-table table">
-                                <thead>
-                                    <tr >
-                                        <th></th>
-                                        <th>MON</th>
-                                        <th>TUE</th>
-                                        <th>WED</th>
-                                        <th>THU</th>
-                                        <th>FRI</th>
-                                        <th>SAT</th>
-                                        <th>SUN</th>
-                                    </tr>
-                                    <tr id="day" >
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                        <th class="day"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            7:00 - 9:00 am
-                                        </td>
-                                        <td class="ngay1 slot1" ></td>
-                                        <td class="ngay2 slot1"></td>
-                                        <td class="ngay3 slot1" ></td>
-                                        <td class="ngay4 slot1"></td>
-                                        <td class="ngay5 slot1"></td>
-                                        <td class="ngay6 slot1"></td>
-                                        <td class="ngay7 slot1"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            9:00 - 11:00 am
-                                        </td>
-                                        <td class="ngay1 slot2" ></td>
-                                        <td class="ngay2 slot2"></td>
-                                        <td class="ngay3 slot2" ></td>
-                                        <td class="ngay4 slot2"></td>
-                                        <td class="ngay5 slot2"></td>
-                                        <td class="ngay6 slot2"></td>
-                                        <td class="ngay7 slot2"></td>
-                                    </tr>
-                                    <tr >
-                                        <td>
-                                            13:00 - 15:00 am
-                                        </td>
-                                        <td class="ngay1 slot3" ></td>
-                                        <td class="ngay2 slot3"></td>
-                                        <td class="ngay3 slot3"></td>
-                                        <td class="ngay4 slot3"></td>
-                                        <td class="ngay5 slot3"></td>
-                                        <td class="ngay6 slot3"></td>
-                                        <td class="ngay7 slot3"></td>
-                                    </tr>
-                                    <tr >
-                                        <td>
-                                            15:00 - 17:00 am
-                                        </td>
-                                        <td class="ngay1 slot4"></td>
-                                        <td class="ngay2 slot4"></td>
-                                        <td class="ngay3 slot4" ></td>
-                                        <td class="ngay4 slot4"></td>
-                                        <td class="ngay5 slot4"></td>
-                                        <td class="ngay6 slot4"></td>
-                                        <td class="ngay7 slot4"></td>
-                                    </tr>                                      
-                                </tbody>
-                            </table>
-                      </div>
-                      
-                                
+
+                    <!-- Modal -->
+                    <div id="f"></div>
+                    <div class="table-wrapper">
+                        <table class="fl-table table">
+                            <thead>
+                                <tr >
+                                    <th></th>
+                                    <th>MON</th>
+                                    <th>TUE</th>
+                                    <th>WED</th>
+                                    <th>THU</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                    <th>SUN</th>
+                                </tr>
+                                <tr id="day" >
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                    <th class="day"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        7:00 - 9:00 am
+                                    </td>
+                                    <td class="ngay1 slot1" ></td>
+                                    <td class="ngay2 slot1"></td>
+                                    <td class="ngay3 slot1" ></td>
+                                    <td class="ngay4 slot1"></td>
+                                    <td class="ngay5 slot1"></td>
+                                    <td class="ngay6 slot1"></td>
+                                    <td class="ngay7 slot1"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        9:00 - 11:00 am
+                                    </td>
+                                    <td class="ngay1 slot2" ></td>
+                                    <td class="ngay2 slot2"></td>
+                                    <td class="ngay3 slot2" ></td>
+                                    <td class="ngay4 slot2"></td>
+                                    <td class="ngay5 slot2"></td>
+                                    <td class="ngay6 slot2"></td>
+                                    <td class="ngay7 slot2"></td>
+                                </tr>
+                                <tr >
+                                    <td>
+                                        13:00 - 15:00 am
+                                    </td>
+                                    <td class="ngay1 slot3" ></td>
+                                    <td class="ngay2 slot3"></td>
+                                    <td class="ngay3 slot3"></td>
+                                    <td class="ngay4 slot3"></td>
+                                    <td class="ngay5 slot3"></td>
+                                    <td class="ngay6 slot3"></td>
+                                    <td class="ngay7 slot3"></td>
+                                </tr>
+                                <tr >
+                                    <td>
+                                        15:00 - 17:00 am
+                                    </td>
+                                    <td class="ngay1 slot4"></td>
+                                    <td class="ngay2 slot4"></td>
+                                    <td class="ngay3 slot4" ></td>
+                                    <td class="ngay4 slot4"></td>
+                                    <td class="ngay5 slot4"></td>
+                                    <td class="ngay6 slot4"></td>
+                                    <td class="ngay7 slot4"></td>
+                                </tr>                                      
+                            </tbody>
+                        </table>
+                    </div>
+
+
                     <!-- End of Footer -->
 
                 </div>
@@ -417,19 +403,19 @@
                         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
+                            <a class="btn btn-primary" href="LogoutController">Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
-             
-             
+
+
             <script src="ckeditor/ckeditor.js"></script>
-       <script>
-             var editor = CKEDITOR.replace('achievement');
-            CKFinder.setupCKEditor(editor, 'ckfinder/');
-            data["achievement"] = editor.getData();
-        </script>    
+            <script>
+                var editor = CKEDITOR.replace('achievement');
+                CKFinder.setupCKEditor(editor, 'ckfinder/');
+                data["achievement"] = editor.getData();
+            </script>    
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -442,7 +428,7 @@
             <!-- Page level custom scripts -->
             <script src="js/demo/chart-area-demo.js"></script>
             <script src="js/demo/chart-pie-demo.js"></script>
-           <script src="js/DB_DoctorDetail.js"></script>
+            <script src="js/DB_DoctorDetail.js"></script>
     </body>
 
 </html>

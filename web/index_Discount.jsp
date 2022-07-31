@@ -257,6 +257,9 @@
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
+                            <i class="fa fa-plus"></i>
+                        </button>
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -265,9 +268,7 @@
                                     search = "";
                                 }
                             %>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="border-radius: 50px;margin-left: 10px">
-                                <i class="fa fa-plus"></i>
-                            </button>
+
                             <form class="form-inline my-2 my-lg-0" action="SearchDiscountController">
                                 <input name="title" class="form-control mr-sm-2" type="search" value="<%=search%>" placeholder="Nhập tên khuyến mãi" aria-label="Search">
                                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm kiếm</button>
@@ -287,22 +288,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
+
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="LogoutController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Đăng xuất
+                                        Logout
                                     </a>
                                 </div>
                             </li>
@@ -312,7 +302,7 @@
                     </nav>
                     <!-- End of Topbar -->
                     <%List<DiscountDTO> listDiscountBySVType = (List<DiscountDTO>) request.getAttribute("listDiscountBySVType");
-                    int serviceTypeID = listDiscountBySVType.get(0).getServiceID(); %>
+                        int serviceTypeID = listDiscountBySVType.get(0).getServiceID();%>
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -634,7 +624,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>

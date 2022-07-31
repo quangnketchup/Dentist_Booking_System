@@ -279,11 +279,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                    
+
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="LogoutController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Đăng xuất
+                                        Logout
                                     </a>
                                 </div>
                             </li>
@@ -303,112 +303,112 @@
                             </div>
                         </div>
 
-                        
+
+                        <%
+                            List<patients.PatientDTO> listSearchPatient = (List<PatientDTO>) request.getAttribute("SEARCH_PATIENT");
+                            if (listSearchPatient != null) {
+                                List<patients.PatientDTO> listPatient = listSearchPatient;
+                        %>
+                        <table id="" class="table table-striped table-hover text-align-center">
+                            <thead class=" align-content-center">
+                                <tr>
+                                    <th>Mã bệnh nhân</th>
+                                    <th>Họ và tên</th>
+                                    <th>Gmail</th>
+                                    <th>Điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Giới tính</th>
+                                    <th>Trạng thái</th>
+                                    <th>Cập nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-content-around">
                                 <%
-                                    List<patients.PatientDTO> listSearchPatient = (List<PatientDTO>) request.getAttribute("SEARCH_PATIENT");
-                                    if (listSearchPatient != null) {
-                                        List<patients.PatientDTO> listPatient = listSearchPatient;
+                                    int count = 1;
+                                    for (PatientDTO patient : listPatient) {
                                 %>
-                                <table id="" class="table table-striped table-hover text-align-center">
-                                    <thead class=" align-content-center">
-                                        <tr>
-                                            <th>Mã bệnh nhân</th>
-                                            <th>Họ và tên</th>
-                                            <th>Gmail</th>
-                                            <th>Điện thoại</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Giới tính</th>
-                                            <th>Trạng thái</th>
-                                            <th>Cập nhật</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="align-content-around">
-                                        <%
-                                            int count = 1;
-                                            for (PatientDTO patient : listPatient) {
-                                        %>
-                                    <form action="UpdatePatientController">
-                                        <tr>
+                            <form action="UpdatePatientController">
+                                <tr>
 
-                                            <td><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="fullName" value="<%=patient.getFullName()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="gmail" value="<%=patient.getGmail()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="phone" value="0<%=patient.getPhone()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="address" value="<%=patient.getAddress()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="gender" value="<%=patient.getGender()%>" class="form-control-plaintext" readonly/></td>
-                                            <td>
-                                                <select name ="status">
-                                                    <option selected value="<%=patient.getStatus()%>"><%if (patient.getStatus() == 1) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
-                                                    <option value="<%=Math.abs(patient.getStatus() - 1)%>"><%if (patient.getStatus() == 0) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
-                                                </select>    
-                                            </td>
-                                            <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Patient"></td>
-                                        </tr>
-                                    </form>
-                                    <%
-                                        }
-                                    %>
-                                    </tbody>
+                                    <td><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="fullName" value="<%=patient.getFullName()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="gmail" value="<%=patient.getGmail()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="phone" value="0<%=patient.getPhone()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="address" value="<%=patient.getAddress()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="gender" value="<%=patient.getGender()%>" class="form-control-plaintext" readonly/></td>
+                                    <td>
+                                        <select name ="status">
+                                            <option selected value="<%=patient.getStatus()%>"><%if (patient.getStatus() == 1) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
+                                            <option value="<%=Math.abs(patient.getStatus() - 1)%>"><%if (patient.getStatus() == 0) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
+                                        </select>    
+                                    </td>
+                                    <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Patient"></td>
+                                </tr>
+                            </form>
+                            <%
+                                }
+                            %>
+                            </tbody>
 
-                                </table>
+                        </table>
+                        <%
+                        } else {
+                            List<PatientDTO> listPatient = (List<PatientDTO>) session.getAttribute("LIST_PATIENT");
+                            if (listPatient != null) {
+                                if (!listPatient.isEmpty()) {
+                        %>
+
+
+                        <table id="serviceTB" class="table table-striped table-hover text-align-center">
+                            <thead class="align-content-center">
+                                <tr>                                     
+                                    <th style="max-width: 10px">Mã</th>
+                                    <th>Họ và tên</th>
+                                    <th>Gmail</th>
+                                    <th>Điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Giới tính</th>
+                                    <th>Trạng thái</th>
+                                    <th>Cập nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-content-around">
                                 <%
-                                } else {
-                                    List<PatientDTO> listPatient = (List<PatientDTO>) session.getAttribute("LIST_PATIENT");
-                                    if (listPatient != null) {
-                                        if (!listPatient.isEmpty()) {
+                                    int count = 1;
+                                    for (PatientDTO patient : listPatient) {
                                 %>
+                            <form action="UpdatePatientController">
+                                <tr>
 
+                                    <td style="max-width: 60px"><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="fullName" value="<%=patient.getFullName()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="gmail" value="<%=patient.getGmail()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="phone" value="0<%=patient.getPhone()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="address" value="<%=patient.getAddress()%>" class="form-control-plaintext" readonly/></td>
+                                    <td><input type="text" name="gender" value="<%=patient.getGender()%>"class="form-control-plaintext" readonly/></td>
+                                    <td>
+                                        <select name ="status">
+                                            <option selected value="<%=patient.getStatus()%>"><%if (patient.getStatus() == 1) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
+                                            <option value="<%=Math.abs(patient.getStatus() - 1)%>"><%if (patient.getStatus() == 0) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
+                                        </select>    
+                                    </td>
 
-                                <table id="serviceTB" class="table table-striped table-hover text-align-center">
-                                    <thead class="align-content-center">
-                                        <tr>                                     
-                                            <th style="max-width: 10px">Mã</th>
-                                            <th>Họ và tên</th>
-                                            <th>Gmail</th>
-                                            <th>Điện thoại</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Giới tính</th>
-                                            <th>Trạng thái</th>
-                                            <th>Cập nhật</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="align-content-around">
-                                        <%
-                                            int count = 1;
-                                            for (PatientDTO patient : listPatient) {
-                                        %>
-                                    <form action="UpdatePatientController">
-                                        <tr>
+                                    <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Patient"></td>
 
-                                            <td style="max-width: 60px"><input type="text" name="patientID" value="<%=patient.getPatientID()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="fullName" value="<%=patient.getFullName()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="gmail" value="<%=patient.getGmail()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="phone" value="0<%=patient.getPhone()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="address" value="<%=patient.getAddress()%>" class="form-control-plaintext" readonly/></td>
-                                            <td><input type="text" name="gender" value="<%=patient.getGender()%>"class="form-control-plaintext" readonly/></td>
-                                            <td>
-                                                <select name ="status">
-                                                    <option selected value="<%=patient.getStatus()%>"><%if (patient.getStatus() == 1) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
-                                                    <option value="<%=Math.abs(patient.getStatus() - 1)%>"><%if (patient.getStatus() == 0) {%>Hội viên<%} else {%>Loại khỏi hội viên<%}%></option>
-                                                </select>    
-                                            </td>
+                                </tr>
+                            </form>
+                            </tbody>
 
-                                            <td><input type="submit" class="btn btn-block btn-outline-success" name="action" value="Update Patient"></td>
-
-                                        </tr>
-                                    </form>
-                                    </tbody>
-
-                                    <%
-                                        }
-                                    %>                          
-                                </table>
-                                <%
-                                            }
-                                        }
+                            <%
+                                }
+                            %>                          
+                        </table>
+                        <%
                                     }
-                                %> 
-                           
+                                }
+                            }
+                        %> 
+
 
                     </div>
 
@@ -439,7 +439,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="LogoutController">Logout</a>
                     </div>
                 </div>
             </div>

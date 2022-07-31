@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        
+
     </head>
 
     <body id="page-top">
@@ -194,11 +194,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
-                                   
+
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="LogoutController" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Đăng xuất
+                                        Logout
                                     </a>
                                 </div>
                             </li>
@@ -209,45 +209,47 @@
                     <!-- End of Topbar -->
                     <div class="container">
                         <%
-                       List<FeedbackDTO>listFeedBack =(List<FeedbackDTO>) request.getAttribute("listFeedBack");
-                       
-                        List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("listService");
-                    %>    
-                    <div id="f" type="hidden"></div>
-                    <!-- Begin Page Content -->
+                            List<FeedbackDTO> listFeedBack = (List<FeedbackDTO>) request.getAttribute("listFeedBack");
+
+                            List<ServiceDTO> listService = (List<ServiceDTO>) request.getAttribute("listService");
+                        %>    
+                        <div id="f" type="hidden"></div>
+                        <!-- Begin Page Content -->
                         <table id="dtBasicExample" class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>STT</th>
-                              <th>Tên khách hàng</th>
-                              <th>Dịch vụ</th>
-                              <th style="max-width: 350px">Nội dung</th>
-                              <th>Ngày phản hồi</th>
-                              <th>Xóa</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              <%int demm = 0;
-                                for (FeedbackDTO fb : listFeedBack) {
-                                for (ServiceDTO sv : listService){
-                                if(fb.getServiceID()==sv.getServiceID()){
-                                demm++;
-                              %> 
-                          <form action="">
-                              <tr>
-                                <td><%=demm%></td>
-                                <td><%=fb.getPatientName()%></td>
-                                <td><%=sv.getServiceName()%></td>
-                                <td style="max-width: 350px"><%=fb.getContent()%></td>
-                                <td ><%=fb.getDateFeedback()%></td>
-                                <td><input class="btn btn-danger" type="button" value="X" onclick="handleDelete(<%=fb.getServiceFeedBackID()%>)"></td>
-                              </tr>
-                          </form> 
-                                <%}}}%>
-                          </tbody>
-                          </table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Dịch vụ</th>
+                                    <th style="max-width: 350px">Nội dung</th>
+                                    <th>Ngày phản hồi</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%int demm = 0;
+                                    for (FeedbackDTO fb : listFeedBack) {
+                                        for (ServiceDTO sv : listService) {
+                                            if (fb.getServiceID() == sv.getServiceID()) {
+                                                demm++;
+                                %> 
+                            <form action="">
+                                <tr>
+                                    <td><%=demm%></td>
+                                    <td><%=fb.getPatientName()%></td>
+                                    <td><%=sv.getServiceName()%></td>
+                                    <td style="max-width: 350px"><%=fb.getContent()%></td>
+                                    <td ><%=fb.getDateFeedback()%></td>
+                                    <td><input class="btn btn-danger" type="button" value="X" onclick="handleDelete(<%=fb.getServiceFeedBackID()%>)"></td>
+                                </tr>
+                            </form> 
+                            <%}
+                                        }
+                                    }%>
+                            </tbody>
+                        </table>
                     </div>
-                    
+
                 </div>
                 <!-- End of Content Wrapper -->
 
@@ -273,7 +275,7 @@
                         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
+                            <a class="btn btn-primary" href="LogoutController">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -290,22 +292,22 @@
             <script src="vendor/chart.js/Chart.min.js"></script>
             <!-- Page level custom scripts -->
             <script>
-                function handleDelete(id){
-                    if(confirm("Bạn muốn xóa phản hồi này này?")){
-                    var form = document.createElement("form");
-                    form.action="DeleteFeedBackController";  
-                    const BKid = document.createElement("input");
-                    BKid.type = "hidden"
-                    BKid.value = id;
-                    BKid.name = "serviceFeedBackID";
-                    form.appendChild(BKid);
-                    var body =document.getElementById('f');
-                      body.appendChild(form)
-                       form.submit()
-                }else{
-                    
-                }
-                }
+                                    function handleDelete(id) {
+                                        if (confirm("Bạn muốn xóa phản hồi này này?")) {
+                                            var form = document.createElement("form");
+                                            form.action = "DeleteFeedBackController";
+                                            const BKid = document.createElement("input");
+                                            BKid.type = "hidden"
+                                            BKid.value = id;
+                                            BKid.name = "serviceFeedBackID";
+                                            form.appendChild(BKid);
+                                            var body = document.getElementById('f');
+                                            body.appendChild(form)
+                                            form.submit()
+                                        } else {
+
+                                        }
+                                    }
             </script>
     </body>
 
