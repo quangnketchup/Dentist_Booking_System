@@ -33,6 +33,7 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template-->
+        
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/DB_DoctorDetail.css" rel="stylesheet">
     </head>
@@ -176,6 +177,7 @@
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
+                
                 <!-- Main Content -->
                 <div id="content">
 
@@ -218,6 +220,29 @@
                     </nav>
                     <!-- End of Topbar -->
 
+                    <!<!-- Toast thông báo hủy lịch thành công -->
+
+        <%
+            String msg = (String) request.getAttribute("SUCCESS_CANCEL");
+            if (msg == null) {
+                msg = "";
+            } else {
+        %>
+
+        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header1">
+                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body1">
+                <%=msg%>
+            </div>
+        </div>
+
+        <%}%>    
                     <!-- Begin Page Content -->
                     <%DoctorDTO doctor = (DoctorDTO) request.getAttribute("DOCTOR_INFOR");%>
                     <div class="row ">
@@ -429,6 +454,12 @@
             <script src="js/demo/chart-area-demo.js"></script>
             <script src="js/demo/chart-pie-demo.js"></script>
             <script src="js/DB_DoctorDetail.js"></script>
+            <script>
+                 function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
+            </script>
     </body>
 
 </html>

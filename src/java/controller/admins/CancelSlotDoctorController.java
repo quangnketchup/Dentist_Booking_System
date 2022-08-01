@@ -55,7 +55,6 @@ public class CancelSlotDoctorController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            
             String day= request.getParameter("day");
             int slot = Integer.parseInt(request.getParameter("slot"));
             int doctorID= Integer.parseInt(request.getParameter("doctorID"));
@@ -67,11 +66,14 @@ public class CancelSlotDoctorController extends HttpServlet {
             BookingDetailDAO bkDAO = new BookingDetailDAO();
             scheduleDTO sche= scheDAO.getScheduleToSubmit(slot, doctorID, day);
             boolean check1=scheDAO.setOffSchedule(slot, day, doctorID);  
-            BookingDetailDTO bk= bkDAO.getBookingDetailByScheduleID(sche.getScheduleID());
-            PatientDTO pa=paDAO.getPatientByPatientID(bk.getPatientID());
+            int nn=sche.getScheduleID();
+            BookingDetailDTO bk= bkDAO.getBookingDetailByScheduleID(nn);
+            int mm=bk.getPatientID();
+            PatientDTO pa=paDAO.getPatientByPatientID(mm);
             boolean check2=bkDAO.cancelBooking(sche.getScheduleID());
             if(check2){
-                 request.setAttribute("doctorID", doctorID);
+                request.setAttribute("SUCCESS_CANCEL", "Đã hủy lịch thành công");
+                request.setAttribute("doctorID", doctorID);
             url=SUCCESS;
                  final String fromEmail = "dentacare.noti@gmail.com";
         // Mat khai email cua ban
@@ -96,6 +98,7 @@ public class CancelSlotDoctorController extends HttpServlet {
                                 throw new AssertionError();
                         }
         final String toEmail = pa.getGmail();
+        String check=toEmail;
         final String subject = "Hủy lịch đặt DentaCare";
         final String body = "DentaCare thông báo\n"
                 + "Vì lý ngoài ý muốn, DentaCare xin thông báo tới quý khách hàng.\n"
@@ -129,7 +132,6 @@ public class CancelSlotDoctorController extends HttpServlet {
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
         Transport.send(msg);
             }
-           
         } catch (Exception e) {
             url = ERROR;
             log("Error at ServiceController");

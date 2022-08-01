@@ -68,7 +68,6 @@ public class LoadDiscountController extends HttpServlet {
             request.setAttribute("LIST_DISCOUNT", listDiscount);
             request.setAttribute("LIST_ALL_SERVICE", listAllService);
             request.setAttribute("LIST_SERVICE_BY_SVTYPE", listServiceType);
-            request.setAttribute("svType", serviceTypeID);
             url=SUCCESS;
         } catch (Exception e) {
             url = ERROR;

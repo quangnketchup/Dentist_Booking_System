@@ -223,7 +223,29 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    
+                    <!<!-- Toast thông báo succeed update -->
+
+                        <%
+                            String msg = (String) request.getAttribute("SSMSG");
+                            if (msg == null) {
+                                msg = "";
+                            } else {
+                        %>
+                        <div id="toast-msg" role="alert" aria-live="assertive" aria-atomic="true"">
+                            <div class="toast-header1">
+                                <strong class="mr-auto1">Thông báo <i class="fa fa-bell"></i></strong>
+
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onClick="toastClose()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="toast-body1">
+                                <%=msg%>
+                            </div>
+                        </div>
+
+                        <%}%>
+
                     <!-- modal them admin-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -259,10 +281,7 @@
                                                 <div class="input-group mb-3">
                                                     <textarea name="achievement" id="achievement" class="form-control"></textarea>
                                                 </div> 
-                                                <div class="input-group mb-3">
-                                                    <input type="file" name="image" class="mt-5 btn btn-primary" />
-                                                </div>  
-                                                
+                                               
                                             </div>
                                         </div><!-- /.card -->
 
@@ -374,6 +393,14 @@
             extraPlugins: 'testplugin'
                 } );
         </script>    
+        
+                                                    <script>
+             function toastClose() {
+                                    var toast1 = document.getElementById("toast-msg");
+                                    toast1.style.display = "none";
+                                }
+       
+        </script>
             <!-- Bootstrap core JavaScript-->
             <script src="vendor/jquery/jquery.min.js"></script>
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

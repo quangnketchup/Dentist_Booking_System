@@ -27,6 +27,7 @@ public class BookingDetailDAO {
     private static final String NUMBER_BOOKING="SELECT COUNT(bk.BookingDetailID) as nb FROM tblBookingDetails bk,tblSchedules s WHERE bk.status=2 and bk.scheduleID=s.scheduleID AND MONTH(s.day)=?";
     private static final String NUMBER_FB="SELECT COUNT(serviceFeedBackID) as nb FROM tblPatientFeedbacks WHERE MONTH(dateFeedback)=?";
     private static final String GET_BOOKING_DURING_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE status =1 and patientID = ?";
+    private static final String GET_BOOKING_DURING_DETAIL_BY_SCHEDULE_ID = "SELECT  * FROM tblBookingDetails WHERE status =1 and scheduleID = ?";
     private static final String GET_BOOKING_FINISH_DETAIL_BY_PATIENT_ID = "SELECT  * FROM tblBookingDetails WHERE status =2 and patientID = ?";
     private static final String GET_ALL_BOOKING_DETAIL = "SELECT  * FROM tblBookingDetails WHERE status = 1";
     private static final String UPDATE_BOOKING = "update tblBookingDetails set status= 2 , expectedFee = ? where BookingDetailID = ?";
@@ -43,7 +44,7 @@ public class BookingDetailDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn != null) {
-                ptm = conn.prepareStatement(GET_BOOKING_DURING_DETAIL_BY_PATIENT_ID);
+                ptm = conn.prepareStatement(GET_BOOKING_DURING_DETAIL_BY_SCHEDULE_ID);
                 ptm.setInt(1, id);
                 rs = ptm.executeQuery();
                 while (rs.next()) {                    

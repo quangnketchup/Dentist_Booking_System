@@ -47,13 +47,13 @@ public class AddDoctorController extends HttpServlet {
         try {
             String serviceTypeName = request.getParameter("serviceTypeName");
             String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
+            String email = request.getParameter("gmail");
             int status = 1;
             String password=request.getParameter("password");
             String gender = request.getParameter("gender");
             int phone =Integer.parseInt(request.getParameter("phone"));
             String achievement=request.getParameter("achievement");
-            String image=request.getParameter("image");
+            String image="null";
 //            check validation here: checkId, name, role , pass,...password
             boolean check = true;
             if (serviceTypeName.trim().length() == 0 || serviceTypeName.trim().length() > 50) {
@@ -79,7 +79,7 @@ public class AddDoctorController extends HttpServlet {
                 boolean checkUpdate = dao.createDoctor(doctor);
                 if (checkUpdate) {
                     url = SUCCESS;
-                    request.setAttribute("SSMSG", "Chỉnh sữa thành công !");
+                    request.setAttribute("SSMSG", "Thêm bác sĩ thành công");
                 }
             } else {
                 request.setAttribute("SSMSG", "Chỉnh sữa thất bại !");

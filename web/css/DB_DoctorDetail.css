@@ -140,5 +140,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .none{
     display: none;
 }
+#toast-close{
+    color: white;
+    width: 240px;
+    background-color: rgb(231,210,14);
+    display: block;
+}
+
+#toast-msg strong{
+    color: white;
+    font-size: 15px;
+}
 
 
